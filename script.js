@@ -293,28 +293,41 @@
     }
   }
 
+  var CERTIFICATES_SCHEMA_VERSION = 2;
   var DEFAULT_CERTIFICATES = [
     { title: '리눅스 마스터', image: 'PDF/리눅스마스터.pdf', type: 'pdf' },
-    { title: '리눅스 중급 (level2) 수료증', image: 'PDF/24.8.4 리눅스중급 (level2)수료증.pdf', type: 'pdf' },
-    { title: '리눅스 초급 (level1) 수료증', image: 'PDF/24.6.8 리눅스초급 (level1)수료증.pdf', type: 'pdf' },
-    { title: '리눅스 초급 (level1) 수료증', image: 'PDF/24.2.24 리눅스초급 (level1)수료증.pdf', type: 'pdf' },
-    { title: '시스코 네트워크 수료증', image: 'PDF/21.8.7 시스코 네트워크 수료증.pdf', type: 'pdf' },
-    { title: '고용재님 수료증', image: 'PDF/고용재님 수료증.pdf', type: 'pdf' },
-    { title: '고용재 수료증', image: 'PDF/고용재 수료증.pdf', type: 'pdf' }
+    { title: '수료증 1', image: 'PDF/수료증1.pdf', type: 'pdf' },
+    { title: '수료증 2', image: 'PDF/수료증2.pdf', type: 'pdf' },
+    { title: '수료증 3', image: 'PDF/수료증3.pdf', type: 'pdf' },
+    { title: '수료증 4', image: 'PDF/수료증4.pdf', type: 'pdf' },
+    { title: '수료증 5', image: 'PDF/수료증5.pdf', type: 'pdf' },
+    { title: '수료증 6', image: 'PDF/수료증6.pdf', type: 'pdf' }
   ];
   function getCertificates() {
     try {
       var raw = localStorage.getItem(CERTIFICATES_KEY);
-      var list = raw ? JSON.parse(raw) : [];
-      if (list.length === 0) {
+      if (!raw) {
+        saveCertificates(DEFAULT_CERTIFICATES);
+        return DEFAULT_CERTIFICATES;
+      }
+      var data = JSON.parse(raw);
+      var list = Array.isArray(data) ? data : (data.list || []);
+      var version = Array.isArray(data) ? 1 : (data.v || 1);
+      if (version < CERTIFICATES_SCHEMA_VERSION || list.length === 0) {
         saveCertificates(DEFAULT_CERTIFICATES);
         return DEFAULT_CERTIFICATES;
       }
       return list;
-    } catch (e) { return []; }
+    } catch (e) {
+      saveCertificates(DEFAULT_CERTIFICATES);
+      return DEFAULT_CERTIFICATES;
+    }
   }
   function saveCertificates(list) {
-    localStorage.setItem(CERTIFICATES_KEY, JSON.stringify(list));
+    localStorage.setItem(CERTIFICATES_KEY, JSON.stringify({
+      v: CERTIFICATES_SCHEMA_VERSION,
+      list: list
+    }));
   }
   function renderCertificates() {
     if (!certificateGrid) return;
