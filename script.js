@@ -1,4 +1,40 @@
 (function () {
+  // ----- 주인장 모드 (localhost 또는 비밀번호 입력 시 편집 가능) -----
+  var OWNER_PASSWORD = 'portfolio'; // 원하는 비밀번호로 변경하세요.
+  var isLocalhost = /^localhost$|^127\.0\.0\.1$/.test(location.hostname);
+  var ownerMode = isLocalhost || sessionStorage.getItem('portfolioOwner') === '1';
+
+  function setOwnerMode(on) {
+    if (on) {
+      sessionStorage.setItem('portfolioOwner', '1');
+    } else {
+      sessionStorage.removeItem('portfolioOwner');
+    }
+    location.reload();
+  }
+
+  function updateOwnerUI() {
+    document.body.classList.toggle('owner-mode', ownerMode);
+    var toggle = document.getElementById('ownerModeToggle');
+    if (toggle) {
+      toggle.textContent = ownerMode ? '편집 모드 종료' : '편집 모드';
+      toggle.onclick = function () {
+        if (ownerMode) {
+          setOwnerMode(false);
+        } else {
+          if (isLocalhost) {
+            setOwnerMode(true);
+          } else {
+            var pw = prompt('비밀번호를 입력하세요.');
+            if (pw === OWNER_PASSWORD) setOwnerMode(true);
+            else if (pw !== null) alert('비밀번호가 올바르지 않습니다.');
+          }
+        }
+      };
+    }
+  }
+  updateOwnerUI();
+
   // 푸터 연도
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -85,7 +121,7 @@
         : '<div class="project-placeholder">📁</div>';
       card.innerHTML =
         '<div class="project-image">' + imgHtml +
-        '<button type="button" class="project-delete" aria-label="삭제">×</button></div>' +
+        '<button type="button" class="project-delete owner-only" aria-label="삭제">×</button></div>' +
         '<div class="project-body">' +
         '<h3 class="project-title">' + escapeHtml(p.title || '제목 없음') + '</h3>' +
         '<p class="project-desc">' + escapeHtml(p.description || '') + '</p>' +
@@ -208,6 +244,198 @@
   }
 
   renderProjects();
+
+  // 수상/자격증 추가 (localStorage)
+  var CERTIFICATES_KEY = 'portfolioCertificates';
+  var certificateGrid = document.getElementById('certificateGrid');
+  var certificateModal = document.getElementById('certificateModal');
+  var certificateForm = document.getElementById('certificateForm');
+  var certificateImageUrl = document.getElementById('certificateImageUrl');
+  var certificateImageFile = document.getElementById('certificateImageFile');
+  var maxCertPdfSize = 2 * 1024 * 1024; // 2MB for PDF
+  var certificateBlobUrls = [];
+
+  function isPdfItem(item) {
+    if (item.type === 'pdf') return true;
+    if (!item.image) return false;
+    if (item.image.indexOf('data:application/pdf') === 0) return true;
+    if (typeof item.image === 'string' && item.image.toLowerCase().endsWith('.pdf')) return true;
+    return false;
+  }
+  function pdfToViewUrl(src) {
+    if (!src || src.indexOf('data:') !== 0) return src;
+    try {
+      var base64 = src.split(',')[1];
+      if (!base64) return null;
+      var bin = atob(base64);
+      var len = bin.length;
+      var bytes = new Uint8Array(len);
+      for (var j = 0; j < len; j++) bytes[j] = bin.charCodeAt(j);
+      var blob = new Blob([bytes], { type: 'application/pdf' });
+      var url = URL.createObjectURL(blob);
+      certificateBlobUrls.push(url);
+      return url;
+    } catch (e) {
+      return null;
+    }
+  }
+  function openPdfView(src) {
+    if (src.indexOf('data:') === 0) {
+      var url = pdfToViewUrl(src);
+      if (url) {
+        window.open(url, '_blank');
+        setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+      } else {
+        window.open(src, '_blank');
+      }
+    } else {
+      window.open(src, '_blank');
+    }
+  }
+
+  var DEFAULT_CERTIFICATES = [
+    { title: '리눅스 마스터', image: 'PDF/리눅스마스터.pdf', type: 'pdf' },
+    { title: '리눅스 중급 (level2) 수료증', image: 'PDF/24.8.4 리눅스중급 (level2)수료증.pdf', type: 'pdf' },
+    { title: '리눅스 초급 (level1) 수료증', image: 'PDF/24.6.8 리눅스초급 (level1)수료증.pdf', type: 'pdf' },
+    { title: '리눅스 초급 (level1) 수료증', image: 'PDF/24.2.24 리눅스초급 (level1)수료증.pdf', type: 'pdf' },
+    { title: '시스코 네트워크 수료증', image: 'PDF/21.8.7 시스코 네트워크 수료증.pdf', type: 'pdf' },
+    { title: '고용재님 수료증', image: 'PDF/고용재님 수료증.pdf', type: 'pdf' },
+    { title: '고용재 수료증', image: 'PDF/고용재 수료증.pdf', type: 'pdf' }
+  ];
+  function getCertificates() {
+    try {
+      var raw = localStorage.getItem(CERTIFICATES_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      if (list.length === 0) {
+        saveCertificates(DEFAULT_CERTIFICATES);
+        return DEFAULT_CERTIFICATES;
+      }
+      return list;
+    } catch (e) { return []; }
+  }
+  function saveCertificates(list) {
+    localStorage.setItem(CERTIFICATES_KEY, JSON.stringify(list));
+  }
+  function renderCertificates() {
+    if (!certificateGrid) return;
+    certificateBlobUrls.forEach(function (u) { try { URL.revokeObjectURL(u); } catch (e) {} });
+    certificateBlobUrls = [];
+    var list = getCertificates();
+    certificateGrid.innerHTML = '';
+    list.forEach(function (item, i) {
+      var card = document.createElement('div');
+      card.className = 'certificate-card';
+      if (isPdfItem(item)) card.classList.add('is-pdf');
+      card.dataset.index = i;
+      var title = (item.title || '').trim();
+      var inner = '';
+      if (isPdfItem(item)) {
+        var pdfSrc = item.image.indexOf('data:') === 0 ? pdfToViewUrl(item.image) : item.image;
+        var viewSrc = pdfSrc ? (pdfSrc.indexOf('#') >= 0 ? pdfSrc : pdfSrc + '#view=FitH') : '';
+        var safeSrc = viewSrc ? ('' + viewSrc).replace(/&/g, '&amp;').replace(/"/g, '&quot;') : '';
+        inner =
+          '<div class="certificate-image">' +
+          (safeSrc
+            ? '<iframe class="certificate-pdf-iframe" src="' + safeSrc + '" title="PDF 미리보기"></iframe>' +
+              '<div class="certificate-pdf-overlay" data-index="' + i + '" role="button" tabindex="0" aria-label="새 창에서 PDF 보기"></div>'
+            : '<span class="certificate-pdf-icon">📄</span>') +
+          '<button type="button" class="certificate-delete owner-only" aria-label="삭제">×</button></div>' +
+          '<div class="certificate-title">' + escapeHtml(title) + '</div>';
+      } else {
+        var imgHtml = item.image
+          ? '<img src="' + item.image + '" alt="">'
+          : '<span style="font-size:2rem;opacity:0.5">📜</span>';
+        inner =
+          '<div class="certificate-image">' + imgHtml +
+          '<button type="button" class="certificate-delete owner-only" aria-label="삭제">×</button></div>' +
+          '<div class="certificate-title">' + escapeHtml(title) + '</div>';
+      }
+      card.innerHTML = inner;
+      certificateGrid.appendChild(card);
+      var pdfOverlay = card.querySelector('.certificate-pdf-overlay');
+      if (pdfOverlay) {
+        function openPdfNewTab() {
+          var idx = parseInt(pdfOverlay.getAttribute('data-index'), 10);
+          var list = getCertificates();
+          var it = list[idx];
+          if (it && it.image) openPdfView(it.image);
+        }
+        pdfOverlay.addEventListener('click', openPdfNewTab);
+        pdfOverlay.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPdfNewTab(); } });
+      }
+      var delBtn = card.querySelector('.certificate-delete');
+      if (delBtn) delBtn.addEventListener('click', function () {
+        var arr = getCertificates();
+        arr.splice(i, 1);
+        saveCertificates(arr);
+        renderCertificates();
+      });
+    });
+  }
+  function openCertificateModal() {
+    if (certificateModal) {
+      certificateModal.classList.add('is-open');
+      certificateModal.setAttribute('aria-hidden', 'false');
+    }
+  }
+  function closeCertificateModal() {
+    if (certificateModal) {
+      certificateModal.classList.remove('is-open');
+      certificateModal.setAttribute('aria-hidden', 'true');
+      if (certificateForm) certificateForm.reset();
+      if (certificateImageFile) certificateImageFile.value = '';
+    }
+  }
+
+  if (document.getElementById('certificateAddBtn')) {
+    document.getElementById('certificateAddBtn').addEventListener('click', openCertificateModal);
+  }
+  if (document.getElementById('certificateModalClose')) {
+    document.getElementById('certificateModalClose').addEventListener('click', closeCertificateModal);
+  }
+  if (document.getElementById('certificateModalBackdrop')) {
+    document.getElementById('certificateModalBackdrop').addEventListener('click', closeCertificateModal);
+  }
+  if (document.getElementById('certificateFormCancel')) {
+    document.getElementById('certificateFormCancel').addEventListener('click', closeCertificateModal);
+  }
+  if (certificateForm) {
+    certificateForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var title = (certificateForm.querySelector('[name="title"]') && certificateForm.querySelector('[name="title"]').value) || '';
+      title = title.trim();
+      var image = certificateImageUrl && certificateImageUrl.value ? certificateImageUrl.value.trim() : '';
+      if (!image && (!certificateImageFile || !certificateImageFile.files[0])) {
+        alert('상장 이미지 또는 PDF를 넣어주세요.');
+        return;
+      }
+      function addCert(imgData, isPdf) {
+        var list = getCertificates();
+        var payload = { title: title, image: imgData || '' };
+        if (isPdf) payload.type = 'pdf';
+        list.push(payload);
+        saveCertificates(list);
+        renderCertificates();
+        closeCertificateModal();
+      }
+      if (image) {
+        var isPdfUrl = image.toLowerCase().endsWith('.pdf');
+        addCert(image, isPdfUrl);
+        return;
+      }
+      var file = certificateImageFile.files[0];
+      var isPdf = file.type === 'application/pdf';
+      var maxSize = isPdf ? maxCertPdfSize : maxImageSize;
+      if (file.size > maxSize) {
+        alert(isPdf ? 'PDF는 2MB 이하로 올려주세요.' : '이미지는 400KB 이하로 올려주세요.');
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function () { addCert(reader.result, isPdf); };
+      reader.readAsDataURL(file);
+    });
+  }
+  renderCertificates();
 
   // 모바일 메뉴 토글
   var nav = document.querySelector('.nav');
