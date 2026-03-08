@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roy Koh | 개발 포트폴리오</title>
+  <meta name="description" content="그동안 개발한 프로젝트와 경험을 담은 포트폴리오입니다.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="#home" class="logo">Roy Koh</a>
+      <ul class="nav-links">
+        <li><a href="#about">소개</a></li>
+        <li><a href="#projects">프로젝트</a></li>
+        <li><a href="#skills">스킬</a></li>
+        <li><a href="#contact">연락</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <p class="hero-tag">Developer Portfolio</p>
+        <h1 class="hero-title">
+          <span id="typing-text"></span><span class="cursor" aria-hidden="true">|</span>
+        </h1>
+        <p class="hero-desc">
+          그동안 만들었던 프로젝트와 사용한 기술을 정리한 공간입니다.
+        </p>
+        <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+      </div>
+      <div class="hero-visual">
+        <img src="KakaoTalk_20260308_180900518.jpg" alt="" class="hero-image" aria-hidden="true">
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="container">
+        <h2 class="section-title">소개</h2>
+        <div class="about-content">
+          <p class="about-text">
+            꿈을 코드로 만드는 개발자, 로이입니다. 사용하는 사람이 편하고 기분 좋게 쓸 수 있는 서비스를 만드는 걸 좋아합니다. 궁금한 점이 있으시면 아래 연락처로 편하게 보내주세요.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2 class="section-title">프로젝트</h2>
+        <p class="section-desc">그동안 개발한 프로젝트입니다. 아래 버튼으로 직접 추가할 수 있습니다.</p>
+        <button type="button" class="btn btn-add" id="projectAddBtn">+ 프로젝트 추가</button>
+        <div class="project-grid" id="projectGrid"></div>
+        <p class="project-empty" id="projectEmpty" style="display: none;">등록된 프로젝트가 없습니다. "프로젝트 추가"로 첫 프로젝트를 올려보세요.</p>
+      </div>
+
+      <!-- 프로젝트 추가 모달 -->
+      <div class="modal" id="projectModal" aria-hidden="true">
+        <div class="modal-backdrop" id="projectModalBackdrop"></div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">프로젝트 추가</h3>
+            <button type="button" class="modal-close" id="projectModalClose" aria-label="닫기">&times;</button>
+          </div>
+          <form id="projectForm" class="project-form">
+            <label class="form-label">제목 <span class="required">*</span></label>
+            <input type="text" name="title" class="form-input" required placeholder="프로젝트 제목">
+            <label class="form-label">설명</label>
+            <textarea name="description" class="form-input form-textarea" rows="3" placeholder="프로젝트 설명을 적어주세요."></textarea>
+            <label class="form-label">기술 태그 <span class="form-hint">쉼표로 구분 (예: React, TypeScript)</span></label>
+            <input type="text" name="tags" class="form-input" placeholder="React, API, Node.js">
+            <label class="form-label">보기 링크</label>
+            <input type="url" name="demoUrl" class="form-input" placeholder="https://...">
+            <label class="form-label">코드 링크</label>
+            <input type="url" name="codeUrl" class="form-input" placeholder="https://github.com/...">
+            <label class="form-label">이미지 <span class="form-hint">URL 또는 파일 선택</span></label>
+            <input type="url" name="imageUrl" class="form-input" placeholder="이미지 URL" id="projectImageUrl">
+            <input type="file" name="imageFile" class="form-input form-file" accept="image/*" id="projectImageFile" aria-label="이미지 파일 선택">
+            <div class="form-actions">
+              <button type="button" class="btn btn-ghost" id="projectFormCancel">취소</button>
+              <button type="submit" class="btn btn-primary">추가하기</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section skills">
+      <div class="container">
+        <h2 class="section-title">스킬</h2>
+        <p class="section-desc">사용해 본 기술들입니다. 수준이나 카테고리별로 나눌 수 있습니다.</p>
+        <div class="skills-wrap">
+          <div class="skill-group">
+            <h3 class="skill-group-title">Frontend</h3>
+            <ul class="skill-tags">
+              <li>HTML / CSS</li>
+              <li>JavaScript</li>
+              <li>React</li>
+              <li>TypeScript</li>
+              <li>Tailwind</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3 class="skill-group-title">Backend</h3>
+            <ul class="skill-tags">
+              <li>Node.js</li>
+              <li>Python</li>
+              <li>API</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3 class="skill-group-title">Tools & Others</h3>
+            <ul class="skill-tags">
+              <li>Git</li>
+              <li>VS Code</li>
+              <li>Figma</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3 class="skill-group-title">프로젝트에서 사용</h3>
+            <ul class="skill-tags" id="skillTagsFromProjects"></ul>
+            <p class="skill-from-projects-hint" id="skillFromProjectsHint">프로젝트를 추가할 때 입력한 기술 태그가 여기에 모입니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 class="section-title">연락하기</h2>
+        <p class="section-desc">궁금한 점이 있으시면 아래로 연락 주세요.</p>
+        <div class="contact-links">
+          <a href="mailto:your@email.com" class="contact-link">이메일</a>
+          <a href="https://github.com/yourusername" target="_blank" rel="noopener" class="contact-link">GitHub</a>
+          <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+          <a href="#" target="_blank" rel="noopener" class="contact-link">블로그</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Roy Koh. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
