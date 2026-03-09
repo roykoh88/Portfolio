@@ -153,6 +153,30 @@
       demoUrl: 'http://sungsimcare.kr/grade/test07/test06.html',
       codeUrl: 'https://github.com/roykoh88/assist_old_person',
       image: ''
+    },
+    {
+      title: '공학용 계산기',
+      description: '공학용 계산기 + 함수 그래프 시각화 웹 앱입니다. 사칙연산, 삼각/역삼각/쌍곡 함수, 로그·지수, pi·e 등 수학 표현식 계산과 함수 식 입력(sin(x), x^2 등)으로 그래프를 그립니다. FastAPI 백엔드 + React(Vite) 프론트엔드.',
+      tags: 'Python, FastAPI, React, Vite, JavaScript, CSS',
+      demoUrl: 'https://yjkohproject.web.app/calculator',
+      codeUrl: 'https://github.com/roykoh88/Calculator',
+      image: ''
+    },
+    {
+      title: '프로젝트 제목',
+      description: '프로젝트 설명을 여기에 입력하세요. 사용 기술, 해결한 문제, 결과를 간단히 적어주세요.',
+      tags: '기술1, 기술2, 기술3',
+      demoUrl: '',
+      codeUrl: '',
+      image: ''
+    },
+    {
+      title: '또 다른 프로젝트',
+      description: '추가로 보여주고 싶은 작업 내용을 설명해 주세요.',
+      tags: 'React, Node.js, MongoDB',
+      demoUrl: '',
+      codeUrl: '',
+      image: ''
     }
   ];
   function getProjects() {

@@ -1,0 +1,87 @@
+.usage-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.usage-modal {
+  background: #18181b;
+  border: 1px solid #3f3f46;
+  border-radius: 12px;
+  max-width: min(520px, 95vw);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.usage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #27272a;
+}
+
+.usage-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.usage-close {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  color: #a1a1aa;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.usage-close:hover {
+  color: #fafafa;
+  background: #27272a;
+}
+
+.usage-body {
+  padding: 1rem 1.25rem 1.25rem;
+  overflow-y: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #e4e4e7;
+}
+
+.usage-body h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 0.95rem;
+  color: #fafafa;
+}
+
+.usage-body h3:first-child {
+  margin-top: 0;
+}
+
+.usage-body ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.usage-body li {
+  margin-bottom: 0.35rem;
+}
+
+.usage-body p {
+  margin: 0 0 0.5rem;
+}
+
+.usage-body strong {
+  color: #a78bfa;
+}
