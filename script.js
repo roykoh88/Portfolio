@@ -1,4 +1,29 @@
 (function () {
+  // ----- 테마 (다크/라이트) -----
+  var THEME_KEY = 'portfolioTheme';
+  function getPreferredTheme() {
+    var saved = localStorage.getItem(THEME_KEY);
+    if (saved === 'light' || saved === 'dark') return saved;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+    return 'dark';
+  }
+  function applyTheme(theme) {
+    if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    else document.documentElement.removeAttribute('data-theme');
+  }
+  function updateThemeToggleUI() {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.textContent = isLight ? '🌙' : '☀️';
+    btn.setAttribute('aria-label', isLight ? '다크 모드로 전환' : '라이트 모드로 전환');
+    btn.setAttribute('title', isLight ? '다크 모드' : '라이트 모드');
+  }
+  (function initTheme() {
+    var theme = getPreferredTheme();
+    applyTheme(theme);
+  })();
+
   // ----- 주인장 모드 (localhost 또는 비밀번호 입력 시 편집 가능) -----
   var OWNER_PASSWORD = 'portfolio'; // 원하는 비밀번호로 변경하세요.
   var isLocalhost = /^localhost$|^127\.0\.0\.1$/.test(location.hostname);
@@ -34,6 +59,19 @@
     }
   }
   updateOwnerUI();
+
+  // 테마 토글 버튼
+  var themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) {
+    updateThemeToggleUI();
+    themeBtn.addEventListener('click', function () {
+      var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      var next = isLight ? 'dark' : 'light';
+      applyTheme(next);
+      localStorage.setItem(THEME_KEY, next);
+      updateThemeToggleUI();
+    });
+  }
 
   // 푸터 연도
   var yearEl = document.getElementById('year');
