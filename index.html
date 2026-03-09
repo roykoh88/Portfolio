@@ -44,7 +44,10 @@
         <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
       </div>
       <div class="hero-visual">
-        <img src="img/KakaoTalk_20260308_180900518.jpg" alt="" class="hero-image" aria-hidden="true">
+        <div class="hero-image-wrap">
+          <img src="img/KakaoTalk_20260308_180900518.jpg" alt="" class="hero-image hero-image-1" aria-hidden="true">
+          <img src="img/로고.png" alt="" class="hero-image hero-image-2" aria-hidden="true">
+        </div>
       </div>
     </section>
 
@@ -168,7 +171,13 @@
           <button type="button" class="btn btn-add owner-only" id="projectAddBtn">+ Add Project</button>
         </div>
         <p class="section-desc">그동안 개발한 프로젝트입니다.<span class="owner-only"> </span></p>
-        <div class="project-grid" id="projectGrid"></div>
+        <div class="project-carousel">
+          <button type="button" class="carousel-btn carousel-prev" id="projectCarouselPrev" aria-label="이전 프로젝트">‹</button>
+          <div class="project-carousel-scroll" id="projectCarouselScroll">
+            <div class="project-grid" id="projectGrid"></div>
+          </div>
+          <button type="button" class="carousel-btn carousel-next" id="projectCarouselNext" aria-label="다음 프로젝트">›</button>
+        </div>
         <p class="project-empty owner-only" id="projectEmpty" style="display: none;">등록된 프로젝트가 없습니다. "프로젝트 추가"로 첫 프로젝트를 올려보세요.</p>
       </div>
 
