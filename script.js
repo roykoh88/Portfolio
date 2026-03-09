@@ -91,10 +91,41 @@
   var imageFileInput = document.getElementById('projectImageFile');
   var maxImageSize = 400 * 1024; // 400KB
 
+  var DEFAULT_PROJECTS = [
+    {
+      title: 'Portfolio',
+      description: '개발 포트폴리오 사이트입니다. About, 교육/연수, Projects, Skills, Certificates, Contact를 담고 있으며 Firebase로 호스팅됩니다.',
+      tags: 'HTML, CSS, JavaScript, Firebase',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/Portfolio',
+      image: ''
+    },
+    {
+      title: '하이브리드 번역기',
+      description: '무료 번역(deep-translator) + Ollama 로컬 LLM 보정으로 문맥에 맞는 자연스러운 번역을 제공합니다. 바이어 메일 번역, 실시간 통역(타이핑/음성/대화), 배치·파일·다국어 번역을 지원합니다.',
+      tags: 'Python, FastAPI, Ollama, deep-translator, JavaScript, HTML, CSS',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/translator',
+      image: ''
+    },
+    {
+      title: '노인 재가복지 보조금 자가진단',
+      description: '노인 재가 복지 지원 보조금을 받을 수 있는지 테스트하는 웹 사이트입니다. 실제 운영 중인 서비스(성심케어)에서 사용 중입니다.',
+      tags: 'JavaScript, HTML, CSS',
+      demoUrl: 'http://sungsimcare.kr/grade/test07/test06.html',
+      codeUrl: 'https://github.com/roykoh88/assist_old_person',
+      image: ''
+    }
+  ];
   function getProjects() {
     try {
       var raw = localStorage.getItem(PROJECTS_KEY);
-      return raw ? JSON.parse(raw) : [];
+      var list = raw ? JSON.parse(raw) : [];
+      if (list.length === 0 && DEFAULT_PROJECTS.length) {
+        saveProjects(DEFAULT_PROJECTS);
+        return DEFAULT_PROJECTS;
+      }
+      return list;
     } catch (e) {
       return [];
     }
@@ -109,7 +140,11 @@
     if (!grid) return;
     grid.innerHTML = '';
     if (projectEmpty) {
-      projectEmpty.style.display = projects.length ? 'none' : 'block';
+      if (projects.length) {
+        projectEmpty.classList.add('hidden-when-has-projects');
+      } else {
+        projectEmpty.classList.remove('hidden-when-has-projects');
+      }
     }
     projects.forEach(function (p, i) {
       var tags = (p.tags || '').split(',').map(function (t) { return t.trim(); }).filter(Boolean);
