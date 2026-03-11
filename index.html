@@ -216,49 +216,64 @@
       <div class="container">
         <h2 class="section-title">Skills</h2>
         <p class="section-desc">사용해 본 기술들입니다. 수준이나 카테고리별로 나눌 수 있습니다.</p>
-        <div class="skills-wrap">
-          <div class="skill-group">
-            <h3 class="skill-group-title">Frontend</h3>
-            <ul class="skill-tags">
-              <li>HTML / CSS</li>
-              <li>JavaScript</li>
-              <li>React</li>
-            </ul>
-          </div>
-          <div class="skill-group">
-            <h3 class="skill-group-title">Backend</h3>
-            <ul class="skill-tags">
-              <li>API</li>
-              <li>FastAPI</li>
-              <li>Node.js</li>
-              <li>Python</li>
-            </ul>
-            <span class="skill-subtitle">DB</span>
-            <ul class="skill-tags">
-              <li>MySQL</li>
-              <li>MongoDB</li>
-              <li>PostgreSQL</li>
-              <li>Oracle</li>
-            </ul>
-          </div>
-          <div class="skill-group">
-            <h3 class="skill-group-title">OS & Cloud</h3>
-            <span class="skill-subtitle">OS</span>
-            <ul class="skill-tags">
-              <li>CentOS</li>
-              <li>Kali Linux</li>
-              <li>Linux</li>
-              <li>Ubuntu</li>
-              <li>Windows</li>
-              <li>Windows Server</li>
-            </ul>
-            <span class="skill-subtitle">Cloud</span>
-            <ul class="skill-tags">
-              <li>AWS</li>
-              <li>Firebase</li>
-              <li>GCP</li>
-              <li>Naver Cloud</li>
-            </ul>
+        <div class="skills-wrap skills-cols-left-stack">
+          <div class="skills-left-col">
+            <div class="skill-group">
+              <h3 class="skill-group-title">Program Language</h3>
+              <span class="skill-subtitle">Front</span>
+              <ul class="skill-tags">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>React</li>
+                <li>Vue</li>
+              </ul>
+              <span class="skill-subtitle">Back</span>
+              <ul class="skill-tags">
+                <li>Java</li>
+                <li>Python</li>
+                <li>Anaconda3</li>
+                <li>Node.js</li>
+                <li>FastAPI</li>
+              </ul>
+              <span class="skill-subtitle">DBMS</span>
+              <ul class="skill-tags">
+                <li>Oracle</li>
+                <li>MongoDB</li>
+                <li>MySQL</li>
+                <li>PostgreSQL</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h3 class="skill-group-title">Web framework</h3>
+              <ul class="skill-tags">
+                <li>FastAPI</li>
+                <li>Flask</li>
+                <li>Spring Boot</li>
+                <li>Firebase</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h3 class="skill-group-title">OS & Cloud</h3>
+              <span class="skill-subtitle">OS</span>
+              <ul class="skill-tags">
+                <li>Windows</li>
+                <li>Linux (Ubuntu, CentOS)</li>
+                <li>Windows Server</li>
+                <li>CentOS</li>
+                <li>Kali Linux</li>
+                <li>Ubuntu</li>
+              </ul>
+              <span class="skill-subtitle">Cloud</span>
+              <ul class="skill-tags">
+                <li>AWS</li>
+                <li>MS Azure</li>
+                <li>GCP</li>
+                <li>NCP</li>
+                <li>Firebase</li>
+                <li>Naver Cloud</li>
+              </ul>
+            </div>
           </div>
           <div class="skill-group">
             <h3 class="skill-group-title">Libraries</h3>
@@ -271,7 +286,6 @@
               <li>NumPy</li>
               <li>Pandas</li>
               <li>Pydantic</li>
-              <li>React</li>
               <li>Selenium</li>
               <li>Streamlit</li>
             </ul>
@@ -281,20 +295,39 @@
               <li>Matplotlib</li>
               <li>Plotly</li>
               <li>Seaborn</li>
+              <li>Tableau</li>
+            </ul>
+            <span class="skill-subtitle">Deep learning</span>
+            <ul class="skill-tags">
+              <li>TensorFlow</li>
+              <li>PyTorch</li>
+              <li>Google Colab</li>
+            </ul>
+            <span class="skill-subtitle">Big Data</span>
+            <ul class="skill-tags">
+              <li>Machine Learning</li>
+              <li>Scikit-Learn</li>
+              <li>Selenium</li>
+              <li>BeautifulSoup</li>
+              <li>Pandas</li>
+              <li>PyCaret</li>
             </ul>
             <span class="skill-subtitle">AI</span>
             <ul class="skill-tags">
               <li>Hugging Face</li>
+              <li>OpenAI</li>
+              <li>Gemini API</li>
               <li>LangChain</li>
               <li>LLM</li>
-              <li>OpenAI API</li>
-              <li>PyCaret</li>
-              <li>PyTorch</li>
               <li>Random Forest</li>
               <li>scikit-learn</li>
-              <li>TensorFlow</li>
               <li>XGBoost</li>
               <li>YOLO</li>
+            </ul>
+            <span class="skill-subtitle">Open source</span>
+            <ul class="skill-tags">
+              <li>Spark</li>
+              <li>Hadoop</li>
             </ul>
             <span class="skill-subtitle">Model Orchestration</span>
             <ul class="skill-tags">
@@ -302,44 +335,52 @@
               <li>MLflow</li>
               <li>Kubeflow</li>
             </ul>
-            <ul class="skill-tags" id="skillTagsFromProjects"></ul>
           </div>
           <div class="skill-group">
             <h3 class="skill-group-title">Tools & Others</h3>
-            <span class="skill-subtitle">Development</span>
+            <span class="skill-subtitle">Tooling</span>
+            <ul class="skill-tags">
+              <li>GitHub</li>
+              <li>VMware</li>
+              <li>Git</li>
+              <li>VS Code</li>
+              <li>Uvicorn</li>
+            </ul>
+            <span class="skill-subtitle">DevOps</span>
             <ul class="skill-tags">
               <li>Docker</li>
-              <li>Git</li>
-              <li>VMware</li>
-              <li>VS Code</li>
+              <li>Kubernetes</li>
+            </ul>
+            <span class="skill-subtitle">CI/CD</span>
+            <ul class="skill-tags">
+              <li>GitHub Actions</li>
+              <li>ArgoCD</li>
+              <li>Ansible</li>
+            </ul>
+            <span class="skill-subtitle">Office</span>
+            <ul class="skill-tags">
+              <li>Word</li>
+              <li>Excel</li>
+              <li>PowerPoint</li>
+              <li>Outlook</li>
             </ul>
             <span class="skill-subtitle">Collaboration</span>
             <ul class="skill-tags">
-              <li>Discord</li>
-              <li>Google Meet</li>
-              <li>Jira</li>
               <li>Notion</li>
               <li>Slack</li>
               <li>Teams</li>
+              <li>Google Meet</li>
+              <li>Discord</li>
+              <li>Jira</li>
               <li>Zoom</li>
             </ul>
             <span class="skill-subtitle">Productivity</span>
             <ul class="skill-tags">
               <li>Anaconda</li>
-              <li>Excel</li>
               <li>Google Colab</li>
               <li>Google Workspace</li>
               <li>Jupyter Notebook</li>
               <li>Microsoft Office</li>
-              <li>Outlook</li>
-              <li>PowerPoint</li>
-              <li>Word</li>
-            </ul>
-            <span class="skill-subtitle">AI & Analytics</span>
-            <ul class="skill-tags">
-              <li>ChatGPT</li>
-              <li>Gemini</li>
-              <li>Tableau</li>
             </ul>
             <span class="skill-subtitle">Others</span>
             <ul class="skill-tags">

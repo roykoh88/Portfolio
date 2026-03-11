@@ -255,7 +255,7 @@ img { max-width: 100%; height: auto; display: block; }
 .hero-image-2 {
   object-fit: contain;
   object-position: center center;
-  transform: scale(1.4);
+  transform: scale(1.75);
   background: var(--bg-elevated);
 }
 .hero-image-1 {
@@ -859,10 +859,26 @@ img { max-width: 100%; height: auto; display: block; }
 .skills-wrap {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 3rem;
+  gap: 2rem 2.5rem;
 }
+/* 왼쪽: flex로 Program Language → Web framework → OS & Cloud (간격 균일) | 가운데: Libraries | 오른쪽: Tools & Others */
+.skills-wrap.skills-cols-left-stack {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.skills-wrap.skills-cols-left-stack .skills-left-col {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Program Language ↔ Web framework ↔ OS & Cloud 간격 */
+  min-width: 0;
+}
+.skills-wrap.skills-cols-left-stack .skill-group:nth-child(2) { grid-column: 2; grid-row: 1; }
+.skills-wrap.skills-cols-left-stack .skill-group:nth-child(3) { grid-column: 3; grid-row: 1; }
 .skill-group {
   min-width: 0;
+  align-self: start;
 }
 .skill-group-title {
   font-size: 1rem;
@@ -1084,9 +1100,17 @@ body.owner-mode .project-card .project-delete.owner-only {
     width: 100%;
     margin-bottom: 1rem;
   }
-  .skills-wrap {
+  .skills-wrap,
+  .skills-wrap.skills-three-cols,
+  .skills-wrap.skills-cols-left-stack {
     grid-template-columns: 1fr;
     gap: 1.25rem;
+  }
+  .skills-wrap.skills-cols-left-stack .skills-left-col,
+  .skills-wrap.skills-cols-left-stack .skill-group:nth-child(2),
+  .skills-wrap.skills-cols-left-stack .skill-group:nth-child(3) {
+    grid-column: auto;
+    grid-row: auto;
   }
   .contact-links {
     flex-direction: column;
