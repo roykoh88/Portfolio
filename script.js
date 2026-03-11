@@ -131,6 +131,14 @@
 
   var DEFAULT_PROJECTS = [
     {
+      title: '공학용 계산기',
+      description: '공학용 계산기 + 함수 그래프 시각화 웹 앱입니다. 사칙연산부터 삼각함수, 로그, 그래프까지 지원합니다.',
+      tags: 'Python, FastAPI, React, JavaScript, HTML, CSS',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/Calculator',
+      image: ''
+    },
+    {
       title: 'Portfolio',
       description: '개발 포트폴리오 사이트입니다. About, 교육/연수, Projects, Skills, Certificates, Contact를 담고 있으며 Firebase로 호스팅됩니다.',
       tags: 'HTML, CSS, JavaScript, Firebase, GitHub Actions',
