@@ -167,13 +167,23 @@
     try {
       var raw = localStorage.getItem(PROJECTS_KEY);
       var list = raw ? JSON.parse(raw) : [];
-      if (list.length === 0 && DEFAULT_PROJECTS.length) {
-        saveProjects(DEFAULT_PROJECTS);
-        return DEFAULT_PROJECTS;
+      // 기존에 저장된 목록이 있더라도, 기본 프로젝트(공학용 계산기 등)가 빠져 있으면 자동으로 채워 넣기
+      if (DEFAULT_PROJECTS && DEFAULT_PROJECTS.length) {
+        DEFAULT_PROJECTS.forEach(function (def) {
+          var exists = list.some(function (p) {
+            return (p.title || '') === (def.title || '');
+          });
+          if (!exists) {
+            list.push(def);
+          }
+        });
+      }
+      if (!raw && list.length) {
+        saveProjects(list);
       }
       return list;
     } catch (e) {
-      return [];
+      return DEFAULT_PROJECTS.slice();
     }
   }
 
