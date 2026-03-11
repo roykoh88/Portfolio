@@ -133,7 +133,7 @@
     {
       title: 'Portfolio',
       description: '개발 포트폴리오 사이트입니다. About, 교육/연수, Projects, Skills, Certificates, Contact를 담고 있으며 Firebase로 호스팅됩니다.',
-      tags: 'HTML, CSS, JavaScript, Firebase',
+      tags: 'HTML, CSS, JavaScript, Firebase, GitHub Actions',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/Portfolio',
       image: ''
