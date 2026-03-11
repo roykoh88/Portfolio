@@ -169,12 +169,29 @@
     }
   }
 
+  // 룰렛 형식: 이 순서대로 표시 (공학용 계산기 다음에 포트폴리오가 오도록)
+  var PROJECT_DISPLAY_ORDER = ['공학용 계산기', 'Portfolio', '하이브리드 번역기', '노인 재가복지 보조금 자가진단'];
+  function getProjectsInRouletteOrder() {
+    var list = getProjects();
+    var order = PROJECT_DISPLAY_ORDER;
+    var ordered = [];
+    var rest = [];
+    list.forEach(function (p) {
+      var i = order.indexOf((p.title || '').trim());
+      if (i >= 0) ordered.push({ p: p, i: i });
+      else rest.push(p);
+    });
+    ordered.sort(function (a, b) { return a.i - b.i; });
+    return ordered.map(function (x) { return x.p; }).concat(rest);
+  }
+
   function saveProjects(projects) {
     localStorage.setItem(PROJECTS_KEY, JSON.stringify(projects));
   }
 
   function renderProjects() {
-    var projects = getProjects();
+    var projects = getProjectsInRouletteOrder();
+    var allProjects = getProjects();
     if (!grid) return;
     grid.innerHTML = '';
     if (projectEmpty) {
@@ -206,17 +223,19 @@
       grid.appendChild(card);
       card.querySelector('.project-delete').addEventListener('click', function () {
         var list = getProjects();
-        list.splice(i, 1);
+        var idx = list.findIndex(function (item) {
+          return (item.title || '') === (p.title || '') &&
+            (item.codeUrl || '') === (p.codeUrl || '') &&
+            (item.demoUrl || '') === (p.demoUrl || '');
+        });
+        if (idx === -1) idx = list.findIndex(function (item) { return (item.title || '') === (p.title || ''); });
+        if (idx >= 0) list.splice(idx, 1);
         saveProjects(list);
         renderProjects();
         renderSkillsFromProjects();
       });
     });
-    var carouselEl = document.querySelector('.project-carousel');
-    if (carouselEl) {
-      carouselEl.classList.remove('project-carousel--fill', 'project-carousel--scroll');
-      carouselEl.classList.add(projects.length > 5 ? 'project-carousel--scroll' : 'project-carousel--fill');
-    }
+    updateProjectCarouselMode(allProjects.length);
     renderSkillsFromProjects();
   }
 
@@ -261,6 +280,20 @@
       if (imageFileInput) imageFileInput.value = '';
     }
   }
+
+  // 모바일(768px 이하)에서는 2개 이상일 때도 가로 스크롤 적용 (핸드폰에서 스와이프 가능)
+  var CAROUSEL_MOBILE_BREAKPOINT = 768;
+  function updateProjectCarouselMode(projectCount) {
+    var carouselEl = document.querySelector('.project-carousel');
+    if (!carouselEl) return;
+    var isMobile = typeof window !== 'undefined' && window.innerWidth <= CAROUSEL_MOBILE_BREAKPOINT;
+    var useScroll = projectCount > 5 || (isMobile && projectCount >= 2);
+    carouselEl.classList.remove('project-carousel--fill', 'project-carousel--scroll');
+    carouselEl.classList.add(useScroll ? 'project-carousel--scroll' : 'project-carousel--fill');
+  }
+  window.addEventListener('resize', function () {
+    updateProjectCarouselMode((getProjects && getProjects()) ? getProjects().length : 0);
+  });
 
   // 프로젝트 캐러셀 좌우 스크롤 (끝에서 다음 → 처음, 처음에서 이전 → 끝, 뻉뻉 돌기)
   var carouselScroll = document.getElementById('projectCarouselScroll');
