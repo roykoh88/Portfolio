@@ -169,6 +169,14 @@
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/News_Crawling',
       image: ''
+    },
+    {
+      title: 'BulSee (불씨)',
+      description: '기상청·산림청 실시간 공공데이터를 수집해 AI로 산불 발생 위험도와 피해 범위를 예측하는 웹 서비스. 지도 기반 지역 조회, 시뮬레이션, 대시보드, 챗봇(OpenAI) 포함.',
+      tags: 'Spring Boot, FastAPI, React, TypeScript, PyTorch, XGBoost, GRU, Transformer, Oracle, Docker',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/bulsee',
+      image: ''
     }
   ];
   function getProjects() {
@@ -196,7 +204,7 @@
   }
 
   // 룰렛 형식: 이 순서대로 표시 (공학용 계산기 다음에 포트폴리오가 오도록)
-  var PROJECT_DISPLAY_ORDER = ['공학용 계산기', 'Portfolio', '하이브리드 번역기', '노인 재가복지 보조금 자가진단', '네이버 경제 뉴스 크롤러'];
+  var PROJECT_DISPLAY_ORDER = ['공학용 계산기', 'Portfolio', '하이브리드 번역기', '노인 재가복지 보조금 자가진단', '네이버 경제 뉴스 크롤러', 'BulSee (불씨)'];
   function getProjectsInRouletteOrder() {
     var list = getProjects();
     var order = PROJECT_DISPLAY_ORDER;
