@@ -469,17 +469,17 @@
     { title: '서버 구성 1회차 수료증', image: 'PDF/학원 수료증/서버 구성1회차 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 4 },
     { title: '네트워크 수료증', image: 'PDF/학원 수료증/네트워크 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 8 },
     { title: '프론트&백엔드 풀스택개발자 수료증', image: 'PDF/학원 수료증/프론트&백엔드풀스택개발자 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 9 },
-    { title: '이수증 1', image: 'PDF/이수증/이수증_1.pdf', type: 'pdf', category: '이수증' },
-    { title: '이수증 2', image: 'PDF/이수증/이수증_2.pdf', type: 'pdf', category: '이수증' },
-    { title: '이수증 3', image: 'PDF/이수증/이수증_3.pdf', type: 'pdf', category: '이수증' },
-    { title: '이수증 4', image: 'PDF/이수증/이수증_4.pdf', type: 'pdf', category: '이수증' },
-    { title: '이수증 5', image: 'PDF/이수증/이수증_5.pdf', type: 'pdf', category: '이수증' },
-    { title: '이수증 6', image: 'PDF/이수증/이수증_6.pdf', type: 'pdf', category: '이수증' },
-    { title: '이수증 7', image: 'PDF/이수증/이수증_7.pdf', type: 'pdf', category: '이수증' },
-    { title: '이수증 8', image: 'PDF/이수증/이수증_8.pdf', type: 'pdf', category: '이수증' },
-    { title: '이수증 9', image: 'PDF/이수증/이수증_9.pdf', type: 'pdf', category: '이수증' },
-    { title: '이수증 10', image: 'PDF/이수증/이수증_10.pdf', type: 'pdf', category: '이수증' },
-    { title: '이수증 11', image: 'PDF/이수증/이수증_11.pdf', type: 'pdf', category: '이수증' }
+    { title: '화면구현', image: 'PDF/이수증/이수증_1.pdf', type: 'pdf', category: '이수증' },
+    { title: 'SQL 활용', image: 'PDF/이수증/이수증_2.pdf', type: 'pdf', category: '이수증' },
+    { title: '데이터베이스 구현', image: 'PDF/이수증/이수증_3.pdf', type: 'pdf', category: '이수증' },
+    { title: '응용SW 기초기술 활용', image: 'PDF/이수증/이수증_4.pdf', type: 'pdf', category: '이수증' },
+    { title: '프로그래밍 언어 활용', image: 'PDF/이수증/이수증_5.pdf', type: 'pdf', category: '이수증' },
+    { title: '애플리케이션 구현', image: 'PDF/이수증/이수증_6.pdf', type: 'pdf', category: '이수증' },
+    { title: '애플리케이션 배포', image: 'PDF/이수증/이수증_7.pdf', type: 'pdf', category: '이수증' },
+    { title: '개발자 테스트', image: 'PDF/이수증/이수증_8.pdf', type: 'pdf', category: '이수증' },
+    { title: '애플리케이션 테스트 수행', image: 'PDF/이수증/이수증_9.pdf', type: 'pdf', category: '이수증' },
+    { title: 'AngularJS', image: 'PDF/이수증/이수증_10.pdf', type: 'pdf', category: '이수증' },
+    { title: 'ReactJS', image: 'PDF/이수증/이수증_11.pdf', type: 'pdf', category: '이수증' }
   ];
   function getCertificates() {
     try {
