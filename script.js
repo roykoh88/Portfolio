@@ -161,6 +161,14 @@
       demoUrl: 'http://sungsimcare.kr/grade/test07/test06.html',
       codeUrl: 'https://github.com/roykoh88/assist_old_person',
       image: ''
+    },
+    {
+      title: '네이버 경제 뉴스 크롤러',
+      description: '네이버 뉴스 경제(섹션 101)의 헤드라인 기사 10개를 크롤링해 제목·링크·본문·썸네일을 CSV로 저장하는 파이썬 스크립트입니다.',
+      tags: 'Python, Selenium, Pandas, Crawling',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/News_Crawling',
+      image: ''
     }
   ];
   function getProjects() {
@@ -188,7 +196,7 @@
   }
 
   // 룰렛 형식: 이 순서대로 표시 (공학용 계산기 다음에 포트폴리오가 오도록)
-  var PROJECT_DISPLAY_ORDER = ['공학용 계산기', 'Portfolio', '하이브리드 번역기', '노인 재가복지 보조금 자가진단'];
+  var PROJECT_DISPLAY_ORDER = ['공학용 계산기', 'Portfolio', '하이브리드 번역기', '노인 재가복지 보조금 자가진단', '네이버 경제 뉴스 크롤러'];
   function getProjectsInRouletteOrder() {
     var list = getProjects();
     var order = PROJECT_DISPLAY_ORDER;
