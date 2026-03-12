@@ -454,7 +454,7 @@
     }
   }
 
-  var CERTIFICATES_SCHEMA_VERSION = 5;
+  var CERTIFICATES_SCHEMA_VERSION = 6;
   // 교육/연수 섹션 순서(0부터): 데이터분석 → AI개발자 → 도커쿠버 → 리눅스중급 → 서버구성 → … → 네트워크
   var DEFAULT_CERTIFICATES = [
     { title: '최우수상', image: 'PDF/수상/최우수상.pdf', type: 'pdf', category: '수상' },
@@ -467,7 +467,19 @@
     { title: '리눅스 수료증', image: 'PDF/학원 수료증/리눅스 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 3 },
     { title: '서버 구성 수료증', image: 'PDF/학원 수료증/서버 구성 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 4 },
     { title: '서버 구성 1회차 수료증', image: 'PDF/학원 수료증/서버 구성1회차 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 4 },
-    { title: '네트워크 수료증', image: 'PDF/학원 수료증/네트워크 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 8 }
+    { title: '네트워크 수료증', image: 'PDF/학원 수료증/네트워크 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 8 },
+    { title: '프론트&백엔드 풀스택개발자 수료증', image: 'PDF/학원 수료증/프론트&백엔드풀스택개발자 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 9 },
+    { title: '이수증 1', image: 'PDF/이수증/이수증_1.pdf', type: 'pdf', category: '이수증' },
+    { title: '이수증 2', image: 'PDF/이수증/이수증_2.pdf', type: 'pdf', category: '이수증' },
+    { title: '이수증 3', image: 'PDF/이수증/이수증_3.pdf', type: 'pdf', category: '이수증' },
+    { title: '이수증 4', image: 'PDF/이수증/이수증_4.pdf', type: 'pdf', category: '이수증' },
+    { title: '이수증 5', image: 'PDF/이수증/이수증_5.pdf', type: 'pdf', category: '이수증' },
+    { title: '이수증 6', image: 'PDF/이수증/이수증_6.pdf', type: 'pdf', category: '이수증' },
+    { title: '이수증 7', image: 'PDF/이수증/이수증_7.pdf', type: 'pdf', category: '이수증' },
+    { title: '이수증 8', image: 'PDF/이수증/이수증_8.pdf', type: 'pdf', category: '이수증' },
+    { title: '이수증 9', image: 'PDF/이수증/이수증_9.pdf', type: 'pdf', category: '이수증' },
+    { title: '이수증 10', image: 'PDF/이수증/이수증_10.pdf', type: 'pdf', category: '이수증' },
+    { title: '이수증 11', image: 'PDF/이수증/이수증_11.pdf', type: 'pdf', category: '이수증' }
   ];
   function getCertificates() {
     try {
@@ -517,6 +529,7 @@
     if (s.indexOf('PDF/자격증/') === 0) return '자격증';
     if (s.indexOf('PDF/학원 수료증/') === 0) return '수료증';
     if (s.indexOf('PDF/수료증/') === 0) return '수료증';
+    if (s.indexOf('PDF/이수증/') === 0) return '이수증';
     return '';
   }
   function inferEducationOrder(item) {
@@ -554,7 +567,7 @@
     return groups;
   }
   function getCategoryOrder(groups) {
-    var base = ['수료증', '수상', '자격증', '근무 기록', '기타'];
+    var base = ['수료증', '이수증', '수상', '자격증', '기타'];
     var cats = Object.keys(groups || {});
     cats.sort(function (a, b) {
       var ia = base.indexOf(a);
