@@ -681,6 +681,139 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--text);
   background: var(--bg-card);
 }
+.modal-close-prominent {
+  width: 48px;
+  height: 48px;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 50%;
+}
+.modal-close-prominent:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-tint);
+}
+
+/* ----- 자격증 뷰어 모달 (X + 이전/다음 화살표) ----- */
+.certificate-viewer-modal .modal-backdrop {
+  background: rgba(0, 0, 0, 0.85);
+}
+.certificate-viewer-content {
+  position: relative;
+  width: 90vw;
+  max-width: 900px;
+  height: 85vh;
+  max-height: 800px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.certificate-viewer-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  color: var(--text);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+.certificate-viewer-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-tint);
+}
+.certificate-viewer-body {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 3rem 0.5rem 1rem;
+  min-height: 0;
+}
+.certificate-viewer-prev,
+.certificate-viewer-next {
+  flex-shrink: 0;
+  width: 56px;
+  min-width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  color: var(--text);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+.certificate-viewer-prev:hover,
+.certificate-viewer-next:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-tint);
+}
+.certificate-viewer-frame-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.certificate-viewer-frame-wrap iframe {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: #fff;
+}
+.certificate-viewer-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .certificate-viewer-content {
+    width: 96vw;
+    height: 88vh;
+  }
+  .certificate-viewer-close {
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+  }
+  .certificate-viewer-prev,
+  .certificate-viewer-next {
+    width: 44px;
+    min-width: 44px;
+    font-size: 2rem;
+  }
+}
+
 .project-form .form-label {
   display: block;
   font-size: 0.875rem;
@@ -730,6 +863,102 @@ img { max-width: 100%; height: auto; display: block; }
 /* ----- 수상/자격증 ----- */
 .section.certificates {
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg-elevated) 50%, var(--bg) 100%);
+}
+.certificate-groups {
+  display: grid;
+  gap: 2rem;
+  max-width: none;
+  margin: 0;
+}
+.certificate-group {
+  display: grid;
+  gap: 1rem;
+}
+.certificate-group-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.certificate-group-title::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: var(--border);
+  margin-top: 0.75rem;
+}
+/* 자격증/수료증 룰렛(캐러셀) */
+.certificate-carousel {
+  position: relative;
+  margin: 0 -0.5rem;
+}
+.certificate-carousel-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.certificate-carousel-scroll::-webkit-scrollbar {
+  display: none;
+}
+.certificate-carousel .certificate-grid {
+  --cert-gap: clamp(1rem, 2.5vw, 1.25rem);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--cert-gap);
+  scroll-snap-type: none;
+  padding: 0 0.25rem;
+  max-width: none;
+  margin: 0;
+}
+.certificate-carousel .certificate-card {
+  flex: 0 0 clamp(
+    calc((100% - 4 * var(--cert-gap)) / 5),
+    220px,
+    calc((100% - 2 * var(--cert-gap)) / 3)
+  );
+  scroll-snap-align: start;
+}
+.certificate-carousel .carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.certificate-carousel .carousel-btn:hover {
+  background: var(--accent-tint);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.certificate-carousel .carousel-prev { left: -0.5rem; }
+.certificate-carousel .carousel-next { right: -0.5rem; }
+@media (max-width: 768px) {
+  .certificate-carousel .carousel-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+  }
+  .certificate-carousel .carousel-prev { left: 0; }
+  .certificate-carousel .carousel-next { right: 0; }
 }
 .certificate-grid {
   display: grid;
@@ -792,6 +1021,7 @@ img { max-width: 100%; height: auto; display: block; }
   font-weight: 600;
   color: var(--text);
   line-height: 1.4;
+  text-align: center;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -803,11 +1033,14 @@ img { max-width: 100%; height: auto; display: block; }
 .certificate-card.is-pdf .certificate-image {
   padding: 0;
   min-height: 0;
+  overflow: hidden;
+  position: relative;
 }
 .certificate-card.is-pdf .certificate-pdf-iframe {
   position: absolute;
   inset: 0;
-  width: 100%;
+  width: calc(100% + 20px);
+  max-width: none;
   height: 100%;
   border: 0;
   background: #fff;
@@ -860,7 +1093,7 @@ img { max-width: 100%; height: auto; display: block; }
 .skills-wrap {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem 2.5rem;
+  gap: 1.5rem 1.75rem;
 }
 /* 왼쪽: flex로 Program Language → Web framework → OS & Cloud (간격 균일) | 가운데: Libraries | 오른쪽: Tools & Others */
 .skills-wrap.skills-cols-left-stack {
@@ -872,7 +1105,7 @@ img { max-width: 100%; height: auto; display: block; }
   align-self: start;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Program Language ↔ Web framework ↔ OS & Cloud 간격 */
+  gap: 1.25rem;
   min-width: 0;
 }
 .skills-wrap.skills-cols-left-stack .skill-group:nth-child(2) { grid-column: 2; grid-row: 1; }
@@ -885,22 +1118,22 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 1rem;
   font-weight: 600;
   color: var(--accent);
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.5rem;
 }
 .skill-subtitle {
   display: block;
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-muted);
-  margin: 1rem 0 0.5rem;
+  margin: 0.65rem 0 0.35rem;
 }
 .skill-subtitle:first-of-type {
-  margin-top: 0.5rem;
+  margin-top: 0.35rem;
 }
 .skill-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 0.6rem;
+  gap: 0.45rem 0.55rem;
 }
 .skill-tags li {
   padding: 0.45rem 0.9rem;

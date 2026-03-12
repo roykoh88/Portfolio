@@ -67,3 +67,6 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# 개인정보 포함 PDF (주민등록번호 등) - 저장소에 올리지 않음
+PDF/근무 기록/경력증명서_고용재.pdf

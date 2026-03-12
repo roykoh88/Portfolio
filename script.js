@@ -408,7 +408,7 @@
 
   // 수상/자격증 추가 (localStorage)
   var CERTIFICATES_KEY = 'portfolioCertificates';
-  var certificateGrid = document.getElementById('certificateGrid');
+  var certificateGroups = document.getElementById('certificateGroups');
   var certificateModal = document.getElementById('certificateModal');
   var certificateForm = document.getElementById('certificateForm');
   var certificateImageUrl = document.getElementById('certificateImageUrl');
@@ -454,15 +454,20 @@
     }
   }
 
-  var CERTIFICATES_SCHEMA_VERSION = 2;
+  var CERTIFICATES_SCHEMA_VERSION = 5;
+  // 교육/연수 섹션 순서(0부터): 데이터분석 → AI개발자 → 도커쿠버 → 리눅스중급 → 서버구성 → … → 네트워크
   var DEFAULT_CERTIFICATES = [
-    { title: '리눅스 마스터', image: 'PDF/리눅스마스터.pdf', type: 'pdf' },
-    { title: '수료증 1', image: 'PDF/수료증1.pdf', type: 'pdf' },
-    { title: '수료증 2', image: 'PDF/수료증2.pdf', type: 'pdf' },
-    { title: '수료증 3', image: 'PDF/수료증3.pdf', type: 'pdf' },
-    { title: '수료증 4', image: 'PDF/수료증4.pdf', type: 'pdf' },
-    { title: '수료증 5', image: 'PDF/수료증5.pdf', type: 'pdf' },
-    { title: '수료증 6', image: 'PDF/수료증6.pdf', type: 'pdf' }
+    { title: '최우수상', image: 'PDF/수상/최우수상.pdf', type: 'pdf', category: '수상' },
+    { title: '개근상', image: 'PDF/수상/개근상.pdf', type: 'pdf', category: '수상' },
+    { title: '개근상 2', image: 'PDF/수상/개근상1.pdf', type: 'pdf', category: '수상' },
+    { title: '리눅스마스터', image: 'PDF/자격증/리눅스마스터.pdf', type: 'pdf', category: '자격증' },
+    { title: '데이터 분석 수료증', image: 'PDF/학원 수료증/데이터 분석 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 0 },
+    { title: 'AI개발자 수료증', image: 'PDF/학원 수료증/AI개발자 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 1 },
+    { title: '도커 & 쿠버 수료증', image: 'PDF/학원 수료증/도커 & 쿠버 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 2 },
+    { title: '리눅스 수료증', image: 'PDF/학원 수료증/리눅스 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 3 },
+    { title: '서버 구성 수료증', image: 'PDF/학원 수료증/서버 구성 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 4 },
+    { title: '서버 구성 1회차 수료증', image: 'PDF/학원 수료증/서버 구성1회차 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 4 },
+    { title: '네트워크 수료증', image: 'PDF/학원 수료증/네트워크 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 8 }
   ];
   function getCertificates() {
     try {
@@ -474,9 +479,24 @@
       var data = JSON.parse(raw);
       var list = Array.isArray(data) ? data : (data.list || []);
       var version = Array.isArray(data) ? 1 : (data.v || 1);
-      if (version < CERTIFICATES_SCHEMA_VERSION || list.length === 0) {
-        saveCertificates(DEFAULT_CERTIFICATES);
-        return DEFAULT_CERTIFICATES;
+      list = list.filter(function (item) {
+        var img = (item.image || '').replace(/\\/g, '/');
+        var cat = (item.category || '').trim();
+        if (cat === '근무 기록') return false;
+        if (img.indexOf('PDF/근무 기록/') === 0 || img.indexOf('경력증명서_고용재') >= 0) return false;
+        return true;
+      });
+      if (version < CERTIFICATES_SCHEMA_VERSION) {
+        if (list.length === 0) {
+          saveCertificates(DEFAULT_CERTIFICATES);
+          return DEFAULT_CERTIFICATES;
+        }
+        DEFAULT_CERTIFICATES.forEach(function (def) {
+          if (!list.some(function (l) { return (l.image || '').replace(/\\/g, '/') === (def.image || '').replace(/\\/g, '/'); })) list.push(def);
+        });
+        saveCertificates(list);
+      } else {
+        saveCertificates(list);
       }
       return list;
     } catch (e) {
@@ -490,60 +510,246 @@
       list: list
     }));
   }
+  function inferCategoryFromImage(image) {
+    if (!image) return '';
+    var s = ('' + image).replace(/\\/g, '/');
+    if (s.indexOf('PDF/수상/') === 0) return '수상';
+    if (s.indexOf('PDF/자격증/') === 0) return '자격증';
+    if (s.indexOf('PDF/학원 수료증/') === 0) return '수료증';
+    if (s.indexOf('PDF/수료증/') === 0) return '수료증';
+    return '';
+  }
+  function inferEducationOrder(item) {
+    if (!item || item.category !== '수료증') return;
+    var t = ((item.title || '') + ' ' + (item.image || '')).toLowerCase();
+    if (t.indexOf('데이터') >= 0 || t.indexOf('데이터 분석') >= 0) return 0;
+    if (t.indexOf('ai개발자') >= 0 || t.indexOf('ai 개발자') >= 0) return 1;
+    if (t.indexOf('도커') >= 0 || t.indexOf('쿠버') >= 0) return 2;
+    if (t.indexOf('리눅스 수료증') >= 0 || t.indexOf('리눅스 수료') >= 0) return 3;
+    if (t.indexOf('서버 구성') >= 0 || t.indexOf('서버구성') >= 0) return 4;
+    if (t.indexOf('네트워크') >= 0 || t.indexOf('시스코') >= 0) return 8;
+    return 9999;
+  }
+  function normalizeCertificateItem(item) {
+    if (!item || typeof item !== 'object') return item;
+    if (!item.category) item.category = inferCategoryFromImage(item.image) || '기타';
+    if (item.category === '수료증' && item.educationOrder == null) item.educationOrder = inferEducationOrder(item);
+    return item;
+  }
+  function groupCertificates(list) {
+    var groups = {};
+    (list || []).forEach(function (it) {
+      normalizeCertificateItem(it);
+      var cat = (it.category || '').trim() || '기타';
+      if (!groups[cat]) groups[cat] = [];
+      groups[cat].push(it);
+    });
+    if (groups['수료증'] && groups['수료증'].length) {
+      groups['수료증'].sort(function (a, b) {
+        var oa = a.educationOrder != null ? a.educationOrder : 9999;
+        var ob = b.educationOrder != null ? b.educationOrder : 9999;
+        return oa - ob;
+      });
+    }
+    return groups;
+  }
+  function getCategoryOrder(groups) {
+    var base = ['수료증', '수상', '자격증', '근무 기록', '기타'];
+    var cats = Object.keys(groups || {});
+    cats.sort(function (a, b) {
+      var ia = base.indexOf(a);
+      var ib = base.indexOf(b);
+      if (ia === -1 && ib === -1) return a.localeCompare(b);
+      if (ia === -1) return 1;
+      if (ib === -1) return -1;
+      return ia - ib;
+    });
+    return cats;
+  }
+  var certificateViewerModal = document.getElementById('certificateViewerModal');
+  var certificateViewerIframe = document.getElementById('certificateViewerIframe');
+  var certificateViewerTitle = document.getElementById('certificateViewerTitle');
+  var certificateViewerList = [];
+  var certificateViewerIndex = 0;
+
+  function getPdfSrcForViewer(src) {
+    if (!src) return '';
+    var hash = '#view=FitH&toolbar=0&navpanes=0';
+    if (src.indexOf('data:') === 0) {
+      var url = pdfToViewUrl(src);
+      return url ? url + hash : '';
+    }
+    return (src.indexOf('#') >= 0 ? src : src + hash);
+  }
+  function openCertificateViewer(items, index) {
+    if (!items || !items.length || !certificateViewerModal || !certificateViewerIframe) return;
+    certificateViewerList = items;
+    certificateViewerIndex = index >= 0 && index < items.length ? index : 0;
+    var it = certificateViewerList[certificateViewerIndex];
+    certificateViewerIframe.src = getPdfSrcForViewer(it && it.image ? it.image : '');
+    certificateViewerTitle.textContent = (it && it.title) ? it.title : '';
+    certificateViewerModal.classList.add('is-open');
+    certificateViewerModal.setAttribute('aria-hidden', 'false');
+    updateCertificateViewerArrows();
+  }
+  function closeCertificateViewer() {
+    if (certificateViewerModal) {
+      certificateViewerModal.classList.remove('is-open');
+      certificateViewerModal.setAttribute('aria-hidden', 'true');
+      if (certificateViewerIframe) certificateViewerIframe.src = 'about:blank';
+    }
+  }
+  function updateCertificateViewerArrows() {
+    var prevBtn = document.getElementById('certificateViewerPrev');
+    var nextBtn = document.getElementById('certificateViewerNext');
+    if (prevBtn) prevBtn.style.visibility = certificateViewerList.length <= 1 ? 'hidden' : 'visible';
+    if (nextBtn) nextBtn.style.visibility = certificateViewerList.length <= 1 ? 'hidden' : 'visible';
+  }
+  function certificateViewerGo(delta) {
+    certificateViewerIndex = (certificateViewerIndex + delta + certificateViewerList.length) % certificateViewerList.length;
+    var it = certificateViewerList[certificateViewerIndex];
+    certificateViewerIframe.src = getPdfSrcForViewer(it && it.image ? it.image : '');
+    certificateViewerTitle.textContent = (it && it.title) ? it.title : '';
+  }
+
+  function renderCertificateCard(item, i, onDelete, groupItems, indexInGroup) {
+    var card = document.createElement('div');
+    card.className = 'certificate-card';
+    if (isPdfItem(item)) card.classList.add('is-pdf');
+    card.dataset.index = i;
+    var title = (item.title || '').trim();
+    var inner = '';
+    if (isPdfItem(item)) {
+      var pdfSrc = item.image.indexOf('data:') === 0 ? pdfToViewUrl(item.image) : item.image;
+      var viewSrc = pdfSrc ? (pdfSrc.indexOf('#') >= 0 ? pdfSrc : pdfSrc + '#view=FitH&toolbar=0&navpanes=0') : '';
+      var safeSrc = viewSrc ? ('' + viewSrc).replace(/&/g, '&amp;').replace(/"/g, '&quot;') : '';
+      inner =
+        '<div class="certificate-image">' +
+        (safeSrc
+          ? '<iframe class="certificate-pdf-iframe" src="' + safeSrc + '" title="PDF 미리보기"></iframe>' +
+            '<div class="certificate-pdf-overlay" data-index="' + i + '" role="button" tabindex="0" aria-label="PDF 보기"></div>'
+          : '<span class="certificate-pdf-icon">📄</span>') +
+        '<button type="button" class="certificate-delete owner-only" aria-label="삭제">×</button></div>' +
+        '<div class="certificate-title">' + escapeHtml(title) + '</div>';
+    } else {
+      var imgHtml = item.image
+        ? '<img src="' + item.image + '" alt="">'
+        : '<span style="font-size:2rem;opacity:0.5">📜</span>';
+      inner =
+        '<div class="certificate-image">' + imgHtml +
+        '<button type="button" class="certificate-delete owner-only" aria-label="삭제">×</button></div>' +
+        '<div class="certificate-title">' + escapeHtml(title) + '</div>';
+    }
+    card.innerHTML = inner;
+
+    var pdfOverlay = card.querySelector('.certificate-pdf-overlay');
+    if (pdfOverlay) {
+      pdfOverlay.addEventListener('click', function () {
+        if (groupItems && groupItems.length && typeof indexInGroup === 'number') {
+          openCertificateViewer(groupItems, indexInGroup);
+        } else if (item && item.image) {
+          openPdfView(item.image);
+        }
+      });
+      pdfOverlay.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (groupItems && groupItems.length && typeof indexInGroup === 'number') {
+            openCertificateViewer(groupItems, indexInGroup);
+          } else if (item && item.image) {
+            openPdfView(item.image);
+          }
+        }
+      });
+    }
+    var delBtn = card.querySelector('.certificate-delete');
+    if (delBtn) delBtn.addEventListener('click', function () { if (onDelete) onDelete(); });
+    return card;
+  }
   function renderCertificates() {
-    if (!certificateGrid) return;
+    if (!certificateGroups) return;
     certificateBlobUrls.forEach(function (u) { try { URL.revokeObjectURL(u); } catch (e) {} });
     certificateBlobUrls = [];
     var list = getCertificates();
-    certificateGrid.innerHTML = '';
-    list.forEach(function (item, i) {
-      var card = document.createElement('div');
-      card.className = 'certificate-card';
-      if (isPdfItem(item)) card.classList.add('is-pdf');
-      card.dataset.index = i;
-      var title = (item.title || '').trim();
-      var inner = '';
-      if (isPdfItem(item)) {
-        var pdfSrc = item.image.indexOf('data:') === 0 ? pdfToViewUrl(item.image) : item.image;
-        var viewSrc = pdfSrc ? (pdfSrc.indexOf('#') >= 0 ? pdfSrc : pdfSrc + '#view=FitH') : '';
-        var safeSrc = viewSrc ? ('' + viewSrc).replace(/&/g, '&amp;').replace(/"/g, '&quot;') : '';
-        inner =
-          '<div class="certificate-image">' +
-          (safeSrc
-            ? '<iframe class="certificate-pdf-iframe" src="' + safeSrc + '" title="PDF 미리보기"></iframe>' +
-              '<div class="certificate-pdf-overlay" data-index="' + i + '" role="button" tabindex="0" aria-label="새 창에서 PDF 보기"></div>'
-            : '<span class="certificate-pdf-icon">📄</span>') +
-          '<button type="button" class="certificate-delete owner-only" aria-label="삭제">×</button></div>' +
-          '<div class="certificate-title">' + escapeHtml(title) + '</div>';
-      } else {
-        var imgHtml = item.image
-          ? '<img src="' + item.image + '" alt="">'
-          : '<span style="font-size:2rem;opacity:0.5">📜</span>';
-        inner =
-          '<div class="certificate-image">' + imgHtml +
-          '<button type="button" class="certificate-delete owner-only" aria-label="삭제">×</button></div>' +
-          '<div class="certificate-title">' + escapeHtml(title) + '</div>';
-      }
-      card.innerHTML = inner;
-      certificateGrid.appendChild(card);
-      var pdfOverlay = card.querySelector('.certificate-pdf-overlay');
-      if (pdfOverlay) {
-        function openPdfNewTab() {
-          var idx = parseInt(pdfOverlay.getAttribute('data-index'), 10);
-          var list = getCertificates();
-          var it = list[idx];
-          if (it && it.image) openPdfView(it.image);
-        }
-        pdfOverlay.addEventListener('click', openPdfNewTab);
-        pdfOverlay.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPdfNewTab(); } });
-      }
-      var delBtn = card.querySelector('.certificate-delete');
-      if (delBtn) delBtn.addEventListener('click', function () {
-        var arr = getCertificates();
-        arr.splice(i, 1);
-        saveCertificates(arr);
-        renderCertificates();
+    certificateGroups.innerHTML = '';
+
+    var normalized = (list || []).map(function (it) { return normalizeCertificateItem(it); });
+    var groups = groupCertificates(normalized);
+    var cats = getCategoryOrder(groups);
+
+    cats.forEach(function (cat) {
+      var section = document.createElement('section');
+      section.className = 'certificate-group';
+      var titleEl = document.createElement('h3');
+      titleEl.className = 'certificate-group-title';
+      titleEl.textContent = cat;
+
+      var carousel = document.createElement('div');
+      carousel.className = 'certificate-carousel';
+
+      var btnPrev = document.createElement('button');
+      btnPrev.type = 'button';
+      btnPrev.className = 'carousel-btn carousel-prev';
+      btnPrev.setAttribute('aria-label', '이전');
+      var btnNext = document.createElement('button');
+      btnNext.type = 'button';
+      btnNext.className = 'carousel-btn carousel-next';
+      btnNext.setAttribute('aria-label', '다음');
+
+      var scrollWrap = document.createElement('div');
+      scrollWrap.className = 'certificate-carousel-scroll';
+
+      var grid = document.createElement('div');
+      grid.className = 'certificate-grid';
+
+      scrollWrap.appendChild(grid);
+      carousel.appendChild(btnPrev);
+      carousel.appendChild(scrollWrap);
+      carousel.appendChild(btnNext);
+      section.appendChild(titleEl);
+      section.appendChild(carousel);
+      certificateGroups.appendChild(section);
+
+      var groupItems = groups[cat] || [];
+      groupItems.forEach(function (item, groupIndex) {
+        var idx = normalized.indexOf(item);
+        var card = renderCertificateCard(item, idx, function () {
+          var arr = getCertificates().map(function (it) { return normalizeCertificateItem(it); });
+          var target = arr.indexOf(item);
+          if (target === -1) target = idx;
+          if (target >= 0) arr.splice(target, 1);
+          saveCertificates(arr);
+          renderCertificates();
+        }, groupItems, groupIndex);
+        grid.appendChild(card);
       });
+
+      (function setupCarousel(scrollEl, prevBtn, nextBtn) {
+        function getScrollStep() {
+          var first = scrollEl.querySelector('.certificate-card');
+          var gap = 16;
+          return first ? first.offsetWidth + gap : 240;
+        }
+        function isAtStart() { return scrollEl.scrollLeft <= 2; }
+        function isAtEnd() {
+          var max = scrollEl.scrollWidth - scrollEl.clientWidth;
+          return max <= 0 || scrollEl.scrollLeft >= max - 2;
+        }
+        prevBtn.addEventListener('click', function () {
+          if (isAtStart()) {
+            scrollEl.scrollTo({ left: scrollEl.scrollWidth - scrollEl.clientWidth, behavior: 'smooth' });
+          } else {
+            scrollEl.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+          }
+        });
+        nextBtn.addEventListener('click', function () {
+          if (isAtEnd()) {
+            scrollEl.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            scrollEl.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+          }
+        });
+      })(scrollWrap, btnPrev, btnNext);
     });
   }
   function openCertificateModal() {
@@ -559,6 +765,19 @@
       if (certificateForm) certificateForm.reset();
       if (certificateImageFile) certificateImageFile.value = '';
     }
+  }
+
+  if (document.getElementById('certificateViewerClose')) {
+    document.getElementById('certificateViewerClose').addEventListener('click', closeCertificateViewer);
+  }
+  if (document.getElementById('certificateViewerBackdrop')) {
+    document.getElementById('certificateViewerBackdrop').addEventListener('click', closeCertificateViewer);
+  }
+  if (document.getElementById('certificateViewerPrev')) {
+    document.getElementById('certificateViewerPrev').addEventListener('click', function () { certificateViewerGo(-1); });
+  }
+  if (document.getElementById('certificateViewerNext')) {
+    document.getElementById('certificateViewerNext').addEventListener('click', function () { certificateViewerGo(1); });
   }
 
   if (document.getElementById('certificateAddBtn')) {
@@ -587,6 +806,7 @@
         var list = getCertificates();
         var payload = { title: title, image: imgData || '' };
         if (isPdf) payload.type = 'pdf';
+        payload.category = inferCategoryFromImage(payload.image) || '기타';
         list.push(payload);
         saveCertificates(list);
         renderCertificates();

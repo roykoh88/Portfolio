@@ -72,6 +72,14 @@
             <div class="education-item">
               <div class="timeline-marker" aria-hidden="true"></div>
               <div class="timeline-content">
+                <span class="education-period">2026.03 ~ 진행중</span>
+                <strong class="education-course">AI 논문 작성</strong>
+                <span class="education-org">휴먼 AI 교육센터</span>
+              </div>
+            </div>
+            <div class="education-item">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <div class="timeline-content">
                 <span class="education-period">2025.12 ~ 2026.03</span>
                 <strong class="education-course">심화_심층 데이터 분석을 통한 서비스 솔루션 개발자 과정</strong>
                 <span class="education-org">휴먼 AI 교육센터</span>
@@ -187,7 +195,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title">Add Project</h3>
-            <button type="button" class="modal-close" id="projectModalClose" aria-label="닫기">&times;</button>
+            <button type="button" class="modal-close modal-close-prominent" id="projectModalClose" aria-label="닫기">&times;</button>
           </div>
           <form id="projectForm" class="project-form">
             <label class="form-label">제목 <span class="required">*</span></label>
@@ -386,8 +394,24 @@
           <h2 class="section-title">Certificates</h2>
           <button type="button" class="btn btn-add owner-only" id="certificateAddBtn">+ Add Certificate</button>
         </div>
-        <p class="section-desc">학원·교육에서 받은 수상 및 자격증입니다.</p>
-        <div class="certificate-grid" id="certificateGrid"></div>
+        <p class="section-desc">학원·교육에서 받은 수상, 수료증 및 자격증입니다.</p>
+        <div class="certificate-groups" id="certificateGroups"></div>
+      </div>
+
+      <!-- 자격증/수료증 뷰어 모달 (PDF 보기 + 이전/다음) -->
+      <div class="modal certificate-viewer-modal" id="certificateViewerModal" aria-hidden="true">
+        <div class="modal-backdrop" id="certificateViewerBackdrop"></div>
+        <div class="certificate-viewer-content">
+          <button type="button" class="certificate-viewer-close" id="certificateViewerClose" aria-label="닫기">×</button>
+          <div class="certificate-viewer-body">
+            <button type="button" class="certificate-viewer-prev" id="certificateViewerPrev" aria-label="이전">‹</button>
+            <div class="certificate-viewer-frame-wrap">
+              <iframe id="certificateViewerIframe" title="자격증 PDF"></iframe>
+              <p class="certificate-viewer-title" id="certificateViewerTitle"></p>
+            </div>
+            <button type="button" class="certificate-viewer-next" id="certificateViewerNext" aria-label="다음">›</button>
+          </div>
+        </div>
       </div>
 
       <div class="modal" id="certificateModal" aria-hidden="true">
@@ -395,7 +419,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title">Add Certificate</h3>
-            <button type="button" class="modal-close" id="certificateModalClose" aria-label="닫기">&times;</button>
+            <button type="button" class="modal-close modal-close-prominent" id="certificateModalClose" aria-label="닫기">×</button>
           </div>
           <form id="certificateForm" class="project-form">
             <label class="form-label">제목 (선택)</label>
