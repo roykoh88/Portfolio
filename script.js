@@ -177,6 +177,14 @@
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/bulsee',
       image: ''
+    },
+    {
+      title: '공부·수면 → 합격 예측 (간단한 AI)',
+      description: '개인 공부 목적으로 ChatGPT와 토론하며 만든 프로젝트입니다. 공부시간·수면시간 데이터로 시험 합격 여부를 예측하는 분류 모델(Random Forest, Logistic Regression, Decision Tree, K-NN)을 비교·실험합니다. GPU 없이 실행 가능.',
+      tags: 'Python, scikit-learn, Decision Tree, Random Forest, Logistic Regression, KNN',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/simple-ai-study-sleep',
+      image: ''
     }
   ];
   function getProjects() {
@@ -204,7 +212,7 @@
   }
 
   // 룰렛 형식: 이 순서대로 표시 (공학용 계산기 다음에 포트폴리오가 오도록)
-  var PROJECT_DISPLAY_ORDER = ['공학용 계산기', 'Portfolio', '하이브리드 번역기', '노인 재가복지 보조금 자가진단', '네이버 경제 뉴스 크롤러', 'BulSee (불씨)'];
+  var PROJECT_DISPLAY_ORDER = ['공학용 계산기', 'Portfolio', '하이브리드 번역기', '노인 재가복지 보조금 자가진단', '네이버 경제 뉴스 크롤러', 'BulSee (불씨)', '공부·수면 → 합격 예측 (간단한 AI)'];
   function getProjectsInRouletteOrder() {
     var list = getProjects();
     var order = PROJECT_DISPLAY_ORDER;
@@ -470,8 +478,10 @@
     }
   }
 
-  var CERTIFICATES_SCHEMA_VERSION = 6;
-  // 교육/연수 섹션 순서(0부터): 데이터분석 → AI개발자 → 도커쿠버 → 리눅스중급 → 서버구성 → … → 네트워크
+  var CERTIFICATES_SCHEMA_VERSION = 8;
+  // 교육/연수 섹션 순서(0부터):
+  // 데이터 분석 → AI 개발자 → 도커&쿠버 → 리눅스(중급) → 서버 구성 → 서버 구성 1회차
+  // → 정보보안 1~6 → 리눅스 1~2 → 씨스코 1~2 → 네트워크 → 프론트&백엔드 풀스택
   var DEFAULT_CERTIFICATES = [
     { title: '최우수상', image: 'PDF/수상/최우수상.pdf', type: 'pdf', category: '수상' },
     { title: '개근상', image: 'PDF/수상/개근상.pdf', type: 'pdf', category: '수상' },
@@ -482,9 +492,19 @@
     { title: '도커 & 쿠버 수료증', image: 'PDF/학원 수료증/도커 & 쿠버 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 2 },
     { title: '리눅스 수료증', image: 'PDF/학원 수료증/리눅스 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 3 },
     { title: '서버 구성 수료증', image: 'PDF/학원 수료증/서버 구성 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 4 },
-    { title: '서버 구성 1회차 수료증', image: 'PDF/학원 수료증/서버 구성1회차 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 4 },
-    { title: '네트워크 수료증', image: 'PDF/학원 수료증/네트워크 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 8 },
-    { title: '프론트&백엔드 풀스택개발자 수료증', image: 'PDF/학원 수료증/프론트&백엔드풀스택개발자 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 9 },
+    { title: '서버 구성 1회차 수료증', image: 'PDF/학원 수료증/서버 구성1회차 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 5 },
+    { title: '정보보안 1 수료증', image: 'PDF/학원 수료증/정보보안1 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 6 },
+    { title: '정보보안 2 수료증', image: 'PDF/학원 수료증/정보보안2 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 7 },
+    { title: '정보보안 3 수료증', image: 'PDF/학원 수료증/정보보안3 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 8 },
+    { title: '정보보안 4 수료증', image: 'PDF/학원 수료증/정보보안4 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 9 },
+    { title: '정보보안 5 수료증', image: 'PDF/학원 수료증/정보보안5 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 10 },
+    { title: '정보보안 6 수료증', image: 'PDF/학원 수료증/정보보안6 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 11 },
+    { title: '리눅스 1 수료증', image: 'PDF/학원 수료증/리눅스1 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 12 },
+    { title: '리눅스 2 수료증', image: 'PDF/학원 수료증/리눅스2 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 13 },
+    { title: '씨스코 1 수료증', image: 'PDF/학원 수료증/씨스코1 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 14 },
+    { title: '씨스코 2 수료증', image: 'PDF/학원 수료증/씨스코2 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 15 },
+    { title: '네트워크 수료증', image: 'PDF/학원 수료증/네트워크 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 16 },
+    { title: '프론트&백엔드 풀스택개발자 수료증', image: 'PDF/학원 수료증/프론트&백엔드풀스택개발자 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 17 },
     { title: '화면구현', image: 'PDF/이수증/이수증_1.pdf', type: 'pdf', category: '이수증' },
     { title: 'SQL 활용', image: 'PDF/이수증/이수증_2.pdf', type: 'pdf', category: '이수증' },
     { title: '데이터베이스 구현', image: 'PDF/이수증/이수증_3.pdf', type: 'pdf', category: '이수증' },
