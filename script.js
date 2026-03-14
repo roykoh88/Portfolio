@@ -488,7 +488,7 @@
     { title: '개근상 2', image: 'PDF/수상/개근상1.pdf', type: 'pdf', category: '수상' },
     { title: '리눅스마스터', image: 'PDF/자격증/리눅스마스터.pdf', type: 'pdf', category: '자격증' },
     { title: '데이터 분석 수료증', image: 'PDF/학원 수료증/데이터 분석 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 0 },
-    { title: 'AI개발자 수료증', image: 'PDF/학원 수료증/AI개발자 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 1 },
+    { title: 'AI개발자 수료증', image: 'https://drive.google.com/file/d/1f9qRHCS_ZD2hIM_Z5nBR4nIbS9q48lX4/preview', type: 'pdf', category: '수료증', educationOrder: 1 },
     { title: '도커 & 쿠버 수료증', image: 'PDF/학원 수료증/도커 & 쿠버 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 2 },
     { title: '리눅스 수료증', image: 'PDF/학원 수료증/리눅스 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 3 },
     { title: '서버 구성 수료증', image: 'PDF/학원 수료증/서버 구성 수료증.pdf', type: 'pdf', category: '수료증', educationOrder: 4 },
