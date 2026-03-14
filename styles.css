@@ -1038,7 +1038,9 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .certificate-card.is-pdf .certificate-pdf-iframe {
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: calc(100% + 20px);
   max-width: none;
   height: 100%;
