@@ -229,6 +229,14 @@
       if (!raw && list.length) {
         saveProjects(list);
       }
+      // placeholder/예시로 저장된 항목은 리스트에서 제거하고 저장
+      var skipTitles = ['프로젝트 제목', '또다른 프로젝트'];
+      var before = list.length;
+      list = list.filter(function (p) {
+        var t = (p.title || '').trim();
+        return skipTitles.indexOf(t) === -1;
+      });
+      if (list.length < before) saveProjects(list);
       return list;
     } catch (e) {
       return DEFAULT_PROJECTS.slice();
@@ -748,7 +756,7 @@
 
     var normalized = (list || []).map(function (it) { return normalizeCertificateItem(it); });
     var groups = groupCertificates(normalized);
-    var cats = getCategoryOrder(groups);
+    var cats = getCategoryOrder(groups).filter(function (c) { return c !== '기타'; });
 
     cats.forEach(function (cat) {
       var section = document.createElement('section');
