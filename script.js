@@ -185,6 +185,14 @@
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/simple-ai-study-sleep',
       image: ''
+    },
+    {
+      title: 'Muzzle (강아지 입마개 탐지)',
+      description: 'YOLOv5/YOLOv8을 사용한 개 탐지 및 대형견·소형견 구분 프로젝트입니다. Stanford Dogs 데이터셋으로 big_dog/small_dog 이진 분류까지 진행했고, 입마개(muzzle) 탐지까지 목표로 했으나 해당 단계는 미완이었습니다. 강아지 인식까지는 구현했습니다.',
+      tags: 'Python, PyTorch, YOLOv5, YOLOv8, Ultralytics, Roboflow, OpenCV',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/muzzle',
+      image: ''
     }
   ];
   function getProjects() {
