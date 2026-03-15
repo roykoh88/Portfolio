@@ -193,6 +193,22 @@
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/muzzle',
       image: ''
+    },
+    {
+      title: 'Dream Lotto (운세·꿈 해몽 로또 추천)',
+      description: '네이버 오늘의 운세와 룰드드림 꿈 해몽을 Selenium으로 수집한 뒤, KLUE-RoBERTa 감정 분류로 감정을 추출하고 감정–숫자 매핑으로 로또 5게임을 추천하는 파이프라인. 번호 분포 엔트로피·시각화, 당첨 번호 백테스트 노트북 포함. 재미 목적.',
+      tags: 'Python, Selenium, PyTorch, Transformers, KLUE-RoBERTa, Pandas, openpyxl',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/dream_lotto',
+      image: ''
+    },
+    {
+      title: 'Dream Web (AI 로또 분석 시스템)',
+      description: 'Express + MongoDB + EJS 기반 웹 앱. AI 로또 번호 분석(Python 연동), 동행복권 API 당첨번호 조회, 감정숫자 분류표, AI 상담 챗봇, 후기 게시판, 고객센터(문의·댓글), 관리자·분석 히스토리. SharePoint 웹파트 삽입 구성.',
+      tags: 'Node.js, Express, MongoDB, EJS, Multer, Axios, bcrypt, Python',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/dream_web',
+      image: ''
     }
   ];
   function getProjects() {
