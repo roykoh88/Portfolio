@@ -119,7 +119,8 @@
   }
 
   // 프로젝트 직접 추가 (localStorage)
-  var PROJECTS_KEY = 'portfolioProjects';
+  // v2 키로 변경해서 기존 캐시를 자동으로 무시하도록 함
+  var PROJECTS_KEY = 'portfolioProjects_v2';
   var grid = document.getElementById('projectGrid');
   var projectEmpty = document.getElementById('projectEmpty');
   var modal = document.getElementById('projectModal');
