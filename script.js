@@ -136,7 +136,17 @@
       tags: 'Python, FastAPI, React, JavaScript, HTML, CSS',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/Calculator',
-      image: ''
+      image: '',
+      projectType: 'personal'
+    },
+    {
+      title: 'LLM 개인 비서 서비스 (BizAi)',
+      description: 'LLM 기반 개인 비서(BizAi) 서비스를 위한 모노레포 구조입니다. 백엔드 API, 프론트엔드, ETL 파이프라인, LLM 서버, 인프라를 하나의 레포에서 관리합니다.',
+      tags: 'Python, FastAPI, React, TypeScript, Docker, PostgreSQL, LLM',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/LLM_project',
+      image: '',
+      projectType: 'academy'
     },
     {
       title: 'Portfolio',
@@ -144,7 +154,8 @@
       tags: 'HTML, CSS, JavaScript, Firebase, GitHub Actions',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/Portfolio',
-      image: ''
+      image: '',
+      projectType: 'personal'
     },
     {
       title: '하이브리드 번역기',
@@ -152,7 +163,8 @@
       tags: 'Python, FastAPI, Ollama, deep-translator, JavaScript, HTML, CSS',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/translator',
-      image: ''
+      image: '',
+      projectType: 'personal'
     },
     {
       title: '노인 재가복지 보조금 자가진단',
@@ -160,7 +172,8 @@
       tags: 'JavaScript, HTML, CSS',
       demoUrl: 'http://sungsimcare.kr/grade/test07/test06.html',
       codeUrl: 'https://github.com/roykoh88/assist_old_person',
-      image: ''
+      image: '',
+      projectType: 'personal'
     },
     {
       title: '네이버 경제 뉴스 크롤러',
@@ -168,7 +181,8 @@
       tags: 'Python, Selenium, Pandas, Crawling',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/News_Crawling',
-      image: ''
+      image: '',
+      projectType: 'personal'
     },
     {
       title: 'BulSee (불씨)',
@@ -176,7 +190,8 @@
       tags: 'Spring Boot, FastAPI, React, TypeScript, PyTorch, XGBoost, GRU, Transformer, Oracle, Docker',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/bulsee',
-      image: ''
+      image: '',
+      projectType: 'academy'
     },
     {
       title: '공부·수면 → 합격 예측 (간단한 AI)',
@@ -184,7 +199,8 @@
       tags: 'Python, scikit-learn, Decision Tree, Random Forest, Logistic Regression, KNN',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/simple-ai-study-sleep',
-      image: ''
+      image: '',
+      projectType: 'personal'
     },
     {
       title: 'Muzzle (강아지 입마개 탐지)',
@@ -192,7 +208,8 @@
       tags: 'Python, PyTorch, YOLOv5, YOLOv8, Ultralytics, Roboflow, OpenCV',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/muzzle',
-      image: ''
+      image: '',
+      projectType: 'academy'
     },
     {
       title: 'Dream Lotto (운세·꿈 해몽 로또 추천)',
@@ -200,7 +217,8 @@
       tags: 'Python, Selenium, PyTorch, Transformers, KLUE-RoBERTa, Pandas, openpyxl',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/dream_lotto',
-      image: ''
+      image: '',
+      projectType: 'academy'
     },
     {
       title: 'Dream Web (AI 로또 분석 시스템)',
@@ -208,7 +226,8 @@
       tags: 'Node.js, Express, MongoDB, EJS, Multer, Axios, bcrypt, Python',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/dream_web',
-      image: ''
+      image: '',
+      projectType: 'academy'
     }
   ];
   function getProjects() {
@@ -243,8 +262,22 @@
     }
   }
 
-  // 룰렛 형식: 이 순서대로 표시 (공학용 계산기 다음에 포트폴리오가 오도록)
-  var PROJECT_DISPLAY_ORDER = ['공학용 계산기', 'Portfolio', '하이브리드 번역기', '노인 재가복지 보조금 자가진단', '네이버 경제 뉴스 크롤러', 'BulSee (불씨)', '공부·수면 → 합격 예측 (간단한 AI)'];
+  // 룰렛 형식: 이 순서대로 표시
+  // Muzzle -> Dream Lotto -> 뉴스 크롤링 -> Dream Web -> 노인 재가 복지 ->
+  // 공부·수면 -> 불씨 -> 하이브리드 번역기 -> BizAi -> 공학용 계산기 -> Portfolio
+  var PROJECT_DISPLAY_ORDER = [
+    'Muzzle (강아지 입마개 탐지)',
+    'Dream Lotto (운세·꿈 해몽 로또 추천)',
+    '네이버 경제 뉴스 크롤러',
+    'Dream Web (AI 로또 분석 시스템)',
+    '노인 재가복지 보조금 자가진단',
+    '공부·수면 → 합격 예측 (간단한 AI)',
+    'BulSee (불씨)',
+    '하이브리드 번역기',
+    'LLM 개인 비서 서비스 (BizAi)',
+    '공학용 계산기',
+    'Portfolio'
+  ];
   function getProjectsInRouletteOrder() {
     var list = getProjects();
     var order = PROJECT_DISPLAY_ORDER;
@@ -280,6 +313,9 @@
       var card = document.createElement('article');
       card.className = 'project-card';
       card.dataset.index = i;
+      var type = (p.projectType || 'personal');
+      var typeLabel = type === 'academy' ? '학원 프로젝트' : '개인 프로젝트';
+      var typeClass = type === 'academy' ? 'project-badge project-badge--academy' : 'project-badge project-badge--personal';
       var imgHtml = p.image
         ? '<img src="' + p.image + '" alt="">'
         : '<div class="project-placeholder">📁</div>';
@@ -287,6 +323,7 @@
         '<div class="project-image">' + imgHtml +
         '<button type="button" class="project-delete owner-only" aria-label="삭제">×</button></div>' +
         '<div class="project-body">' +
+        '<div class="' + typeClass + '">' + typeLabel + '</div>' +
         '<h3 class="project-title">' + escapeHtml(p.title || '제목 없음') + '</h3>' +
         '<p class="project-desc">' + escapeHtml(p.description || '') + '</p>' +
         '<div class="project-tags">' + tags.map(function (t) { return '<span>' + escapeHtml(t) + '</span>'; }).join('') + '</div>' +
