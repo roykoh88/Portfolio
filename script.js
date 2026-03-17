@@ -553,12 +553,12 @@
   // 데이터 분석 → AI 개발자 → 도커&쿠버 → 리눅스(중급) → 서버 구성 → 서버 구성 1회차
   // → 정보보안 1~6 → 리눅스 1~2 → 씨스코 1~2 → 네트워크 → 프론트&백엔드 풀스택
   var DEFAULT_CERTIFICATES = [
-    { title: '최우수상', image: 'https://drive.google.com/file/d/1jthFUocW5E2X75lG7G5uNn3Kl-x4mL-X/preview', type: 'pdf', category: '수상' },
-    { title: '개근상', image: 'https://drive.google.com/file/d/1EkEX5FGF7XE54E2yDs8C0w0vk0qgJ54q/preview', type: 'pdf', category: '수상' },
-    { title: '개근상 2', image: 'https://drive.google.com/file/d/1cVtjxcvauc29pVXLDmfUzVdH2PsbQ8cK/preview', type: 'pdf', category: '수상' },
-    { title: '알파코 태도 우수상', image: 'https://drive.google.com/file/d/1F_dcJi8pO-YPSj_MaHTBqTtbKWzqOtdC/preview', type: 'pdf', category: '수상' },
-    { title: '알파코 학습 우수상', image: 'https://drive.google.com/file/d/1UtCqiMXBj_SUPciHwfBrutQ4bxzaVVn0/preview', type: 'pdf', category: '수상' },
-    { title: '알파코 프로젝트 우수상', image: 'https://drive.google.com/file/d/1k6LNDJBaTWiz-LfFq4ws0jnzPxGnjBhr/preview', type: 'pdf', category: '수상' },
+    { title: '<휴먼> 최우수상', image: 'https://drive.google.com/file/d/1jthFUocW5E2X75lG7G5uNn3Kl-x4mL-X/preview', type: 'pdf', category: '수상' },
+    { title: '<휴먼> 개근상', image: 'https://drive.google.com/file/d/1EkEX5FGF7XE54E2yDs8C0w0vk0qgJ54q/preview', type: 'pdf', category: '수상' },
+    { title: '<알파코> 개근상', image: 'https://drive.google.com/file/d/1cVtjxcvauc29pVXLDmfUzVdH2PsbQ8cK/preview', type: 'pdf', category: '수상' },
+    { title: '<알파코> 태도 우수상', image: 'https://drive.google.com/file/d/1F_dcJi8pO-YPSj_MaHTBqTtbKWzqOtdC/preview', type: 'pdf', category: '수상' },
+    { title: '<알파코> 학습 우수상', image: 'https://drive.google.com/file/d/1UtCqiMXBj_SUPciHwfBrutQ4bxzaVVn0/preview', type: 'pdf', category: '수상' },
+    { title: '<알파코> 프로젝트 우수상', image: 'https://drive.google.com/file/d/1k6LNDJBaTWiz-LfFq4ws0jnzPxGnjBhr/preview', type: 'pdf', category: '수상' },
     { title: '리눅스마스터', image: 'https://drive.google.com/file/d/1QxTi8pUCh8X6yBchjUWieiBcxbPWG33w/preview', type: 'pdf', category: '자격증' },
     { title: '데이터 분석 수료증', image: 'https://drive.google.com/file/d/1Vxev_3nI0V94fSOihKrK-qE6Yo8GfMNL/preview', type: 'pdf', category: '수료증', educationOrder: 0 },
     { title: 'AI개발자 수료증', image: 'https://drive.google.com/file/d/1f9qRHCS_ZD2hIM_Z5nBR4nIbS9q48lX4/preview', type: 'pdf', category: '수료증', educationOrder: 1 },
