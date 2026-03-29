@@ -649,45 +649,53 @@ a.education-org--cert:focus {
 }
 .award-table {
   width: 100%;
-  min-width: 320px;
+  min-width: 36rem;
   border-collapse: collapse;
-  table-layout: fixed;
+  /* fixed + 좁은 % 열 너비는 rowspan·긴 제목에서 셀 경계가 무너져 글자가 겹칠 수 있음 */
+  table-layout: auto;
   font-size: 0.95rem;
   line-height: 1.5;
 }
-/* Award 3열: Date | 명칭 | 발급처 — Certificates 5열과 같은 카드 너비에서 비율만 분배 */
+/* Award 3열: Date | 명칭 | 발급처 — 날짜는 최소 폭 확보, 명칭은 긴 문구용 min-width */
 .award-table:not(.award-table--license) thead th:nth-child(1),
 .award-table:not(.award-table--license) tbody td:nth-child(1) {
-  width: 15%;
+  width: 1%;
+  min-width: 7rem;
+  white-space: nowrap;
 }
 .award-table:not(.award-table--license) thead th:nth-child(2),
 .award-table:not(.award-table--license) tbody td:nth-child(2) {
-  width: 48%;
+  min-width: 20rem;
 }
 .award-table:not(.award-table--license) thead th:nth-child(3),
 .award-table:not(.award-table--license) tbody td:nth-child(3) {
-  width: 37%;
+  min-width: 11rem;
 }
 /* Certificates 5열: Date | Country | 자격증 | 등급 | 발급처 */
 .award-table--license thead th:nth-child(1),
 .award-table--license tbody td:nth-child(1) {
-  width: 11%;
+  width: 1%;
+  min-width: 7rem;
+  white-space: nowrap;
 }
 .award-table--license thead th:nth-child(2),
 .award-table--license tbody td:nth-child(2) {
-  width: 14%;
+  width: 1%;
+  min-width: 6.5rem;
+  white-space: nowrap;
 }
 .award-table--license thead th:nth-child(3),
 .award-table--license tbody td:nth-child(3) {
-  width: 26%;
+  min-width: 18rem;
 }
 .award-table--license thead th:nth-child(4),
 .award-table--license tbody td:nth-child(4) {
-  width: 12%;
+  min-width: 5rem;
+  white-space: nowrap;
 }
 .award-table--license thead th:nth-child(5),
 .award-table--license tbody td:nth-child(5) {
-  width: 37%;
+  min-width: 11rem;
 }
 .award-table thead th {
   padding: 0.75rem 0.85rem;
@@ -700,10 +708,11 @@ a.education-org--cert:focus {
 .award-table tbody td {
   padding: 0.7rem 0.85rem;
   text-align: center;
-  vertical-align: middle;
+  vertical-align: top;
   color: var(--text);
   border-bottom: 1px solid var(--border);
   overflow-wrap: break-word;
+  word-break: keep-all;
 }
 .award-table tbody tr:last-child td {
   border-bottom: none;

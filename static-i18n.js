@@ -106,6 +106,7 @@
         empty: '이 조합에 해당하는 항목이 없습니다.',
       },
       awards: {
+        title: 'Award',
         intro: '교육 과정 등에서 받은 수상 실적입니다.',
         colDate: '날짜',
         colName: '수상명',
@@ -113,6 +114,7 @@
         pdfTitleTemplate: '{label} PDF (새 창)',
       },
       certificates: {
+        title: 'Certificates',
         desc: '국가·기관에서 발급한 자격·면허입니다.',
         add: '+ Add Certificate',
         colDate: '취득일자',
@@ -233,6 +235,7 @@
         empty: 'Nothing to show for this combination.',
       },
       awards: {
+        title: 'Award',
         intro: 'Awards received during training and related programs.',
         colDate: 'Date',
         colName: 'Award',
@@ -360,12 +363,14 @@
   }
 
   function setLang(next) {
+    var code = String(next || '').trim()
+    if (code !== 'en' && code !== 'ko') code = 'ko'
     try {
-      localStorage.setItem(LANG_KEY, next)
+      localStorage.setItem(LANG_KEY, code)
     } catch (e) {}
-    document.documentElement.lang = next === 'en' ? 'en' : 'ko'
-    applyAll(next)
-    global.dispatchEvent(new CustomEvent('portfolio-lang-change', { detail: { lang: next } }))
+    document.documentElement.lang = code === 'en' ? 'en' : 'ko'
+    applyAll(code)
+    global.dispatchEvent(new CustomEvent('portfolio-lang-change', { detail: { lang: code } }))
   }
 
   function getByPath(obj, path) {
@@ -498,7 +503,8 @@
   }
 
   function applyDataI18n(lang) {
-    var m = MESSAGES[lang]
+    var m = MESSAGES[lang] || MESSAGES.ko
+    if (!m) return
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var key = el.getAttribute('data-i18n')
       var v = getByPath(m, key)
@@ -575,11 +581,16 @@
   }
 
   function applyAll(lang) {
-    applyDataI18n(lang)
-    renderEducationSplit(lang)
-    renderAwardTable(lang)
-    renderCertTable(lang)
-    updateFooterLangButtons(lang)
+    var code = lang === 'en' || lang === 'ko' ? lang : 'ko'
+    try {
+      applyDataI18n(code)
+      renderEducationSplit(code)
+      renderAwardTable(code)
+      renderCertTable(code)
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.error) console.error('applyAll', e)
+    }
+    updateFooterLangButtons(code)
   }
 
   function bindFooterLang() {

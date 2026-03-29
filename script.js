@@ -276,7 +276,46 @@
       projectType: 'academy'
     }
   ];
+  var DEFAULT_PROJECT_BY_TITLE = {};
+  DEFAULT_PROJECTS.forEach(function (def) {
+    var k = (def.title || '').trim();
+    if (k) DEFAULT_PROJECT_BY_TITLE[k] = def;
+  });
+
+  /** getProjects() 반복 호출 시 JSON/병합 비용 방지 — saveProjects 시 무효화 */
+  var projectsListCache = null;
+  function invalidateProjectsCache() {
+    projectsListCache = null;
+  }
+
+  /** localStorage에 예전 형식(영문 필드 없음)만 있으면 영어 전환해도 한글만 나옴 → 기본 프로젝트와 제목이 같을 때 titleEn 등 보강 */
+  function mergeDefaultLocaleFields(list) {
+    if (!list || !DEFAULT_PROJECTS.length) return false;
+    var mutated = false;
+    list.forEach(function (p) {
+      var def = DEFAULT_PROJECT_BY_TITLE[(p.title || '').trim()];
+      if (!def) return;
+      if (def.titleEn && (p.titleEn === undefined || p.titleEn === null || String(p.titleEn).trim() === '')) {
+        p.titleEn = def.titleEn;
+        mutated = true;
+      }
+      if (
+        def.descriptionEn != null &&
+        String(def.descriptionEn).trim() !== '' &&
+        (p.descriptionEn === undefined || p.descriptionEn === null || String(p.descriptionEn).trim() === '')
+      ) {
+        p.descriptionEn = def.descriptionEn;
+        mutated = true;
+      }
+      if ((!p.projectType || String(p.projectType).trim() === '') && def.projectType) {
+        p.projectType = def.projectType;
+        mutated = true;
+      }
+    });
+    return mutated;
+  }
   function getProjects() {
+    if (projectsListCache !== null) return projectsListCache;
     try {
       var raw = localStorage.getItem(PROJECTS_KEY);
       var list = raw ? JSON.parse(raw) : [];
@@ -302,9 +341,14 @@
         return skipTitles.indexOf(t) === -1;
       });
       if (list.length < before) saveProjects(list);
+      if (mergeDefaultLocaleFields(list)) {
+        saveProjects(list);
+      }
+      projectsListCache = list;
       return list;
     } catch (e) {
-      return DEFAULT_PROJECTS.slice();
+      projectsListCache = DEFAULT_PROJECTS.slice();
+      return projectsListCache;
     }
   }
 
@@ -324,12 +368,12 @@
     '공학용 계산기',
     'Portfolio'
   ];
-  function getProjectsInRouletteOrder() {
-    var list = getProjects();
+  function getProjectsInRouletteOrder(list) {
+    var src = list != null ? list : getProjects();
     var order = PROJECT_DISPLAY_ORDER;
     var ordered = [];
     var rest = [];
-    list.forEach(function (p) {
+    src.forEach(function (p) {
       var i = order.indexOf((p.title || '').trim());
       if (i >= 0) ordered.push({ p: p, i: i });
       else rest.push(p);
@@ -340,6 +384,7 @@
 
   function saveProjects(projects) {
     localStorage.setItem(PROJECTS_KEY, JSON.stringify(projects));
+    invalidateProjectsCache();
   }
 
   function projectLang() {
@@ -482,7 +527,11 @@
     carouselEl.classList.add(useScroll ? 'project-carousel--scroll' : 'project-carousel--fill');
   }
   window.addEventListener('resize', function () {
-    updateProjectCarouselMode((getProjects && getProjects()) ? getProjects().length : 0);
+    var n = 0;
+    try {
+      n = getProjects().length;
+    } catch (e) {}
+    updateProjectCarouselMode(n);
   });
 
   // 프로젝트 캐러셀 좌우 스크롤 (끝에서 다음 → 처음, 처음에서 이전 → 끝, 뻉뻉 돌기)
@@ -578,7 +627,127 @@
 
   renderProjects();
 
-  // 수상/자격증 추가 (localStorage)
+  // Skills — react-app/data/skillsByTrack.js 와 동일 데이터·규칙 (자격증 블록보다 먼저 실행되어 중단 시에도 패널이 채워지도록)
+  (function initSkillsTrackPanel() {
+    var getGroups =
+      typeof window.portfolioGetSkillGroupsForTier === 'function'
+        ? window.portfolioGetSkillGroupsForTier
+        : null;
+    var tracks = window.portfolioSkillTracks;
+    var tiers = window.portfolioSkillTiers;
+    if (!getGroups || !tracks || !tiers) return;
+
+    var panel = document.getElementById('skillsFilteredPanel');
+    var tierRow = document.getElementById('skillsTierRow');
+    var contextValue = document.getElementById('skillsContextValue');
+    var trackBtns = document.querySelectorAll('[data-skill-track]');
+    var tierBtns = document.querySelectorAll('[data-skill-tier]');
+    if (!panel || !trackBtns.length) return;
+
+    var state = { track: 'llm', tier: 'strong' };
+
+    function labelForTrack(id) {
+      if (id === 'common' && typeof portfolioT === 'function') return portfolioT('skills.trackCommon');
+      var l = id;
+      tracks.forEach(function (t) {
+        if (t.id === id) l = t.label;
+      });
+      return l;
+    }
+    function labelForTier(id) {
+      if (id === 'strong' && typeof portfolioT === 'function') return portfolioT('skills.tierStrong');
+      if (id === 'experience' && typeof portfolioT === 'function') return portfolioT('skills.tierExp');
+      var l = id;
+      tiers.forEach(function (t) {
+        if (t.id === id) l = t.label;
+      });
+      return l;
+    }
+
+    function render() {
+      var trackLabel = labelForTrack(state.track);
+      var tierLabel = labelForTier(state.tier);
+      trackBtns.forEach(function (btn) {
+        var on = btn.getAttribute('data-skill-track') === state.track;
+        btn.classList.toggle('is-active', on);
+        btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      if (tierRow) {
+        tierRow.style.display = state.track === 'common' ? 'none' : '';
+      }
+      tierBtns.forEach(function (btn) {
+        var on = btn.getAttribute('data-skill-tier') === state.tier;
+        btn.classList.toggle('is-active', on);
+        btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      if (contextValue) {
+        var suffix =
+          typeof portfolioT === 'function'
+            ? portfolioT('skills.contextCommonSuffix')
+            : '협업·인프라 공통';
+        contextValue.textContent =
+          state.track === 'common' ? trackLabel + ' · ' + suffix : trackLabel + ' · ' + tierLabel;
+      }
+      var groups = getGroups(state.track, state.tier);
+      panel.innerHTML = '';
+      if (!groups.length) {
+        var empty = document.createElement('p');
+        empty.className = 'skills-empty-hint';
+        empty.textContent =
+          typeof portfolioT === 'function'
+            ? portfolioT('skills.empty')
+            : '이 조합에 해당하는 항목이 없습니다.';
+        panel.appendChild(empty);
+        return;
+      }
+      groups.forEach(function (g) {
+        var div = document.createElement('div');
+        div.className = 'skill-group skill-group--panel';
+        var h3 = document.createElement('h3');
+        h3.className = 'skill-group-title';
+        h3.textContent =
+          typeof portfolioSkillTitleEn === 'function' ? portfolioSkillTitleEn(g.title) : g.title;
+        div.appendChild(h3);
+        (g.blocks || []).forEach(function (block) {
+          if (block.subtitle) {
+            var sub = document.createElement('span');
+            sub.className = 'skill-subtitle';
+            sub.textContent = block.subtitle;
+            div.appendChild(sub);
+          }
+          var ul = document.createElement('ul');
+          ul.className = 'skill-tags';
+          (block.items || []).forEach(function (tag) {
+            var li = document.createElement('li');
+            li.textContent = tag;
+            ul.appendChild(li);
+          });
+          div.appendChild(ul);
+        });
+        panel.appendChild(div);
+      });
+    }
+
+    trackBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        state.track = btn.getAttribute('data-skill-track');
+        render();
+      });
+    });
+    tierBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        state.tier = btn.getAttribute('data-skill-tier');
+        render();
+      });
+    });
+
+    render();
+    document.addEventListener('portfolio-lang-change', function () {
+      render();
+    });
+  })();
+
+  // 수상/자격증 추가 (localStorage) — 레거시: 정적 HTML에서는 certificateGroups 가 없으면 실행 안 됨
   var CERTIFICATES_KEY = 'portfolioCertificates';
   var certificateGroups = document.getElementById('certificateGroups');
   var certificateModal = document.getElementById('certificateModal');
@@ -1032,126 +1201,6 @@
     });
   }
   renderCertificates();
-
-  // Skills — react-app/data/skillsByTrack.js 와 동일 데이터·규칙
-  (function initSkillsTrackPanel() {
-    var getGroups =
-      typeof window.portfolioGetSkillGroupsForTier === 'function'
-        ? window.portfolioGetSkillGroupsForTier
-        : null;
-    var tracks = window.portfolioSkillTracks;
-    var tiers = window.portfolioSkillTiers;
-    if (!getGroups || !tracks || !tiers) return;
-
-    var panel = document.getElementById('skillsFilteredPanel');
-    var tierRow = document.getElementById('skillsTierRow');
-    var contextValue = document.getElementById('skillsContextValue');
-    var trackBtns = document.querySelectorAll('[data-skill-track]');
-    var tierBtns = document.querySelectorAll('[data-skill-tier]');
-    if (!panel || !trackBtns.length) return;
-
-    var state = { track: 'llm', tier: 'strong' };
-
-    function labelForTrack(id) {
-      if (id === 'common' && typeof portfolioT === 'function') return portfolioT('skills.trackCommon');
-      var l = id;
-      tracks.forEach(function (t) {
-        if (t.id === id) l = t.label;
-      });
-      return l;
-    }
-    function labelForTier(id) {
-      if (id === 'strong' && typeof portfolioT === 'function') return portfolioT('skills.tierStrong');
-      if (id === 'experience' && typeof portfolioT === 'function') return portfolioT('skills.tierExp');
-      var l = id;
-      tiers.forEach(function (t) {
-        if (t.id === id) l = t.label;
-      });
-      return l;
-    }
-
-    function render() {
-      var trackLabel = labelForTrack(state.track);
-      var tierLabel = labelForTier(state.tier);
-      trackBtns.forEach(function (btn) {
-        var on = btn.getAttribute('data-skill-track') === state.track;
-        btn.classList.toggle('is-active', on);
-        btn.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
-      if (tierRow) {
-        tierRow.style.display = state.track === 'common' ? 'none' : '';
-      }
-      tierBtns.forEach(function (btn) {
-        var on = btn.getAttribute('data-skill-tier') === state.tier;
-        btn.classList.toggle('is-active', on);
-        btn.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
-      if (contextValue) {
-        var suffix =
-          typeof portfolioT === 'function'
-            ? portfolioT('skills.contextCommonSuffix')
-            : '협업·인프라 공통';
-        contextValue.textContent =
-          state.track === 'common' ? trackLabel + ' · ' + suffix : trackLabel + ' · ' + tierLabel;
-      }
-      var groups = getGroups(state.track, state.tier);
-      panel.innerHTML = '';
-      if (!groups.length) {
-        var empty = document.createElement('p');
-        empty.className = 'skills-empty-hint';
-        empty.textContent =
-          typeof portfolioT === 'function'
-            ? portfolioT('skills.empty')
-            : '이 조합에 해당하는 항목이 없습니다.';
-        panel.appendChild(empty);
-        return;
-      }
-      groups.forEach(function (g) {
-        var div = document.createElement('div');
-        div.className = 'skill-group skill-group--panel';
-        var h3 = document.createElement('h3');
-        h3.className = 'skill-group-title';
-        h3.textContent =
-          typeof portfolioSkillTitleEn === 'function' ? portfolioSkillTitleEn(g.title) : g.title;
-        div.appendChild(h3);
-        (g.blocks || []).forEach(function (block) {
-          if (block.subtitle) {
-            var sub = document.createElement('span');
-            sub.className = 'skill-subtitle';
-            sub.textContent = block.subtitle;
-            div.appendChild(sub);
-          }
-          var ul = document.createElement('ul');
-          ul.className = 'skill-tags';
-          (block.items || []).forEach(function (tag) {
-            var li = document.createElement('li');
-            li.textContent = tag;
-            ul.appendChild(li);
-          });
-          div.appendChild(ul);
-        });
-        panel.appendChild(div);
-      });
-    }
-
-    trackBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        state.track = btn.getAttribute('data-skill-track');
-        render();
-      });
-    });
-    tierBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        state.tier = btn.getAttribute('data-skill-tier');
-        render();
-      });
-    });
-
-    render();
-    document.addEventListener('portfolio-lang-change', function () {
-      render();
-    });
-  })();
 
   function syncNavToggleAria() {
     var navEl = document.querySelector('.nav');

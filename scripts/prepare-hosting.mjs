@@ -11,7 +11,14 @@ const root = path.resolve(__dirname, '..')
 const dist = path.join(root, 'react-app', 'dist')
 const destHtml = path.join(dist, 'html')
 
-const LEGACY_FILES = ['index.html', 'styles.css', 'script.js', '404.html']
+const LEGACY_FILES = [
+  'index.html',
+  'styles.css',
+  'script.js',
+  'static-i18n.js',
+  'skills-track.js',
+  '404.html',
+]
 const LEGACY_DIRS = ['img', 'PDF']
 
 function copyDirRecursive(src, dest) {

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=56">
+  <link rel="stylesheet" href="styles.css?v=57">
 </head>
 <body>
   <header class="header">
@@ -144,7 +144,7 @@
     <section id="projects" class="section projects">
       <div class="container">
         <div class="section-title-row">
-          <h2 class="section-title">Projects</h2>
+          <h2 class="section-title" data-i18n="nav.projects">Projects</h2>
           <button type="button" class="btn btn-add owner-only" id="projectAddBtn" data-i18n="projects.add">+ Add Project</button>
         </div>
         <p class="section-desc"><span data-i18n="projects.desc">그동안 개발한 프로젝트입니다.</span><span class="owner-only"> </span></p>
@@ -217,7 +217,7 @@
 
     <section id="awards" class="section award">
       <div class="container">
-        <h2 class="section-title" data-i18n="nav.awards">Award</h2>
+        <h2 class="section-title" data-i18n="awards.title">Award</h2>
         <p class="section-desc award-intro-desc" data-i18n="awards.intro">교육 과정 등에서 받은 수상 실적입니다.</p>
 
         <div class="award-table-card">
@@ -237,10 +237,7 @@
 
     <section id="certificates" class="section certificates">
       <div class="container">
-        <div class="section-title-row">
-          <h2 class="section-title" data-i18n="nav.certificates">Certificates</h2>
-          <button type="button" class="btn btn-add owner-only" id="certificateAddBtn" data-i18n="certificates.add">+ Add Certificate</button>
-        </div>
+        <h2 class="section-title" data-i18n="certificates.title">Certificates</h2>
         <p class="section-desc" data-i18n="certificates.desc">국가·기관에서 발급한 자격·면허입니다.</p>
 
         <div class="award-table-card">
@@ -256,45 +253,6 @@
             </thead>
             <tbody id="staticCertTbody"></tbody>
           </table>
-        </div>
-
-        <div class="certificate-groups" id="certificateGroups"></div>
-      </div>
-
-      <!-- 자격증/수료증 뷰어 모달 (PDF 보기 + 이전/다음) -->
-      <div class="modal certificate-viewer-modal" id="certificateViewerModal" aria-hidden="true">
-        <div class="modal-backdrop" id="certificateViewerBackdrop"></div>
-        <div class="certificate-viewer-content">
-          <button type="button" class="certificate-viewer-close" id="certificateViewerClose" aria-label="닫기">×</button>
-          <div class="certificate-viewer-body">
-            <button type="button" class="certificate-viewer-prev" id="certificateViewerPrev" aria-label="이전">‹</button>
-            <div class="certificate-viewer-frame-wrap">
-              <iframe id="certificateViewerIframe" title="자격증 PDF"></iframe>
-              <p class="certificate-viewer-title" id="certificateViewerTitle"></p>
-            </div>
-            <button type="button" class="certificate-viewer-next" id="certificateViewerNext" aria-label="다음">›</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal" id="certificateModal" aria-hidden="true">
-        <div class="modal-backdrop" id="certificateModalBackdrop"></div>
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Add Certificate</h3>
-            <button type="button" class="modal-close modal-close-prominent" id="certificateModalClose" aria-label="닫기">×</button>
-          </div>
-          <form id="certificateForm" class="project-form">
-            <label class="form-label">제목 (선택)</label>
-            <input type="text" name="title" class="form-input" placeholder="예: 우수상, 수료증">
-            <label class="form-label">상장 이미지 또는 PDF <span class="form-hint">URL 또는 파일 (이미지 400KB, PDF 2MB 이하)</span></label>
-            <input type="url" name="imageUrl" class="form-input" placeholder="이미지 또는 PDF URL" id="certificateImageUrl">
-            <input type="file" name="imageFile" class="form-input form-file" accept="image/*,application/pdf" id="certificateImageFile" aria-label="이미지 또는 PDF 선택">
-            <div class="form-actions">
-              <button type="button" class="btn btn-ghost" id="certificateFormCancel">취소</button>
-              <button type="submit" class="btn btn-primary">추가</button>
-            </div>
-          </form>
         </div>
       </div>
     </section>
@@ -325,8 +283,8 @@
     </p>
   </footer>
 
-  <script src="static-i18n.js?v=1"></script>
-  <script src="skills-track.js?v=1"></script>
-  <script src="script.js?v=9"></script>
+  <script src="static-i18n.js?v=2"></script>
+  <script src="skills-track.js?v=2"></script>
+  <script src="script.js?v=13"></script>
 </body>
 </html>
