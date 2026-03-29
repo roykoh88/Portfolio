@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=15">
+  <link rel="stylesheet" href="styles.css?v=20">
 </head>
 <body>
   <header class="header">
@@ -36,9 +36,9 @@
     <section id="home" class="hero">
       <div class="hero-visual">
         <div class="hero-image-wrap hero-image-wrap--match-height">
-          <!-- 실제 파일: img/고용재_사진.jpg · 모바일 등에서 한글 경로 호환용 인코딩 -->
-          <img src="img/%EA%B3%A0%EC%9A%A9%EC%9E%AC_%EC%82%AC%EC%A7%84.jpg" alt="" class="hero-image hero-image-1" aria-hidden="true">
-          <img src="img/%EB%A1%9C%EA%B3%A0.png" alt="" class="hero-image hero-image-2" aria-hidden="true">
+          <!-- 실제 파일: img/고용재_사진.jpg — 인코딩은 서버·브라우저 호환용. 폴백은 루트 /img/(Vite public 동일 파일) -->
+          <img src="img/%EA%B3%A0%EC%9A%A9%EC%9E%AC_%EC%82%AC%EC%A7%84.jpg" alt="" class="hero-image hero-image-1" width="800" height="1000" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='/img/%EA%B3%A0%EC%9A%A9%EC%9E%AC_%EC%82%AC%EC%A7%84.jpg'" aria-hidden="true">
+          <img src="img/logo.png" alt="" class="hero-image hero-image-2" width="512" height="512" decoding="async" onerror="this.onerror=null;this.src='/img/logo.png'" aria-hidden="true">
         </div>
       </div>
       <div class="hero-content">

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node ../scripts/prepare-hosting.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "img:hero": "node scripts/combine-hero-assets.mjs"

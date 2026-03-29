@@ -48,6 +48,11 @@ function main() {
     }
   }
 
+  const heroJpg = path.join(root, 'img', 'profile-hero.jpg')
+  if (!fs.existsSync(heroJpg)) {
+    console.warn('prepare-hosting: img/profile-hero.jpg 없음 → /html/ 레거시 히어로 사진 404 가능')
+  }
+
   const calculatorSrc = path.join(root, 'calculator')
   if (fs.existsSync(calculatorSrc)) {
     copyDirRecursive(calculatorSrc, path.join(dist, 'calculator'))

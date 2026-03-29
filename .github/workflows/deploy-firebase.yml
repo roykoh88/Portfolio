@@ -20,7 +20,8 @@ jobs:
           cache: "npm"
           cache-dependency-path: react-app/package-lock.json
 
-      - name: Install & build React + copy legacy to dist/html
+      # react-app build = vite + prepare-hosting → dist/html/ 에 레거시·img·PDF 복사
+      - name: Install & build (Vite + legacy → dist/html)
         run: npm ci --prefix react-app && npm run build
 
       - name: Deploy to Firebase Hosting

@@ -319,7 +319,7 @@ img { max-width: 100%; height: auto; display: block; }
 .hero-image-2 {
   animation: hero-crossfade-2 8s ease-in-out infinite;
 }
-/* 프로필·로고 교체: 동일 프레임(100%×100%) — cover로 폭·높이 꽉 채움, 잘림 허용 */
+/* 프로필·로고 교체: 동일 프레임 — 원래대로 둘 다 cover */
 .hero-image-wrap--match-height .hero-image-1,
 .hero-image-wrap--match-height .hero-image-2 {
   inset: 0;
@@ -1474,14 +1474,13 @@ body.owner-mode .project-card .project-delete.owner-only {
     max-width: min(17.5rem, 88vw);
     margin-inline: auto;
     flex-shrink: 0;
-    /* 4/5보다 살짝 낮은 프레임 + 상한으로 모바일 세로 길이 축소 */
     aspect-ratio: 5 / 6;
     max-height: min(36vh, 14rem);
     height: auto !important;
-    /* flex·% 높이 이슈로 프레임이 0이 되는 경우 방지 (특히 iOS Safari) */
     min-height: 11rem;
     overflow: hidden;
     pointer-events: none;
+    border-radius: var(--radius-lg);
   }
   .hero-visual:has(.hero-image--combined) {
     max-width: min(26rem, 94vw);
@@ -1497,6 +1496,7 @@ body.owner-mode .project-card .project-delete.owner-only {
     min-height: 0;
     display: block;
     background: transparent;
+    border-radius: var(--radius-lg);
   }
   .hero-image-wrap:has(.hero-image--combined) {
     background: #000;
