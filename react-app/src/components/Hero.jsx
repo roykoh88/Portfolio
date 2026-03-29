@@ -3,6 +3,9 @@ import { LEGACY_HTML_URL } from '../config/site'
 
 const FULL_TEXT = '안녕하세요\n꿈을 개발하는 개발자\n Roy 입니다.'
 
+const HERO_PHOTO = '/img/고용재_사진.jpg'
+const HERO_LOGO = '/img/로고.png'
+
 export function Hero() {
   const [displayText, setDisplayText] = useState('')
 
@@ -49,6 +52,20 @@ export function Hero() {
 
   return (
     <section id="home" className="hero">
+      <div className="hero-visual">
+        <div className="hero-image-wrap hero-image-wrap--match-height">
+          <img
+            src={HERO_PHOTO}
+            alt="고용재 프로필 사진"
+            className="hero-image hero-image-1"
+          />
+          <img
+            src={HERO_LOGO}
+            alt="ROY.K 로고"
+            className="hero-image hero-image-2"
+          />
+        </div>
+      </div>
       <div className="hero-content">
         <p className="hero-tag">Developer Portfolio</p>
         <h1 className="hero-title">
@@ -78,22 +95,6 @@ export function Hero() {
           >
             HTML로 보기
           </a>
-        </div>
-      </div>
-      <div className="hero-visual">
-        <div className="hero-image-wrap">
-          <img
-            src="/img/KakaoTalk_20260308_180900518.jpg"
-            alt=""
-            className="hero-image hero-image-1"
-            aria-hidden="true"
-          />
-          <img
-            src="/img/로고.png"
-            alt=""
-            className="hero-image hero-image-2"
-            aria-hidden="true"
-          />
         </div>
       </div>
     </section>
