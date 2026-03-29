@@ -1303,7 +1303,7 @@ body.owner-mode .project-card .project-delete.owner-only {
   .hero {
     align-items: flex-start;
     justify-content: flex-start;
-    padding-top: max(6rem, calc(env(safe-area-inset-top, 0px) + 5.25rem));
+    padding-top: max(7.25rem, calc(env(safe-area-inset-top, 0px) + 5.75rem));
     overflow: visible;
   }
 }
@@ -1313,7 +1313,7 @@ body.owner-mode .project-card .project-delete.owner-only {
     gap: 1.5vw;
     align-items: flex-start;
     justify-content: flex-start;
-    padding-top: max(6.25rem, calc(env(safe-area-inset-top, 0px) + 5.25rem));
+    padding-top: max(7.5rem, calc(env(safe-area-inset-top, 0px) + 5.75rem));
     padding-left: max(1rem, 3vw);
     padding-right: max(1rem, 3vw);
     padding-bottom: 3vh;
@@ -1379,7 +1379,7 @@ body.owner-mode .project-card .project-delete.owner-only {
     align-items: flex-start;
     justify-content: flex-start;
     /* 고정 헤더 아래에서 시작 — 가운데 정렬 시 상단 줄이 헤더에 가려짐 */
-    padding-top: max(6.25rem, calc(env(safe-area-inset-top, 0px) + 5.25rem));
+    padding-top: max(7.5rem, calc(env(safe-area-inset-top, 0px) + 6rem));
     padding-left: max(1rem, 4vw);
     padding-right: max(1rem, 4vw);
     padding-bottom: 3vh;
@@ -1499,7 +1499,7 @@ body.owner-mode .project-card .project-delete.owner-only {
   }
   /* padding 단축 금지: 768px에서 준 헤더 여백(padding-top)을 덮어쓰면 인사말이 헤더에 가려짐 */
   .hero {
-    padding-top: max(6.25rem, calc(env(safe-area-inset-top, 0px) + 5.25rem));
+    padding-top: max(7.5rem, calc(env(safe-area-inset-top, 0px) + 6rem));
     padding-left: max(1rem, 3vw);
     padding-right: max(1rem, 3vw);
     padding-bottom: 2.5vh;
