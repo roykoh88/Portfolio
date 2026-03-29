@@ -179,7 +179,7 @@
     {
       title: 'Portfolio',
       titleEn: 'Portfolio',
-      description: '개발 포트폴리오 사이트입니다. About, 교육/연수, Projects, Skills, Certificates, Contact를 담고 있으며 Firebase로 호스팅됩니다.',
+      description: '개발 포트폴리오 사이트입니다. About, Education, Projects, Skills, Certificates, Contact를 담고 있으며 Firebase로 호스팅됩니다.',
       descriptionEn: 'Developer portfolio with About, Education, Projects, Skills, Certificates, and Contact—hosted on Firebase.',
       tags: 'HTML, CSS, JavaScript, Firebase, GitHub Actions',
       demoUrl: '',
@@ -813,7 +813,7 @@
     }).join('/');
   }
 
-  // 학원 수료증·과목 이수증 PDF는 교육/연수에서만 링크 (Certificates 갤러리는 수상·자격증만)
+  // 학원 수료증·과목 이수증 PDF는 Education 섹션에서만 링크 (Certificates 갤러리는 수상·자격증만)
   var CERTIFICATES_SCHEMA_VERSION = 15;
   var DEFAULT_CERTIFICATES = [
     { title: '<휴먼> 자동화 프로젝트 최우수상', image: pdfFromPages('수상/휴먼 자동화 프로젝트 최우수상.pdf'), type: 'pdf', category: '수상' },

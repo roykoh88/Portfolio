@@ -16,7 +16,7 @@
       meta: { title: 'Roy Koh | 개발 포트폴리오', desc: '그동안 개발한 프로젝트와 경험을 담은 포트폴리오입니다.' },
       nav: {
         about: 'About',
-        education: '교육/연수',
+        education: 'Education',
         projects: 'Projects',
         skills: 'Skills',
         awards: 'Award',
@@ -66,7 +66,7 @@
         ],
       },
       education: {
-        title: '교육/연수',
+        title: 'Education',
         intro: '이수한 교육 및 연수 과정입니다.',
         hint: '학원명을 클릭 하시면 수료증을 확인 하실 수 있습니다.',
         certPdfTitle: '수료증 PDF',

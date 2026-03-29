@@ -422,7 +422,7 @@ img { max-width: 100%; height: auto; display: block; }
   line-height: 1.75;
 }
 
-/* ----- 교육/연수 (타임라인) ----- */
+/* ----- Education (타임라인) ----- */
 .education-intro-desc .education-cert-hint-text {
   display: block;
   margin-top: 0.5rem;
@@ -457,24 +457,28 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .education-item {
   position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
   padding-bottom: 1.5rem;
 }
 .education-item:last-child {
   padding-bottom: 0;
 }
 .timeline-marker {
-  position: absolute;
-  left: 0;
-  top: 0.6rem;
+  flex-shrink: 0;
   width: 12px;
   height: 12px;
-  margin-left: calc(0.4rem - 6px);
+  /* 카드 상단 패딩 + 첫 줄(기간) 라인박스 세로 중앙 − 점 반지름 */
+  margin-top: calc(1rem + (1.35 * 1rem) / 2 - 6px);
   background: var(--accent);
   border: 3px solid var(--inverse);
   border-radius: 50%;
   box-sizing: border-box;
 }
 .timeline-content {
+  flex: 1;
+  min-width: 0;
   padding: 1rem 1.25rem;
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -489,6 +493,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .education-period {
   font-size: 1rem;
+  line-height: 1.35;
   color: var(--accent);
   font-weight: 500;
 }
@@ -596,7 +601,7 @@ a.education-org--cert:focus {
   .timeline-marker {
     width: 10px;
     height: 10px;
-    margin-left: calc(0.3rem - 5px);
+    margin-top: calc(1rem + (1.35 * 0.85rem) / 2 - 5px);
   }
   .education-period { font-size: 0.85rem; }
   .education-course { font-size: 0.95rem; }
@@ -608,6 +613,9 @@ a.education-org--cert:focus {
   .education-timeline { padding-left: 1.5rem; }
   .education-column-title { padding-left: 1.5rem; font-size: 0.95rem; }
   .timeline-content { padding: 0.75rem 1rem; }
+  .timeline-marker {
+    margin-top: calc(0.75rem + (1.35 * 2.8vw) / 2 - 5px);
+  }
   .education-course { font-size: 3.5vw; }
   .education-period { font-size: 2.8vw; }
   .education-org { font-size: 2.6vw; }

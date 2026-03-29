@@ -1,7 +1,7 @@
 import { pdfFromPages } from '../config/portfolioPages.js'
 
 /**
- * 교육/연수 — 왼쪽·오른쪽 타임라인 열 순서 (index.html 과 동일)
+ * Education — 왼쪽·오른쪽 타임라인 열 순서 (index.html 과 동일)
  *
  * `periodEn` / `courseEn` / `orgEn` 은 영어 UI에서 사용합니다.
  */

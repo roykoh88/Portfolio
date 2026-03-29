@@ -36,7 +36,7 @@ export const DEFAULT_PROJECTS = [
     title: 'Portfolio',
     titleEn: 'Portfolio',
     description:
-      '개발 포트폴리오 사이트입니다. About, 교육/연수, Projects, Skills, Certificates, Contact를 담고 있으며 Firebase로 호스팅됩니다.',
+      '개발 포트폴리오 사이트입니다. About, Education, Projects, Skills, Certificates, Contact를 담고 있으며 Firebase로 호스팅됩니다.',
     descriptionEn:
       'Developer portfolio with About, Education, Projects, Skills, Certificates, and Contact—hosted on Firebase.',
     tags: 'HTML, CSS, JavaScript, Firebase, GitHub Actions',

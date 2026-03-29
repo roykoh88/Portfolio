@@ -5,7 +5,7 @@ export const messages = {
   ko: {
     nav: {
       about: 'About',
-      education: '교육/연수',
+      education: 'Education',
       projects: 'Projects',
       skills: 'Skills',
       awards: 'Award',
@@ -57,7 +57,7 @@ export const messages = {
       photoAlt: '고용재 프로필 사진',
     },
     education: {
-      title: '교육/연수',
+      title: 'Education',
       intro: '이수한 교육 및 연수 과정입니다.',
       hint: '학원명을 클릭 하시면 수료증을 확인 하실 수 있습니다.',
       certPdfTitle: '수료증 PDF',
