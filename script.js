@@ -390,18 +390,28 @@
   function projectLang() {
     return typeof portfolioGetLang === 'function' ? portfolioGetLang() : 'ko';
   }
-  function projectCardTitle(p) {
-    if (projectLang() === 'en' && p.titleEn) return p.titleEn;
+  /** @param {string} [forLang] 이벤트 detail.lang 등 — 전달 시 storage/헬퍼와 동기 */
+  function effectiveProjectLang(forLang) {
+    if (forLang === 'en' || forLang === 'ko') return forLang;
+    return projectLang();
+  }
+  function projectCardTitle(p, forLang) {
+    if (effectiveProjectLang(forLang) === 'en' && p.titleEn) return p.titleEn;
     return p.title || '';
   }
-  function projectCardDescription(p) {
-    if (projectLang() === 'en' && p.descriptionEn) return p.descriptionEn;
+  function projectCardDescription(p, forLang) {
+    if (effectiveProjectLang(forLang) === 'en' && p.descriptionEn) return p.descriptionEn;
     return p.description || '';
   }
-  function ptProjects(key, fallback) {
-    if (typeof portfolioT === 'function') {
-      var s = portfolioT('projects.' + key);
+  function ptProjects(key, fallback, forLang) {
+    var L = effectiveProjectLang(forLang);
+    if (typeof portfolioTAt === 'function') {
+      var s = portfolioTAt(L, 'projects.' + key);
       if (s && s !== 'projects.' + key) return s;
+    }
+    if (typeof portfolioT === 'function') {
+      var s2 = portfolioT('projects.' + key);
+      if (s2 && s2 !== 'projects.' + key) return s2;
     }
     return fallback;
   }
@@ -413,9 +423,9 @@
     return fallback;
   }
 
-  function renderProjects() {
-    var projects = getProjectsInRouletteOrder();
+  function renderProjects(forLang) {
     var allProjects = getProjects();
+    var projects = getProjectsInRouletteOrder(allProjects);
     if (!grid) return;
     grid.innerHTML = '';
     if (projectEmpty) {
@@ -433,13 +443,13 @@
       var type = (p.projectType || 'personal');
       var typeLabel =
         type === 'academy'
-          ? ptProjects('academy', '학원 프로젝트')
-          : ptProjects('personal', '개인 프로젝트');
+          ? ptProjects('academy', '학원 프로젝트', forLang)
+          : ptProjects('personal', '개인 프로젝트', forLang);
       var typeClass = type === 'academy' ? 'project-badge project-badge--academy' : 'project-badge project-badge--personal';
-      var delAria = ptProjects('deleteAria', '삭제');
-      var demoLabel = ptProjects('demo', '보기');
-      var codeLabel = ptProjects('code', '코드');
-      var noTitle = ptProjects('noTitle', '제목 없음');
+      var delAria = ptProjects('deleteAria', '삭제', forLang);
+      var demoLabel = ptProjects('demo', '보기', forLang);
+      var codeLabel = ptProjects('code', '코드', forLang);
+      var noTitle = ptProjects('noTitle', '제목 없음', forLang);
       var imgHtml = p.image
         ? '<img src="' + p.image + '" alt="">'
         : '<div class="project-placeholder">📁</div>';
@@ -448,8 +458,8 @@
         '<button type="button" class="project-delete owner-only" aria-label="' + escapeHtml(delAria) + '">×</button></div>' +
         '<div class="project-body">' +
         '<div class="' + typeClass + '">' + escapeHtml(typeLabel) + '</div>' +
-        '<h3 class="project-title">' + escapeHtml(projectCardTitle(p) || noTitle) + '</h3>' +
-        '<p class="project-desc">' + escapeHtml(projectCardDescription(p) || '') + '</p>' +
+        '<h3 class="project-title">' + escapeHtml(projectCardTitle(p, forLang) || noTitle) + '</h3>' +
+        '<p class="project-desc">' + escapeHtml(projectCardDescription(p, forLang) || '') + '</p>' +
         '<div class="project-tags">' + tags.map(function (t) { return '<span>' + escapeHtml(t) + '</span>'; }).join('') + '</div>' +
         '<div class="project-links">' +
         (p.demoUrl ? '<a href="' + escapeHtml(p.demoUrl) + '" target="_blank" rel="noopener">' + escapeHtml(demoLabel) + '</a>' : '') +
@@ -466,7 +476,7 @@
         if (idx === -1) idx = list.findIndex(function (item) { return (item.title || '') === (p.title || ''); });
         if (idx >= 0) list.splice(idx, 1);
         saveProjects(list);
-        renderProjects();
+        renderProjects(forLang);
         renderSkillsFromProjects();
       });
     });
@@ -599,7 +609,7 @@
           image: imgData || ''
         });
         saveProjects(list);
-        renderProjects();
+        renderProjects(undefined);
         renderSkillsFromProjects();
         closeModal();
       }
@@ -1231,11 +1241,12 @@
     });
   }
 
-  document.addEventListener('portfolio-lang-change', function () {
+  document.addEventListener('portfolio-lang-change', function (e) {
+    var nextLang = e && e.detail && (e.detail.lang === 'en' || e.detail.lang === 'ko') ? e.detail.lang : undefined;
     updateThemeToggleUI();
     updateOwnerUI();
     syncNavToggleAria();
-    renderProjects();
+    renderProjects(nextLang);
     renderCertificates();
   });
 })();

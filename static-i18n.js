@@ -605,6 +605,11 @@
   global.portfolioT = function (path) {
     return t(getLang(), path)
   }
+  /** 특정 언어로 문자열 조회 (언어 전환 직후 getLang 지연 시 플젝 카드용) */
+  global.portfolioTAt = function (lang, path) {
+    var code = lang === 'en' || lang === 'ko' ? lang : getLang()
+    return t(code, path)
+  }
   global.portfolioSkillTitleEn = function (title) {
     return getLang() === 'en' ? SKILL_GROUP_EN[title] || title : title
   }
