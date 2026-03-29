@@ -1,4 +1,4 @@
-import { LEGACY_HTML_URL, hostFromUrl } from '../config/site'
+import { LEGACY_HTML_URL } from '../config/site'
 
 const navItems = [
   { href: '#about', label: 'About' },
@@ -33,13 +33,13 @@ export function Header({ theme, onThemeToggle, navOpen, onNavOpenChange }) {
         <div className="nav-right">
           <a
             href={LEGACY_HTML_URL}
-            className="legacy-html-link"
+            className="legacy-html-icon"
             target="_blank"
             rel="noopener noreferrer"
             title={`정적 HTML 버전 (${LEGACY_HTML_URL})`}
+            aria-label="정적 HTML 버전 열기"
           >
-            <span className="nav-cross-label">정적 HTML</span>
-            <span className="nav-cross-url">{hostFromUrl(LEGACY_HTML_URL)}</span>
+            H
           </a>
           <button
             type="button"

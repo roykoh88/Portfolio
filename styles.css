@@ -141,6 +141,33 @@ img { max-width: 100%; height: auto; display: block; }
   border-color: var(--accent);
   color: var(--accent);
 }
+/* React 헤더 H · 레거시 헤더 R — 테마 토글과 동일 크기·배경 */
+.legacy-html-icon,
+.react-main-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  margin-right: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--accent);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.legacy-html-icon:hover,
+.react-main-icon:hover {
+  border-color: var(--accent);
+  color: var(--accent-hover);
+}
 .nav-right {
   display: flex;
   align-items: center;
@@ -240,58 +267,6 @@ img { max-width: 100%; height: auto; display: block; }
   flex-wrap: wrap;
   align-items: center;
   gap: clamp(0.5rem, 1.2vw, 1rem);
-}
-.hero-actions .btn-ghost {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 0.12rem;
-}
-.hero-actions .btn-ghost .nav-cross-url {
-  font-size: clamp(0.65rem, 1.4vw, 0.75rem);
-  max-width: 16rem;
-}
-/* 헤더 크로스 링크: 레거시(React 미리보기) · React 앱(정적 HTML) — 스타일은 공통 styles.css 에만 둠 */
-.react-preview-link,
-.legacy-html-link {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  margin-right: 0.35rem;
-  padding: 0.4rem 0.75rem;
-  font-size: clamp(0.7rem, 0.95vw, 0.85rem);
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  line-height: 1.2;
-  transition: color var(--transition), border-color var(--transition), background var(--transition);
-}
-.nav-cross-label {
-  white-space: nowrap;
-}
-.nav-cross-url {
-  font-size: 0.62rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  font-family: ui-monospace, Consolas, monospace;
-  max-width: 11rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.react-preview-link:hover,
-.legacy-html-link:hover {
-  color: var(--accent-hover);
-  border-color: var(--accent);
-  background: var(--accent-tint);
-}
-.react-preview-link:hover .nav-cross-url,
-.legacy-html-link:hover .nav-cross-url {
-  color: var(--text-muted);
 }
 .hero-visual {
   flex: 0 0 auto;
@@ -1362,15 +1337,9 @@ body.owner-mode .project-card .project-delete.owner-only {
   .nav-right {
     gap: 0.35rem;
   }
-  .react-preview-link,
-  .legacy-html-link {
+  .legacy-html-icon,
+  .react-main-icon {
     margin-right: 0;
-    padding: 0.35rem 0.55rem;
-    font-size: 0.72rem;
-  }
-  .nav-cross-url {
-    font-size: 0.58rem;
-    max-width: 9rem;
   }
   .nav.nav-open .nav-links {
     display: flex;
