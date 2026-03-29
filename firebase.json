@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": ".",
+    "public": "react-app/dist",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -16,12 +16,20 @@
     ],
     "rewrites": [
       {
+        "source": "/html",
+        "destination": "/html/index.html"
+      },
+      {
         "source": "/calculator",
         "destination": "/calculator/index.html"
       },
       {
         "source": "/calculator/**",
         "destination": "/calculator/index.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
       }
     ]
   }

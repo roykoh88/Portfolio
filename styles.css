@@ -77,23 +77,32 @@ img { max-width: 100%; height: auto; display: block; }
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
+/* Grid: 가운데 메뉴가 줄어들 수 있게 해 오른쪽(HTML/React 링크·테마)이 잘리지 않게 함 */
 .nav {
-  max-width: 90vw;
+  max-width: min(90vw, 100%);
   margin: 0 auto;
   padding: 1.5vh 2.5vw;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.75rem 1.25vw;
   position: relative;
 }
 .logo {
   font-weight: 700;
   font-size: 1.4vw;
   color: var(--text);
+  justify-self: start;
 }
 .nav-links {
   display: flex;
-  gap: 2.5vw;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.4rem, 2vw, 2.5vw);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .nav-links a {
   color: var(--text-muted);
@@ -135,6 +144,8 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-right {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  justify-self: end;
 }
 .nav-toggle {
   display: none;
@@ -230,25 +241,57 @@ img { max-width: 100%; height: auto; display: block; }
   align-items: center;
   gap: clamp(0.5rem, 1.2vw, 1rem);
 }
-.react-preview-link {
+.hero-actions .btn-ghost {
   display: inline-flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.12rem;
+}
+.hero-actions .btn-ghost .nav-cross-url {
+  font-size: clamp(0.65rem, 1.4vw, 0.75rem);
+  max-width: 16rem;
+}
+/* 헤더 크로스 링크: 레거시(React 미리보기) · React 앱(정적 HTML) — 스타일은 공통 styles.css 에만 둠 */
+.react-preview-link,
+.legacy-html-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
   margin-right: 0.35rem;
-  padding: 0.45rem 0.85rem;
-  font-size: clamp(0.75rem, 1.05vw, 0.95rem);
+  padding: 0.4rem 0.75rem;
+  font-size: clamp(0.7rem, 0.95vw, 0.85rem);
   font-weight: 600;
   color: var(--accent);
   text-decoration: none;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  white-space: nowrap;
+  line-height: 1.2;
   transition: color var(--transition), border-color var(--transition), background var(--transition);
 }
-.react-preview-link:hover {
+.nav-cross-label {
+  white-space: nowrap;
+}
+.nav-cross-url {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-family: ui-monospace, Consolas, monospace;
+  max-width: 11rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.react-preview-link:hover,
+.legacy-html-link:hover {
   color: var(--accent-hover);
   border-color: var(--accent);
   background: var(--accent-tint);
+}
+.react-preview-link:hover .nav-cross-url,
+.legacy-html-link:hover .nav-cross-url {
+  color: var(--text-muted);
 }
 .hero-visual {
   flex: 0 0 auto;
@@ -1319,10 +1362,15 @@ body.owner-mode .project-card .project-delete.owner-only {
   .nav-right {
     gap: 0.35rem;
   }
-  .react-preview-link {
+  .react-preview-link,
+  .legacy-html-link {
     margin-right: 0;
-    padding: 0.35rem 0.6rem;
-    font-size: 0.78rem;
+    padding: 0.35rem 0.55rem;
+    font-size: 0.72rem;
+  }
+  .nav-cross-url {
+    font-size: 0.58rem;
+    max-width: 9rem;
   }
   .nav.nav-open .nav-links {
     display: flex;

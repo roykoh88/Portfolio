@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { LEGACY_HTML_URL } from '../config/site'
+import { LEGACY_HTML_URL, hostFromUrl } from '../config/site'
 
 const FULL_TEXT = '안녕하세요\n꿈을 개발하는 개발자\n Roy 입니다.'
 
@@ -74,9 +74,10 @@ export function Hero() {
             className="btn btn-ghost"
             target="_blank"
             rel="noopener noreferrer"
-            title="정적 HTML 버전 포트폴리오"
+            title={`정적 HTML 버전 (${LEGACY_HTML_URL})`}
           >
-            HTML로 보기
+            <span className="nav-cross-label">HTML로 보기</span>
+            <span className="nav-cross-url">{hostFromUrl(LEGACY_HTML_URL)}</span>
           </a>
         </div>
       </div>
