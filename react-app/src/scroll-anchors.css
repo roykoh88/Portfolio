@@ -36,3 +36,23 @@ main > section[id] {
     font-size: 0.78rem;
   }
 }
+
+/*
+ * 네비 메뉴(6개) + 오른쪽 액션이 한 줄에 너무 넓으면 nav-right가 뷰포트 밖으로 밀림.
+ * body { overflow-x: hidden } 이라 'HTML로 보기'가 통째로 잘려 보이지 않을 수 있음.
+ */
+.nav .nav-links {
+  flex-shrink: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 0.35rem;
+}
+
+.nav .nav-right {
+  flex-shrink: 0;
+}
+
+.nav .logo {
+  flex-shrink: 0;
+}

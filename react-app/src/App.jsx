@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './scroll-anchors.css'
 import { About } from './components/About'
+import { Education } from './components/Education'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { SectionPlaceholder } from './components/SectionPlaceholder'
@@ -37,7 +38,7 @@ function App() {
       <main>
         <Hero />
         <About />
-        <SectionPlaceholder id="education" title="교육/연수" />
+        <Education />
         <SectionPlaceholder id="projects" title="Projects" />
         <SectionPlaceholder id="skills" title="Skills" />
         <SectionPlaceholder id="certificates" title="Certificates" />
