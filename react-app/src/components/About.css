@@ -1,0 +1,203 @@
+/* 레거시 .about-content { max-width: 60vw } 보다 우선 — 소개 글이 과하게 좁아지며 줄이 어색하게 잘리는 것 방지 */
+.section.about .about-content.about-content--profile {
+  max-width: 100%;
+  width: 100%;
+}
+
+.about-content--profile {
+  max-width: none;
+  width: 100%;
+}
+
+.about-profile {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+  margin-bottom: clamp(1.5rem, 3vh, 2.25rem);
+}
+
+.about-profile-photo {
+  border-radius: var(--radius-lg, 20px);
+  overflow: hidden;
+  border: none;
+  background: var(--bg-card);
+  aspect-ratio: 4 / 5;
+  max-width: 200px;
+}
+
+.about-profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  border: none;
+  outline: none;
+}
+
+.about-profile-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.about-profile-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-profile-row:last-child {
+  border-bottom: none;
+}
+
+.about-profile-row--pair {
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+}
+
+.about-profile-row--triple {
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem 1.25rem;
+  align-items: start;
+}
+
+.about-profile-link-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.about-profile-link-cell .about-profile-value {
+  word-break: break-all;
+}
+
+/* 라벨 열 너비를 짝 행·단일 행 동일하게 맞춰 값(고용재·이메일·주소 등) 세로 정렬 */
+.about-profile-field {
+  display: grid;
+  grid-template-columns: minmax(4rem, 5.75rem) minmax(0, 1fr);
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.about-profile-field--no-label {
+  grid-template-columns: 1fr;
+  justify-items: end;
+}
+
+.about-profile-value--only {
+  display: block;
+}
+
+.about-scroll-contact {
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.about-scroll-contact:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.about-profile-label {
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.about-profile-value {
+  font-size: clamp(0.85rem, 1.15vw, 1.05rem);
+  color: var(--text);
+  word-break: keep-all;
+}
+
+.about-profile-value a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.about-profile-value a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* 위쪽 프로필 그리드와 가로 폭 맞춤(읽기 폭만 ch로 줄이지 않음) */
+.about-intro-stack {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 0.75rem;
+}
+
+.about-intro-p {
+  margin: 0 0 1em;
+  font-size: clamp(0.9375rem, 0.35vw + 0.88rem, 1.0625rem);
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+  text-wrap: pretty;
+  hyphens: none;
+}
+
+.about-intro-p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .about-profile {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .about-profile-photo {
+    max-width: 180px;
+  }
+
+  .about-profile-fields {
+    width: 100%;
+    text-align: left;
+  }
+
+  .about-profile-field {
+    grid-template-columns: minmax(4.5rem, 6rem) minmax(0, 1fr);
+  }
+
+  .about-profile-row--pair {
+    grid-template-columns: 1fr;
+  }
+
+  .about-profile-row--pair .about-profile-field {
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-profile-row--pair .about-profile-field:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .about-profile-row--triple {
+    grid-template-columns: 1fr;
+    gap: 0.75rem 0;
+  }
+
+  .about-profile-link-cell {
+    width: 100%;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-profile-row--triple .about-profile-link-cell:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}

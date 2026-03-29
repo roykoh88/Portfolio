@@ -1,0 +1,38 @@
+/* 고정 헤더 때문에 #contact 등 앵커 이동 시 제목이 가려지지 않도록 */
+main > section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* React 앱 → 레거시 HTML 포트폴리오 (헤더 링크, 레거시 index.html 의 .react-preview-link 와 대칭) */
+.legacy-html-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  font-size: clamp(0.75rem, 1.05vw, 0.95rem);
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  white-space: nowrap;
+  transition:
+    color var(--transition, 0.2s ease),
+    border-color var(--transition, 0.2s ease),
+    background var(--transition, 0.2s ease);
+}
+
+.legacy-html-link:hover {
+  color: var(--accent-hover);
+  border-color: var(--accent);
+  background: var(--accent-tint);
+}
+
+@media (max-width: 768px) {
+  .legacy-html-link {
+    margin-right: 0;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.78rem;
+  }
+}

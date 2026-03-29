@@ -224,6 +224,32 @@ img { max-width: 100%; height: auto; display: block; }
   background: var(--accent-hover);
   transform: translateY(-2px);
 }
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(0.5rem, 1.2vw, 1rem);
+}
+.react-preview-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  font-size: clamp(0.75rem, 1.05vw, 0.95rem);
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  white-space: nowrap;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.react-preview-link:hover {
+  color: var(--accent-hover);
+  border-color: var(--accent);
+  background: var(--accent-tint);
+}
 .hero-visual {
   flex: 0 0 auto;
   width: 30vw;
@@ -1289,6 +1315,14 @@ body.owner-mode .project-card .project-delete.owner-only {
   }
   .nav-toggle {
     display: flex;
+  }
+  .nav-right {
+    gap: 0.35rem;
+  }
+  .react-preview-link {
+    margin-right: 0;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.78rem;
   }
   .nav.nav-open .nav-links {
     display: flex;
