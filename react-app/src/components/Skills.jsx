@@ -54,8 +54,8 @@ export function Skills() {
         <p className="section-desc">
           분야(CV · LLM · ML · Web · 공통)와 주력·경험을 선택할 수 있습니다.{' '}
           경험을 고르면 해당 분야의 주력 항목을 모두 포함해 보여 줍니다. 네 분야(CV·LLM·ML·Web)에는 같은 기술이 축마다
-          다시 나올 수 있습니다. 공통 탭의 OS·협업 등은 CV·LLM·ML 화면
-          하단에도 같이 표시됩니다.
+          다시 나올 수 있습니다. OS·협업·Office 등은 공통 탭에서만
+          모아 둡니다.
         </p>
 
         <div

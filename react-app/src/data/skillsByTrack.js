@@ -2,10 +2,10 @@
  * CV / LLM / ML / Web / 공통 × 주력·경험 (공통은 주력·경험 없이 단일 목록)
  *
  * 네 축(CV·LLM·ML·Web) 사이에는 같은 항목이 의도적으로 중복될 수 있습니다.
- * CV 스택은 멀티모달·비전+언어 LLM에도 쓰이므로 LLM 등에 그대로 다시 넣을 수 있습니다.
+ * 비전·이미지는 CV 축에 두고, VLM 등은 다루지 않을 때 LLM 축에는 넣지 않는 편이 낫습니다.
  *
- * SKILLS_COMMON_GROUPS(OS·협업 등)는 공통 탭 내용이며, CV·LLM·ML 주력·경험 목록
- * 하단에도 붙입니다. Anaconda·Jupyter는 공통 탭에는 두지 않고 해당 분야 하단에만 둡니다.
+ * SKILLS_COMMON_GROUPS(OS·협업 등)는 공통 탭 전용입니다. CV·LLM·ML 분야 화면에는 붙이지 않습니다.
+ * Anaconda·Jupyter·Colab 등은 공통 탭이 아니라 CV·LLM·ML 주력의 Notebook 카드에 둡니다.
  *
  * 공통 칸 순서는 `SKILLS_COMMON_SOURCE` 정의 후 태그 개수(많은 그룹이 위)로 자동 정렬됩니다.
  */
@@ -20,8 +20,8 @@ export const SKILL_TRACKS = [
 
 /** CV·LLM·ML 주력에만 붙임(경험 배열에는 생략 — 병합 시 주력에 이미 포함됨) */
 const SKILLS_NOTEBOOK_ENV_GROUP = {
-  title: 'Notebook · 환경',
-  blocks: [{ items: ['Anaconda', 'Jupyter Notebook'] }],
+  title: 'Notebook · 환경 · 실험',
+  blocks: [{ items: ['Anaconda', 'Jupyter Notebook', 'Google Colab'] }],
 }
 
 function countItemsInSkillGroup(group) {
@@ -189,53 +189,51 @@ export const SKILLS_BY_TRACK_AND_TIER = {
       },
       {
         title: 'LLM & orchestration',
+        blocks: [{ items: ['LangChain', 'LLM'] }],
+      },
+      {
+        title: 'API · 모델',
         blocks: [
-          { items: ['LangChain', 'OpenAI', 'LLM'] },
+          { subtitle: 'Cloud API', items: ['OpenAI API', 'Gemini API'] },
+          { subtitle: 'Local', items: ['Llama', 'EXAONE'] },
+          { subtitle: 'Agents', items: ['CrewAI'] },
         ],
+      },
+      {
+        title: 'Vector DB',
+        blocks: [{ items: ['ChromaDB'] }],
       },
       {
         title: 'Models & ecosystem',
-        blocks: [
-          { items: ['Hugging Face', 'Transformers'] },
-        ],
+        blocks: [{ items: ['Hugging Face', 'Transformers'] }],
       },
       {
         title: 'Backend · 서빙',
-        blocks: [
-          {
-            items: ['FastAPI', 'Pydantic', 'Docker', 'PostgreSQL'],
-          },
-        ],
-      },
-      SKILLS_NOTEBOOK_ENV_GROUP,
-      ...SKILLS_COMMON_GROUPS,
-    ],
-    experience: [
-      {
-        title: 'Language',
-        blocks: [{ items: ['Python'] }],
-      },
-      {
-        title: 'API & agents',
-        blocks: [{ items: ['Gemini API', 'CrewAI'] }],
-      },
-      {
-        title: 'MLOps (LLM·모델 운영)',
-        blocks: [{ items: ['MLflow', 'Kubeflow'] }],
+        blocks: [{ items: ['FastAPI', 'Docker'] }],
       },
       {
         title: 'Data · 평가',
         blocks: [{ items: ['Pandas', 'NumPy'] }],
       },
       {
-        title: 'Vision · 멀티모달',
-        blocks: [{ items: ['YOLO', 'PyTorch', 'OpenCV'] }],
+        title: 'MLOps',
+        blocks: [{ items: ['MLflow'] }],
+      },
+      SKILLS_NOTEBOOK_ENV_GROUP,
+    ],
+    experience: [
+      {
+        title: 'LLM & orchestration',
+        blocks: [{ items: ['LangGraph'] }],
       },
       {
-        title: '배포 · 추론',
-        blocks: [{ items: ['Docker'] }],
+        title: 'Models & ecosystem',
+        blocks: [{ subtitle: 'Encoder', items: ['BERT', 'KLUE-RoBERTa'] }],
       },
-      ...SKILLS_COMMON_GROUPS,
+      {
+        title: 'MLOps',
+        blocks: [{ items: ['Kubeflow'] }],
+      },
     ],
   },
 
@@ -246,27 +244,34 @@ export const SKILLS_BY_TRACK_AND_TIER = {
         blocks: [{ items: ['Python'] }],
       },
       {
-        title: 'Core stack',
+        title: 'Libraries',
         blocks: [
           {
-            items: ['Pandas', 'NumPy', 'scikit-learn', 'XGBoost'],
+            items: [
+              'Pandas',
+              'NumPy',
+              'Scikit-Learn',
+              'Hugging Face',
+              'Transformers',
+            ],
           },
         ],
       },
       {
+        title: 'Classical ML',
+        blocks: [{ items: ['Random Forest', 'XGBoost'] }],
+      },
+      {
         title: 'Deep learning',
-        blocks: [{ items: ['PyTorch', 'TensorFlow'] }],
+        blocks: [
+          { items: ['PyTorch', 'TensorFlow', 'LSTM', 'GRU', 'Transformer'] },
+        ],
       },
       {
         title: 'Auto ML',
         blocks: [{ items: ['PyCaret'] }],
       },
-      {
-        title: 'Notebook · 실험',
-        blocks: [{ items: ['Google Colab'] }],
-      },
       SKILLS_NOTEBOOK_ENV_GROUP,
-      ...SKILLS_COMMON_GROUPS,
     ],
     experience: [
       {
@@ -274,27 +279,13 @@ export const SKILLS_BY_TRACK_AND_TIER = {
         blocks: [{ items: ['Python'] }],
       },
       {
-        title: 'Classical ML (실습·비교)',
+        title: 'Classical ML',
         blocks: [
           {
             items: [
-              'Random Forest',
               'Logistic Regression',
               'Decision Tree',
               'K-Nearest Neighbors',
-              'Scikit-Learn',
-            ],
-          },
-        ],
-      },
-      {
-        title: 'Data & crawling',
-        blocks: [
-          {
-            items: [
-              'BeautifulSoup',
-              'Selenium',
-              'Machine Learning',
             ],
           },
         ],
@@ -309,23 +300,12 @@ export const SKILLS_BY_TRACK_AND_TIER = {
       },
       {
         title: 'Big Data',
-        blocks: [{ items: ['Spark', 'Hadoop'] }],
-      },
-      {
-        title: 'LLM 생태계 (ML 맥락)',
-        blocks: [{ items: ['Hugging Face', 'Transformers'] }],
-      },
-      {
-        title: '딥러닝 · 구조',
-        blocks: [
-          { items: ['TensorFlow', 'LSTM', 'GRU', 'Transformer'] },
-        ],
+        blocks: [{ items: ['Spark', 'Hadoop', 'Snowflake'] }],
       },
       {
         title: '배포',
         blocks: [{ items: ['Docker'] }],
       },
-      ...SKILLS_COMMON_GROUPS,
     ],
   },
 
@@ -337,21 +317,43 @@ export const SKILLS_BY_TRACK_AND_TIER = {
       },
       {
         title: 'Computer Vision',
-        blocks: [{ items: ['YOLO', 'PyTorch', 'OpenCV'] }],
+        blocks: [
+          {
+            items: [
+              'YOLO',
+              'OpenCV',
+              'SAHI',
+              'OCR',
+              'CNN',
+              'RNN',
+              'GRU',
+              'LSTM',
+              'Transformer',
+            ],
+          },
+        ],
       },
       {
-        title: 'Models · hub',
-        blocks: [{ items: ['Hugging Face', 'Transformers'] }],
+        title: 'Data',
+        blocks: [
+          {
+            items: [
+              'Hugging Face',
+              'AI Hub',
+              'Roboflow',
+              'Kaggle',
+              'Dacon',
+            ],
+          },
+        ],
       },
       SKILLS_NOTEBOOK_ENV_GROUP,
-      ...SKILLS_COMMON_GROUPS,
     ],
     experience: [
       {
         title: '배포 · 추론',
         blocks: [{ items: ['Docker'] }],
       },
-      ...SKILLS_COMMON_GROUPS,
     ],
   },
 }
@@ -427,14 +429,13 @@ function mergeStrongAndExperience(strong, experience) {
   return order.map((t) => byTitle.get(t))
 }
 
-/** 공통 꼬리(SKILLS_COMMON_GROUPS)는 순서 고정, 앞쪽 카드만 태그 개수순 */
-function sortHeadPreservingCommonTail(groups) {
-  const n = SKILLS_COMMON_GROUPS.length
-  if (groups.length <= n || !endsWithCommonGroups(groups)) return groups
-  return [
-    ...sortSkillGroupsByItemCount(groups.slice(0, -n)),
-    ...groups.slice(-n),
-  ]
+const COMMON_GROUP_TITLE_SET = new Set(
+  SKILLS_COMMON_GROUPS.map((g) => g.title),
+)
+
+/** CV·LLM·ML: 공통(OS·Collaboration·Office·Others) 카드는 분야 화면에서 제외 */
+function stripCommonSkillGroups(groups) {
+  return groups.filter((g) => !COMMON_GROUP_TITLE_SET.has(g.title))
 }
 
 /** @param {'strong'|'experience'} tier */
@@ -450,8 +451,8 @@ export function getSkillGroupsForTier(trackId, tier) {
   if (trackId === 'web') {
     return sortSkillGroupsByItemCount(merged)
   }
-  if (tier === 'strong') {
-    return sortHeadPreservingCommonTail(merged)
+  if (trackId === 'ml' || trackId === 'llm' || trackId === 'cv') {
+    return sortSkillGroupsByItemCount(stripCommonSkillGroups(merged))
   }
-  return merged
+  return sortSkillGroupsByItemCount(merged)
 }
