@@ -8,23 +8,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=55">
+  <link rel="stylesheet" href="styles.css?v=56">
 </head>
 <body>
   <header class="header">
     <nav class="nav">
       <a href="#home" class="logo">Roy Koh</a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#awards">Award</a></li>
-        <li><a href="#certificates">Certificates</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#education" data-i18n="nav.education">교육/연수</a></li>
+        <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+        <li><a href="#awards" data-i18n="nav.awards">Award</a></li>
+        <li><a href="#certificates" data-i18n="nav.certificates">Certificates</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
       </ul>
       <div class="nav-right">
-        <a href="/" class="react-main-icon" title="React 포트폴리오(메인)" aria-label="React 메인으로 이동">R</a>
+        <a href="/" class="react-main-icon" id="reactMainLink" title="React 포트폴리오(메인)" aria-label="React 메인으로 이동">R</a>
         <button type="button" class="theme-toggle" id="themeToggle" aria-label="라이트 모드로 전환" title="라이트 모드">☀️</button>
         <button class="nav-toggle" aria-label="메뉴 열기">
           <span></span><span></span><span></span>
@@ -43,23 +43,23 @@
         </div>
       </div>
       <div class="hero-content">
-        <p class="hero-tag">Developer Portfolio</p>
+        <p class="hero-tag" data-i18n="hero.tag">Developer Portfolio</p>
         <h1 class="hero-title">
           <span id="typing-text"></span><span class="cursor" aria-hidden="true">|</span>
         </h1>
-        <p class="hero-desc">
+        <p class="hero-desc" data-i18n="hero.desc">
           그동안 만들었던 프로젝트와 사용한 기술을 정리한 공간입니다.
         </p>
         <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
-          <a href="/" class="btn btn-primary" target="_blank" rel="noopener noreferrer" title="React 포트폴리오(메인)">React로 보기</a>
+          <a href="#projects" class="btn btn-primary" data-i18n="hero.viewProjects">프로젝트 보기</a>
+          <a href="/" class="btn btn-primary" id="heroReactBtn" target="_blank" rel="noopener noreferrer" title="React 포트폴리오(메인)" data-i18n="hero.viewReact">React로 보기</a>
         </div>
       </div>
     </section>
 
     <section id="about" class="section about">
       <div class="container">
-        <h2 class="section-title">About</h2>
+        <h2 class="section-title" data-i18n="about.title">About</h2>
         <div class="about-content about-content--profile">
           <div class="about-profile">
             <div class="about-profile-photo">
@@ -68,21 +68,21 @@
             <div class="about-profile-fields">
               <div class="about-profile-row about-profile-row--pair">
                 <div class="about-profile-field">
-                  <span class="about-profile-label">이름</span>
+                  <span class="about-profile-label" data-i18n="about.name">이름</span>
                   <span class="about-profile-value">고용재</span>
                 </div>
                 <div class="about-profile-field">
-                  <span class="about-profile-label">생년월일</span>
+                  <span class="about-profile-label" data-i18n="about.birth">생년월일</span>
                   <span class="about-profile-value">1988.10.20</span>
                 </div>
               </div>
               <div class="about-profile-row about-profile-row--pair">
                 <div class="about-profile-field">
-                  <span class="about-profile-label">영문</span>
+                  <span class="about-profile-label" data-i18n="about.nameEn">영문</span>
                   <span class="about-profile-value">Koh Yongjae</span>
                 </div>
                 <div class="about-profile-field">
-                  <span class="about-profile-label">나이</span>
+                  <span class="about-profile-label" data-i18n="about.age">나이</span>
                   <span class="about-profile-value" id="about-man-age"></span>
                 </div>
               </div>
@@ -92,18 +92,18 @@
                   <span class="about-profile-value"><a href="mailto:roy.koh.ai88@gmail.com">roy.koh.ai88@gmail.com</a></span>
                 </div>
                 <div class="about-profile-field">
-                  <span class="about-profile-label">연락처</span>
-                  <span class="about-profile-value"><a href="#contact" class="about-scroll-contact">contact</a></span>
+                  <span class="about-profile-label" data-i18n="about.phoneLink">연락처</span>
+                  <span class="about-profile-value"><a href="#contact" class="about-scroll-contact" data-i18n="about.contactCta">contact</a></span>
                 </div>
               </div>
               <div class="about-profile-row about-profile-row--pair">
                 <div class="about-profile-field">
-                  <span class="about-profile-label">주소</span>
-                  <span class="about-profile-value">서울시 노원구</span>
+                  <span class="about-profile-label" data-i18n="about.address">주소</span>
+                  <span class="about-profile-value" data-i18n="about.addressValue">서울시 노원구</span>
                 </div>
                 <div class="about-profile-field">
-                  <span class="about-profile-label">지원 분야</span>
-                  <span class="about-profile-value">LLM Developer</span>
+                  <span class="about-profile-label" data-i18n="about.role">지원 분야</span>
+                  <span class="about-profile-value" data-i18n="about.roleValue">LLM Developer</span>
                 </div>
               </div>
               <div class="about-profile-row about-profile-row--triple">
@@ -135,154 +135,9 @@
 
     <section id="education" class="section education">
       <div class="container">
-        <h2 class="section-title">교육/연수</h2>
-        <p class="section-desc education-intro-desc">이수한 교육 및 연수 과정입니다.<span class="education-cert-hint-text">학원명을 클릭 하시면 수료증을 확인 하실 수 있습니다.</span></p>
-        <div class="education-split">
-          <div class="education-timeline">
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2026.03 ~ 진행중</span>
-                <strong class="education-course">AI 논문 작성</strong>
-                <span class="education-org">휴먼 AI 교육센터</span>
-              </div>
-            </div>
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2025.12 ~ 2026.03</span>
-                <strong class="education-course">심화_심층 데이터 분석을 통한 서비스 솔루션 개발자 과정</strong>
-                <a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" class="education-org education-org--cert" target="_blank" rel="noopener noreferrer" title="수료증 PDF">휴먼 AI 교육센터</a>
-              </div>
-            </div>
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2025.04 ~ 2025.11</span>
-                <strong class="education-course">AI 개발자 마스터 과정</strong>
-                <a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/AI%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" class="education-org education-org--cert" target="_blank" rel="noopener noreferrer" title="수료증 PDF">알파코</a>
-              </div>
-            </div>
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2025.02 ~ 2025.03</span>
-                <strong class="education-course">도커 &amp; 쿠버네티스</strong>
-                <a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%8F%84%EC%BB%A4%20&%20%EC%BF%A0%EB%B2%84%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" class="education-org education-org--cert" target="_blank" rel="noopener noreferrer" title="수료증 PDF">솔데스크</a>
-              </div>
-            </div>
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2024.08 ~ 2024.09</span>
-                <strong class="education-course">리눅스 시스템 관리 및 Ansible 자동화 기술</strong>
-                <a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%A6%AC%EB%88%85%EC%8A%A4%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" class="education-org education-org--cert" target="_blank" rel="noopener noreferrer" title="수료증 PDF">솔데스크</a>
-              </div>
-            </div>
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2024.06 ~ 2024.07</span>
-                <strong class="education-course">서버구성 자동화와 Ansible 구성</strong>
-                <details class="education-org-details">
-                  <summary class="education-org education-org--cert education-org--multi" title="수료증 2건 — 펼쳐서 선택">솔데스크<span class="education-org-cert-hint" aria-hidden="true"> · 수료증 2</span></summary>
-                  <ul class="education-cert-pick-list">
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%84%9C%EB%B2%84%20%EA%B5%AC%EC%84%B11%ED%9A%8C%EC%B0%A8%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">1회차</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%84%9C%EB%B2%84%20%EA%B5%AC%EC%84%B1%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">2회차</a></li>
-                  </ul>
-                </details>
-              </div>
-            </div>
-          </div>
-          <div class="education-timeline">
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2022.11 ~ 2023.05</span>
-                <strong class="education-course">정보보안 1 ~ 6</strong>
-                <details class="education-org-details">
-                  <summary class="education-org education-org--cert education-org--multi" title="수료증 6건 — 펼쳐서 선택">코리아 IT 아카데미<span class="education-org-cert-hint" aria-hidden="true"> · 수료증 6</span></summary>
-                  <ul class="education-cert-pick-list">
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%881%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">정보보안 1</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%882%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">정보보안 2</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%883%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">정보보안 3</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%884%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">정보보안 4</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%885%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">정보보안 5</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%886%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">정보보안 6</a></li>
-                  </ul>
-                </details>
-              </div>
-            </div>
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2022.10 ~ 2022.11</span>
-                <strong class="education-course">리눅스 1 ~ 2</strong>
-                <details class="education-org-details">
-                  <summary class="education-org education-org--cert education-org--multi" title="수료증 2건 — 펼쳐서 선택">코리아 IT 아카데미<span class="education-org-cert-hint" aria-hidden="true"> · 수료증 2</span></summary>
-                  <ul class="education-cert-pick-list">
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%A6%AC%EB%88%85%EC%8A%A41%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">리눅스 1</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%A6%AC%EB%88%85%EC%8A%A42%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">리눅스 2</a></li>
-                  </ul>
-                </details>
-              </div>
-            </div>
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2022.09 ~ 2022.10</span>
-                <strong class="education-course">씨스코 1 ~ 2</strong>
-                <details class="education-org-details">
-                  <summary class="education-org education-org--cert education-org--multi" title="수료증 2건 — 펼쳐서 선택">코리아 IT 아카데미<span class="education-org-cert-hint" aria-hidden="true"> · 수료증 2</span></summary>
-                  <ul class="education-cert-pick-list">
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%94%A8%EC%8A%A4%EC%BD%941%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">씨스코 1</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%94%A8%EC%8A%A4%EC%BD%942%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">씨스코 2</a></li>
-                  </ul>
-                </details>
-              </div>
-            </div>
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2021.08 ~ 2021.09</span>
-                <strong class="education-course">시스코 네트워크 관리자 기본과정</strong>
-                <a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" class="education-org education-org--cert" target="_blank" rel="noopener noreferrer" title="수료증 PDF">솔데스크</a>
-              </div>
-            </div>
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2019.06 ~ 2019.12</span>
-                <strong class="education-course">프론트 엔드 개발 및 자바 개발자 양성과정</strong>
-                <details class="education-org-details">
-                  <summary class="education-org education-org--cert education-org--multi" title="수료증 12건 — 펼쳐서 선택">KIC 캠퍼스<span class="education-org-cert-hint" aria-hidden="true"> · 수료증 12</span></summary>
-                  <ul class="education-cert-pick-list">
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%ED%94%84%EB%A1%A0%ED%8A%B8&%EB%B0%B1%EC%97%94%EB%93%9C%ED%92%80%EC%8A%A4%ED%83%9D%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf" target="_blank" rel="noopener noreferrer">학원 수료증</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_1.pdf" target="_blank" rel="noopener noreferrer">과목 이수증1</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_2.pdf" target="_blank" rel="noopener noreferrer">과목 이수증2</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_3.pdf" target="_blank" rel="noopener noreferrer">과목 이수증3</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_4.pdf" target="_blank" rel="noopener noreferrer">과목 이수증4</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_5.pdf" target="_blank" rel="noopener noreferrer">과목 이수증5</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_6.pdf" target="_blank" rel="noopener noreferrer">과목 이수증6</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_7.pdf" target="_blank" rel="noopener noreferrer">과목 이수증7</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_8.pdf" target="_blank" rel="noopener noreferrer">과목 이수증8</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_9.pdf" target="_blank" rel="noopener noreferrer">과목 이수증9</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_10.pdf" target="_blank" rel="noopener noreferrer">과목 이수증10</a></li>
-                    <li><a href="https://roykoh88.github.io/Portfolio/PDF/%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_11.pdf" target="_blank" rel="noopener noreferrer">과목 이수증11</a></li>
-                  </ul>
-                </details>
-              </div>
-            </div>
-            <div class="education-item">
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <span class="education-period">2008.01 ~ 2009.06</span>
-                <strong class="education-course">어학 연수 및 비즈니스 회화</strong>
-                <span class="education-org">TBLNJ 어학원</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <h2 class="section-title" data-i18n="education.title">교육/연수</h2>
+        <p class="section-desc education-intro-desc"><span data-i18n="education.intro">이수한 교육 및 연수 과정입니다.</span><span class="education-cert-hint-text" data-i18n="education.hint">학원명을 클릭 하시면 수료증을 확인 하실 수 있습니다.</span></p>
+        <div class="education-split" id="educationSplitRoot"></div>
       </div>
     </section>
 
@@ -290,17 +145,17 @@
       <div class="container">
         <div class="section-title-row">
           <h2 class="section-title">Projects</h2>
-          <button type="button" class="btn btn-add owner-only" id="projectAddBtn">+ Add Project</button>
+          <button type="button" class="btn btn-add owner-only" id="projectAddBtn" data-i18n="projects.add">+ Add Project</button>
         </div>
-        <p class="section-desc">그동안 개발한 프로젝트입니다.<span class="owner-only"> </span></p>
+        <p class="section-desc"><span data-i18n="projects.desc">그동안 개발한 프로젝트입니다.</span><span class="owner-only"> </span></p>
         <div class="project-carousel">
-          <button type="button" class="carousel-btn carousel-prev" id="projectCarouselPrev" aria-label="이전 프로젝트">‹</button>
+          <button type="button" class="carousel-btn carousel-prev" id="projectCarouselPrev" data-i18n-attr="aria-label|projects.prevAria" aria-label="이전 프로젝트">‹</button>
           <div class="project-carousel-scroll" id="projectCarouselScroll">
             <div class="project-grid" id="projectGrid"></div>
           </div>
-          <button type="button" class="carousel-btn carousel-next" id="projectCarouselNext" aria-label="다음 프로젝트">›</button>
+          <button type="button" class="carousel-btn carousel-next" id="projectCarouselNext" data-i18n-attr="aria-label|projects.nextAria" aria-label="다음 프로젝트">›</button>
         </div>
-        <p class="project-empty owner-only" id="projectEmpty" style="display: none;">등록된 프로젝트가 없습니다. "프로젝트 추가"로 첫 프로젝트를 올려보세요.</p>
+        <p class="project-empty owner-only" id="projectEmpty" style="display: none;" data-i18n="projects.empty">등록된 프로젝트가 없습니다. "프로젝트 추가"로 첫 프로젝트를 올려보세요.</p>
       </div>
 
       <!-- 프로젝트 추가 모달 -->
@@ -336,23 +191,23 @@
 
     <section id="skills" class="section skills">
       <div class="container">
-        <h2 class="section-title">Skills</h2>
+        <h2 class="section-title" data-i18n="nav.skills">Skills</h2>
 
-        <div class="skills-filter-row skills-filter-row--tracks" role="tablist" aria-label="스킬 분야">
+        <div class="skills-filter-row skills-filter-row--tracks" role="tablist" data-i18n-attr="aria-label|skills.tabTrackAria" aria-label="스킬 분야">
           <button type="button" role="tab" class="skills-filter-btn" data-skill-track="cv" aria-selected="false">CV</button>
           <button type="button" role="tab" class="skills-filter-btn is-active" data-skill-track="llm" aria-selected="true">LLM</button>
           <button type="button" role="tab" class="skills-filter-btn" data-skill-track="ml" aria-selected="false">ML</button>
           <button type="button" role="tab" class="skills-filter-btn" data-skill-track="web" aria-selected="false">Web</button>
-          <button type="button" role="tab" class="skills-filter-btn" data-skill-track="common" aria-selected="false">공통</button>
+          <button type="button" role="tab" class="skills-filter-btn" data-skill-track="common" aria-selected="false" data-i18n-track-common>공통</button>
         </div>
 
-        <div class="skills-filter-row skills-filter-row--tier" id="skillsTierRow" role="tablist" aria-label="숙련도">
-          <button type="button" role="tab" class="skills-filter-btn skills-filter-btn--tier is-active" data-skill-tier="strong" aria-selected="true">주력</button>
-          <button type="button" role="tab" class="skills-filter-btn skills-filter-btn--tier" data-skill-tier="experience" aria-selected="false">경험</button>
+        <div class="skills-filter-row skills-filter-row--tier" id="skillsTierRow" role="tablist" data-i18n-attr="aria-label|skills.tabTierAria" aria-label="숙련도">
+          <button type="button" role="tab" class="skills-filter-btn skills-filter-btn--tier is-active" data-skill-tier="strong" aria-selected="true" data-i18n-tier-strong>주력</button>
+          <button type="button" role="tab" class="skills-filter-btn skills-filter-btn--tier" data-skill-tier="experience" aria-selected="false" data-i18n-tier-exp>경험</button>
         </div>
 
         <p class="skills-context-bar">
-          <span class="skills-context-prefix">현재 분류</span>
+          <span class="skills-context-prefix" data-i18n="skills.contextPrefix">현재 분류</span>
           <span class="skills-context-value" id="skillsContextValue">LLM · 주력</span>
         </p>
 
@@ -362,46 +217,19 @@
 
     <section id="awards" class="section award">
       <div class="container">
-        <h2 class="section-title">Award</h2>
-        <p class="section-desc award-intro-desc">교육 과정 등에서 받은 수상 실적입니다.</p>
+        <h2 class="section-title" data-i18n="nav.awards">Award</h2>
+        <p class="section-desc award-intro-desc" data-i18n="awards.intro">교육 과정 등에서 받은 수상 실적입니다.</p>
 
         <div class="award-table-card">
           <table class="award-table">
             <thead>
               <tr>
-                <th scope="col">날짜</th>
-                <th scope="col">수상명</th>
-                <th scope="col">발급처</th>
+                <th scope="col" data-i18n="awards.colDate">날짜</th>
+                <th scope="col" data-i18n="awards.colName">수상명</th>
+                <th scope="col" data-i18n="awards.colIssuer">발급처</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>2025.07</td>
-                <td><a class="award-pdf-link" href="https://roykoh88.github.io/Portfolio/PDF/%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%95%99%EC%8A%B5%20%EC%9A%B0%EC%88%98%EC%83%81.pdf" target="_blank" rel="noopener noreferrer" title="수상명 PDF (새 창)">학습 우수상</a></td>
-                <td rowspan="4">알파코 (Alphaco)</td>
-              </tr>
-              <tr>
-                <td>2025.07</td>
-                <td><a class="award-pdf-link" href="https://roykoh88.github.io/Portfolio/PDF/%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%9A%B0%EC%88%98%EC%83%81.pdf" target="_blank" rel="noopener noreferrer" title="수상명 PDF (새 창)">자연어 처리(NLP) 및 LLM 프로젝트 우수상</a></td>
-              </tr>
-              <tr>
-                <td>2025.08</td>
-                <td><a class="award-pdf-link" href="https://roykoh88.github.io/Portfolio/PDF/%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%83%9C%EB%8F%84%20%EC%9A%B0%EC%88%98%EC%83%81.pdf" target="_blank" rel="noopener noreferrer" title="수상명 PDF (새 창)">태도 우수 교육상</a></td>
-              </tr>
-              <tr>
-                <td>2025.11</td>
-                <td><a class="award-pdf-link" href="https://roykoh88.github.io/Portfolio/PDF/%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%EC%B6%9C%EC%84%9D%20%EC%9A%B0%EC%88%98%EC%83%81.pdf" target="_blank" rel="noopener noreferrer" title="수상명 PDF (새 창)">출석 우수상</a></td>
-              </tr>
-              <tr>
-                <td>2026.03</td>
-                <td><a class="award-pdf-link" href="https://roykoh88.github.io/Portfolio/PDF/%EC%88%98%EC%83%81/%ED%9C%B4%EB%A8%BC%20%EA%B0%9C%EA%B7%BC%EC%83%81.pdf" target="_blank" rel="noopener noreferrer" title="수상명 PDF (새 창)">개근상</a></td>
-                <td rowspan="2">휴먼 AI 교육센터</td>
-              </tr>
-              <tr>
-                <td>2026.03</td>
-                <td><a class="award-pdf-link" href="https://roykoh88.github.io/Portfolio/PDF/%EC%88%98%EC%83%81/%ED%9C%B4%EB%A8%BC%20%EC%9E%90%EB%8F%99%ED%99%94%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%B5%9C%EC%9A%B0%EC%88%98%EC%83%81.pdf" target="_blank" rel="noopener noreferrer" title="수상명 PDF (새 창)">자동화 프로젝트 최우수상</a></td>
-              </tr>
-            </tbody>
+            <tbody id="staticAwardTbody"></tbody>
           </table>
         </div>
       </div>
@@ -410,31 +238,23 @@
     <section id="certificates" class="section certificates">
       <div class="container">
         <div class="section-title-row">
-          <h2 class="section-title">Certificates</h2>
-          <button type="button" class="btn btn-add owner-only" id="certificateAddBtn">+ Add Certificate</button>
+          <h2 class="section-title" data-i18n="nav.certificates">Certificates</h2>
+          <button type="button" class="btn btn-add owner-only" id="certificateAddBtn" data-i18n="certificates.add">+ Add Certificate</button>
         </div>
-        <p class="section-desc">국가·기관에서 발급한 자격·면허입니다.</p>
+        <p class="section-desc" data-i18n="certificates.desc">국가·기관에서 발급한 자격·면허입니다.</p>
 
         <div class="award-table-card">
           <table class="award-table award-table--license">
             <thead>
               <tr>
-                <th scope="col">취득일자</th>
-                <th scope="col">국가</th>
-                <th scope="col">자격증/면허증</th>
-                <th scope="col">등급</th>
-                <th scope="col">발급처</th>
+                <th scope="col" data-i18n="certificates.colDate">취득일자</th>
+                <th scope="col" data-i18n="certificates.colCountry">국가</th>
+                <th scope="col" data-i18n="certificates.colName">자격증/면허증</th>
+                <th scope="col" data-i18n="certificates.colGrade">등급</th>
+                <th scope="col" data-i18n="certificates.colIssuer">발급처</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>2024. 09</td>
-                <td>대한민국</td>
-                <td><a class="award-pdf-link" href="https://roykoh88.github.io/Portfolio/PDF/%EC%9E%90%EA%B2%A9%EC%A6%9D/%EB%A6%AC%EB%88%85%EC%8A%A4%EB%A7%88%EC%8A%A4%ED%84%B0.pdf" target="_blank" rel="noopener noreferrer" title="자격증 PDF (새 창)">리눅스 마스터</a></td>
-                <td>2급</td>
-                <td>KAIT 정보통신 기술 자격 검정</td>
-              </tr>
-            </tbody>
+            <tbody id="staticCertTbody"></tbody>
           </table>
         </div>
 
@@ -481,8 +301,8 @@
 
     <section id="contact" class="section contact">
       <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <p class="section-desc">궁금한 점이 있으시면 아래로 연락 주세요.</p>
+        <h2 class="section-title" data-i18n="contact.title">Contact</h2>
+        <p class="section-desc" data-i18n="contact.desc">궁금한 점이 있으시면 아래로 연락 주세요.</p>
         <div class="contact-panel">
           <div class="contact-links">
             <a href="mailto:roy.koh.ai88@gmail.com" class="contact-link">Email</a>
@@ -497,10 +317,16 @@
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> Roy Koh. All rights reserved. <span id="ownerModeWrap"><button type="button" class="footer-owner-link" id="ownerModeToggle">편집 모드</button></span></p>
+    <p class="footer-line">© <span id="year"></span> Roy Koh. <span data-i18n="footer.rights">All rights reserved.</span> <span id="ownerModeWrap"><button type="button" class="footer-owner-link" id="ownerModeToggle">편집 모드</button></span></p>
+    <p class="footer-lang" role="group" data-i18n-attr="aria-label|footer.langAria" aria-label="표시 언어">
+      <button type="button" class="footer-lang-btn" id="footerLangKo" aria-pressed="true" data-i18n="footer.langKo">한국어</button>
+      <span class="footer-lang-sep" aria-hidden="true">/</span>
+      <button type="button" class="footer-lang-btn" id="footerLangEn" aria-pressed="false" data-i18n="footer.langEn">English</button>
+    </p>
   </footer>
 
+  <script src="static-i18n.js?v=1"></script>
   <script src="skills-track.js?v=1"></script>
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>

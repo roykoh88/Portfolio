@@ -16,8 +16,13 @@
     if (!btn) return;
     var isLight = document.documentElement.getAttribute('data-theme') === 'light';
     btn.textContent = isLight ? '🌙' : '☀️';
-    btn.setAttribute('aria-label', isLight ? '다크 모드로 전환' : '라이트 모드로 전환');
-    btn.setAttribute('title', isLight ? '다크 모드' : '라이트 모드');
+    if (typeof portfolioT === 'function') {
+      btn.setAttribute('aria-label', isLight ? portfolioT('header.themeToDark') : portfolioT('header.themeToLight'));
+      btn.setAttribute('title', isLight ? portfolioT('header.themeDark') : portfolioT('header.themeLight'));
+    } else {
+      btn.setAttribute('aria-label', isLight ? '다크 모드로 전환' : '라이트 모드로 전환');
+      btn.setAttribute('title', isLight ? '다크 모드' : '라이트 모드');
+    }
   }
   (function initTheme() {
     var theme = getPreferredTheme();
@@ -42,7 +47,9 @@
     document.body.classList.toggle('owner-mode', ownerMode);
     var toggle = document.getElementById('ownerModeToggle');
     if (toggle) {
-      toggle.textContent = ownerMode ? '편집 모드 종료' : '편집 모드';
+      var onLabel = typeof portfolioT === 'function' ? portfolioT('footer.ownerOn') : '편집 모드 종료';
+      var offLabel = typeof portfolioT === 'function' ? portfolioT('footer.ownerOff') : '편집 모드';
+      toggle.textContent = ownerMode ? onLabel : offLabel;
       toggle.onclick = function () {
         if (ownerMode) {
           setOwnerMode(false);
@@ -50,9 +57,11 @@
           if (isLocalhost) {
             setOwnerMode(true);
           } else {
-            var pw = prompt('비밀번호를 입력하세요.');
+            var promptMsg = typeof portfolioT === 'function' ? portfolioT('owner.promptPassword') : '비밀번호를 입력하세요.';
+            var wrongMsg = typeof portfolioT === 'function' ? portfolioT('owner.wrongPassword') : '비밀번호가 올바르지 않습니다.';
+            var pw = prompt(promptMsg);
             if (pw === OWNER_PASSWORD) setOwnerMode(true);
-            else if (pw !== null) alert('비밀번호가 올바르지 않습니다.');
+            else if (pw !== null) alert(wrongMsg);
           }
         }
       };
@@ -77,23 +86,18 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // About 만 나이 (React About.jsx·getManAge와 동일)
-  function getManAge(year, month, day) {
-    var now = new Date();
-    var age = now.getFullYear() - year;
-    var m = now.getMonth() + 1;
-    if (m < month || (m === month && now.getDate() < day)) age -= 1;
-    return age;
-  }
-  var aboutAgeEl = document.getElementById('about-man-age');
-  if (aboutAgeEl) {
-    aboutAgeEl.textContent = '(만) ' + getManAge(1988, 10, 20);
-  }
-
-  // 타이핑 효과 (반복: 입력 → 잠시 대기 → 지우기 → 다시 입력)
+  // 타이핑 효과 — 문자열은 static-i18n hero.typing 과 동기 (언어 전환 시 루프 재시작)
   var typingEl = document.getElementById('typing-text');
-  if (typingEl) {
-    var fullText = '안녕하세요\n꿈을 개발하는 개발자\n Roy 입니다.';
+  var heroTypingRunId = 0;
+  function startHeroTyping() {
+    if (!typingEl) return;
+    heroTypingRunId += 1;
+    var runId = heroTypingRunId;
+    typingEl.innerHTML = '';
+    var fullText =
+      typeof portfolioT === 'function'
+        ? portfolioT('hero.typing')
+        : '안녕하세요\n꿈을 개발하는 개발자\n Roy 입니다.';
     var index = 0;
     var typeSpeed = 120;
     var eraseSpeed = 80;
@@ -109,6 +113,7 @@
     }
 
     function type() {
+      if (runId !== heroTypingRunId) return;
       if (index < fullText.length) {
         appendChar(typingEl, fullText[index]);
         index++;
@@ -119,6 +124,7 @@
     }
 
     function erase() {
+      if (runId !== heroTypingRunId) return;
       if (typingEl.lastChild) {
         typingEl.removeChild(typingEl.lastChild);
         setTimeout(erase, eraseSpeed);
@@ -130,6 +136,10 @@
 
     type();
   }
+  startHeroTyping();
+  document.addEventListener('portfolio-lang-change', function () {
+    startHeroTyping();
+  });
 
   // 프로젝트 직접 추가 (localStorage)
   // v2 키로 변경해서 기존 캐시를 자동으로 무시하도록 함
@@ -146,7 +156,9 @@
   var DEFAULT_PROJECTS = [
     {
       title: '공학용 계산기',
+      titleEn: 'Scientific calculator',
       description: '공학용 계산기 + 함수 그래프 시각화 웹 앱입니다. 사칙연산부터 삼각함수, 로그, 그래프까지 지원합니다.',
+      descriptionEn: 'A scientific calculator and function graphing web app—from basic arithmetic to trig, logs, and plots.',
       tags: 'Python, FastAPI, React, JavaScript, HTML, CSS',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/Calculator',
@@ -155,7 +167,9 @@
     },
     {
       title: 'LLM 개인 비서 서비스 (BizAi)',
+      titleEn: 'LLM personal assistant (BizAi)',
       description: 'LLM 기반 개인 비서(BizAi) 서비스를 위한 모노레포 구조입니다. 백엔드 API, 프론트엔드, ETL 파이프라인, LLM 서버, 인프라를 하나의 레포에서 관리합니다.',
+      descriptionEn: 'Monorepo for a BizAi LLM-powered assistant: backend APIs, frontend, ETL, LLM server, and infra in one repository.',
       tags: 'Python, FastAPI, React, TypeScript, Docker, PostgreSQL, LLM',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/LLM_project',
@@ -164,7 +178,9 @@
     },
     {
       title: 'Portfolio',
+      titleEn: 'Portfolio',
       description: '개발 포트폴리오 사이트입니다. About, 교육/연수, Projects, Skills, Certificates, Contact를 담고 있으며 Firebase로 호스팅됩니다.',
+      descriptionEn: 'Developer portfolio with About, Education, Projects, Skills, Certificates, and Contact—hosted on Firebase.',
       tags: 'HTML, CSS, JavaScript, Firebase, GitHub Actions',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/Portfolio',
@@ -173,7 +189,9 @@
     },
     {
       title: '하이브리드 번역기',
+      titleEn: 'Hybrid translator',
       description: '무료 번역(deep-translator) + Ollama 로컬 LLM 보정으로 문맥에 맞는 자연스러운 번역을 제공합니다. 바이어 메일 번역, 실시간 통역(타이핑/음성/대화), 배치·파일·다국어 번역을 지원합니다.',
+      descriptionEn: 'Combines free translation (deep-translator) with local Ollama LLM polishing for more natural, context-aware output. Buyer-email translation, live interpretation (typing/voice/chat), batch/file, and multilingual modes.',
       tags: 'Python, FastAPI, Ollama, deep-translator, JavaScript, HTML, CSS',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/translator',
@@ -182,7 +200,9 @@
     },
     {
       title: '노인 재가복지 보조금 자가진단',
+      titleEn: 'Home-care subsidy self-assessment (seniors)',
       description: '노인 재가 복지 지원 보조금을 받을 수 있는지 테스트하는 웹 사이트입니다. 실제 운영 중인 서비스(성심케어)에서 사용 중입니다.',
+      descriptionEn: 'A simple web check for whether someone may qualify for senior home-care support subsidies. Used in production by SungSim Care.',
       tags: 'JavaScript, HTML, CSS',
       demoUrl: 'http://sungsimcare.kr/grade/test07/test06.html',
       codeUrl: 'https://github.com/roykoh88/assist_old_person',
@@ -191,7 +211,9 @@
     },
     {
       title: '네이버 경제 뉴스 크롤러',
+      titleEn: 'Naver economy news crawler',
       description: '네이버 뉴스 경제(섹션 101)의 헤드라인 기사 10개를 크롤링해 제목·링크·본문·썸네일을 CSV로 저장하는 파이썬 스크립트입니다.',
+      descriptionEn: 'Python script that crawls ten headline articles from Naver News Economy (section 101) and saves title, link, body, and thumbnail to CSV.',
       tags: 'Python, Selenium, Pandas, Crawling',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/News_Crawling',
@@ -200,7 +222,9 @@
     },
     {
       title: 'BulSee (불씨)',
+      titleEn: 'BulSee',
       description: '기상청·산림청 실시간 공공데이터를 수집해 AI로 산불 발생 위험도와 피해 범위를 예측하는 웹 서비스. 지도 기반 지역 조회, 시뮬레이션, 대시보드, 챗봇(OpenAI) 포함.',
+      descriptionEn: 'Web service that ingests live KMA & forest-agency open data to estimate wildfire risk and impact with AI. Map-based lookup, simulation, dashboard, and an OpenAI chatbot.',
       tags: 'Spring Boot, FastAPI, React, TypeScript, PyTorch, XGBoost, GRU, Transformer, Oracle, Docker',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/bulsee',
@@ -209,7 +233,9 @@
     },
     {
       title: '공부·수면 → 합격 예측 (간단한 AI)',
+      titleEn: 'Study & sleep → pass prediction (simple AI)',
       description: '개인 공부 목적으로 ChatGPT와 토론하며 만든 프로젝트입니다. 공부시간·수면시간 데이터로 시험 합격 여부를 예측하는 분류 모델(Random Forest, Logistic Regression, Decision Tree, K-NN)을 비교·실험합니다. GPU 없이 실행 가능.',
+      descriptionEn: 'Personal study project built with ChatGPT as a sparring partner. Compares classifiers (Random Forest, logistic regression, decision tree, k-NN) on study/sleep hours vs. pass/fail. Runs without a GPU.',
       tags: 'Python, scikit-learn, Decision Tree, Random Forest, Logistic Regression, KNN',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/simple-ai-study-sleep',
@@ -218,7 +244,9 @@
     },
     {
       title: 'Muzzle (강아지 입마개 탐지)',
+      titleEn: 'Muzzle (dog muzzle detection)',
       description: 'YOLOv5/YOLOv8을 사용한 개 탐지 및 대형견·소형견 구분 프로젝트입니다. Stanford Dogs 데이터셋으로 big_dog/small_dog 이진 분류까지 진행했고, 입마개(muzzle) 탐지까지 목표로 했으나 해당 단계는 미완이었습니다. 강아지 인식까지는 구현했습니다.',
+      descriptionEn: 'Dog detection with YOLOv5/YOLOv8 and large vs. small dog separation. Trained a big_dog/small_dog head on Stanford Dogs; muzzle detection was planned but not finished—dog recognition is implemented.',
       tags: 'Python, PyTorch, YOLOv5, YOLOv8, Ultralytics, Roboflow, OpenCV',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/muzzle',
@@ -227,7 +255,9 @@
     },
     {
       title: 'Dream Lotto (운세·꿈 해몽 로또 추천)',
+      titleEn: 'Dream Lotto (horoscope & dream-based Lotto picks)',
       description: '네이버 오늘의 운세와 룰드드림 꿈 해몽을 Selenium으로 수집한 뒤, KLUE-RoBERTa 감정 분류로 감정을 추출하고 감정–숫자 매핑으로 로또 5게임을 추천하는 파이프라인. 번호 분포 엔트로피·시각화, 당첨 번호 백테스트 노트북 포함. 재미 목적.',
+      descriptionEn: 'Pipeline that scrapes Naver daily horoscope and dream-interpretation text with Selenium, runs KLUE-RoBERTa sentiment, maps emotions to numbers, and suggests five Lotto games—plus entropy/visualization and a backtest notebook. For fun only.',
       tags: 'Python, Selenium, PyTorch, Transformers, KLUE-RoBERTa, Pandas, openpyxl',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/dream_lotto',
@@ -236,7 +266,9 @@
     },
     {
       title: 'Dream Web (AI 로또 분석 시스템)',
+      titleEn: 'Dream Web (AI Lotto analysis system)',
       description: 'Express + MongoDB + EJS 기반 웹 앱. AI 로또 번호 분석(Python 연동), 동행복권 API 당첨번호 조회, 감정숫자 분류표, AI 상담 챗봇, 후기 게시판, 고객센터(문의·댓글), 관리자·분석 히스토리. SharePoint 웹파트 삽입 구성.',
+      descriptionEn: 'Express + MongoDB + EJS app: AI Lotto analysis (Python), official draw lookup API, emotion–number table, AI chatbot, reviews board, support tickets with comments, admin analysis history, and SharePoint web-part embedding.',
       tags: 'Node.js, Express, MongoDB, EJS, Multer, Axios, bcrypt, Python',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/dream_web',
@@ -310,6 +342,32 @@
     localStorage.setItem(PROJECTS_KEY, JSON.stringify(projects));
   }
 
+  function projectLang() {
+    return typeof portfolioGetLang === 'function' ? portfolioGetLang() : 'ko';
+  }
+  function projectCardTitle(p) {
+    if (projectLang() === 'en' && p.titleEn) return p.titleEn;
+    return p.title || '';
+  }
+  function projectCardDescription(p) {
+    if (projectLang() === 'en' && p.descriptionEn) return p.descriptionEn;
+    return p.description || '';
+  }
+  function ptProjects(key, fallback) {
+    if (typeof portfolioT === 'function') {
+      var s = portfolioT('projects.' + key);
+      if (s && s !== 'projects.' + key) return s;
+    }
+    return fallback;
+  }
+  function ptCert(key, fallback) {
+    if (typeof portfolioT === 'function') {
+      var s = portfolioT('certificates.' + key);
+      if (s && s !== 'certificates.' + key) return s;
+    }
+    return fallback;
+  }
+
   function renderProjects() {
     var projects = getProjectsInRouletteOrder();
     var allProjects = getProjects();
@@ -328,22 +386,29 @@
       card.className = 'project-card';
       card.dataset.index = i;
       var type = (p.projectType || 'personal');
-      var typeLabel = type === 'academy' ? '학원 프로젝트' : '개인 프로젝트';
+      var typeLabel =
+        type === 'academy'
+          ? ptProjects('academy', '학원 프로젝트')
+          : ptProjects('personal', '개인 프로젝트');
       var typeClass = type === 'academy' ? 'project-badge project-badge--academy' : 'project-badge project-badge--personal';
+      var delAria = ptProjects('deleteAria', '삭제');
+      var demoLabel = ptProjects('demo', '보기');
+      var codeLabel = ptProjects('code', '코드');
+      var noTitle = ptProjects('noTitle', '제목 없음');
       var imgHtml = p.image
         ? '<img src="' + p.image + '" alt="">'
         : '<div class="project-placeholder">📁</div>';
       card.innerHTML =
         '<div class="project-image">' + imgHtml +
-        '<button type="button" class="project-delete owner-only" aria-label="삭제">×</button></div>' +
+        '<button type="button" class="project-delete owner-only" aria-label="' + escapeHtml(delAria) + '">×</button></div>' +
         '<div class="project-body">' +
-        '<div class="' + typeClass + '">' + typeLabel + '</div>' +
-        '<h3 class="project-title">' + escapeHtml(p.title || '제목 없음') + '</h3>' +
-        '<p class="project-desc">' + escapeHtml(p.description || '') + '</p>' +
+        '<div class="' + typeClass + '">' + escapeHtml(typeLabel) + '</div>' +
+        '<h3 class="project-title">' + escapeHtml(projectCardTitle(p) || noTitle) + '</h3>' +
+        '<p class="project-desc">' + escapeHtml(projectCardDescription(p) || '') + '</p>' +
         '<div class="project-tags">' + tags.map(function (t) { return '<span>' + escapeHtml(t) + '</span>'; }).join('') + '</div>' +
         '<div class="project-links">' +
-        (p.demoUrl ? '<a href="' + escapeHtml(p.demoUrl) + '" target="_blank" rel="noopener">보기</a>' : '') +
-        (p.codeUrl ? '<a href="' + escapeHtml(p.codeUrl) + '" target="_blank" rel="noopener">코드</a>' : '') +
+        (p.demoUrl ? '<a href="' + escapeHtml(p.demoUrl) + '" target="_blank" rel="noopener">' + escapeHtml(demoLabel) + '</a>' : '') +
+        (p.codeUrl ? '<a href="' + escapeHtml(p.codeUrl) + '" target="_blank" rel="noopener">' + escapeHtml(codeLabel) + '</a>' : '') +
         '</div></div>';
       grid.appendChild(card);
       card.querySelector('.project-delete').addEventListener('click', function () {
@@ -497,7 +562,7 @@
       var file = imageFileInput && imageFileInput.files[0];
       if (file) {
         if (file.size > maxImageSize) {
-          alert('이미지는 400KB 이하로 올려주세요.');
+          alert(ptProjects('alertImageSize', '이미지는 400KB 이하로 올려주세요.'));
           return;
         }
         var reader = new FileReader();
@@ -752,6 +817,7 @@
     if (isPdfItem(item)) card.classList.add('is-pdf');
     card.dataset.index = i;
     var title = (item.title || '').trim();
+    var certDelAria = escapeHtml(ptCert('deleteAria', '삭제'));
     var inner = '';
     if (isPdfItem(item)) {
       var pdfSrc = item.image.indexOf('data:') === 0 ? pdfToViewUrl(item.image) : item.image;
@@ -763,7 +829,7 @@
           ? '<iframe class="certificate-pdf-iframe" src="' + safeSrc + '" title="PDF 미리보기"></iframe>' +
             '<div class="certificate-pdf-overlay" data-index="' + i + '" role="button" tabindex="0" aria-label="PDF 보기"></div>'
           : '<span class="certificate-pdf-icon">📄</span>') +
-        '<button type="button" class="certificate-delete owner-only" aria-label="삭제">×</button></div>' +
+        '<button type="button" class="certificate-delete owner-only" aria-label="' + certDelAria + '">×</button></div>' +
         '<div class="certificate-title">' + escapeHtml(title) + '</div>';
     } else {
       var imgHtml = item.image
@@ -771,7 +837,7 @@
         : '<span style="font-size:2rem;opacity:0.5">📜</span>';
       inner =
         '<div class="certificate-image">' + imgHtml +
-        '<button type="button" class="certificate-delete owner-only" aria-label="삭제">×</button></div>' +
+        '<button type="button" class="certificate-delete owner-only" aria-label="' + certDelAria + '">×</button></div>' +
         '<div class="certificate-title">' + escapeHtml(title) + '</div>';
     }
     card.innerHTML = inner;
@@ -935,7 +1001,7 @@
       title = title.trim();
       var image = certificateImageUrl && certificateImageUrl.value ? certificateImageUrl.value.trim() : '';
       if (!image && (!certificateImageFile || !certificateImageFile.files[0])) {
-        alert('상장 이미지 또는 PDF를 넣어주세요.');
+        alert(ptCert('addNeedMedia', '상장 이미지 또는 PDF를 넣어주세요.'));
         return;
       }
       function addCert(imgData, isPdf) {
@@ -957,7 +1023,7 @@
       var isPdf = file.type === 'application/pdf';
       var maxSize = isPdf ? maxCertPdfSize : maxImageSize;
       if (file.size > maxSize) {
-        alert(isPdf ? 'PDF는 2MB 이하로 올려주세요.' : '이미지는 400KB 이하로 올려주세요.');
+        alert(isPdf ? ptCert('alertPdfTooBig', 'PDF는 2MB 이하로 올려주세요.') : ptCert('alertImageTooBig', '이미지는 400KB 이하로 올려주세요.'));
         return;
       }
       var reader = new FileReader();
@@ -987,6 +1053,7 @@
     var state = { track: 'llm', tier: 'strong' };
 
     function labelForTrack(id) {
+      if (id === 'common' && typeof portfolioT === 'function') return portfolioT('skills.trackCommon');
       var l = id;
       tracks.forEach(function (t) {
         if (t.id === id) l = t.label;
@@ -994,6 +1061,8 @@
       return l;
     }
     function labelForTier(id) {
+      if (id === 'strong' && typeof portfolioT === 'function') return portfolioT('skills.tierStrong');
+      if (id === 'experience' && typeof portfolioT === 'function') return portfolioT('skills.tierExp');
       var l = id;
       tiers.forEach(function (t) {
         if (t.id === id) l = t.label;
@@ -1018,17 +1087,22 @@
         btn.setAttribute('aria-selected', on ? 'true' : 'false');
       });
       if (contextValue) {
+        var suffix =
+          typeof portfolioT === 'function'
+            ? portfolioT('skills.contextCommonSuffix')
+            : '협업·인프라 공통';
         contextValue.textContent =
-          state.track === 'common'
-            ? trackLabel + ' · 협업·인프라 공통'
-            : trackLabel + ' · ' + tierLabel;
+          state.track === 'common' ? trackLabel + ' · ' + suffix : trackLabel + ' · ' + tierLabel;
       }
       var groups = getGroups(state.track, state.tier);
       panel.innerHTML = '';
       if (!groups.length) {
         var empty = document.createElement('p');
         empty.className = 'skills-empty-hint';
-        empty.textContent = '이 조합에 해당하는 항목이 없습니다.';
+        empty.textContent =
+          typeof portfolioT === 'function'
+            ? portfolioT('skills.empty')
+            : '이 조합에 해당하는 항목이 없습니다.';
         panel.appendChild(empty);
         return;
       }
@@ -1037,7 +1111,8 @@
         div.className = 'skill-group skill-group--panel';
         var h3 = document.createElement('h3');
         h3.className = 'skill-group-title';
-        h3.textContent = g.title;
+        h3.textContent =
+          typeof portfolioSkillTitleEn === 'function' ? portfolioSkillTitleEn(g.title) : g.title;
         div.appendChild(h3);
         (g.blocks || []).forEach(function (block) {
           if (block.subtitle) {
@@ -1073,20 +1148,45 @@
     });
 
     render();
+    document.addEventListener('portfolio-lang-change', function () {
+      render();
+    });
   })();
+
+  function syncNavToggleAria() {
+    var navEl = document.querySelector('.nav');
+    var tgl = document.querySelector('.nav-toggle');
+    if (!tgl) return;
+    var open = navEl && navEl.classList.contains('nav-open');
+    if (typeof portfolioT === 'function') {
+      tgl.setAttribute('aria-label', open ? portfolioT('header.menuClose') : portfolioT('header.menuOpen'));
+    } else {
+      tgl.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    }
+  }
 
   // 모바일 메뉴 토글
   var nav = document.querySelector('.nav');
   var toggle = document.querySelector('.nav-toggle');
   if (nav && toggle) {
+    syncNavToggleAria();
     toggle.addEventListener('click', function () {
       nav.classList.toggle('nav-open');
-      toggle.setAttribute('aria-label', nav.classList.contains('nav-open') ? '메뉴 닫기' : '메뉴 열기');
+      syncNavToggleAria();
     });
     document.querySelectorAll('.nav-links a').forEach(function (link) {
       link.addEventListener('click', function () {
         nav.classList.remove('nav-open');
+        syncNavToggleAria();
       });
     });
   }
+
+  document.addEventListener('portfolio-lang-change', function () {
+    updateThemeToggleUI();
+    updateOwnerUI();
+    syncNavToggleAria();
+    renderProjects();
+    renderCertificates();
+  });
 })();
