@@ -1299,9 +1299,27 @@ body.owner-mode .project-card .project-delete.owner-only {
   .hero-tag { font-size: 1.4vw; }
   .hero-desc { font-size: 1.5vw; }
   .btn { font-size: 1.3vw; padding: 1.2vh 2vw; }
+  /* 태블릿·좁은 가로: 고정 헤더 아래로 본문 시작 (768~992 구간도 동일 이슈) */
+  .hero {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: max(6rem, calc(env(safe-area-inset-top, 0px) + 5.25rem));
+    overflow: visible;
+  }
 }
 @media (max-width: 860px) {
-  .hero { gap: 1.5vw; padding: 4vh 3vw 3vh; }
+  /* padding 단축 금지 — 상단만 4vh면 헤더에 히어로가 가려짐 */
+  .hero {
+    gap: 1.5vw;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: max(6.25rem, calc(env(safe-area-inset-top, 0px) + 5.25rem));
+    padding-left: max(1rem, 3vw);
+    padding-right: max(1rem, 3vw);
+    padding-bottom: 3vh;
+    min-height: auto;
+    overflow: visible;
+  }
   .hero-content { width: 55vw; }
   .hero-visual { width: 24vw; height: 32vh; }
   .hero-title { font-size: 5.5vw; }
@@ -1312,7 +1330,8 @@ body.owner-mode .project-card .project-delete.owner-only {
 
 @media (max-width: 768px) {
   .container {
-    padding: 0 3vw;
+    padding-left: max(1rem, 3vw);
+    padding-right: max(1rem, 3vw);
   }
   .nav {
     padding: 1.5vh 3vw;
@@ -1357,22 +1376,40 @@ body.owner-mode .project-card .project-delete.owner-only {
     border-bottom: 1px solid var(--border);
   }
   .hero {
-    padding: 4vh 4vw 3vh;
+    align-items: flex-start;
+    justify-content: flex-start;
+    /* 고정 헤더 아래에서 시작 — 가운데 정렬 시 상단 줄이 헤더에 가려짐 */
+    padding-top: max(6.25rem, calc(env(safe-area-inset-top, 0px) + 5.25rem));
+    padding-left: max(1rem, 4vw);
+    padding-right: max(1rem, 4vw);
+    padding-bottom: 3vh;
     min-height: auto;
+    overflow: visible;
   }
   .hero-content {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: keep-all;
   }
   .hero-title {
-    font-size: 6vw;
+    font-size: clamp(1.2rem, 5.25vw, 1.7rem);
+    line-height: 1.35;
+    letter-spacing: -0.03em;
   }
   .hero-desc {
-    font-size: 2.5vw;
+    font-size: clamp(0.875rem, 3.5vw, 1rem);
     max-width: 100%;
+    line-height: 1.65;
   }
-  .hero-tag { font-size: 2vw; }
-  .btn { font-size: 2.2vw; padding: 1.5vh 4vw; }
+  .hero-tag {
+    font-size: clamp(0.75rem, 3.2vw, 0.9rem);
+  }
+  .btn {
+    font-size: clamp(0.85rem, 3.6vw, 0.95rem);
+    padding: 0.85rem 1.15rem;
+  }
   .hero-visual {
     display: none;
   }
@@ -1450,7 +1487,8 @@ body.owner-mode .project-card .project-delete.owner-only {
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 3vw;
+    padding-left: max(1rem, 3vw);
+    padding-right: max(1rem, 3vw);
   }
   .logo { font-size: 5vw; }
   .nav-toggle span {
@@ -1459,15 +1497,27 @@ body.owner-mode .project-card .project-delete.owner-only {
   .nav.nav-open .nav-links a {
     font-size: 4.5vw;
   }
+  /* padding 단축 금지: 768px에서 준 헤더 여백(padding-top)을 덮어쓰면 인사말이 헤더에 가려짐 */
   .hero {
-    padding: 3.5vh 3vw 2.5vh;
+    padding-top: max(6.25rem, calc(env(safe-area-inset-top, 0px) + 5.25rem));
+    padding-left: max(1rem, 3vw);
+    padding-right: max(1rem, 3vw);
+    padding-bottom: 2.5vh;
   }
   .hero-title {
-    font-size: 7vw;
+    font-size: clamp(1.1rem, 5.2vw, 1.6rem);
+    line-height: 1.35;
   }
-  .hero-desc { font-size: 3vw; }
-  .hero-tag { font-size: 2.5vw; }
-  .btn { font-size: 2.8vw; padding: 1.5vh 5vw; }
+  .hero-desc {
+    font-size: clamp(0.8125rem, 3.4vw, 0.98rem);
+  }
+  .hero-tag {
+    font-size: clamp(0.72rem, 3vw, 0.88rem);
+  }
+  .btn {
+    font-size: clamp(0.8rem, 3.5vw, 0.92rem);
+    padding: 0.8rem 1rem;
+  }
   .section {
     padding: 4vh 0;
   }

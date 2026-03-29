@@ -1,68 +1,10 @@
 import './About.css'
+import { getManAge } from '../lib/age'
 
-const profileRows = [
-  {
-    type: 'pair',
-    left: { label: '이름', value: '고용재' },
-    right: { label: '생년월일', value: '1988.10.20' },
-  },
-  {
-    type: 'pair',
-    left: { label: '영문', value: 'Koh Yongjae' },
-    right: { label: '나이', value: '(만) 37' },
-  },
-  {
-    type: 'pair',
-    left: {
-      label: 'E-mail',
-      value: (
-        <a href="mailto:roy.koh.ai88@gmail.com">roy.koh.ai88@gmail.com</a>
-      ),
-    },
-    right: {
-      label: '연락처',
-      value: (
-        <a href="#contact" className="about-scroll-contact">
-          contact
-        </a>
-      ),
-    },
-  },
-  {
-    type: 'pair',
-    left: { label: '주소', value: '서울시 노원구' },
-    right: { label: '지원 분야', value: 'LLM Developer' },
-  },
-  {
-    type: 'triple',
-    items: [
-      {
-        label: 'Blog',
-        value: (
-          <a href="https://javakid.tistory.com/" target="_blank" rel="noreferrer">
-            javakid.tistory.com
-          </a>
-        ),
-      },
-      {
-        label: 'Portfolio',
-        value: (
-          <a href="https://yjkohproject.web.app/" target="_blank" rel="noreferrer">
-            yjkohproject.web.app
-          </a>
-        ),
-      },
-      {
-        label: 'GitHub',
-        value: (
-          <a href="https://github.com/roykoh88" target="_blank" rel="noreferrer">
-            github.com/roykoh88
-          </a>
-        ),
-      },
-    ],
-  },
-]
+/** 만 나이 계산 기준 (생년월일과 반드시 일치) */
+const BIRTH_YEAR = 1988
+const BIRTH_MONTH = 10
+const BIRTH_DAY = 20
 
 const introParagraphs = [
   '안녕하세요.',
@@ -96,6 +38,72 @@ function Field({ label, value }) {
 }
 
 export function About() {
+  const manAge = getManAge(BIRTH_YEAR, BIRTH_MONTH, BIRTH_DAY)
+
+  const profileRows = [
+    {
+      type: 'pair',
+      left: { label: '이름', value: '고용재' },
+      right: { label: '생년월일', value: '1988.10.20' },
+    },
+    {
+      type: 'pair',
+      left: { label: '영문', value: 'Koh Yongjae' },
+      right: { label: '나이', value: `(만) ${manAge}` },
+    },
+    {
+      type: 'pair',
+      left: {
+        label: 'E-mail',
+        value: (
+          <a href="mailto:roy.koh.ai88@gmail.com">roy.koh.ai88@gmail.com</a>
+        ),
+      },
+      right: {
+        label: '연락처',
+        value: (
+          <a href="#contact" className="about-scroll-contact">
+            contact
+          </a>
+        ),
+      },
+    },
+    {
+      type: 'pair',
+      left: { label: '주소', value: '서울시 노원구' },
+      right: { label: '지원 분야', value: 'LLM Developer' },
+    },
+    {
+      type: 'triple',
+      items: [
+        {
+          label: 'Blog',
+          value: (
+            <a href="https://javakid.tistory.com/" target="_blank" rel="noreferrer">
+              javakid.tistory.com
+            </a>
+          ),
+        },
+        {
+          label: 'Portfolio',
+          value: (
+            <a href="https://yjkohproject.web.app/" target="_blank" rel="noreferrer">
+              yjkohproject.web.app
+            </a>
+          ),
+        },
+        {
+          label: 'GitHub',
+          value: (
+            <a href="https://github.com/roykoh88" target="_blank" rel="noreferrer">
+              github.com/roykoh88
+            </a>
+          ),
+        },
+      ],
+    },
+  ]
+
   return (
     <section id="about" className="section about">
       <div className="container">
