@@ -1,4 +1,3 @@
-import './About.css'
 import { getManAge } from '../lib/age'
 
 /** 만 나이 계산 기준 (생년월일과 반드시 일치) */

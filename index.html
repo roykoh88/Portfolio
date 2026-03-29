@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=13">
+  <link rel="stylesheet" href="styles.css?v=15">
 </head>
 <body>
   <header class="header">
@@ -58,12 +58,75 @@
     <section id="about" class="section about">
       <div class="container">
         <h2 class="section-title">About</h2>
-        <div class="about-content">
-          <p class="about-text">
-            꿈을 코드로 만드는 개발자, ROY입니다. 사용하는 사람이 편하고 기분 좋게 쓸 수 있는 서비스를 만드는 걸 좋아합니다.<br>
-            기술 중심으로 성장하며 <strong>AI 개발자</strong>가 되길 희망하고, 웹·데이터·ML을 다루는 일에 관심이 많습니다.<br>
-            궁금한 점이 있으시면 아래 연락처로 편하게 보내주세요.
-          </p>
+        <div class="about-content about-content--profile">
+          <div class="about-profile">
+            <div class="about-profile-photo">
+              <img src="img/증명사진_고용재.jpg" alt="고용재 프로필 사진" width="200" height="250">
+            </div>
+            <div class="about-profile-fields">
+              <div class="about-profile-row about-profile-row--pair">
+                <div class="about-profile-field">
+                  <span class="about-profile-label">이름</span>
+                  <span class="about-profile-value">고용재</span>
+                </div>
+                <div class="about-profile-field">
+                  <span class="about-profile-label">생년월일</span>
+                  <span class="about-profile-value">1988.10.20</span>
+                </div>
+              </div>
+              <div class="about-profile-row about-profile-row--pair">
+                <div class="about-profile-field">
+                  <span class="about-profile-label">영문</span>
+                  <span class="about-profile-value">Koh Yongjae</span>
+                </div>
+                <div class="about-profile-field">
+                  <span class="about-profile-label">나이</span>
+                  <span class="about-profile-value" id="about-man-age"></span>
+                </div>
+              </div>
+              <div class="about-profile-row about-profile-row--pair">
+                <div class="about-profile-field">
+                  <span class="about-profile-label">E-mail</span>
+                  <span class="about-profile-value"><a href="mailto:roy.koh.ai88@gmail.com">roy.koh.ai88@gmail.com</a></span>
+                </div>
+                <div class="about-profile-field">
+                  <span class="about-profile-label">연락처</span>
+                  <span class="about-profile-value"><a href="#contact" class="about-scroll-contact">contact</a></span>
+                </div>
+              </div>
+              <div class="about-profile-row about-profile-row--pair">
+                <div class="about-profile-field">
+                  <span class="about-profile-label">주소</span>
+                  <span class="about-profile-value">서울시 노원구</span>
+                </div>
+                <div class="about-profile-field">
+                  <span class="about-profile-label">지원 분야</span>
+                  <span class="about-profile-value">LLM Developer</span>
+                </div>
+              </div>
+              <div class="about-profile-row about-profile-row--triple">
+                <div class="about-profile-link-cell">
+                  <span class="about-profile-label">Blog</span>
+                  <span class="about-profile-value"><a href="https://javakid.tistory.com/" target="_blank" rel="noopener noreferrer">javakid.tistory.com</a></span>
+                </div>
+                <div class="about-profile-link-cell">
+                  <span class="about-profile-label">Portfolio</span>
+                  <span class="about-profile-value"><a href="https://yjkohproject.web.app/" target="_blank" rel="noopener noreferrer">yjkohproject.web.app</a></span>
+                </div>
+                <div class="about-profile-link-cell">
+                  <span class="about-profile-label">GitHub</span>
+                  <span class="about-profile-value"><a href="https://github.com/roykoh88" target="_blank" rel="noopener noreferrer">github.com/roykoh88</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="about-intro-stack" lang="ko">
+            <p class="about-text about-intro-p">안녕하세요.</p>
+            <p class="about-text about-intro-p">꿈을 코드로 만드는 개발자 ROY(고용재)입니다. 사용하는 사람이 편하고 기분 좋게 쓸 수 있는 서비스를 만드는 걸 좋아합니다.</p>
+            <p class="about-text about-intro-p">AI를 서비스 기능으로 구현하는 개발에 집중하고 있고, 운영 경험을 바탕으로 개발자로 전환하여 LLM/RAG 기반 프로젝트를 수행하며 데이터부터 API, 서비스까지 이어 붙이는 경험을 쌓아 왔습니다. 기술 중심으로 성장하며 AI 개발자가 되길 희망하고, 웹·데이터·ML을 다루는 일에 관심이 많습니다.</p>
+            <p class="about-text about-intro-p">웹페이지 프론트와 백엔드 개발도 직접 해 보았고, Computer Vision 분야에서는 YOLO를 활용해 프로젝트를 진행해 본 경험이 있습니다.</p>
+            <p class="about-text about-intro-p">AI를 실제 서비스에 적용해 가치를 만드는 개발자로 기여하고 싶습니다. 궁금한 점이 있으시면 아래 연락처로 편하게 보내주세요.</p>
+          </div>
         </div>
       </div>
     </section>

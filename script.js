@@ -77,6 +77,19 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // About 만 나이 (React About.jsx·getManAge와 동일)
+  function getManAge(year, month, day) {
+    var now = new Date();
+    var age = now.getFullYear() - year;
+    var m = now.getMonth() + 1;
+    if (m < month || (m === month && now.getDate() < day)) age -= 1;
+    return age;
+  }
+  var aboutAgeEl = document.getElementById('about-man-age');
+  if (aboutAgeEl) {
+    aboutAgeEl.textContent = '(만) ' + getManAge(1988, 10, 20);
+  }
+
   // 타이핑 효과 (반복: 입력 → 잠시 대기 → 지우기 → 다시 입력)
   var typingEl = document.getElementById('typing-text');
   if (typingEl) {
