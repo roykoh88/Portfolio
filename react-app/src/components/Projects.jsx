@@ -1,9 +1,34 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext.jsx'
-import { MAX_IMAGE_BYTES } from '../lib/projects/constants'
+import {
+  MAX_IMAGE_BYTES,
+  defaultProjectByTitle,
+} from '../lib/projects/constants'
 import { projectKey } from '../lib/projects/projectStorage'
 
 const CAROUSEL_MOBILE_BREAKPOINT = 768
+
+function projectCardCopy(p, lang, t) {
+  const def = defaultProjectByTitle(p.title)
+  const titleEn = p.titleEn ?? def?.titleEn
+  const descEn = p.descriptionEn ?? def?.descriptionEn
+  if (lang !== 'en') {
+    return {
+      title: p.title || t('projects.noTitle'),
+      description: p.description || '',
+    }
+  }
+  return {
+    title:
+      (titleEn && String(titleEn).trim()) ||
+      p.title ||
+      t('projects.noTitle'),
+    description:
+      descEn !== undefined && descEn !== null
+        ? String(descEn)
+        : p.description || '',
+  }
+}
 
 function parseTags(tags) {
   return (tags || '')
@@ -13,7 +38,7 @@ function parseTags(tags) {
 }
 
 export function Projects({ orderedProjects, addProject, removeProject }) {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
   const [modalOpen, setModalOpen] = useState(false)
   const [carouselScroll, setCarouselScroll] = useState(false)
   const scrollRef = useRef(null)
@@ -162,6 +187,8 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                     ? 'project-badge project-badge--academy'
                     : 'project-badge project-badge--personal'
                 const tags = parseTags(p.tags)
+                const { title: cardTitle, description: cardDesc } =
+                  projectCardCopy(p, lang, t)
                 return (
                   <article
                     className="project-card"
@@ -169,7 +196,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                   >
                     <div className="project-image">
                       {p.image ? (
-                        <img src={p.image} alt="" />
+                        <img src={p.image} alt={cardTitle} />
                       ) : (
                         <div className="project-placeholder">📁</div>
                       )}
@@ -184,10 +211,8 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                     </div>
                     <div className="project-body">
                       <div className={typeClass}>{typeLabel}</div>
-                      <h3 className="project-title">
-                        {p.title || t('projects.noTitle')}
-                      </h3>
-                      <p className="project-desc">{p.description || ''}</p>
+                      <h3 className="project-title">{cardTitle}</h3>
+                      <p className="project-desc">{cardDesc}</p>
                       <div className="project-tags">
                         {tags.map((tag) => (
                           <span key={tag}>{tag}</span>

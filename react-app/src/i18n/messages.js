@@ -106,7 +106,6 @@ export const messages = {
       alertImageSize: '이미지는 400KB 이하로 올려주세요.',
     },
     skills: {
-      desc: '분야(CV · LLM · ML · Web · 공통)와 주력·경험을 선택할 수 있습니다. 경험을 고르면 해당 분야의 주력 항목을 모두 포함해 보여 줍니다. 네 분야(CV·LLM·ML·Web)에는 같은 기술이 축마다 다시 나올 수 있습니다. OS·협업·Office 등은 공통 탭에서만 모아 둡니다.',
       tabTrackAria: '스킬 분야',
       tabTierAria: '숙련도',
       trackCommon: '공통',
@@ -251,7 +250,6 @@ export const messages = {
       alertImageSize: 'Please use an image under 400KB.',
     },
     skills: {
-      desc: 'Choose a track (CV · LLM · ML · Web · Common) and Main or Experience. Experience includes all Main items for that track plus extra ones. The same technology may appear again per track. OS, collaboration, and Office tools are grouped under Common.',
       tabTrackAria: 'Skill track',
       tabTierAria: 'Proficiency',
       trackCommon: 'Common',

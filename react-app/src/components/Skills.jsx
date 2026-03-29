@@ -61,7 +61,6 @@ export function Skills() {
     <section id="skills" className="section skills">
       <div className="container">
         <h2 className="section-title">{t('nav.skills')}</h2>
-        <p className="section-desc">{t('skills.desc')}</p>
 
         <div
           className="skills-filter-row skills-filter-row--tracks"
