@@ -4,6 +4,7 @@ import {
   SKILL_TIERS,
   getSkillGroupsForTier,
 } from '../data/skillsByTrack'
+import { useLanguage } from '../i18n/LanguageContext.jsx'
 
 function SkillBlock({ subtitle, items }) {
   return (
@@ -12,22 +13,24 @@ function SkillBlock({ subtitle, items }) {
         <span className="skill-subtitle">{subtitle}</span>
       ) : null}
       <ul className="skill-tags">
-        {items.map((t, i) => (
-          <li key={`${subtitle ?? 'x'}-${i}-${t}`}>{t}</li>
+        {items.map((item, i) => (
+          <li key={`${subtitle ?? 'x'}-${i}-${item}`}>{item}</li>
         ))}
       </ul>
     </>
   )
 }
 
-function SkillGroup({ title, blocks }) {
+function SkillGroup({ title, blocks, mapTitle, mapSubtitle }) {
   return (
     <div className="skill-group skill-group--panel">
-      <h3 className="skill-group-title">{title}</h3>
+      <h3 className="skill-group-title">{mapTitle(title)}</h3>
       {blocks.map((block, i) => (
         <SkillBlock
           key={`${title}-${block.subtitle ?? 'main'}-${i}`}
-          subtitle={block.subtitle}
+          subtitle={
+            block.subtitle ? mapSubtitle(block.subtitle) : undefined
+          }
           items={block.items}
         />
       ))}
@@ -36,43 +39,45 @@ function SkillGroup({ title, blocks }) {
 }
 
 export function Skills() {
-  const [track, setTrack] = useState('web')
+  const { t, skillGroupTitle, skillSubtitle } = useLanguage()
+  const [track, setTrack] = useState('llm')
   const [tier, setTier] = useState('strong')
 
   const isCommonTrack = track === 'common'
   const groups = getSkillGroupsForTier(track, tier)
 
   const trackLabel =
-    SKILL_TRACKS.find((t) => t.id === track)?.label ?? track
+    track === 'common'
+      ? t('skills.trackCommon')
+      : SKILL_TRACKS.find((x) => x.id === track)?.label ?? track
   const tierLabel =
-    SKILL_TIERS.find((t) => t.id === tier)?.label ?? tier
+    tier === 'strong'
+      ? t('skills.tierStrong')
+      : tier === 'experience'
+        ? t('skills.tierExp')
+        : SKILL_TIERS.find((x) => x.id === tier)?.label ?? tier
 
   return (
     <section id="skills" className="section skills">
       <div className="container">
-        <h2 className="section-title">Skills</h2>
-        <p className="section-desc">
-          분야(CV · LLM · ML · Web · 공통)와 주력·경험을 선택할 수 있습니다.{' '}
-          경험을 고르면 해당 분야의 주력 항목을 모두 포함해 보여 줍니다. 네 분야(CV·LLM·ML·Web)에는 같은 기술이 축마다
-          다시 나올 수 있습니다. OS·협업·Office 등은 공통 탭에서만
-          모아 둡니다.
-        </p>
+        <h2 className="section-title">{t('nav.skills')}</h2>
+        <p className="section-desc">{t('skills.desc')}</p>
 
         <div
           className="skills-filter-row skills-filter-row--tracks"
           role="tablist"
-          aria-label="스킬 분야"
+          aria-label={t('skills.tabTrackAria')}
         >
-          {SKILL_TRACKS.map((t) => (
+          {SKILL_TRACKS.map((tr) => (
             <button
-              key={t.id}
+              key={tr.id}
               type="button"
               role="tab"
-              aria-selected={track === t.id}
-              className={`skills-filter-btn${track === t.id ? ' is-active' : ''}`}
-              onClick={() => setTrack(t.id)}
+              aria-selected={track === tr.id}
+              className={`skills-filter-btn${track === tr.id ? ' is-active' : ''}`}
+              onClick={() => setTrack(tr.id)}
             >
-              {t.label}
+              {tr.id === 'common' ? t('skills.trackCommon') : tr.label}
             </button>
           ))}
         </div>
@@ -81,30 +86,34 @@ export function Skills() {
           <div
             className="skills-filter-row skills-filter-row--tier"
             role="tablist"
-            aria-label="숙련도"
+            aria-label={t('skills.tabTierAria')}
           >
-            {SKILL_TIERS.map((t) => (
+            {SKILL_TIERS.map((ti) => (
               <button
-                key={t.id}
+                key={ti.id}
                 type="button"
                 role="tab"
-                aria-selected={tier === t.id}
+                aria-selected={tier === ti.id}
                 className={`skills-filter-btn skills-filter-btn--tier${
-                  tier === t.id ? ' is-active' : ''
+                  tier === ti.id ? ' is-active' : ''
                 }`}
-                onClick={() => setTier(t.id)}
+                onClick={() => setTier(ti.id)}
               >
-                {t.label}
+                {ti.id === 'strong'
+                  ? t('skills.tierStrong')
+                  : ti.id === 'experience'
+                    ? t('skills.tierExp')
+                    : ti.label}
               </button>
             ))}
           </div>
         )}
 
         <p className="skills-context-bar">
-          <span className="skills-context-prefix">현재 분류</span>
+          <span className="skills-context-prefix">{t('skills.contextPrefix')}</span>
           <span className="skills-context-value">
             {isCommonTrack
-              ? `${trackLabel} · 협업·인프라 공통`
+              ? `${trackLabel} · ${t('skills.contextCommonSuffix')}`
               : `${trackLabel} · ${tierLabel}`}
           </span>
         </p>
@@ -115,10 +124,16 @@ export function Skills() {
           aria-live="polite"
         >
           {groups.length === 0 ? (
-            <p className="skills-empty-hint">이 조합에 해당하는 항목이 없습니다.</p>
+            <p className="skills-empty-hint">{t('skills.empty')}</p>
           ) : (
             groups.map((g) => (
-              <SkillGroup key={g.title} title={g.title} blocks={g.blocks} />
+              <SkillGroup
+                key={g.title}
+                title={g.title}
+                blocks={g.blocks}
+                mapTitle={skillGroupTitle}
+                mapSubtitle={skillSubtitle}
+              />
             ))
           )}
         </div>

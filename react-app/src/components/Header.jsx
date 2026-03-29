@@ -1,17 +1,20 @@
 import { LEGACY_HTML_URL } from '../config/site'
+import { useLanguage } from '../i18n/LanguageContext.jsx'
 
-const navItems = [
-  { href: '#about', label: 'About' },
-  { href: '#education', label: 'Education' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#awards', label: 'Award' },
-  { href: '#certificates', label: 'Certificates' },
-  { href: '#contact', label: 'Contact' },
+const NAV_KEYS = [
+  { href: '#about', key: 'about' },
+  { href: '#education', key: 'education' },
+  { href: '#projects', key: 'projects' },
+  { href: '#skills', key: 'skills' },
+  { href: '#awards', key: 'awards' },
+  { href: '#certificates', key: 'certificates' },
+  { href: '#contact', key: 'contact' },
 ]
 
 export function Header({ theme, onThemeToggle, navOpen, onNavOpenChange }) {
   const isLight = theme === 'light'
+  const { t } = useLanguage()
+  const legacyTitle = `${t('header.legacyTitle')} (${LEGACY_HTML_URL})`
 
   return (
     <header className="header">
@@ -20,13 +23,10 @@ export function Header({ theme, onThemeToggle, navOpen, onNavOpenChange }) {
           Roy Koh
         </a>
         <ul className="nav-links">
-          {navItems.map(({ href, label }) => (
+          {NAV_KEYS.map(({ href, key }) => (
             <li key={href}>
-              <a
-                href={href}
-                onClick={() => onNavOpenChange(false)}
-              >
-                {label}
+              <a href={href} onClick={() => onNavOpenChange(false)}>
+                {t(`nav.${key}`)}
               </a>
             </li>
           ))}
@@ -37,8 +37,8 @@ export function Header({ theme, onThemeToggle, navOpen, onNavOpenChange }) {
             className="legacy-html-icon"
             target="_blank"
             rel="noopener noreferrer"
-            title={`정적 HTML 버전 (${LEGACY_HTML_URL})`}
-            aria-label="정적 HTML 버전 열기"
+            title={legacyTitle}
+            aria-label={t('header.legacyAria')}
           >
             H
           </a>
@@ -46,15 +46,17 @@ export function Header({ theme, onThemeToggle, navOpen, onNavOpenChange }) {
             type="button"
             className="theme-toggle"
             onClick={onThemeToggle}
-            aria-label={isLight ? '다크 모드로 전환' : '라이트 모드로 전환'}
-            title={isLight ? '다크 모드' : '라이트 모드'}
+            aria-label={
+              isLight ? t('header.themeToDark') : t('header.themeToLight')
+            }
+            title={isLight ? t('header.themeDark') : t('header.themeLight')}
           >
             {isLight ? '🌙' : '☀️'}
           </button>
           <button
             type="button"
             className="nav-toggle"
-            aria-label={navOpen ? '메뉴 닫기' : '메뉴 열기'}
+            aria-label={navOpen ? t('header.menuClose') : t('header.menuOpen')}
             onClick={() => onNavOpenChange(!navOpen)}
           >
             <span />

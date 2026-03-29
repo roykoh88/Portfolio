@@ -570,14 +570,14 @@
   }
 
   // 학원 수료증·과목 이수증 PDF는 교육/연수에서만 링크 (Certificates 갤러리는 수상·자격증만)
-  var CERTIFICATES_SCHEMA_VERSION = 14;
+  var CERTIFICATES_SCHEMA_VERSION = 15;
   var DEFAULT_CERTIFICATES = [
-    { title: '<휴먼> 최우수상', image: pdfFromPages('수상/최우수상.pdf'), type: 'pdf', category: '수상' },
-    { title: '<휴먼> 개근상', image: pdfFromPages('수상/개근상.pdf'), type: 'pdf', category: '수상' },
-    { title: '<알파코> 개근상', image: pdfFromPages('수상/개근상1.pdf'), type: 'pdf', category: '수상' },
+    { title: '<휴먼> 자동화 프로젝트 최우수상', image: pdfFromPages('수상/휴먼 자동화 프로젝트 최우수상.pdf'), type: 'pdf', category: '수상' },
+    { title: '<휴먼> 개근상', image: pdfFromPages('수상/휴먼 개근상.pdf'), type: 'pdf', category: '수상' },
+    { title: '<알파코> 출석 우수상', image: pdfFromPages('수상/알파코 출석 우수상.pdf'), type: 'pdf', category: '수상' },
     { title: '<알파코> 태도 우수상', image: pdfFromPages('수상/알파코 태도 우수상.pdf'), type: 'pdf', category: '수상' },
-    { title: '<알파코> 학습 우수상', image: pdfFromPages('수상/알파코 학습 우수상.pdf'), type: 'pdf', category: '수상' },
     { title: '<알파코> 프로젝트 우수상', image: pdfFromPages('수상/알파코 프로젝트 우수상.pdf'), type: 'pdf', category: '수상' },
+    { title: '<알파코> 학습 우수상', image: pdfFromPages('수상/알파코 학습 우수상.pdf'), type: 'pdf', category: '수상' },
     { title: '리눅스마스터', image: pdfFromPages('자격증/리눅스마스터.pdf'), type: 'pdf', category: '자격증' }
   ];
   function getCertificates() {
@@ -984,7 +984,7 @@
     var tierBtns = document.querySelectorAll('[data-skill-tier]');
     if (!panel || !trackBtns.length) return;
 
-    var state = { track: 'web', tier: 'strong' };
+    var state = { track: 'llm', tier: 'strong' };
 
     function labelForTrack(id) {
       var l = id;

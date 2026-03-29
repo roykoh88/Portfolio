@@ -1,7 +1,16 @@
 /**
- * 자격증 표( Certificates 섹션 ) — 날짜·자격명·발급처, 같은 발급처는 한 셀로 묶음
- * @type {Array<{ issuer: string, items: Array<{ date: string, title: string }> }>}
+ * 자격증·면허 표( Certificates ) — Award 표와 동일한 카드·테이블 스타일
+ * `pdf`: GitHub Pages `PDF/` 기준 상대 경로 (`pdfFromPages` 인자)
+ * `country`: 한국어 UI 표기 · `countryEn`: 영어 UI(없으면 `country` 사용)
  */
-export const certificationGroups = [
-  // 예: { issuer: '한국정보통신기술협회(TTA)', items: [{ date: '2024.06', title: '리눅스마스터 2급' }] },
+export const licenseRows = [
+  {
+    date: '2024. 09',
+    country: '대한민국',
+    countryEn: 'South Korea',
+    title: '리눅스 마스터',
+    grade: '2급',
+    issuer: 'KAIT 정보통신 기술 자격 검정',
+    pdf: '자격증/리눅스마스터.pdf',
+  },
 ]

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useLanguage } from '../i18n/LanguageContext.jsx'
 import { MAX_IMAGE_BYTES } from '../lib/projects/constants'
 import { projectKey } from '../lib/projects/projectStorage'
 
@@ -12,6 +13,7 @@ function parseTags(tags) {
 }
 
 export function Projects({ orderedProjects, addProject, removeProject }) {
+  const { t } = useLanguage()
   const [modalOpen, setModalOpen] = useState(false)
   const [carouselScroll, setCarouselScroll] = useState(false)
   const scrollRef = useRef(null)
@@ -101,7 +103,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
     }
     if (imageFile) {
       if (imageFile.size > MAX_IMAGE_BYTES) {
-        window.alert('이미지는 400KB 이하로 올려주세요.')
+        window.alert(t('projects.alertImageSize'))
         return
       }
       const reader = new FileReader()
@@ -116,18 +118,18 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
     <section id="projects" className="section projects">
       <div className="container">
         <div className="section-title-row">
-          <h2 className="section-title">Projects</h2>
+          <h2 className="section-title">{t('nav.projects')}</h2>
           <button
             type="button"
             className="btn btn-add owner-only"
             id="projectAddBtn"
             onClick={() => setModalOpen(true)}
           >
-            + Add Project
+            {t('projects.add')}
           </button>
         </div>
         <p className="section-desc">
-          그동안 개발한 프로젝트입니다.
+          {t('projects.desc')}
           <span className="owner-only"> </span>
         </p>
         <div
@@ -138,7 +140,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
           <button
             type="button"
             className="carousel-btn carousel-prev"
-            aria-label="이전 프로젝트"
+            aria-label={t('projects.prevAria')}
             onClick={onCarouselPrev}
           >
             ‹
@@ -152,7 +154,9 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
               {orderedProjects.map((p) => {
                 const type = p.projectType || 'personal'
                 const typeLabel =
-                  type === 'academy' ? '학원 프로젝트' : '개인 프로젝트'
+                  type === 'academy'
+                    ? t('projects.academy')
+                    : t('projects.personal')
                 const typeClass =
                   type === 'academy'
                     ? 'project-badge project-badge--academy'
@@ -172,7 +176,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                       <button
                         type="button"
                         className="project-delete owner-only"
-                        aria-label="삭제"
+                        aria-label={t('projects.deleteAria')}
                         onClick={() => removeProject(p)}
                       >
                         ×
@@ -181,12 +185,12 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                     <div className="project-body">
                       <div className={typeClass}>{typeLabel}</div>
                       <h3 className="project-title">
-                        {p.title || '제목 없음'}
+                        {p.title || t('projects.noTitle')}
                       </h3>
                       <p className="project-desc">{p.description || ''}</p>
                       <div className="project-tags">
-                        {tags.map((t) => (
-                          <span key={t}>{t}</span>
+                        {tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
                         ))}
                       </div>
                       <div className="project-links">
@@ -196,7 +200,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            보기
+                            {t('projects.demo')}
                           </a>
                         ) : null}
                         {p.codeUrl ? (
@@ -205,7 +209,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            코드
+                            {t('projects.code')}
                           </a>
                         ) : null}
                       </div>
@@ -218,7 +222,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
           <button
             type="button"
             className="carousel-btn carousel-next"
-            aria-label="다음 프로젝트"
+            aria-label={t('projects.nextAria')}
             onClick={onCarouselNext}
           >
             ›
@@ -230,8 +234,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
           }`}
           id="projectEmpty"
         >
-          등록된 프로젝트가 없습니다. &quot;프로젝트 추가&quot;로 첫 프로젝트를
-          올려보세요.
+          {t('projects.empty')}
         </p>
       </div>
 
@@ -248,11 +251,11 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
         />
         <div className="modal-content">
           <div className="modal-header">
-            <h3 className="modal-title">Add Project</h3>
+            <h3 className="modal-title">{t('projects.modalTitle')}</h3>
             <button
               type="button"
               className="modal-close modal-close-prominent"
-              aria-label="닫기"
+              aria-label={t('projects.closeAria')}
               onClick={closeModal}
             >
               &times;
@@ -265,25 +268,26 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
             onSubmit={onSubmit}
           >
             <label className="form-label">
-              제목 <span className="required">*</span>
+              {t('projects.labelTitle')}{' '}
+              <span className="required">{t('projects.required')}</span>
             </label>
             <input
               type="text"
               name="title"
               className="form-input"
               required
-              placeholder="프로젝트 제목"
+              placeholder={t('projects.phTitle')}
             />
-            <label className="form-label">설명</label>
+            <label className="form-label">{t('projects.labelDesc')}</label>
             <textarea
               name="description"
               className="form-input form-textarea"
               rows={3}
-              placeholder="프로젝트 설명을 적어주세요."
+              placeholder={t('projects.phDesc')}
             />
             <label className="form-label">
-              기술 태그{' '}
-              <span className="form-hint">쉼표로 구분 (예: React, TypeScript)</span>
+              {t('projects.labelTags')}{' '}
+              <span className="form-hint">{t('projects.hintTags')}</span>
             </label>
             <input
               type="text"
@@ -291,28 +295,29 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
               className="form-input"
               placeholder="React, API, Node.js"
             />
-            <label className="form-label">보기 링크</label>
+            <label className="form-label">{t('projects.labelDemo')}</label>
             <input
               type="url"
               name="demoUrl"
               className="form-input"
-              placeholder="https://..."
+              placeholder={t('projects.phDemo')}
             />
-            <label className="form-label">코드 링크</label>
+            <label className="form-label">{t('projects.labelCode')}</label>
             <input
               type="url"
               name="codeUrl"
               className="form-input"
-              placeholder="https://github.com/..."
+              placeholder={t('projects.phCode')}
             />
             <label className="form-label">
-              이미지 <span className="form-hint">URL 또는 파일 선택</span>
+              {t('projects.labelImage')}{' '}
+              <span className="form-hint">{t('projects.hintImage')}</span>
             </label>
             <input
               type="url"
               name="imageUrl"
               className="form-input"
-              placeholder="이미지 URL"
+              placeholder={t('projects.phImageUrl')}
               id="projectImageUrl"
             />
             <input
@@ -321,7 +326,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
               className="form-input form-file"
               accept="image/*"
               id="projectImageFile"
-              aria-label="이미지 파일 선택"
+              aria-label={t('projects.imageFileAria')}
             />
             <div className="form-actions">
               <button
@@ -330,10 +335,10 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                 id="projectFormCancel"
                 onClick={closeModal}
               >
-                취소
+                {t('projects.cancel')}
               </button>
               <button type="submit" className="btn btn-primary">
-                추가하기
+                {t('projects.submit')}
               </button>
             </div>
           </form>

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { LEGACY_HTML_URL } from '../config/site'
-
-const FULL_TEXT = '안녕하세요\n꿈을 개발하는 개발자\n Roy 입니다.'
+import { useLanguage } from '../i18n/LanguageContext.jsx'
 
 /** 일부 모바일·호스팅에서 한글 경로 실패 방지 */
 const HERO_PHOTO = `/img/${encodeURIComponent('고용재_사진.jpg')}`
 const HERO_LOGO = `/img/${encodeURIComponent('로고.png')}`
 
 export function Hero() {
+  const { lang, t } = useLanguage()
+  const fullText = t('hero.typing')
   const [displayText, setDisplayText] = useState('')
 
   useEffect(() => {
@@ -22,9 +23,9 @@ export function Hero() {
 
     function tick() {
       if (mode === 'type') {
-        if (index < FULL_TEXT.length) {
+        if (index < fullText.length) {
           index += 1
-          setDisplayText(FULL_TEXT.slice(0, index))
+          setDisplayText(fullText.slice(0, index))
           timeoutId = setTimeout(tick, typeSpeed)
         } else {
           timeoutId = setTimeout(() => {
@@ -35,7 +36,7 @@ export function Hero() {
       } else {
         if (index > 0) {
           index -= 1
-          setDisplayText(FULL_TEXT.slice(0, index))
+          setDisplayText(fullText.slice(0, index))
           timeoutId = setTimeout(tick, eraseSpeed)
         } else {
           mode = 'type'
@@ -49,7 +50,9 @@ export function Hero() {
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [])
+  }, [fullText, lang])
+
+  const legacyTitle = `${t('hero.htmlTitle')} (${LEGACY_HTML_URL})`
 
   return (
     <section id="home" className="hero">
@@ -57,18 +60,18 @@ export function Hero() {
         <div className="hero-image-wrap hero-image-wrap--match-height">
           <img
             src={HERO_PHOTO}
-            alt="고용재 프로필 사진"
+            alt={t('hero.photoAlt')}
             className="hero-image hero-image-1"
           />
           <img
             src={HERO_LOGO}
-            alt="ROY.K 로고"
+            alt={t('hero.logoAlt')}
             className="hero-image hero-image-2"
           />
         </div>
       </div>
       <div className="hero-content">
-        <p className="hero-tag">Developer Portfolio</p>
+        <p className="hero-tag">{t('hero.tag')}</p>
         <h1 className="hero-title">
           {displayText.split('\n').map((line, i) => (
             <span key={i}>
@@ -80,21 +83,19 @@ export function Hero() {
             |
           </span>
         </h1>
-        <p className="hero-desc">
-          그동안 만들었던 프로젝트와 사용한 기술을 정리한 공간입니다.
-        </p>
+        <p className="hero-desc">{t('hero.desc')}</p>
         <div className="hero-actions">
           <a href="#projects" className="btn btn-primary">
-            프로젝트 보기
+            {t('hero.viewProjects')}
           </a>
           <a
             href={LEGACY_HTML_URL}
             className="btn btn-primary"
             target="_blank"
             rel="noopener noreferrer"
-            title={`정적 HTML 버전 (${LEGACY_HTML_URL})`}
+            title={legacyTitle}
           >
-            HTML로 보기
+            {t('hero.viewHtml')}
           </a>
         </div>
       </div>
