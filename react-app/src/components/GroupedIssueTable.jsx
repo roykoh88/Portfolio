@@ -1,4 +1,4 @@
-import { pdfFromPages } from '../config/portfolioPages'
+import { portfolioPdfUrl } from '../config/portfolioPages'
 import { useLanguage } from '../i18n/LanguageContext.jsx'
 
 function awardTitle(row, lang) {
@@ -18,7 +18,7 @@ function NameCell({ row, nameColumnLabel }) {
   if (row.pdf) {
     return (
       <a
-        href={pdfFromPages(row.pdf)}
+        href={portfolioPdfUrl(row.pdf)}
         className="award-pdf-link"
         target="_blank"
         rel="noopener noreferrer"

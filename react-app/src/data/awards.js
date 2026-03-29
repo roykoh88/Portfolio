@@ -1,6 +1,6 @@
 /**
  * 수상( Award 섹션 ) — 발급처가 같은 행은 rowspan
- * `pdf`: GitHub Pages `PDF/` 기준 상대 경로 (`portfolioPages.pdfFromPages` 인자)
+ * `pdf`: Storage/GitHub Pages 공통 상대 경로 (`portfolioPages.portfolioPdfUrl` → 토큰 맵 또는 `PDF/`)
  * `titleEn` / `issuerEn`: 영어 UI 표기
  */
 export const awardGroups = [

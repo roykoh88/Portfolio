@@ -1,6 +1,6 @@
 /**
  * 자격증·면허 표( Certificates ) — Award 표와 동일한 카드·테이블 스타일
- * `pdf`: GitHub Pages `PDF/` 기준 상대 경로 (`pdfFromPages` 인자)
+ * `pdf`: Storage/GitHub Pages 공통 상대 경로 (`portfolioPdfUrl` 토큰 맵 또는 `PDF/`)
  * `country`: 한국어 UI 표기 · `countryEn`: 영어 UI(없으면 `country` 사용)
  */
 export const licenseRows = [

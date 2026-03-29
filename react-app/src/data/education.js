@@ -1,4 +1,4 @@
-import { pdfFromPages } from '../config/portfolioPages.js'
+import { portfolioPdfUrl } from '../config/portfolioPages.js'
 
 /**
  * Education — 왼쪽·오른쪽 타임라인 열 순서 (index.html 과 동일)
@@ -23,7 +23,7 @@ export const educationColumns = [
         'Advanced: service solution development through deep data analytics',
       org: '휴먼 AI 교육센터',
       orgEn: 'Human AI Training Center',
-      certificateUrl: pdfFromPages('학원 수료증/데이터 분석 수료증.pdf'),
+      certificateUrl: portfolioPdfUrl('학원 수료증/데이터 분석 수료증.pdf'),
     },
     {
       period: '2025.04 ~ 2025.11',
@@ -32,7 +32,7 @@ export const educationColumns = [
       courseEn: 'AI Developer Master Course',
       org: '알파코',
       orgEn: 'Alphaco',
-      certificateUrl: pdfFromPages('학원 수료증/AI개발자 수료증.pdf'),
+      certificateUrl: portfolioPdfUrl('학원 수료증/AI개발자 수료증.pdf'),
     },
     {
       period: '2025.02 ~ 2025.03',
@@ -41,7 +41,7 @@ export const educationColumns = [
       courseEn: 'Docker & Kubernetes',
       org: '솔데스크',
       orgEn: 'SolDesk',
-      certificateUrl: pdfFromPages('학원 수료증/도커 & 쿠버 수료증.pdf'),
+      certificateUrl: portfolioPdfUrl('학원 수료증/도커 & 쿠버 수료증.pdf'),
     },
     {
       period: '2024.08 ~ 2024.09',
@@ -50,7 +50,7 @@ export const educationColumns = [
       courseEn: 'Linux administration & Ansible automation',
       org: '솔데스크',
       orgEn: 'SolDesk',
-      certificateUrl: pdfFromPages('학원 수료증/리눅스 수료증.pdf'),
+      certificateUrl: portfolioPdfUrl('학원 수료증/리눅스 수료증.pdf'),
     },
     {
       period: '2024.06 ~ 2024.07',
@@ -60,8 +60,8 @@ export const educationColumns = [
       org: '솔데스크',
       orgEn: 'SolDesk',
       certificates: [
-        { url: pdfFromPages('학원 수료증/서버 구성1회차 수료증.pdf'), label: '1회차' },
-        { url: pdfFromPages('학원 수료증/서버 구성 수료증.pdf'), label: '2회차' },
+        { url: portfolioPdfUrl('학원 수료증/서버 구성1회차 수료증.pdf'), label: '1회차' },
+        { url: portfolioPdfUrl('학원 수료증/서버 구성 수료증.pdf'), label: '2회차' },
       ],
     },
   ],
@@ -74,12 +74,12 @@ export const educationColumns = [
       org: '코리아 IT 아카데미',
       orgEn: 'Korea IT Academy',
       certificates: [
-        { url: pdfFromPages('학원 수료증/정보보안1 수료증.pdf'), label: '정보보안 1' },
-        { url: pdfFromPages('학원 수료증/정보보안2 수료증.pdf'), label: '정보보안 2' },
-        { url: pdfFromPages('학원 수료증/정보보안3 수료증.pdf'), label: '정보보안 3' },
-        { url: pdfFromPages('학원 수료증/정보보안4 수료증.pdf'), label: '정보보안 4' },
-        { url: pdfFromPages('학원 수료증/정보보안5 수료증.pdf'), label: '정보보안 5' },
-        { url: pdfFromPages('학원 수료증/정보보안6 수료증.pdf'), label: '정보보안 6' },
+        { url: portfolioPdfUrl('학원 수료증/정보보안1 수료증.pdf'), label: '정보보안 1' },
+        { url: portfolioPdfUrl('학원 수료증/정보보안2 수료증.pdf'), label: '정보보안 2' },
+        { url: portfolioPdfUrl('학원 수료증/정보보안3 수료증.pdf'), label: '정보보안 3' },
+        { url: portfolioPdfUrl('학원 수료증/정보보안4 수료증.pdf'), label: '정보보안 4' },
+        { url: portfolioPdfUrl('학원 수료증/정보보안5 수료증.pdf'), label: '정보보안 5' },
+        { url: portfolioPdfUrl('학원 수료증/정보보안6 수료증.pdf'), label: '정보보안 6' },
       ],
     },
     {
@@ -90,8 +90,8 @@ export const educationColumns = [
       org: '코리아 IT 아카데미',
       orgEn: 'Korea IT Academy',
       certificates: [
-        { url: pdfFromPages('학원 수료증/리눅스1 수료증.pdf'), label: '리눅스 1' },
-        { url: pdfFromPages('학원 수료증/리눅스2 수료증.pdf'), label: '리눅스 2' },
+        { url: portfolioPdfUrl('학원 수료증/리눅스1 수료증.pdf'), label: '리눅스 1' },
+        { url: portfolioPdfUrl('학원 수료증/리눅스2 수료증.pdf'), label: '리눅스 2' },
       ],
     },
     {
@@ -102,8 +102,8 @@ export const educationColumns = [
       org: '코리아 IT 아카데미',
       orgEn: 'Korea IT Academy',
       certificates: [
-        { url: pdfFromPages('학원 수료증/씨스코1 수료증.pdf'), label: '씨스코 1' },
-        { url: pdfFromPages('학원 수료증/씨스코2 수료증.pdf'), label: '씨스코 2' },
+        { url: portfolioPdfUrl('학원 수료증/씨스코1 수료증.pdf'), label: '씨스코 1' },
+        { url: portfolioPdfUrl('학원 수료증/씨스코2 수료증.pdf'), label: '씨스코 2' },
       ],
     },
     {
@@ -113,7 +113,7 @@ export const educationColumns = [
       courseEn: 'Cisco network administrator fundamentals',
       org: '솔데스크',
       orgEn: 'SolDesk',
-      certificateUrl: pdfFromPages('학원 수료증/네트워크 수료증.pdf'),
+      certificateUrl: portfolioPdfUrl('학원 수료증/네트워크 수료증.pdf'),
     },
     {
       period: '2019.06 ~ 2019.12',
@@ -124,13 +124,13 @@ export const educationColumns = [
       orgEn: 'KIC Campus',
       certificates: [
         {
-          url: pdfFromPages('학원 수료증/프론트&백엔드풀스택개발자 수료증.pdf'),
+          url: portfolioPdfUrl('학원 수료증/프론트&백엔드풀스택개발자 수료증.pdf'),
           label: '학원 수료증',
         },
         ...Array.from({ length: 11 }, (_, i) => {
           const n = i + 1
           return {
-            url: pdfFromPages(`이수증/이수증_${n}.pdf`),
+            url: portfolioPdfUrl(`이수증/이수증_${n}.pdf`),
             label: `과목 이수증${n}`,
           }
         }),

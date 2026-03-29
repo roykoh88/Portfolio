@@ -1,4 +1,4 @@
-import { pdfFromPages } from '../config/portfolioPages'
+import { portfolioPdfUrl } from '../config/portfolioPages'
 import { useLanguage } from '../i18n/LanguageContext.jsx'
 
 function licenseCountryCell(row, lang) {
@@ -53,7 +53,7 @@ export function LicenseTable({ rows }) {
                 <td>
                   {row.pdf ? (
                     <a
-                      href={pdfFromPages(row.pdf)}
+                      href={portfolioPdfUrl(row.pdf)}
                       className="award-pdf-link"
                       target="_blank"
                       rel="noopener noreferrer"
