@@ -561,47 +561,24 @@
     }
   }
 
-  var CERTIFICATES_SCHEMA_VERSION = 9;
-  // 교육/연수 섹션 순서(0부터):
-  // 데이터 분석 → AI 개발자 → 도커&쿠버 → 리눅스(중급) → 서버 구성 → 서버 구성 1회차
-  // → 정보보안 1~6 → 리눅스 1~2 → 씨스코 1~2 → 네트워크 → 프론트&백엔드 풀스택
+  /** GitHub Pages에 올린 Portfolio 저장소의 공개 URL (PDF/ 하위 경로) */
+  var PDF_PAGES_ORIGIN = 'https://roykoh88.github.io/Portfolio';
+  function pdfFromPages(relativePathUnderPdf) {
+    return PDF_PAGES_ORIGIN + '/PDF/' + relativePathUnderPdf.split('/').map(function (seg) {
+      return encodeURIComponent(seg);
+    }).join('/');
+  }
+
+  // 학원 수료증·과목 이수증 PDF는 교육/연수에서만 링크 (Certificates 갤러리는 수상·자격증만)
+  var CERTIFICATES_SCHEMA_VERSION = 14;
   var DEFAULT_CERTIFICATES = [
-    { title: '<휴먼> 최우수상', image: 'https://drive.google.com/file/d/1jthFUocW5E2X75lG7G5uNn3Kl-x4mL-X/preview', type: 'pdf', category: '수상' },
-    { title: '<휴먼> 개근상', image: 'https://drive.google.com/file/d/1EkEX5FGF7XE54E2yDs8C0w0vk0qgJ54q/preview', type: 'pdf', category: '수상' },
-    { title: '<알파코> 개근상', image: 'https://drive.google.com/file/d/1cVtjxcvauc29pVXLDmfUzVdH2PsbQ8cK/preview', type: 'pdf', category: '수상' },
-    { title: '<알파코> 태도 우수상', image: 'https://drive.google.com/file/d/1F_dcJi8pO-YPSj_MaHTBqTtbKWzqOtdC/preview', type: 'pdf', category: '수상' },
-    { title: '<알파코> 학습 우수상', image: 'https://drive.google.com/file/d/1UtCqiMXBj_SUPciHwfBrutQ4bxzaVVn0/preview', type: 'pdf', category: '수상' },
-    { title: '<알파코> 프로젝트 우수상', image: 'https://drive.google.com/file/d/1k6LNDJBaTWiz-LfFq4ws0jnzPxGnjBhr/preview', type: 'pdf', category: '수상' },
-    { title: '리눅스마스터', image: 'https://drive.google.com/file/d/1QxTi8pUCh8X6yBchjUWieiBcxbPWG33w/preview', type: 'pdf', category: '자격증' },
-    { title: '데이터 분석 수료증', image: 'https://drive.google.com/file/d/1Vxev_3nI0V94fSOihKrK-qE6Yo8GfMNL/preview', type: 'pdf', category: '수료증', educationOrder: 0 },
-    { title: 'AI개발자 수료증', image: 'https://drive.google.com/file/d/1f9qRHCS_ZD2hIM_Z5nBR4nIbS9q48lX4/preview', type: 'pdf', category: '수료증', educationOrder: 1 },
-    { title: '도커 & 쿠버 수료증', image: 'https://drive.google.com/file/d/1XsNA-eAG8VVo7nTYrBH9CJvxhK7H2QmK/preview', type: 'pdf', category: '수료증', educationOrder: 2 },
-    { title: '리눅스 수료증', image: 'https://drive.google.com/file/d/1owpiAIVl8iVdwqCVW6Z_kOMvsaOGM0YD/preview', type: 'pdf', category: '수료증', educationOrder: 3 },
-    { title: '서버 구성 수료증', image: 'https://drive.google.com/file/d/1Uj8_RjLsfdpXaLyHUdNeW6oPRyLKrrkY/preview', type: 'pdf', category: '수료증', educationOrder: 4 },
-    { title: '서버 구성 1회차 수료증', image: 'https://drive.google.com/file/d/1mHjYfo20hUthvDuyj6S9WKT3PtxQqx6Q/preview', type: 'pdf', category: '수료증', educationOrder: 5 },
-    { title: '정보보안 1 수료증', image: 'https://drive.google.com/file/d/1eenCcfvVd9SsY-Ur1fhHiVoii6H0RvX3/preview', type: 'pdf', category: '수료증', educationOrder: 6 },
-    { title: '정보보안 2 수료증', image: 'https://drive.google.com/file/d/12rkKdhksbV3kiGLdgcB8sfB1kXNA6QZl/preview', type: 'pdf', category: '수료증', educationOrder: 7 },
-    { title: '정보보안 3 수료증', image: 'https://drive.google.com/file/d/1K1GVFVG6EXghPHfqgtv1Go1io0wvku9v/preview', type: 'pdf', category: '수료증', educationOrder: 8 },
-    { title: '정보보안 4 수료증', image: 'https://drive.google.com/file/d/1dprmY4G9Q89lHFuYy1N54htaTFNPOEHQ/preview', type: 'pdf', category: '수료증', educationOrder: 9 },
-    { title: '정보보안 5 수료증', image: 'https://drive.google.com/file/d/1iqpj6WJefdF6wjD3Q8iO8s21dZiLNQwn/preview', type: 'pdf', category: '수료증', educationOrder: 10 },
-    { title: '정보보안 6 수료증', image: 'https://drive.google.com/file/d/1w9C--CGi8SmEje255kb1H7HvnJVidL4C/preview', type: 'pdf', category: '수료증', educationOrder: 11 },
-    { title: '리눅스 1 수료증', image: 'https://drive.google.com/file/d/1fCH-GcdvuCgTf8BHBdzptnnJDKlIL0wl/preview', type: 'pdf', category: '수료증', educationOrder: 12 },
-    { title: '리눅스 2 수료증', image: 'https://drive.google.com/file/d/1KHkUeSeETydI3RCfYSngRqKk7ww3NSzC/preview', type: 'pdf', category: '수료증', educationOrder: 13 },
-    { title: '씨스코 1 수료증', image: 'https://drive.google.com/file/d/1JEVidskkdG8xDdurx0u2ruuXEvE-e9Hm/preview', type: 'pdf', category: '수료증', educationOrder: 14 },
-    { title: '씨스코 2 수료증', image: 'https://drive.google.com/file/d/1isWXdbTlEjqfTwn4hunJbg0WJ5lOtZal/preview', type: 'pdf', category: '수료증', educationOrder: 15 },
-    { title: '네트워크 수료증', image: 'https://drive.google.com/file/d/1QTHbN1qOW0e0EfC5t3AlVireuE-0jz7K/preview', type: 'pdf', category: '수료증', educationOrder: 16 },
-    { title: '프론트&백엔드 풀스택개발자 수료증', image: 'https://drive.google.com/file/d/1iTmJpXfhOEo-y9YPLmUkqCa3Z_46TOhn/preview', type: 'pdf', category: '수료증', educationOrder: 17 },
-    { title: '화면구현', image: 'https://drive.google.com/file/d/12At3WS_c8qjSwNGeHtw3V4jZ4NuTLRx2/preview', type: 'pdf', category: '이수증' },
-    { title: 'SQL 활용', image: 'https://drive.google.com/file/d/14Hbr51syGxOn1CNiQ2wvPpJ0J_YGbrg0/preview', type: 'pdf', category: '이수증' },
-    { title: '데이터베이스 구현', image: 'https://drive.google.com/file/d/1OPJOkzwsAJIQ_F-rVTVGOJpAENcMyDmK/preview', type: 'pdf', category: '이수증' },
-    { title: '응용SW 기초기술 활용', image: 'https://drive.google.com/file/d/1IoPHpqrRd4_SvVhh_trqnWr9mnxqkqBQ/preview', type: 'pdf', category: '이수증' },
-    { title: '프로그래밍 언어 활용', image: 'https://drive.google.com/file/d/1IUfNWnnEOqsAvvWWcF-BGFtxSacLeZjn/preview', type: 'pdf', category: '이수증' },
-    { title: '애플리케이션 구현', image: 'https://drive.google.com/file/d/15VmDWw3-6CgnRD2CWOkc2VbqnmUxRFQ9/preview', type: 'pdf', category: '이수증' },
-    { title: '애플리케이션 배포', image: 'https://drive.google.com/file/d/1ZPCqj9m5qfzlh1oDX4vFD6NzGW_QFHyE/preview', type: 'pdf', category: '이수증' },
-    { title: '개발자 테스트', image: 'https://drive.google.com/file/d/1NA_vHedrIJlPzfzyHmhqxWd2XwPMuUqI/preview', type: 'pdf', category: '이수증' },
-    { title: '애플리케이션 테스트 수행', image: 'https://drive.google.com/file/d/1cbVBeT-2aJCpeHlT-EQDlZm0kUQZMy3W/preview', type: 'pdf', category: '이수증' },
-    { title: 'AngularJS', image: 'https://drive.google.com/file/d/1pihceo0TL8eeN-2QtRxn4Y9FrteMN_-R/preview', type: 'pdf', category: '이수증' },
-    { title: 'ReactJS', image: 'https://drive.google.com/file/d/1hif0UYuRJtGLz84OPACH3XaiL0bUFcDM/preview', type: 'pdf', category: '이수증' }
+    { title: '<휴먼> 최우수상', image: pdfFromPages('수상/최우수상.pdf'), type: 'pdf', category: '수상' },
+    { title: '<휴먼> 개근상', image: pdfFromPages('수상/개근상.pdf'), type: 'pdf', category: '수상' },
+    { title: '<알파코> 개근상', image: pdfFromPages('수상/개근상1.pdf'), type: 'pdf', category: '수상' },
+    { title: '<알파코> 태도 우수상', image: pdfFromPages('수상/알파코 태도 우수상.pdf'), type: 'pdf', category: '수상' },
+    { title: '<알파코> 학습 우수상', image: pdfFromPages('수상/알파코 학습 우수상.pdf'), type: 'pdf', category: '수상' },
+    { title: '<알파코> 프로젝트 우수상', image: pdfFromPages('수상/알파코 프로젝트 우수상.pdf'), type: 'pdf', category: '수상' },
+    { title: '리눅스마스터', image: pdfFromPages('자격증/리눅스마스터.pdf'), type: 'pdf', category: '자격증' }
   ];
   function getCertificates() {
     try {
@@ -617,11 +594,25 @@
         var img = (item.image || '').replace(/\\/g, '/');
         var cat = (item.category || '').trim();
         if (cat === '근무 기록') return false;
-        if (img.indexOf('PDF/근무 기록/') === 0 || img.indexOf('경력증명서_고용재') >= 0) return false;
+        if (cat === '수료증') return false;
+        if (cat === '이수증') return false;
+        if (img.indexOf('PDF/근무 기록/') === 0 || img.indexOf('/PDF/근무 기록/') >= 0 || img.indexOf('경력증명서_고용재') >= 0) return false;
         return true;
       });
       if (version < CERTIFICATES_SCHEMA_VERSION) {
-        if (list.length === 0) {
+        var anyDrive = list.some(function (l) {
+          return (l.image || '').indexOf('drive.google.com') >= 0;
+        });
+        var anyRawGithub = list.some(function (l) {
+          return (l.image || '').indexOf('raw.githubusercontent.com') >= 0;
+        });
+        var anyRelativePdf = list.some(function (l) {
+          var i = (l.image || '').replace(/\\/g, '/');
+          if (i.indexOf('://') >= 0) return false;
+          var n = i.replace(/^\.\/+/, '');
+          return n.indexOf('PDF/') === 0;
+        });
+        if (list.length === 0 || anyDrive || anyRawGithub || anyRelativePdf) {
           saveCertificates(DEFAULT_CERTIFICATES);
           return DEFAULT_CERTIFICATES;
         }
@@ -647,6 +638,14 @@
   function inferCategoryFromImage(image) {
     if (!image) return '';
     var s = ('' + image).replace(/\\/g, '/');
+    try {
+      var dec = decodeURIComponent(s);
+      if (dec.indexOf('/PDF/수상/') >= 0) return '수상';
+      if (dec.indexOf('/PDF/자격증/') >= 0) return '자격증';
+      if (dec.indexOf('/PDF/학원 수료증/') >= 0) return '수료증';
+      if (dec.indexOf('/PDF/수료증/') >= 0) return '수료증';
+      if (dec.indexOf('/PDF/이수증/') >= 0) return '이수증';
+    } catch (e) { /* ignore */ }
     if (s.indexOf('PDF/수상/') === 0) return '수상';
     if (s.indexOf('PDF/자격증/') === 0) return '자격증';
     if (s.indexOf('PDF/학원 수료증/') === 0) return '수료증';
@@ -689,7 +688,7 @@
     return groups;
   }
   function getCategoryOrder(groups) {
-    var base = ['수료증', '이수증', '수상', '자격증', '기타'];
+    var base = ['수상', '자격증', '기타'];
     var cats = Object.keys(groups || {});
     cats.sort(function (a, b) {
       var ia = base.indexOf(a);
@@ -810,7 +809,9 @@
 
     var normalized = (list || []).map(function (it) { return normalizeCertificateItem(it); });
     var groups = groupCertificates(normalized);
-    var cats = getCategoryOrder(groups).filter(function (c) { return c !== '기타'; });
+    var cats = getCategoryOrder(groups).filter(function (c) {
+      return c !== '기타' && c !== '수료증' && c !== '이수증';
+    });
 
     cats.forEach(function (cat) {
       var section = document.createElement('section');

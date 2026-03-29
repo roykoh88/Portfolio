@@ -80,7 +80,12 @@ export function Education() {
     <section id="education" className="section education">
       <div className="container">
         <h2 className="section-title">교육/연수</h2>
-        <p className="section-desc">이수한 교육 및 연수 과정입니다.</p>
+        <p className="section-desc education-intro-desc">
+          이수한 교육 및 연수 과정입니다.
+          <span className="education-cert-hint-text">
+            학원명을 클릭 하시면 수료증을 확인 하실 수 있습니다.
+          </span>
+        </p>
         <div className="education-split">
           {educationColumns.map((col, i) => (
             <TimelineColumn key={i} items={col} />

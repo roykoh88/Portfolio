@@ -3,8 +3,9 @@ import { LEGACY_HTML_URL } from '../config/site'
 
 const FULL_TEXT = '안녕하세요\n꿈을 개발하는 개발자\n Roy 입니다.'
 
-const HERO_PHOTO = '/img/고용재_사진.jpg'
-const HERO_LOGO = '/img/로고.png'
+/** 일부 모바일·호스팅에서 한글 경로 실패 방지 */
+const HERO_PHOTO = `/img/${encodeURIComponent('고용재_사진.jpg')}`
+const HERO_LOGO = `/img/${encodeURIComponent('로고.png')}`
 
 export function Hero() {
   const [displayText, setDisplayText] = useState('')
