@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import './scroll-anchors.css'
 import { About } from './components/About'
+import { Awards } from './components/Awards'
 import { Education } from './components/Education'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Projects } from './components/Projects'
+import { CertificatesSection } from './components/CertificatesSection'
 import { SectionPlaceholder } from './components/SectionPlaceholder'
 import { Skills } from './components/Skills'
 import { useOwnerMode } from './hooks/useOwnerMode'
@@ -57,7 +59,8 @@ function App() {
           removeProject={removeProject}
         />
         <Skills />
-        <SectionPlaceholder id="certificates" title="Certificates" />
+        <Awards />
+        <CertificatesSection />
         <SectionPlaceholder id="contact" title="Contact" />
       </main>
       <Footer ownerMode={ownerMode} onOwnerToggle={toggleOwnerMode} />

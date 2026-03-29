@@ -617,6 +617,87 @@ a.education-org--cert:focus {
   }
 }
 
+/* ----- Award / 수상 · 자격증 (교육 섹션과 톤 맞춤) ----- */
+.section.award .award-intro-desc {
+  max-width: 42rem;
+}
+.award-block-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 2rem 0 0.85rem;
+  letter-spacing: -0.02em;
+}
+.section.award .award-block-title:first-of-type {
+  margin-top: 0.5rem;
+}
+.award-table-card {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: border-color var(--transition);
+}
+.award-table-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+.award-table {
+  width: 100%;
+  min-width: 280px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.award-table thead th {
+  padding: 0.75rem 0.85rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--text);
+  background: color-mix(in srgb, var(--text-muted) 12%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.award-table tbody td {
+  padding: 0.7rem 0.85rem;
+  text-align: center;
+  vertical-align: middle;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+.award-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.award-table tbody td:nth-child(1) {
+  color: var(--accent);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.award-table tbody td:nth-child(2) {
+  text-align: left;
+  font-weight: 500;
+}
+.award-cert-placeholder {
+  margin: 0;
+  max-width: 40rem;
+  font-size: 0.95rem;
+}
+.award-code-hint {
+  font-family: ui-monospace, monospace;
+  font-size: 0.88em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--text-muted) 14%, transparent);
+}
+.section.certificates .certificates-gallery-hint {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+.section.certificates .certificates-qual-hint {
+  margin-bottom: 1rem;
+}
+[data-theme='light'] .award-table thead th {
+  background: color-mix(in srgb, var(--text-muted) 8%, var(--bg-card));
+}
+
 .about-list {
   display: flex;
   flex-direction: column;

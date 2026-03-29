@@ -967,6 +967,114 @@
   }
   renderCertificates();
 
+  // Skills — react-app/data/skillsByTrack.js 와 동일 데이터·규칙
+  (function initSkillsTrackPanel() {
+    var getGroups =
+      typeof window.portfolioGetSkillGroupsForTier === 'function'
+        ? window.portfolioGetSkillGroupsForTier
+        : null;
+    var tracks = window.portfolioSkillTracks;
+    var tiers = window.portfolioSkillTiers;
+    if (!getGroups || !tracks || !tiers) return;
+
+    var panel = document.getElementById('skillsFilteredPanel');
+    var tierRow = document.getElementById('skillsTierRow');
+    var contextValue = document.getElementById('skillsContextValue');
+    var trackBtns = document.querySelectorAll('[data-skill-track]');
+    var tierBtns = document.querySelectorAll('[data-skill-tier]');
+    if (!panel || !trackBtns.length) return;
+
+    var state = { track: 'web', tier: 'strong' };
+
+    function labelForTrack(id) {
+      var l = id;
+      tracks.forEach(function (t) {
+        if (t.id === id) l = t.label;
+      });
+      return l;
+    }
+    function labelForTier(id) {
+      var l = id;
+      tiers.forEach(function (t) {
+        if (t.id === id) l = t.label;
+      });
+      return l;
+    }
+
+    function render() {
+      var trackLabel = labelForTrack(state.track);
+      var tierLabel = labelForTier(state.tier);
+      trackBtns.forEach(function (btn) {
+        var on = btn.getAttribute('data-skill-track') === state.track;
+        btn.classList.toggle('is-active', on);
+        btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      if (tierRow) {
+        tierRow.style.display = state.track === 'common' ? 'none' : '';
+      }
+      tierBtns.forEach(function (btn) {
+        var on = btn.getAttribute('data-skill-tier') === state.tier;
+        btn.classList.toggle('is-active', on);
+        btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      if (contextValue) {
+        contextValue.textContent =
+          state.track === 'common'
+            ? trackLabel + ' · 협업·인프라 공통'
+            : trackLabel + ' · ' + tierLabel;
+      }
+      var groups = getGroups(state.track, state.tier);
+      panel.innerHTML = '';
+      if (!groups.length) {
+        var empty = document.createElement('p');
+        empty.className = 'skills-empty-hint';
+        empty.textContent = '이 조합에 해당하는 항목이 없습니다.';
+        panel.appendChild(empty);
+        return;
+      }
+      groups.forEach(function (g) {
+        var div = document.createElement('div');
+        div.className = 'skill-group skill-group--panel';
+        var h3 = document.createElement('h3');
+        h3.className = 'skill-group-title';
+        h3.textContent = g.title;
+        div.appendChild(h3);
+        (g.blocks || []).forEach(function (block) {
+          if (block.subtitle) {
+            var sub = document.createElement('span');
+            sub.className = 'skill-subtitle';
+            sub.textContent = block.subtitle;
+            div.appendChild(sub);
+          }
+          var ul = document.createElement('ul');
+          ul.className = 'skill-tags';
+          (block.items || []).forEach(function (tag) {
+            var li = document.createElement('li');
+            li.textContent = tag;
+            ul.appendChild(li);
+          });
+          div.appendChild(ul);
+        });
+        panel.appendChild(div);
+      });
+    }
+
+    trackBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        state.track = btn.getAttribute('data-skill-track');
+        render();
+      });
+    });
+    tierBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        state.tier = btn.getAttribute('data-skill-tier');
+        render();
+      });
+    });
+
+    render();
+  })();
+
   // 모바일 메뉴 토글
   var nav = document.querySelector('.nav');
   var toggle = document.querySelector('.nav-toggle');
