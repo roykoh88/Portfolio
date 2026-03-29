@@ -2,14 +2,21 @@ import { useEffect, useState } from 'react'
 import './scroll-anchors.css'
 import { About } from './components/About'
 import { Education } from './components/Education'
+import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { Projects } from './components/Projects'
 import { SectionPlaceholder } from './components/SectionPlaceholder'
+import { Skills } from './components/Skills'
+import { useOwnerMode } from './hooks/useOwnerMode'
+import { useProjects } from './hooks/useProjects'
 import { getInitialTheme, persistTheme } from './lib/theme'
 
 function App() {
   const [theme, setTheme] = useState(getInitialTheme)
   const [navOpen, setNavOpen] = useState(false)
+  const { ownerMode, toggleOwnerMode } = useOwnerMode()
+  const { orderedProjects, addProject, removeProject } = useProjects()
 
   useEffect(() => {
     if (theme === 'light') {
@@ -18,6 +25,11 @@ function App() {
       document.documentElement.removeAttribute('data-theme')
     }
   }, [theme])
+
+  useEffect(() => {
+    document.body.classList.toggle('owner-mode', ownerMode)
+    return () => document.body.classList.remove('owner-mode')
+  }, [ownerMode])
 
   function handleThemeToggle() {
     setTheme((prev) => {
@@ -39,11 +51,16 @@ function App() {
         <Hero />
         <About />
         <Education />
-        <SectionPlaceholder id="projects" title="Projects" />
-        <SectionPlaceholder id="skills" title="Skills" />
+        <Projects
+          orderedProjects={orderedProjects}
+          addProject={addProject}
+          removeProject={removeProject}
+        />
+        <Skills />
         <SectionPlaceholder id="certificates" title="Certificates" />
         <SectionPlaceholder id="contact" title="Contact" />
       </main>
+      <Footer ownerMode={ownerMode} onOwnerToggle={toggleOwnerMode} />
     </>
   )
 }
