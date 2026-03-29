@@ -1,9 +1,20 @@
 import { pdfFromPages } from '../config/portfolioPages'
 import { useLanguage } from '../i18n/LanguageContext.jsx'
 
+function awardTitle(row, lang) {
+  if (lang === 'en' && row.titleEn) return row.titleEn
+  return row.title
+}
+
+function awardIssuer(group, lang) {
+  if (lang === 'en' && group.issuerEn) return group.issuerEn
+  return group.issuer
+}
+
 function NameCell({ row, nameColumnLabel }) {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
   const label = nameColumnLabel || t('awards.colName')
+  const displayTitle = awardTitle(row, lang)
   if (row.pdf) {
     return (
       <a
@@ -13,16 +24,16 @@ function NameCell({ row, nameColumnLabel }) {
         rel="noopener noreferrer"
         title={t('awards.pdfTitleTemplate', { label })}
       >
-        {row.title}
+        {displayTitle}
       </a>
     )
   }
-  return row.title
+  return displayTitle
 }
 
 /** 날짜 / 명칭 / 발급처 — 같은 발급처는 rowspan */
 export function GroupedIssueTable({ groups, nameColumnLabel }) {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
   if (!groups.length) return null
   return (
     <div className="award-table-card">
@@ -43,7 +54,7 @@ export function GroupedIssueTable({ groups, nameColumnLabel }) {
                   <NameCell row={row} nameColumnLabel={nameColumnLabel} />
                 </td>
                 {i === 0 ? (
-                  <td rowSpan={g.items.length}>{g.issuer}</td>
+                  <td rowSpan={g.items.length}>{awardIssuer(g, lang)}</td>
                 ) : null}
               </tr>
             )),

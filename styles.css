@@ -633,20 +633,61 @@ a.education-org--cert:focus {
 }
 .award-table-card {
   overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--bg-card);
   transition: border-color var(--transition);
+}
+.section.award .award-table-card,
+.section.certificates .award-table-card {
+  box-sizing: border-box;
 }
 .award-table-card:hover {
   border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
 }
 .award-table {
   width: 100%;
-  min-width: 280px;
+  min-width: 320px;
   border-collapse: collapse;
+  table-layout: fixed;
   font-size: 0.95rem;
   line-height: 1.5;
+}
+/* Award 3열: Date | 명칭 | 발급처 — Certificates 5열과 같은 카드 너비에서 비율만 분배 */
+.award-table:not(.award-table--license) thead th:nth-child(1),
+.award-table:not(.award-table--license) tbody td:nth-child(1) {
+  width: 15%;
+}
+.award-table:not(.award-table--license) thead th:nth-child(2),
+.award-table:not(.award-table--license) tbody td:nth-child(2) {
+  width: 48%;
+}
+.award-table:not(.award-table--license) thead th:nth-child(3),
+.award-table:not(.award-table--license) tbody td:nth-child(3) {
+  width: 37%;
+}
+/* Certificates 5열: Date | Country | 자격증 | 등급 | 발급처 */
+.award-table--license thead th:nth-child(1),
+.award-table--license tbody td:nth-child(1) {
+  width: 11%;
+}
+.award-table--license thead th:nth-child(2),
+.award-table--license tbody td:nth-child(2) {
+  width: 14%;
+}
+.award-table--license thead th:nth-child(3),
+.award-table--license tbody td:nth-child(3) {
+  width: 26%;
+}
+.award-table--license thead th:nth-child(4),
+.award-table--license tbody td:nth-child(4) {
+  width: 12%;
+}
+.award-table--license thead th:nth-child(5),
+.award-table--license tbody td:nth-child(5) {
+  width: 37%;
 }
 .award-table thead th {
   padding: 0.75rem 0.85rem;
@@ -662,6 +703,7 @@ a.education-org--cert:focus {
   vertical-align: middle;
   color: var(--text);
   border-bottom: 1px solid var(--border);
+  overflow-wrap: break-word;
 }
 .award-table tbody tr:last-child td {
   border-bottom: none;

@@ -1,5 +1,6 @@
 /** 스킬 카드 제목·부제 — 한국어 원문 → 영어 표기 (en 모드에서만 적용) */
 export const SKILL_GROUP_EN = {
+  'API · 모델': 'API · Model',
   'Notebook · 환경 · 실험': 'Notebook · Environment · Experiment',
   'BaaS · 호스팅': 'BaaS · Hosting',
   'Backend · 서빙': 'Backend · Serving',

@@ -11,6 +11,23 @@ function licenseCountryCell(row, lang) {
   return row.country
 }
 
+function licenseTitle(row, lang) {
+  if (lang === 'en' && row.titleEn) return row.titleEn
+  return row.title
+}
+
+function licenseGrade(row, lang) {
+  if (lang === 'en' && row.gradeEn != null && row.gradeEn !== '') {
+    return row.gradeEn
+  }
+  return row.grade ?? '—'
+}
+
+function licenseIssuer(row, lang) {
+  if (lang === 'en' && row.issuerEn) return row.issuerEn
+  return row.issuer
+}
+
 export function LicenseTable({ rows }) {
   const { lang, t } = useLanguage()
   if (!rows?.length) return null
@@ -27,29 +44,32 @@ export function LicenseTable({ rows }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, i) => (
-            <tr key={`${row.date}-${row.title}-${i}`}>
-              <td>{row.date}</td>
-              <td>{licenseCountryCell(row, lang)}</td>
-              <td>
-                {row.pdf ? (
-                  <a
-                    href={pdfFromPages(row.pdf)}
-                    className="award-pdf-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={t('certificates.pdfTitle')}
-                  >
-                    {row.title}
-                  </a>
-                ) : (
-                  row.title
-                )}
-              </td>
-              <td>{row.grade ?? '—'}</td>
-              <td>{row.issuer}</td>
-            </tr>
-          ))}
+          {rows.map((row, i) => {
+            const displayTitle = licenseTitle(row, lang)
+            return (
+              <tr key={`${row.date}-${row.title}-${i}`}>
+                <td>{row.date}</td>
+                <td>{licenseCountryCell(row, lang)}</td>
+                <td>
+                  {row.pdf ? (
+                    <a
+                      href={pdfFromPages(row.pdf)}
+                      className="award-pdf-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={t('certificates.pdfTitle')}
+                    >
+                      {displayTitle}
+                    </a>
+                  ) : (
+                    displayTitle
+                  )}
+                </td>
+                <td>{licenseGrade(row, lang)}</td>
+                <td>{licenseIssuer(row, lang)}</td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </div>

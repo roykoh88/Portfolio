@@ -9,8 +9,11 @@ export const licenseRows = [
     country: '대한민국',
     countryEn: 'South Korea',
     title: '리눅스 마스터',
+    titleEn: 'Linux Master',
     grade: '2급',
+    gradeEn: 'Lv. 2',
     issuer: 'KAIT 정보통신 기술 자격 검정',
+    issuerEn: 'KAIT (Korea Association for ICT Promotion)',
     pdf: '자격증/리눅스마스터.pdf',
   },
 ]
