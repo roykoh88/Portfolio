@@ -3,6 +3,7 @@ import {
   PROJECTS_KEY,
   PROJECT_DISPLAY_ORDER,
   SKIP_TITLES,
+  defaultProjectByCodeUrl,
   defaultProjectByTitle,
 } from './constants'
 
@@ -13,6 +14,7 @@ function mergeInstitutionFromDefaults(list) {
     if (!def && p.titleEn) {
       def = defaultProjectByTitle(String(p.titleEn).trim())
     }
+    if (!def) def = defaultProjectByCodeUrl(p.codeUrl)
     if (!def) continue
     if (
       (!p.projectType || String(p.projectType).trim() === '') &&

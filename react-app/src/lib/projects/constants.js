@@ -71,7 +71,9 @@ export const DEFAULT_PROJECTS = [
     demoUrl: 'http://sungsimcare.kr/grade/test07/test06.html',
     codeUrl: 'https://github.com/roykoh88/assist_old_person',
     image: '',
-    projectType: 'personal',
+    projectType: 'outsourced',
+    institution: '성심케어',
+    institutionEn: 'SungSim Care',
   },
   {
     title: '네이버 경제 뉴스 크롤러',
@@ -141,6 +143,8 @@ export const DEFAULT_PROJECTS = [
     codeUrl: 'https://github.com/roykoh88/dream_lotto',
     image: '',
     projectType: 'academy',
+    institution: '알파코',
+    institutionEn: 'Alphaco',
   },
   {
     title: 'Dream Web (AI 로또 분석 시스템)',
@@ -182,4 +186,11 @@ export function defaultProjectByTitle(title) {
     DEFAULT_PROJECTS.find((d) => (d.title || '').trim() === k) ||
     DEFAULT_PROJECTS.find((d) => (d.titleEn || '').trim() === k)
   )
+}
+
+/** 제목 중간점(·) 등 미세 차이로 title 매칭이 실패해도 codeUrl로 동일 항목 식별 */
+export function defaultProjectByCodeUrl(codeUrl) {
+  const u = (codeUrl || '').trim()
+  if (!u) return undefined
+  return DEFAULT_PROJECTS.find((d) => (d.codeUrl || '').trim() === u)
 }

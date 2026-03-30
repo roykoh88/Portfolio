@@ -19,14 +19,16 @@ export function Footer({ ownerMode, onOwnerToggle }) {
             {contactLinks.map(({ label, href, external }) => {
               const isKakao = href.includes('open.kakao.com')
               const isTistory = href.includes('tistory.com')
-              const classNames = ['contact-link']
+              const classNames = ['contact-link', 'contact-link--icon-only']
               if (isKakao) classNames.push('contact-link--kakao')
               if (isTistory) classNames.push('contact-link--tistory')
               return (
                 <a
-                  key={label}
+                  key={href}
                   href={href}
                   className={classNames.join(' ')}
+                  aria-label={label}
+                  title={label}
                   {...(external
                     ? { target: '_blank', rel: 'noopener noreferrer' }
                     : {})}
@@ -75,7 +77,6 @@ export function Footer({ ownerMode, onOwnerToggle }) {
                       />
                     </>
                   ) : null}
-                  {label}
                 </a>
               )
             })}

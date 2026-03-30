@@ -151,16 +151,18 @@
   var imageUrlInput = document.getElementById('projectImageUrl');
   var imageFileInput = document.getElementById('projectImageFile');
   var maxImageSize = 400 * 1024; // 400KB
-  /** @type {'all'|'personal'|'academy'} */
+  /** @type {'all'|'personal'|'academy'|'outsourced'} */
   var projectListFilter = 'all';
   var lastProjectCarouselCount = 0;
 
   var DEFAULT_PROJECTS = [
     {
-      title: 'Scientific calculator',
+      title: '공학용 계산기',
       titleEn: 'Scientific calculator',
-      description: 'A scientific calculator and function graphing web app?from basic arithmetic to trig, logs, and plots.',
-      descriptionEn: 'A scientific calculator and function graphing web app?from basic arithmetic to trig, logs, and plots.',
+      description:
+        '공학용 계산기 + 함수 그래프 시각화 웹 앱입니다. 사칙연산부터 삼각함수, 로그, 그래프까지 지원합니다.',
+      descriptionEn:
+        'A scientific calculator and function graphing web app—from basic arithmetic to trig, logs, and plots.',
       tags: 'Python, FastAPI, React, JavaScript, HTML, CSS',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/Calculator',
@@ -168,23 +170,27 @@
       projectType: 'personal'
     },
     {
-      title: 'LLM personal assistant (BizAi)',
+      title: 'LLM 개인 비서 서비스 (BizAi)',
       titleEn: 'LLM personal assistant (BizAi)',
-      description: 'Monorepo for a BizAi LLM-powered assistant: backend APIs, frontend, ETL, LLM server, and infra in one repository.',
-      descriptionEn: 'Monorepo for a BizAi LLM-powered assistant: backend APIs, frontend, ETL, LLM server, and infra in one repository.',
+      description:
+        'LLM 기반 개인 비서(BizAi) 서비스를 위한 모노레포 구조입니다. 백엔드 API, 프론트엔드, ETL 파이프라인, LLM 서버, 인프라를 하나의 레포에서 관리합니다.',
+      descriptionEn:
+        'Monorepo for a BizAi LLM-powered assistant: backend APIs, frontend, ETL, LLM server, and infra in one repository.',
       tags: 'Python, FastAPI, React, TypeScript, Docker, PostgreSQL, LLM',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/LLM_project',
       image: '',
       projectType: 'academy',
-      institution: '\uc720\uba38 AI \uad50\uc721\uc13c\ud130',
+      institution: '휴먼 AI 교육센터',
       institutionEn: 'Human AI Training Center'
     },
     {
       title: 'Portfolio',
       titleEn: 'Portfolio',
-      description: 'Developer portfolio with About, Education, Projects, Skills, Certificates, and Contact?hosted on Firebase.',
-      descriptionEn: 'Developer portfolio with About, Education, Projects, Skills, Certificates, and Contact?hosted on Firebase.',
+      description:
+        '개발 포트폴리오 사이트입니다. About, Education, Projects, Skills, Certificates, Contact를 담고 있으며 Firebase로 호스팅됩니다.',
+      descriptionEn:
+        'Developer portfolio with About, Education, Projects, Skills, Certificates, and Contact—hosted on Firebase.',
       tags: 'HTML, CSS, JavaScript, Firebase, GitHub Actions',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/Portfolio',
@@ -192,10 +198,12 @@
       projectType: 'personal'
     },
     {
-      title: 'Hybrid translator',
+      title: '하이브리드 번역기',
       titleEn: 'Hybrid translator',
-      description: 'Combines free translation with a local Ollama LLM for more natural, context-aware output (chat/typing/voice, batch/file, multilingual modes).',
-      descriptionEn: 'Combines free translation (deep-translator) with local Ollama LLM polishing for more natural, context-aware output. Buyer-email translation, live interpretation (typing/voice/chat), batch/file, and multilingual modes.',
+      description:
+        '무료 번역(deep-translator) + Ollama 로컬 LLM 보정으로 문맥에 맞는 자연스러운 번역을 제공합니다. 바이어 메일 번역, 실시간 통역(타이핑/음성/대화), 배치·파일·다국어 번역을 지원합니다.',
+      descriptionEn:
+        'Combines free translation (deep-translator) with local Ollama LLM polishing for more natural, context-aware output. Buyer-email translation, live interpretation (typing/voice/chat), batch/file, and multilingual modes.',
       tags: 'Python, FastAPI, Ollama, deep-translator, JavaScript, HTML, CSS',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/translator',
@@ -203,21 +211,27 @@
       projectType: 'personal'
     },
     {
-      title: 'Home-care subsidy self-assessment (seniors)',
+      title: '노인 재가복지 보조금 자가진단',
       titleEn: 'Home-care subsidy self-assessment (seniors)',
-      description: 'A simple web check for whether someone may qualify for senior home-care support subsidies (used in production).',
-      descriptionEn: 'A simple web check for whether someone may qualify for senior home-care support subsidies. Used in production by SungSim Care.',
+      description:
+        '노인 재가 복지 지원 보조금을 받을 수 있는지 테스트하는 웹 사이트입니다. 실제 운영 중인 서비스(성심케어)에서 사용 중입니다.',
+      descriptionEn:
+        'A simple web check for whether someone may qualify for senior home-care support subsidies. Used in production by SungSim Care.',
       tags: 'JavaScript, HTML, CSS',
       demoUrl: 'http://sungsimcare.kr/grade/test07/test06.html',
       codeUrl: 'https://github.com/roykoh88/assist_old_person',
       image: '',
-      projectType: 'personal'
+      projectType: 'outsourced',
+      institution: '성심케어',
+      institutionEn: 'SungSim Care'
     },
     {
-      title: 'Naver economy news crawler',
+      title: '네이버 경제 뉴스 크롤러',
       titleEn: 'Naver economy news crawler',
-      description: 'Python script that crawls 10 headline articles from Naver News Economy (section 101) and saves to CSV.',
-      descriptionEn: 'Python script that crawls ten headline articles from Naver News Economy (section 101) and saves title, link, body, and thumbnail to CSV.',
+      description:
+        '네이버 뉴스 경제(섹션 101)의 헤드라인 기사 10개를 크롤링해 제목·링크·본문·썸네일을 CSV로 저장하는 파이썬 스크립트입니다.',
+      descriptionEn:
+        'Python script that crawls ten headline articles from Naver News Economy (section 101) and saves title, link, body, and thumbnail to CSV.',
       tags: 'Python, Selenium, Pandas, Crawling',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/News_Crawling',
@@ -225,23 +239,27 @@
       projectType: 'personal'
     },
     {
-      title: 'BulSee (wildfire risk)',
+      title: 'BulSee (불씨)',
       titleEn: 'BulSee',
-      description: 'Web service that estimates wildfire risk/impact from public data with AI; includes map lookup, dashboard, and chatbot.',
-      descriptionEn: 'Web service that ingests live KMA & forest-agency open data to estimate wildfire risk and impact with AI. Map-based lookup, simulation, dashboard, and an OpenAI chatbot.',
+      description:
+        '기상청·산림청 실시간 공공데이터를 수집해 AI로 산불 발생 위험도와 피해 범위를 예측하는 웹 서비스. 지도 기반 지역 조회, 시뮬레이션, 대시보드, 챗봇(OpenAI) 포함.',
+      descriptionEn:
+        'Web service that ingests live KMA & forest-agency open data to estimate wildfire risk and impact with AI. Map-based lookup, simulation, dashboard, and an OpenAI chatbot.',
       tags: 'Spring Boot, FastAPI, React, TypeScript, PyTorch, XGBoost, GRU, Transformer, Oracle, Docker',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/bulsee',
       image: '',
       projectType: 'academy',
-      institution: '\uc720\uba38 AI \uad50\uc721\uc13c\ud130',
+      institution: '휴먼 AI 교육센터',
       institutionEn: 'Human AI Training Center'
     },
     {
-      title: 'Study & sleep pass prediction (simple AI)',
-      titleEn: 'Study & sleep pass prediction (simple AI)',
-      description: 'Compares classic classifiers on study/sleep hours vs pass/fail; runs locally without a GPU.',
-      descriptionEn: 'Personal study project built with ChatGPT as a sparring partner. Compares classifiers (Random Forest, logistic regression, decision tree, k-NN) on study/sleep hours vs. pass/fail. Runs without a GPU.',
+      title: '공부·수면 → 합격 예측 (간단한 AI)',
+      titleEn: 'Study & sleep → pass prediction (simple AI)',
+      description:
+        '개인 공부 목적으로 ChatGPT와 토론하며 만든 프로젝트입니다. 공부시간·수면시간 데이터로 시험 합격 여부를 예측하는 분류 모델(Random Forest, Logistic Regression, Decision Tree, K-NN)을 비교·실험합니다. GPU 없이 실행 가능.',
+      descriptionEn:
+        'Personal study project built with ChatGPT as a sparring partner. Compares classifiers (Random Forest, logistic regression, decision tree, k-NN) on study/sleep hours vs. pass/fail. Runs without a GPU.',
       tags: 'Python, scikit-learn, Decision Tree, Random Forest, Logistic Regression, KNN',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/simple-ai-study-sleep',
@@ -249,42 +267,48 @@
       projectType: 'personal'
     },
     {
-      title: 'Muzzle (dog muzzle detection)',
+      title: 'Muzzle (강아지 입마개 탐지)',
       titleEn: 'Muzzle (dog muzzle detection)',
-      description: 'Dog detection with YOLOv5/YOLOv8; trained a big vs small dog head on Stanford Dogs; muzzle detection was planned.',
-      descriptionEn: 'Dog detection with YOLOv5/YOLOv8 and large vs. small dog separation. Trained a big_dog/small_dog head on Stanford Dogs; muzzle detection was planned but not finished?dog recognition is implemented.',
+      description:
+        'YOLOv5/YOLOv8을 사용한 개 탐지 및 대형견·소형견 구분 프로젝트입니다. Stanford Dogs 데이터셋으로 big_dog/small_dog 이진 분류까지 진행했고, 입마개(muzzle) 탐지까지 목표로 했으나 해당 단계는 미완이었습니다. 강아지 인식까지는 구현했습니다.',
+      descriptionEn:
+        'Dog detection with YOLOv5/YOLOv8 and large vs. small dog separation. Trained a big_dog/small_dog head on Stanford Dogs; muzzle detection was planned but not finished—dog recognition is implemented.',
       tags: 'Python, PyTorch, YOLOv5, YOLOv8, Ultralytics, Roboflow, OpenCV',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/muzzle',
       image: '',
       projectType: 'academy',
-      institution: '\uc54c\ud30c\ucf54',
+      institution: '알파코',
       institutionEn: 'Alphaco'
     },
     {
-      title: 'Dream Lotto (horoscope & dream-based Lotto picks)',
+      title: 'Dream Lotto (운세·꿈 해몽 로또 추천)',
       titleEn: 'Dream Lotto (horoscope & dream-based Lotto picks)',
-      description: 'Pipeline that scrapes horoscope/dream-interpretation text, runs sentiment, maps emotions to numbers, and suggests Lotto picks (for fun).',
-      descriptionEn: 'Pipeline that scrapes Naver daily horoscope and dream-interpretation text with Selenium, runs KLUE-RoBERTa sentiment, maps emotions to numbers, and suggests five Lotto games?plus entropy/visualization and a backtest notebook. For fun only.',
+      description:
+        '네이버 오늘의 운세와 룰드드림 꿈 해몽을 Selenium으로 수집한 뒤, KLUE-RoBERTa 감정 분류로 감정을 추출하고 감정–숫자 매핑으로 로또 5게임을 추천하는 파이프라인. 번호 분포 엔트로피·시각화, 당첨 번호 백테스트 노트북 포함. 재미 목적.',
+      descriptionEn:
+        'Pipeline that scrapes Naver daily horoscope and dream-interpretation text with Selenium, runs KLUE-RoBERTa sentiment, maps emotions to numbers, and suggests five Lotto games—plus entropy/visualization and a backtest notebook. For fun only.',
       tags: 'Python, Selenium, PyTorch, Transformers, KLUE-RoBERTa, Pandas, openpyxl',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/dream_lotto',
       image: '',
       projectType: 'academy',
-      institution: '\uc54c\ud30c\ucf54',
+      institution: '알파코',
       institutionEn: 'Alphaco'
     },
     {
-      title: 'Dream Web (AI Lotto analysis system)',
+      title: 'Dream Web (AI 로또 분석 시스템)',
       titleEn: 'Dream Web (AI Lotto analysis system)',
-      description: 'Express + MongoDB + EJS app for AI Lotto analysis, official draw lookup, chatbot, boards, admin pages, and embedding.',
-      descriptionEn: 'Express + MongoDB + EJS app: AI Lotto analysis (Python), official draw lookup API, emotion-number table, AI chatbot, reviews board, support tickets with comments, admin analysis history, and SharePoint web-part embedding.',
+      description:
+        'Express + MongoDB + EJS 기반 웹 앱. AI 로또 번호 분석(Python 연동), 동행복권 API 당첨번호 조회, 감정숫자 분류표, AI 상담 챗봇, 후기 게시판, 고객센터(문의·댓글), 관리자·분석 히스토리. SharePoint 웹파트 삽입 구성.',
+      descriptionEn:
+        'Express + MongoDB + EJS app: AI Lotto analysis (Python), official draw lookup API, emotion–number table, AI chatbot, reviews board, support tickets with comments, admin analysis history, and SharePoint web-part embedding.',
       tags: 'Node.js, Express, MongoDB, EJS, Multer, Axios, bcrypt, Python',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/dream_web',
       image: '',
       projectType: 'academy',
-      institution: '\uc54c\ud30c\ucf54',
+      institution: '알파코',
       institutionEn: 'Alphaco'
     }
   ];
@@ -294,6 +318,11 @@
     if (k) DEFAULT_PROJECT_BY_TITLE[k] = def;
     var te = (def.titleEn || '').trim();
     if (te) DEFAULT_PROJECT_BY_TITLE[te] = def;
+  });
+  var DEFAULT_PROJECT_BY_CODE_URL = {};
+  DEFAULT_PROJECTS.forEach(function (def) {
+    var u = (def.codeUrl || '').trim();
+    if (u) DEFAULT_PROJECT_BY_CODE_URL[u] = def;
   });
 
   /** getProjects(): load from localStorage and normalize/merge defaults */
@@ -311,6 +340,9 @@
       var def = DEFAULT_PROJECT_BY_TITLE[t];
       if (!def && p.titleEn) {
         def = DEFAULT_PROJECT_BY_TITLE[String(p.titleEn).trim()];
+      }
+      if (!def && p.codeUrl) {
+        def = DEFAULT_PROJECT_BY_CODE_URL[String(p.codeUrl).trim()];
       }
       if (!def) return;
       if (def.titleEn && (p.titleEn === undefined || p.titleEn === null || String(p.titleEn).trim() === '')) {
@@ -346,6 +378,52 @@
     });
     return mutated;
   }
+
+  /** ??? ????? codeUrl ???? DEFAULT_PROJECTS? ??????. */
+  function syncCanonicalProjectsByCodeUrl(list) {
+    if (!list || !DEFAULT_PROJECTS.length) return false;
+    function isPlaceholderInstitution(val) {
+      var s = String(val == null ? '' : val).trim();
+      if (!s) return false;
+      return /^\?+$/.test(s);
+    }
+    var byCode = {};
+    DEFAULT_PROJECTS.forEach(function (d) {
+      var u = (d.codeUrl || '').trim();
+      if (u) byCode[u] = d;
+    });
+    var fields = [
+      'title',
+      'titleEn',
+      'description',
+      'descriptionEn',
+      'tags',
+      'projectType',
+      'institution',
+      'institutionEn'
+    ];
+    var mutated = false;
+    list.forEach(function (p) {
+      var u = (p.codeUrl || '').trim();
+      if (!u || !byCode[u]) return;
+      var def = byCode[u];
+      fields.forEach(function (field) {
+        if (def[field] === undefined) return;
+        if (
+          (field === 'institution' || field === 'institutionEn') &&
+          isPlaceholderInstitution(def[field])
+        ) {
+          return;
+        }
+        if (p[field] !== def[field]) {
+          p[field] = def[field];
+          mutated = true;
+        }
+      });
+    });
+    return mutated;
+  }
+
   function getProjects() {
     if (projectsListCache !== null) return projectsListCache;
     try {
@@ -354,8 +432,18 @@
       // Normalize/merge and then drop placeholders.
       if (DEFAULT_PROJECTS && DEFAULT_PROJECTS.length) {
         DEFAULT_PROJECTS.forEach(function (def) {
+          var defU = (def.codeUrl || '').trim();
+          var defT = (def.title || '').trim();
+          var defTe = (def.titleEn || '').trim();
           var exists = list.some(function (p) {
-            return (p.title || '') === (def.title || '');
+            var pt = (p.title || '').trim();
+            var pu = (p.codeUrl || '').trim();
+            var pte = (p.titleEn || '').trim();
+            if (pt === defT) return true;
+            if (defU && pu === defU) return true;
+            if (defTe && pt === defTe) return true;
+            if (defTe && pte === defTe) return true;
+            return false;
           });
           if (!exists) {
             list.push(def);
@@ -376,6 +464,9 @@
       if (mergeDefaultLocaleFields(list)) {
         saveProjects(list);
       }
+      if (syncCanonicalProjectsByCodeUrl(list)) {
+        saveProjects(list);
+      }
       projectsListCache = list;
       return list;
     } catch (e) {
@@ -386,16 +477,16 @@
 
   // Project display order (roulette / featured order)
   var PROJECT_DISPLAY_ORDER = [
-    'Muzzle (dog muzzle detection)',
-    'Dream Lotto (horoscope & dream-based Lotto picks)',
-    'Scientific calculator',
-    'Dream Web (AI Lotto analysis system)',
-    'Home-care subsidy self-assessment (seniors)',
-    'Naver economy news crawler',
-    'Study & sleep pass prediction (simple AI)',
-    'BulSee (wildfire risk)',
-    'Hybrid translator',
-    'LLM personal assistant (BizAi)',
+    'Muzzle (강아지 입마개 탐지)',
+    'Dream Lotto (운세·꿈 해몽 로또 추천)',
+    '네이버 경제 뉴스 크롤러',
+    'Dream Web (AI 로또 분석 시스템)',
+    '노인 재가복지 보조금 자가진단',
+    '공부·수면 → 합격 예측 (간단한 AI)',
+    'BulSee (불씨)',
+    '하이브리드 번역기',
+    'LLM 개인 비서 서비스 (BizAi)',
+    '공학용 계산기',
     'Portfolio'
   ];
   function getProjectsInRouletteOrder(list) {
@@ -418,6 +509,7 @@
       var t = (p.projectType || 'personal');
       if (filterKey === 'personal') return t === 'personal';
       if (filterKey === 'academy') return t === 'academy';
+      if (filterKey === 'outsourced') return t === 'outsourced';
       return true;
     });
   }
@@ -494,20 +586,30 @@
       var typeLabel =
         type === 'academy'
           ? ptProjects('academy', 'BootCamp Project', forLang)
-          : ptProjects('personal', '\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8', forLang);
-      var typeClass = type === 'academy' ? 'project-badge project-badge--academy' : 'project-badge project-badge--personal';
+          : type === 'outsourced'
+            ? ptProjects('outsourced', '\uc678\uc8fc \ud504\ub85c\uc81d\ud2b8', forLang)
+            : ptProjects('personal', '\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8', forLang);
+      var typeClass =
+        type === 'academy'
+          ? 'project-badge project-badge--academy'
+          : type === 'outsourced'
+            ? 'project-badge project-badge--outsourced'
+            : 'project-badge project-badge--personal';
       var delAria = ptProjects('deleteAria', '\uc0ad\uc81c', forLang);
       var demoLabel = ptProjects('demo', '\ubcf4\uae30', forLang);
       var codeLabel = ptProjects('code', '\ucf54\ub4dc', forLang);
       var noTitle = ptProjects('noTitle', '\uc81c\ubaa9 \uc5c6\uc74c', forLang);
       var instLine = '';
-      if (type === 'academy') {
+      if (type === 'academy' || type === 'outsourced') {
         var instKo = (p.institution || '').trim();
         var instEn = (p.institutionEn || '').trim();
         var instTit = (p.title || '').trim();
         var instDef = DEFAULT_PROJECT_BY_TITLE[instTit];
         if (!instDef && p.titleEn) {
           instDef = DEFAULT_PROJECT_BY_TITLE[String(p.titleEn).trim()];
+        }
+        if (!instDef && p.codeUrl) {
+          instDef = DEFAULT_PROJECT_BY_CODE_URL[String(p.codeUrl).trim()];
         }
         if (instDef) {
           if (!instKo && instDef.institution) instKo = instDef.institution;

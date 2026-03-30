@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext.jsx'
 import {
   MAX_IMAGE_BYTES,
+  defaultProjectByCodeUrl,
   defaultProjectByTitle,
 } from '../lib/projects/constants'
 import { projectKey } from '../lib/projects/projectStorage'
@@ -42,7 +43,8 @@ function parseTags(tags) {
 function institutionLine(p, lang) {
   const def =
     defaultProjectByTitle(p.title) ||
-    (p.titleEn ? defaultProjectByTitle(String(p.titleEn).trim()) : undefined)
+    (p.titleEn ? defaultProjectByTitle(String(p.titleEn).trim()) : undefined) ||
+    defaultProjectByCodeUrl(p.codeUrl)
   const ko = String(p.institution ?? def?.institution ?? '').trim()
   const en = String(p.institutionEn ?? def?.institutionEn ?? '').trim()
   if (lang === 'en') return en || ko
@@ -62,7 +64,8 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
     return orderedProjects.filter((p) => {
       const ty = p.projectType || 'personal'
       if (projectFilter === 'personal') return ty === 'personal'
-      return ty === 'academy'
+      if (projectFilter === 'academy') return ty === 'academy'
+      return ty === 'outsourced'
     })
   }, [orderedProjects, projectFilter])
 
@@ -184,13 +187,15 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
           role="group"
           aria-label={t('projects.filterAria')}
         >
-          {(['all', 'personal', 'academy']).map((key) => {
+          {(['all', 'personal', 'academy', 'outsourced']).map((key) => {
             const labelKey =
               key === 'all'
                 ? 'filterAll'
                 : key === 'personal'
                   ? 'filterPersonal'
-                  : 'filterAcademy'
+                  : key === 'academy'
+                    ? 'filterAcademy'
+                    : 'filterOutsourced'
             return (
               <button
                 key={key}
@@ -232,15 +237,22 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                 const typeLabel =
                   type === 'academy'
                     ? t('projects.academy')
-                    : t('projects.personal')
+                    : type === 'outsourced'
+                      ? t('projects.outsourced')
+                      : t('projects.personal')
                 const typeClass =
                   type === 'academy'
                     ? 'project-badge project-badge--academy'
-                    : 'project-badge project-badge--personal'
+                    : type === 'outsourced'
+                      ? 'project-badge project-badge--outsourced'
+                      : 'project-badge project-badge--personal'
                 const tags = parseTags(p.tags)
                 const { title: cardTitle, description: cardDesc } =
                   projectCardCopy(p, lang, t)
-                const org = type === 'academy' ? institutionLine(p, lang) : ''
+                const org =
+                  type === 'academy' || type === 'outsourced'
+                    ? institutionLine(p, lang)
+                    : ''
                 return (
                   <article
                     className="project-card"

@@ -875,10 +875,14 @@ a.award-pdf-link:focus {
   scroll-snap-type: none;
   padding: 0 0.25rem;
 }
-/* 5개 이하: 카드가 개수만큼 비율 맞춰 한 줄 꽉 채움 (3개=1/3 each, 4개=1/4, 5개=1/5) */
+/* 5개 이하(fill): 균등 분배하되 카드당 최대 너비 캡 — 필터로 1개만 남을 때 한 줄 전체로 늘어나지 않게 */
+.project-carousel--fill .project-grid {
+  justify-content: center;
+}
 .project-carousel--fill .project-card {
   flex: 1 1 0;
   min-width: 0;
+  max-width: min(22rem, 100%);
   scroll-snap-align: unset;
 }
 /* 6개 이상: 좌우 스크롤, 카드 너비 3~5개 보이도록 */
@@ -945,6 +949,11 @@ a.award-pdf-link:focus {
   background: var(--accent-tint);
   color: var(--accent);
   border: 1px solid rgba(245, 158, 11, 0.4);
+}
+.project-badge--outsourced {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.45);
 }
 .project-title {
   font-size: 1.2rem;
@@ -1888,6 +1897,29 @@ footer#contact {
   width: 100%;
   justify-content: center;
 }
+/* 푸터: 글자 없이 아이콘만 */
+.footer-contact-links .contact-link.contact-link--icon-only {
+  min-width: 2.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  gap: 0;
+  font-size: 1.2rem;
+}
+.footer-contact-links .contact-link.contact-link--icon-only[href^="mailto:"]::before,
+.footer-contact-links .contact-link.contact-link--icon-only[href^="tel:"]::before {
+  font-size: 1.15rem;
+}
+.footer-contact-links .contact-link.contact-link--icon-only[href*="github.com"]::before {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.footer-contact-links .contact-link--kakao .contact-link__kakao-icon,
+.footer-contact-links .contact-link--tistory .contact-link__tistory-icon {
+  height: 1.25rem;
+  width: auto;
+  max-height: 1.35rem;
+}
 .footer-line {
   font-size: 0.9rem;
   color: var(--text-muted);
@@ -2260,6 +2292,17 @@ footer#contact {
   .contact-link {
     text-align: center;
     width: 100%;
+  }
+  .footer-contact-links.contact-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .footer-contact-links .contact-link.contact-link--icon-only {
+    width: 2.75rem;
+    min-width: 2.75rem;
+    max-width: none;
   }
   .modal-content {
     width: 92vw;
