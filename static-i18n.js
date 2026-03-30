@@ -114,8 +114,10 @@
       about: {
         title: 'About',
         name: '\uc774\ub984',
+        nameValue: '\uace0\uc6a9\uc7ac',
         birth: '\uc0dd\ub144\uc6d4\uc77c',
         nameEn: '\uc601\ubb38',
+        nameEnValue: 'Koh Yongjae',
         age: '\ub098\uc774',
         ageUnit: '(\ub9cc)',
         phoneLink: '\uc5f0\ub77d\ucc98',
@@ -253,8 +255,10 @@
       about: {
         title: 'About',
         name: 'Name',
+        nameValue: '\uace0\uc6a9\uc7ac',
         birth: 'Date of birth',
         nameEn: 'English name',
+        nameEnValue: 'Koh Yongjae',
         age: 'Age',
         ageUnit: '(international)',
         phoneLink: 'Contact',
@@ -366,23 +370,24 @@
     '\ubc30\ud3ec \u00b7 \ucd94\ub860': 'Deployment \u00b7 Inference',
   }
 
+  /** React `src/data/awards.js` `awardGroups` 와 동일: 발급처 순서·행 날짜 내림차순 */
   var STATIC_AWARD_GROUPS = [
-    {
-      issuerKo: '\uc54c\ud30c\ucf54 (Alphaco)',
-      issuerEn: 'Alphaco',
-      items: [
-        { date: '2025.07', titleKo: '\ud559\uc2b5 \uc6b0\uc218\uc0c1', titleEn: 'Excellence Award \u2014 Learning', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%95%99%EC%8A%B5%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
-        { date: '2025.07', titleKo: '\uc790\uc5f0\uc5b4 \ucc98\ub9ac(NLP) \ubc0f LLM \ud504\ub85c\uc81d\ud2b8 \uc6b0\uc218\uc0c1', titleEn: 'Excellence Award \u2014 NLP & LLM Project', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
-        { date: '2025.08', titleKo: '\ud0dc\ub3c4 \uc6b0\uc218 \uad50\uc721\uc0c1', titleEn: 'Excellence Award \u2014 Attitude', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%83%9C%EB%8F%84%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
-        { date: '2025.11', titleKo: '\ucd9c\uc11d \uc6b0\uc218\uc0c1', titleEn: 'Excellence Award \u2014 Attendance', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%EC%B6%9C%EC%84%9D%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
-      ],
-    },
     {
       issuerKo: '\ud734\uba3c AI \uad50\uc721\uc13c\ud130',
       issuerEn: 'Human AI Training Center',
       items: [
         { date: '2026.03', titleKo: '\uac1c\uadfc\uc0c1', titleEn: 'Perfect Attendance Award', pdf: '%EC%88%98%EC%83%81/%ED%9C%B4%EB%A8%BC%20%EA%B0%9C%EA%B7%BC%EC%83%81.pdf' },
         { date: '2026.03', titleKo: '\uc790\ub3d9\ud654 \ud504\ub85c\uc81d\ud2b8 \ucd5c\uc6b0\uc218\uc0c1', titleEn: 'Grand Prize \u2014 Automation Project', pdf: '%EC%88%98%EC%83%81/%ED%9C%B4%EB%A8%BC%20%EC%9E%90%EB%8F%99%ED%99%94%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%B5%9C%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
+      ],
+    },
+    {
+      issuerKo: '\uc54c\ud30c\ucf54 (Alphaco)',
+      issuerEn: 'Alphaco',
+      items: [
+        { date: '2025.11', titleKo: '\ucd9c\uc11d \uc6b0\uc218\uc0c1', titleEn: 'Excellence Award \u2014 Attendance', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%EC%B6%9C%EC%84%9D%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
+        { date: '2025.08', titleKo: '\ud0dc\ub3c4 \uc6b0\uc218 \uad50\uc721\uc0c1', titleEn: 'Excellence Award \u2014 Attitude', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%83%9C%EB%8F%84%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
+        { date: '2025.07', titleKo: '\ud559\uc2b5 \uc6b0\uc218\uc0c1', titleEn: 'Excellence Award \u2014 Learning', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%95%99%EC%8A%B5%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
+        { date: '2025.07', titleKo: '\uc790\uc5f0\uc5b4 \ucc98\ub9ac(NLP) \ubc0f LLM \ud504\ub85c\uc81d\ud2b8 \uc6b0\uc218\uc0c1', titleEn: 'Excellence Award \u2014 NLP & LLM Project', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
       ],
     },
   ]
