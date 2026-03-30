@@ -23,7 +23,7 @@ function translateCertLabel(c, i, lang, t) {
   if (m) return t('education.certCisco', { n: m[1] })
   m = lab.match(/^과목 이수증(\d+)$/)
   if (m) return t('education.certCourseSubject', { n: m[1] })
-  if (lab === '학원 수료증') return t('education.certBootcampDoc')
+  if (lab === '학원 수료증' || lab === '교육기관 수료증') return t('education.certBootcampDoc')
   return c.label || t('education.certFallback', { n: i + 1 })
 }
 

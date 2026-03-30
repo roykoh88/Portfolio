@@ -31,6 +31,8 @@ export const DEFAULT_PROJECTS = [
     codeUrl: 'https://github.com/roykoh88/LLM_project',
     image: '',
     projectType: 'academy',
+    institution: '휴먼 AI 교육센터',
+    institutionEn: 'Human AI Training Center',
   },
   {
     title: 'Portfolio',
@@ -96,6 +98,8 @@ export const DEFAULT_PROJECTS = [
     codeUrl: 'https://github.com/roykoh88/bulsee',
     image: '',
     projectType: 'academy',
+    institution: '휴먼 AI 교육센터',
+    institutionEn: 'Human AI Training Center',
   },
   {
     title: '공부·수면 → 합격 예측 (간단한 AI)',
@@ -122,6 +126,8 @@ export const DEFAULT_PROJECTS = [
     codeUrl: 'https://github.com/roykoh88/muzzle',
     image: '',
     projectType: 'academy',
+    institution: '알파코',
+    institutionEn: 'Alphaco',
   },
   {
     title: 'Dream Lotto (운세·꿈 해몽 로또 추천)',
@@ -148,6 +154,8 @@ export const DEFAULT_PROJECTS = [
     codeUrl: 'https://github.com/roykoh88/dream_web',
     image: '',
     projectType: 'academy',
+    institution: '알파코',
+    institutionEn: 'Alphaco',
   },
 ]
 
@@ -166,8 +174,12 @@ export const PROJECT_DISPLAY_ORDER = [
   'Portfolio',
 ]
 
-/** 저장된 프로젝트와 기본 목록을 제목(한글 기준)으로 매칭해 영어 필드 조회 */
+/** 저장된 프로젝트와 기본 목록 매칭 — 제목이 한글이거나 영문(titleEn)이어도 동일 항목으로 인식 */
 export function defaultProjectByTitle(title) {
   const k = (title || '').trim()
-  return DEFAULT_PROJECTS.find((d) => (d.title || '').trim() === k)
+  if (!k) return undefined
+  return (
+    DEFAULT_PROJECTS.find((d) => (d.title || '').trim() === k) ||
+    DEFAULT_PROJECTS.find((d) => (d.titleEn || '').trim() === k)
+  )
 }

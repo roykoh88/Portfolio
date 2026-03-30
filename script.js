@@ -1,5 +1,5 @@
 (function () {
-  // ----- 테마 (다크/라이트) -----
+  // ----- Theme (dark/light) -----
   var THEME_KEY = 'portfolioTheme';
   function getPreferredTheme() {
     var saved = localStorage.getItem(THEME_KEY);
@@ -15,13 +15,13 @@
     var btn = document.getElementById('themeToggle');
     if (!btn) return;
     var isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    btn.textContent = isLight ? '🌙' : '☀️';
+    btn.textContent = isLight ? '\u263d' : '\u2600';
     if (typeof portfolioT === 'function') {
       btn.setAttribute('aria-label', isLight ? portfolioT('header.themeToDark') : portfolioT('header.themeToLight'));
       btn.setAttribute('title', isLight ? portfolioT('header.themeDark') : portfolioT('header.themeLight'));
     } else {
-      btn.setAttribute('aria-label', isLight ? '다크 모드로 전환' : '라이트 모드로 전환');
-      btn.setAttribute('title', isLight ? '다크 모드' : '라이트 모드');
+      btn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+      btn.setAttribute('title', isLight ? 'Dark mode' : 'Light mode');
     }
   }
   (function initTheme() {
@@ -29,8 +29,8 @@
     applyTheme(theme);
   })();
 
-  // ----- 주인장 모드 (localhost 또는 비밀번호 입력 시 편집 가능) -----
-  var OWNER_PASSWORD = 'portfolio'; // 원하는 비밀번호로 변경하세요.
+  // ----- Owner mode (always on at localhost, otherwise session-based) -----
+  var OWNER_PASSWORD = 'portfolio'; // Change if needed.
   var isLocalhost = /^localhost$|^127\.0\.0\.1$/.test(location.hostname);
   var ownerMode = isLocalhost || sessionStorage.getItem('portfolioOwner') === '1';
 
@@ -47,8 +47,8 @@
     document.body.classList.toggle('owner-mode', ownerMode);
     var toggle = document.getElementById('ownerModeToggle');
     if (toggle) {
-      var onLabel = typeof portfolioT === 'function' ? portfolioT('footer.ownerOn') : '편집 모드 종료';
-      var offLabel = typeof portfolioT === 'function' ? portfolioT('footer.ownerOff') : '편집 모드';
+      var onLabel = typeof portfolioT === 'function' ? portfolioT('footer.ownerOn') : 'Exit edit mode';
+      var offLabel = typeof portfolioT === 'function' ? portfolioT('footer.ownerOff') : 'Edit mode';
       toggle.textContent = ownerMode ? onLabel : offLabel;
       toggle.onclick = function () {
         if (ownerMode) {
@@ -57,8 +57,8 @@
           if (isLocalhost) {
             setOwnerMode(true);
           } else {
-            var promptMsg = typeof portfolioT === 'function' ? portfolioT('owner.promptPassword') : '비밀번호를 입력하세요.';
-            var wrongMsg = typeof portfolioT === 'function' ? portfolioT('owner.wrongPassword') : '비밀번호가 올바르지 않습니다.';
+            var promptMsg = typeof portfolioT === 'function' ? portfolioT('owner.promptPassword') : 'Enter password.';
+            var wrongMsg = typeof portfolioT === 'function' ? portfolioT('owner.wrongPassword') : 'Incorrect password.';
             var pw = prompt(promptMsg);
             if (pw === OWNER_PASSWORD) setOwnerMode(true);
             else if (pw !== null) alert(wrongMsg);
@@ -69,7 +69,7 @@
   }
   updateOwnerUI();
 
-  // 테마 토글 버튼
+  // Theme toggle button
   var themeBtn = document.getElementById('themeToggle');
   if (themeBtn) {
     updateThemeToggleUI();
@@ -82,11 +82,11 @@
     });
   }
 
-  // 푸터 연도
+  // Footer year
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // 타이핑 효과 — 문자열은 static-i18n hero.typing 과 동기 (언어 전환 시 루프 재시작)
+  // Hero typing effect (uses static-i18n hero.typing; fallback text below)
   var typingEl = document.getElementById('typing-text');
   var heroTypingRunId = 0;
   function startHeroTyping() {
@@ -97,7 +97,7 @@
     var fullText =
       typeof portfolioT === 'function'
         ? portfolioT('hero.typing')
-        : '안녕하세요\n꿈을 개발하는 개발자\n Roy 입니다.';
+        : "Hello\nI'm Roy,\na developer who builds dreams with code.";
     var index = 0;
     var typeSpeed = 120;
     var eraseSpeed = 80;
@@ -141,9 +141,8 @@
     startHeroTyping();
   });
 
-  // 프로젝트 직접 추가 (localStorage)
-  // v2 키로 변경해서 기존 캐시를 자동으로 무시하도록 함
-  var PROJECTS_KEY = 'portfolioProjects_v2';
+  // Projects in owner mode (localStorage)
+  // If you change schema, bump PROJECTS_SCHEMA_VERSION and/or PROJECTS_KEY.
   var grid = document.getElementById('projectGrid');
   var projectEmpty = document.getElementById('projectEmpty');
   var modal = document.getElementById('projectModal');
@@ -152,13 +151,16 @@
   var imageUrlInput = document.getElementById('projectImageUrl');
   var imageFileInput = document.getElementById('projectImageFile');
   var maxImageSize = 400 * 1024; // 400KB
+  /** @type {'all'|'personal'|'academy'} */
+  var projectListFilter = 'all';
+  var lastProjectCarouselCount = 0;
 
   var DEFAULT_PROJECTS = [
     {
-      title: '공학용 계산기',
+      title: 'Scientific calculator',
       titleEn: 'Scientific calculator',
-      description: '공학용 계산기 + 함수 그래프 시각화 웹 앱입니다. 사칙연산부터 삼각함수, 로그, 그래프까지 지원합니다.',
-      descriptionEn: 'A scientific calculator and function graphing web app—from basic arithmetic to trig, logs, and plots.',
+      description: 'A scientific calculator and function graphing web app?from basic arithmetic to trig, logs, and plots.',
+      descriptionEn: 'A scientific calculator and function graphing web app?from basic arithmetic to trig, logs, and plots.',
       tags: 'Python, FastAPI, React, JavaScript, HTML, CSS',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/Calculator',
@@ -166,21 +168,23 @@
       projectType: 'personal'
     },
     {
-      title: 'LLM 개인 비서 서비스 (BizAi)',
+      title: 'LLM personal assistant (BizAi)',
       titleEn: 'LLM personal assistant (BizAi)',
-      description: 'LLM 기반 개인 비서(BizAi) 서비스를 위한 모노레포 구조입니다. 백엔드 API, 프론트엔드, ETL 파이프라인, LLM 서버, 인프라를 하나의 레포에서 관리합니다.',
+      description: 'Monorepo for a BizAi LLM-powered assistant: backend APIs, frontend, ETL, LLM server, and infra in one repository.',
       descriptionEn: 'Monorepo for a BizAi LLM-powered assistant: backend APIs, frontend, ETL, LLM server, and infra in one repository.',
       tags: 'Python, FastAPI, React, TypeScript, Docker, PostgreSQL, LLM',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/LLM_project',
       image: '',
-      projectType: 'academy'
+      projectType: 'academy',
+      institution: '\uc720\uba38 AI \uad50\uc721\uc13c\ud130',
+      institutionEn: 'Human AI Training Center'
     },
     {
       title: 'Portfolio',
       titleEn: 'Portfolio',
-      description: '개발 포트폴리오 사이트입니다. About, Education, Projects, Skills, Certificates, Contact를 담고 있으며 Firebase로 호스팅됩니다.',
-      descriptionEn: 'Developer portfolio with About, Education, Projects, Skills, Certificates, and Contact—hosted on Firebase.',
+      description: 'Developer portfolio with About, Education, Projects, Skills, Certificates, and Contact?hosted on Firebase.',
+      descriptionEn: 'Developer portfolio with About, Education, Projects, Skills, Certificates, and Contact?hosted on Firebase.',
       tags: 'HTML, CSS, JavaScript, Firebase, GitHub Actions',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/Portfolio',
@@ -188,9 +192,9 @@
       projectType: 'personal'
     },
     {
-      title: '하이브리드 번역기',
+      title: 'Hybrid translator',
       titleEn: 'Hybrid translator',
-      description: '무료 번역(deep-translator) + Ollama 로컬 LLM 보정으로 문맥에 맞는 자연스러운 번역을 제공합니다. 바이어 메일 번역, 실시간 통역(타이핑/음성/대화), 배치·파일·다국어 번역을 지원합니다.',
+      description: 'Combines free translation with a local Ollama LLM for more natural, context-aware output (chat/typing/voice, batch/file, multilingual modes).',
       descriptionEn: 'Combines free translation (deep-translator) with local Ollama LLM polishing for more natural, context-aware output. Buyer-email translation, live interpretation (typing/voice/chat), batch/file, and multilingual modes.',
       tags: 'Python, FastAPI, Ollama, deep-translator, JavaScript, HTML, CSS',
       demoUrl: '',
@@ -199,9 +203,9 @@
       projectType: 'personal'
     },
     {
-      title: '노인 재가복지 보조금 자가진단',
+      title: 'Home-care subsidy self-assessment (seniors)',
       titleEn: 'Home-care subsidy self-assessment (seniors)',
-      description: '노인 재가 복지 지원 보조금을 받을 수 있는지 테스트하는 웹 사이트입니다. 실제 운영 중인 서비스(성심케어)에서 사용 중입니다.',
+      description: 'A simple web check for whether someone may qualify for senior home-care support subsidies (used in production).',
       descriptionEn: 'A simple web check for whether someone may qualify for senior home-care support subsidies. Used in production by SungSim Care.',
       tags: 'JavaScript, HTML, CSS',
       demoUrl: 'http://sungsimcare.kr/grade/test07/test06.html',
@@ -210,9 +214,9 @@
       projectType: 'personal'
     },
     {
-      title: '네이버 경제 뉴스 크롤러',
+      title: 'Naver economy news crawler',
       titleEn: 'Naver economy news crawler',
-      description: '네이버 뉴스 경제(섹션 101)의 헤드라인 기사 10개를 크롤링해 제목·링크·본문·썸네일을 CSV로 저장하는 파이썬 스크립트입니다.',
+      description: 'Python script that crawls 10 headline articles from Naver News Economy (section 101) and saves to CSV.',
       descriptionEn: 'Python script that crawls ten headline articles from Naver News Economy (section 101) and saves title, link, body, and thumbnail to CSV.',
       tags: 'Python, Selenium, Pandas, Crawling',
       demoUrl: '',
@@ -221,20 +225,22 @@
       projectType: 'personal'
     },
     {
-      title: 'BulSee (불씨)',
+      title: 'BulSee (wildfire risk)',
       titleEn: 'BulSee',
-      description: '기상청·산림청 실시간 공공데이터를 수집해 AI로 산불 발생 위험도와 피해 범위를 예측하는 웹 서비스. 지도 기반 지역 조회, 시뮬레이션, 대시보드, 챗봇(OpenAI) 포함.',
+      description: 'Web service that estimates wildfire risk/impact from public data with AI; includes map lookup, dashboard, and chatbot.',
       descriptionEn: 'Web service that ingests live KMA & forest-agency open data to estimate wildfire risk and impact with AI. Map-based lookup, simulation, dashboard, and an OpenAI chatbot.',
       tags: 'Spring Boot, FastAPI, React, TypeScript, PyTorch, XGBoost, GRU, Transformer, Oracle, Docker',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/bulsee',
       image: '',
-      projectType: 'academy'
+      projectType: 'academy',
+      institution: '\uc720\uba38 AI \uad50\uc721\uc13c\ud130',
+      institutionEn: 'Human AI Training Center'
     },
     {
-      title: '공부·수면 → 합격 예측 (간단한 AI)',
-      titleEn: 'Study & sleep → pass prediction (simple AI)',
-      description: '개인 공부 목적으로 ChatGPT와 토론하며 만든 프로젝트입니다. 공부시간·수면시간 데이터로 시험 합격 여부를 예측하는 분류 모델(Random Forest, Logistic Regression, Decision Tree, K-NN)을 비교·실험합니다. GPU 없이 실행 가능.',
+      title: 'Study & sleep pass prediction (simple AI)',
+      titleEn: 'Study & sleep pass prediction (simple AI)',
+      description: 'Compares classic classifiers on study/sleep hours vs pass/fail; runs locally without a GPU.',
       descriptionEn: 'Personal study project built with ChatGPT as a sparring partner. Compares classifiers (Random Forest, logistic regression, decision tree, k-NN) on study/sleep hours vs. pass/fail. Runs without a GPU.',
       tags: 'Python, scikit-learn, Decision Tree, Random Forest, Logistic Regression, KNN',
       demoUrl: '',
@@ -243,57 +249,69 @@
       projectType: 'personal'
     },
     {
-      title: 'Muzzle (강아지 입마개 탐지)',
+      title: 'Muzzle (dog muzzle detection)',
       titleEn: 'Muzzle (dog muzzle detection)',
-      description: 'YOLOv5/YOLOv8을 사용한 개 탐지 및 대형견·소형견 구분 프로젝트입니다. Stanford Dogs 데이터셋으로 big_dog/small_dog 이진 분류까지 진행했고, 입마개(muzzle) 탐지까지 목표로 했으나 해당 단계는 미완이었습니다. 강아지 인식까지는 구현했습니다.',
-      descriptionEn: 'Dog detection with YOLOv5/YOLOv8 and large vs. small dog separation. Trained a big_dog/small_dog head on Stanford Dogs; muzzle detection was planned but not finished—dog recognition is implemented.',
+      description: 'Dog detection with YOLOv5/YOLOv8; trained a big vs small dog head on Stanford Dogs; muzzle detection was planned.',
+      descriptionEn: 'Dog detection with YOLOv5/YOLOv8 and large vs. small dog separation. Trained a big_dog/small_dog head on Stanford Dogs; muzzle detection was planned but not finished?dog recognition is implemented.',
       tags: 'Python, PyTorch, YOLOv5, YOLOv8, Ultralytics, Roboflow, OpenCV',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/muzzle',
       image: '',
-      projectType: 'academy'
+      projectType: 'academy',
+      institution: '\uc54c\ud30c\ucf54',
+      institutionEn: 'Alphaco'
     },
     {
-      title: 'Dream Lotto (운세·꿈 해몽 로또 추천)',
+      title: 'Dream Lotto (horoscope & dream-based Lotto picks)',
       titleEn: 'Dream Lotto (horoscope & dream-based Lotto picks)',
-      description: '네이버 오늘의 운세와 룰드드림 꿈 해몽을 Selenium으로 수집한 뒤, KLUE-RoBERTa 감정 분류로 감정을 추출하고 감정–숫자 매핑으로 로또 5게임을 추천하는 파이프라인. 번호 분포 엔트로피·시각화, 당첨 번호 백테스트 노트북 포함. 재미 목적.',
-      descriptionEn: 'Pipeline that scrapes Naver daily horoscope and dream-interpretation text with Selenium, runs KLUE-RoBERTa sentiment, maps emotions to numbers, and suggests five Lotto games—plus entropy/visualization and a backtest notebook. For fun only.',
+      description: 'Pipeline that scrapes horoscope/dream-interpretation text, runs sentiment, maps emotions to numbers, and suggests Lotto picks (for fun).',
+      descriptionEn: 'Pipeline that scrapes Naver daily horoscope and dream-interpretation text with Selenium, runs KLUE-RoBERTa sentiment, maps emotions to numbers, and suggests five Lotto games?plus entropy/visualization and a backtest notebook. For fun only.',
       tags: 'Python, Selenium, PyTorch, Transformers, KLUE-RoBERTa, Pandas, openpyxl',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/dream_lotto',
       image: '',
-      projectType: 'academy'
+      projectType: 'academy',
+      institution: '\uc54c\ud30c\ucf54',
+      institutionEn: 'Alphaco'
     },
     {
-      title: 'Dream Web (AI 로또 분석 시스템)',
+      title: 'Dream Web (AI Lotto analysis system)',
       titleEn: 'Dream Web (AI Lotto analysis system)',
-      description: 'Express + MongoDB + EJS 기반 웹 앱. AI 로또 번호 분석(Python 연동), 동행복권 API 당첨번호 조회, 감정숫자 분류표, AI 상담 챗봇, 후기 게시판, 고객센터(문의·댓글), 관리자·분석 히스토리. SharePoint 웹파트 삽입 구성.',
-      descriptionEn: 'Express + MongoDB + EJS app: AI Lotto analysis (Python), official draw lookup API, emotion–number table, AI chatbot, reviews board, support tickets with comments, admin analysis history, and SharePoint web-part embedding.',
+      description: 'Express + MongoDB + EJS app for AI Lotto analysis, official draw lookup, chatbot, boards, admin pages, and embedding.',
+      descriptionEn: 'Express + MongoDB + EJS app: AI Lotto analysis (Python), official draw lookup API, emotion-number table, AI chatbot, reviews board, support tickets with comments, admin analysis history, and SharePoint web-part embedding.',
       tags: 'Node.js, Express, MongoDB, EJS, Multer, Axios, bcrypt, Python',
       demoUrl: '',
       codeUrl: 'https://github.com/roykoh88/dream_web',
       image: '',
-      projectType: 'academy'
+      projectType: 'academy',
+      institution: '\uc54c\ud30c\ucf54',
+      institutionEn: 'Alphaco'
     }
   ];
   var DEFAULT_PROJECT_BY_TITLE = {};
   DEFAULT_PROJECTS.forEach(function (def) {
     var k = (def.title || '').trim();
     if (k) DEFAULT_PROJECT_BY_TITLE[k] = def;
+    var te = (def.titleEn || '').trim();
+    if (te) DEFAULT_PROJECT_BY_TITLE[te] = def;
   });
 
-  /** getProjects() 반복 호출 시 JSON/병합 비용 방지 — saveProjects 시 무효화 */
+  /** getProjects(): load from localStorage and normalize/merge defaults */
   var projectsListCache = null;
   function invalidateProjectsCache() {
     projectsListCache = null;
   }
 
-  /** localStorage에 예전 형식(영문 필드 없음)만 있으면 영어 전환해도 한글만 나옴 → 기본 프로젝트와 제목이 같을 때 titleEn 등 보강 */
+  /** Merge missing locale fields from DEFAULT_PROJECTS into stored projects. */
   function mergeDefaultLocaleFields(list) {
     if (!list || !DEFAULT_PROJECTS.length) return false;
     var mutated = false;
     list.forEach(function (p) {
-      var def = DEFAULT_PROJECT_BY_TITLE[(p.title || '').trim()];
+      var t = (p.title || '').trim();
+      var def = DEFAULT_PROJECT_BY_TITLE[t];
+      if (!def && p.titleEn) {
+        def = DEFAULT_PROJECT_BY_TITLE[String(p.titleEn).trim()];
+      }
       if (!def) return;
       if (def.titleEn && (p.titleEn === undefined || p.titleEn === null || String(p.titleEn).trim() === '')) {
         p.titleEn = def.titleEn;
@@ -311,6 +329,20 @@
         p.projectType = def.projectType;
         mutated = true;
       }
+      if (
+        (!p.institution || String(p.institution).trim() === '') &&
+        def.institution
+      ) {
+        p.institution = def.institution;
+        mutated = true;
+      }
+      if (
+        (!p.institutionEn || String(p.institutionEn).trim() === '') &&
+        def.institutionEn
+      ) {
+        p.institutionEn = def.institutionEn;
+        mutated = true;
+      }
     });
     return mutated;
   }
@@ -319,7 +351,7 @@
     try {
       var raw = localStorage.getItem(PROJECTS_KEY);
       var list = raw ? JSON.parse(raw) : [];
-      // 기존에 저장된 목록이 있더라도, 기본 프로젝트(공학용 계산기 등)가 빠져 있으면 자동으로 채워 넣기
+      // Normalize/merge and then drop placeholders.
       if (DEFAULT_PROJECTS && DEFAULT_PROJECTS.length) {
         DEFAULT_PROJECTS.forEach(function (def) {
           var exists = list.some(function (p) {
@@ -333,8 +365,8 @@
       if (!raw && list.length) {
         saveProjects(list);
       }
-      // placeholder/예시로 저장된 항목은 리스트에서 제거하고 저장
-      var skipTitles = ['프로젝트 제목', '또다른 프로젝트'];
+      // Remove placeholder items (if any) that slipped in.
+      var skipTitles = ['(placeholder)', '(draft)'];
       var before = list.length;
       list = list.filter(function (p) {
         var t = (p.title || '').trim();
@@ -352,20 +384,18 @@
     }
   }
 
-  // 룰렛 형식: 이 순서대로 표시
-  // Muzzle -> Dream Lotto -> 뉴스 크롤링 -> Dream Web -> 노인 재가 복지 ->
-  // 공부·수면 -> 불씨 -> 하이브리드 번역기 -> BizAi -> 공학용 계산기 -> Portfolio
+  // Project display order (roulette / featured order)
   var PROJECT_DISPLAY_ORDER = [
-    'Muzzle (강아지 입마개 탐지)',
-    'Dream Lotto (운세·꿈 해몽 로또 추천)',
-    '네이버 경제 뉴스 크롤러',
-    'Dream Web (AI 로또 분석 시스템)',
-    '노인 재가복지 보조금 자가진단',
-    '공부·수면 → 합격 예측 (간단한 AI)',
-    'BulSee (불씨)',
-    '하이브리드 번역기',
-    'LLM 개인 비서 서비스 (BizAi)',
-    '공학용 계산기',
+    'Muzzle (dog muzzle detection)',
+    'Dream Lotto (horoscope & dream-based Lotto picks)',
+    'Scientific calculator',
+    'Dream Web (AI Lotto analysis system)',
+    'Home-care subsidy self-assessment (seniors)',
+    'Naver economy news crawler',
+    'Study & sleep pass prediction (simple AI)',
+    'BulSee (wildfire risk)',
+    'Hybrid translator',
+    'LLM personal assistant (BizAi)',
     'Portfolio'
   ];
   function getProjectsInRouletteOrder(list) {
@@ -378,8 +408,18 @@
       if (i >= 0) ordered.push({ p: p, i: i });
       else rest.push(p);
     });
-    ordered.sort(function (a, b) { return a.i - b.i; });
+    ordered.sort(function (a, b) { return b.i - a.i; });
     return ordered.map(function (x) { return x.p; }).concat(rest);
+  }
+
+  function filterProjectsByType(list, filterKey) {
+    if (!filterKey || filterKey === 'all') return list;
+    return list.filter(function (p) {
+      var t = (p.projectType || 'personal');
+      if (filterKey === 'personal') return t === 'personal';
+      if (filterKey === 'academy') return t === 'academy';
+      return true;
+    });
   }
 
   function saveProjects(projects) {
@@ -390,7 +430,7 @@
   function projectLang() {
     return typeof portfolioGetLang === 'function' ? portfolioGetLang() : 'ko';
   }
-  /** @param {string} [forLang] 이벤트 detail.lang 등 — 전달 시 storage/헬퍼와 동기 */
+  /** @param {string} [forLang] Optional language override ('ko'|'en') */
   function effectiveProjectLang(forLang) {
     if (forLang === 'en' || forLang === 'ko') return forLang;
     return projectLang();
@@ -425,11 +465,21 @@
 
   function renderProjects(forLang) {
     var allProjects = getProjects();
-    var projects = getProjectsInRouletteOrder(allProjects);
+    var ordered = getProjectsInRouletteOrder(allProjects);
+    var projects = filterProjectsByType(ordered, projectListFilter);
     if (!grid) return;
     grid.innerHTML = '';
+    var filterEmptyEl = document.getElementById('projectFilterEmpty');
+    if (filterEmptyEl) {
+      if (projects.length === 0 && ordered.length > 0) {
+        filterEmptyEl.hidden = false;
+        filterEmptyEl.textContent = ptProjects('filterEmpty', '\uc774 \ubd84\ub958\uc5d0 \ud574\ub2f9\ud558\ub294 \ud504\ub85c\uc81d\ud2b8\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.', forLang);
+      } else {
+        filterEmptyEl.hidden = true;
+      }
+    }
     if (projectEmpty) {
-      if (projects.length) {
+      if (allProjects.length) {
         projectEmpty.classList.add('hidden-when-has-projects');
       } else {
         projectEmpty.classList.remove('hidden-when-has-projects');
@@ -443,22 +493,42 @@
       var type = (p.projectType || 'personal');
       var typeLabel =
         type === 'academy'
-          ? ptProjects('academy', '학원 프로젝트', forLang)
-          : ptProjects('personal', '개인 프로젝트', forLang);
+          ? ptProjects('academy', 'BootCamp Project', forLang)
+          : ptProjects('personal', '\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8', forLang);
       var typeClass = type === 'academy' ? 'project-badge project-badge--academy' : 'project-badge project-badge--personal';
-      var delAria = ptProjects('deleteAria', '삭제', forLang);
-      var demoLabel = ptProjects('demo', '보기', forLang);
-      var codeLabel = ptProjects('code', '코드', forLang);
-      var noTitle = ptProjects('noTitle', '제목 없음', forLang);
+      var delAria = ptProjects('deleteAria', '\uc0ad\uc81c', forLang);
+      var demoLabel = ptProjects('demo', '\ubcf4\uae30', forLang);
+      var codeLabel = ptProjects('code', '\ucf54\ub4dc', forLang);
+      var noTitle = ptProjects('noTitle', '\uc81c\ubaa9 \uc5c6\uc74c', forLang);
+      var instLine = '';
+      if (type === 'academy') {
+        var instKo = (p.institution || '').trim();
+        var instEn = (p.institutionEn || '').trim();
+        var instTit = (p.title || '').trim();
+        var instDef = DEFAULT_PROJECT_BY_TITLE[instTit];
+        if (!instDef && p.titleEn) {
+          instDef = DEFAULT_PROJECT_BY_TITLE[String(p.titleEn).trim()];
+        }
+        if (instDef) {
+          if (!instKo && instDef.institution) instKo = instDef.institution;
+          if (!instEn && instDef.institutionEn) instEn = instDef.institutionEn;
+        }
+        var instText =
+          effectiveProjectLang(forLang) === 'en' ? (instEn || instKo) : (instKo || instEn);
+        if (instText) {
+          instLine = '<p class="project-institution">' + escapeHtml(instText) + '</p>';
+        }
+      }
       var imgHtml = p.image
         ? '<img src="' + p.image + '" alt="">'
-        : '<div class="project-placeholder">📁</div>';
+        : '<div class="project-placeholder">\ud83d\udcc1</div>';
       card.innerHTML =
         '<div class="project-image">' + imgHtml +
-        '<button type="button" class="project-delete owner-only" aria-label="' + escapeHtml(delAria) + '">×</button></div>' +
+        '<button type="button" class="project-delete owner-only" aria-label="' + escapeHtml(delAria) + '">?</button></div>' +
         '<div class="project-body">' +
         '<div class="' + typeClass + '">' + escapeHtml(typeLabel) + '</div>' +
         '<h3 class="project-title">' + escapeHtml(projectCardTitle(p, forLang) || noTitle) + '</h3>' +
+        instLine +
         '<p class="project-desc">' + escapeHtml(projectCardDescription(p, forLang) || '') + '</p>' +
         '<div class="project-tags">' + tags.map(function (t) { return '<span>' + escapeHtml(t) + '</span>'; }).join('') + '</div>' +
         '<div class="project-links">' +
@@ -480,7 +550,8 @@
         renderSkillsFromProjects();
       });
     });
-    updateProjectCarouselMode(allProjects.length);
+    lastProjectCarouselCount = projects.length;
+    updateProjectCarouselMode(projects.length);
     renderSkillsFromProjects();
   }
 
@@ -526,7 +597,7 @@
     }
   }
 
-  // 모바일(768px 이하)에서는 2개 이상일 때도 가로 스크롤 적용 (핸드폰에서 스와이프 가능)
+  // Mobile: slightly fewer rows/cards (layout tuning).
   var CAROUSEL_MOBILE_BREAKPOINT = 768;
   function updateProjectCarouselMode(projectCount) {
     var carouselEl = document.querySelector('.project-carousel');
@@ -537,14 +608,10 @@
     carouselEl.classList.add(useScroll ? 'project-carousel--scroll' : 'project-carousel--fill');
   }
   window.addEventListener('resize', function () {
-    var n = 0;
-    try {
-      n = getProjects().length;
-    } catch (e) {}
-    updateProjectCarouselMode(n);
+    updateProjectCarouselMode(lastProjectCarouselCount);
   });
 
-  // 프로젝트 캐러셀 좌우 스크롤 (끝에서 다음 → 처음, 처음에서 이전 → 끝, 뻉뻉 돌기)
+  // Client-side image size guard (prevents huge base64 storage).
   var carouselScroll = document.getElementById('projectCarouselScroll');
   var carouselPrev = document.getElementById('projectCarouselPrev');
   var carouselNext = document.getElementById('projectCarouselNext');
@@ -573,6 +640,21 @@
       } else {
         carouselScroll.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
       }
+    });
+  }
+
+  var projectFilterWrap = document.getElementById('projectFilter');
+  if (projectFilterWrap) {
+    projectFilterWrap.addEventListener('click', function (e) {
+      var btn = e.target.closest('.project-filter-btn');
+      if (!btn || !projectFilterWrap.contains(btn)) return;
+      var f = btn.getAttribute('data-filter');
+      if (!f) return;
+      projectListFilter = f;
+      projectFilterWrap.querySelectorAll('.project-filter-btn').forEach(function (b) {
+        b.classList.toggle('is-active', b === btn);
+      });
+      renderProjects();
     });
   }
 
@@ -621,7 +703,7 @@
       var file = imageFileInput && imageFileInput.files[0];
       if (file) {
         if (file.size > maxImageSize) {
-          alert(ptProjects('alertImageSize', '이미지는 400KB 이하로 올려주세요.'));
+          alert(ptProjects('alertImageSize', 'Image is too large (max 400KB).'));
           return;
         }
         var reader = new FileReader();
@@ -637,7 +719,7 @@
 
   renderProjects();
 
-  // Skills — react-app/data/skillsByTrack.js 와 동일 데이터·규칙 (자격증 블록보다 먼저 실행되어 중단 시에도 패널이 채워지도록)
+  // Skills data (kept in sync with react-app/data/skillsByTrack.js)
   (function initSkillsTrackPanel() {
     var getGroups =
       typeof window.portfolioGetSkillGroupsForTier === 'function'
@@ -694,9 +776,9 @@
         var suffix =
           typeof portfolioT === 'function'
             ? portfolioT('skills.contextCommonSuffix')
-            : '협업·인프라 공통';
+            : 'No projects found.';
         contextValue.textContent =
-          state.track === 'common' ? trackLabel + ' · ' + suffix : trackLabel + ' · ' + tierLabel;
+          state.track === 'common' ? trackLabel + ' ? ' + suffix : trackLabel + ' ? ' + tierLabel;
       }
       var groups = getGroups(state.track, state.tier);
       panel.innerHTML = '';
@@ -706,7 +788,7 @@
         empty.textContent =
           typeof portfolioT === 'function'
             ? portfolioT('skills.empty')
-            : '이 조합에 해당하는 항목이 없습니다.';
+            : 'Failed to load projects.';
         panel.appendChild(empty);
         return;
       }
@@ -757,7 +839,7 @@
     });
   })();
 
-  // 수상/자격증 추가 (localStorage) — 레거시: 정적 HTML에서는 certificateGroups 가 없으면 실행 안 됨
+  // Awards/Certificates (localStorage) - runs only when certificateGroups exists in static HTML.
   var CERTIFICATES_KEY = 'portfolioCertificates';
   var certificateGroups = document.getElementById('certificateGroups');
   var certificateModal = document.getElementById('certificateModal');
@@ -805,47 +887,47 @@
     }
   }
 
-  /** GitHub Pages에 올린 Portfolio 저장소의 공개 URL (PDF/ 하위 경로) */
+  /** GitHub Pages portfolio PDF URL helper (PDF/...) */
   var PDF_PAGES_ORIGIN = 'https://roykoh88.github.io/Portfolio';
-  /** `react-app/src/config/portfolioPages.js` · static-i18n.js 와 동기화 */
+  /** Mirrors logic from react-app/src/config/portfolioPages.js and static-i18n.js */
   var FIREBASE_STORAGE_BUCKET = 'yjkohproject.firebasestorage.app';
   var FIREBASE_STORAGE_DOWNLOAD_TOKENS = {
-    '학원 수료증/AI개발자 수료증.pdf': '73eae910-2ff1-4e92-bac5-e4d10848abe8',
-    '학원 수료증/네트워크 수료증.pdf': 'ade03022-8624-4dec-bb00-0dc8d18c1433',
-    '학원 수료증/데이터 분석 수료증.pdf': '9ee71e23-cb49-494d-b2bf-25ae143fc38e',
-    '학원 수료증/도커 & 쿠버 수료증.pdf': '976bea00-eba5-4a42-b7b6-4966ea8f67aa',
-    '학원 수료증/리눅스 수료증.pdf': 'e4615cda-2181-4c37-af9b-c528293eb836',
-    '학원 수료증/리눅스1 수료증.pdf': '11887c51-8313-41d6-bf99-03bfa94a8bc5',
-    '학원 수료증/리눅스2 수료증.pdf': '4926ba48-bc9c-4956-8497-3c82b88e9062',
-    '학원 수료증/서버 구성 수료증.pdf': '2698a634-dca3-490c-8360-4b2bdff60251',
-    '학원 수료증/서버 구성1회차 수료증.pdf': '53227cd9-b2c1-4ae4-b35d-d3b70baa15a4',
-    '학원 수료증/씨스코1 수료증.pdf': 'b50426ac-31fe-46b7-85b7-077b0134eadc',
-    '학원 수료증/씨스코2 수료증.pdf': 'ad62f147-c2ff-4560-a0b0-163a049ffcaf',
-    '학원 수료증/정보보안1 수료증.pdf': '1cf18e55-42a8-45e1-b796-a76a8d04b60d',
-    '학원 수료증/정보보안2 수료증.pdf': '05f57cc9-b1d2-40c1-9a02-6c1edb69d50e',
-    '학원 수료증/정보보안3 수료증.pdf': 'e31a6f01-0a52-4e5e-bc45-6238fc8e834c',
-    '학원 수료증/정보보안4 수료증.pdf': '7a287b93-891a-4130-84ac-e5797654a8e2',
-    '학원 수료증/정보보안5 수료증.pdf': 'ff083384-e059-4668-8e5d-b3127ff5c696',
-    '학원 수료증/정보보안6 수료증.pdf': '9fe86d78-90ff-4298-9e53-610efdc1acde',
-    '학원 수료증/프론트&백엔드풀스택개발자 수료증.pdf': '252cd855-d890-4152-a918-17a9f9484f4c',
-    '수상/알파코 출석 우수상.pdf': 'f44b0c3c-9b20-4f54-a002-29fcd63415ea',
-    '수상/알파코 태도 우수상.pdf': 'ce6f46f5-eddf-4c7c-8027-879c82ed0379',
-    '수상/알파코 프로젝트 우수상.pdf': '23ab1ea8-fbd9-4f8f-bc3b-e5426022d2a8',
-    '수상/알파코 학습 우수상.pdf': '5aa0844c-a7ee-445f-bc77-990467e11fdb',
-    '수상/휴먼 개근상.pdf': 'fd03a002-9ccf-4587-961d-ded3f16495a4',
-    '수상/휴먼 자동화 프로젝트 최우수상.pdf': '51c0dd68-c878-45bb-98b1-cfda96f39f36',
-    '이수증/이수증_1.pdf': 'b81d29c8-f7ba-4930-ba9e-44afe510bbc0',
-    '이수증/이수증_2.pdf': '03456b8c-f420-47ad-843d-716b5049eef8',
-    '이수증/이수증_3.pdf': '85c65fe8-897a-4a88-a54f-d678a58f832e',
-    '이수증/이수증_4.pdf': 'b52c1575-f47b-44d3-bb04-0e3ec626187c',
-    '이수증/이수증_5.pdf': 'e5404eef-4989-42f0-9914-e16b4990e620',
-    '이수증/이수증_6.pdf': '8125b6e5-f45e-425e-a5fd-ebd017dc1ccb',
-    '이수증/이수증_7.pdf': 'e82effb3-2185-44b6-bf95-5a40b02e46be',
-    '이수증/이수증_8.pdf': '87088659-8b5c-46e1-aa64-179057140b15',
-    '이수증/이수증_9.pdf': '9070210f-7d85-4a66-974f-97a0af11802e',
-    '이수증/이수증_10.pdf': '909f4d58-2527-4d00-b104-a2981aad683a',
-    '이수증/이수증_11.pdf': '35e9a9e7-b02f-421f-8b4f-c973326f3113',
-    '자격증/리눅스마스터.pdf': 'ebe7ac59-f1c4-4ea1-840a-ad904fc66a55',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/AI\uac1c\ubc1c\uc790 \uc218\ub8cc\uc99d.pdf': '73eae910-2ff1-4e92-bac5-e4d10848abe8',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub124\ud2b8\uc6cc\ud06c \uc218\ub8cc\uc99d.pdf': 'ade03022-8624-4dec-bb00-0dc8d18c1433',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub370\uc774\ud130 \ubd84\uc11d \uc218\ub8cc\uc99d.pdf': '9ee71e23-cb49-494d-b2bf-25ae143fc38e',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub3c4\ucee4 & \ucfe0\ubc84 \uc218\ub8cc\uc99d.pdf': '976bea00-eba5-4a42-b7b6-4966ea8f67aa',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub9ac\ub205\uc2a4 \uc218\ub8cc\uc99d.pdf': 'e4615cda-2181-4c37-af9b-c528293eb836',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub9ac\ub205\uc2a41 \uc218\ub8cc\uc99d.pdf': '11887c51-8313-41d6-bf99-03bfa94a8bc5',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub9ac\ub205\uc2a42 \uc218\ub8cc\uc99d.pdf': '4926ba48-bc9c-4956-8497-3c82b88e9062',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc11c\ubc84 \uad6c\uc131 \uc218\ub8cc\uc99d.pdf': '2698a634-dca3-490c-8360-4b2bdff60251',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc11c\ubc84 \uad6c\uc1311\ud68c\ucc28 \uc218\ub8cc\uc99d.pdf': '53227cd9-b2c1-4ae4-b35d-d3b70baa15a4',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc528\uc2a4\ucf541 \uc218\ub8cc\uc99d.pdf': 'b50426ac-31fe-46b7-85b7-077b0134eadc',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc528\uc2a4\ucf542 \uc218\ub8cc\uc99d.pdf': 'ad62f147-c2ff-4560-a0b0-163a049ffcaf',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5481 \uc218\ub8cc\uc99d.pdf': '1cf18e55-42a8-45e1-b796-a76a8d04b60d',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5482 \uc218\ub8cc\uc99d.pdf': '05f57cc9-b1d2-40c1-9a02-6c1edb69d50e',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5483 \uc218\ub8cc\uc99d.pdf': 'e31a6f01-0a52-4e5e-bc45-6238fc8e834c',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5484 \uc218\ub8cc\uc99d.pdf': '7a287b93-891a-4130-84ac-e5797654a8e2',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5485 \uc218\ub8cc\uc99d.pdf': 'ff083384-e059-4668-8e5d-b3127ff5c696',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5486 \uc218\ub8cc\uc99d.pdf': '9fe86d78-90ff-4298-9e53-610efdc1acde',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ud504\ub860\ud2b8&\ubc31\uc5d4\ub4dc\ud480\uc2a4\ud0dd\uac1c\ubc1c\uc790 \uc218\ub8cc\uc99d.pdf': '252cd855-d890-4152-a918-17a9f9484f4c',
+    '\uc218\uc0c1/\uc54c\ud30c\ucf54 \ucd9c\uc11d \uc6b0\uc218\uc0c1.pdf': 'f44b0c3c-9b20-4f54-a002-29fcd63415ea',
+    '\uc218\uc0c1/\uc54c\ud30c\ucf54 \ud0dc\ub3c4 \uc6b0\uc218\uc0c1.pdf': 'ce6f46f5-eddf-4c7c-8027-879c82ed0379',
+    '\uc218\uc0c1/\uc54c\ud30c\ucf54 \ud504\ub85c\uc81d\ud2b8 \uc6b0\uc218\uc0c1.pdf': '23ab1ea8-fbd9-4f8f-bc3b-e5426022d2a8',
+    '\uc218\uc0c1/\uc54c\ud30c\ucf54 \ud559\uc2b5 \uc6b0\uc218\uc0c1.pdf': '5aa0844c-a7ee-445f-bc77-990467e11fdb',
+    '\uc218\uc0c1/\ud734\uba3c \uac1c\uadfc\uc0c1.pdf': 'fd03a002-9ccf-4587-961d-ded3f16495a4',
+    '\uc218\uc0c1/\ud734\uba3c \uc790\ub3d9\ud654 \ud504\ub85c\uc81d\ud2b8 \ucd5c\uc6b0\uc218\uc0c1.pdf': '51c0dd68-c878-45bb-98b1-cfda96f39f36',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_1.pdf': 'b81d29c8-f7ba-4930-ba9e-44afe510bbc0',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_2.pdf': '03456b8c-f420-47ad-843d-716b5049eef8',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_3.pdf': '85c65fe8-897a-4a88-a54f-d678a58f832e',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_4.pdf': 'b52c1575-f47b-44d3-bb04-0e3ec626187c',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_5.pdf': 'e5404eef-4989-42f0-9914-e16b4990e620',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_6.pdf': '8125b6e5-f45e-425e-a5fd-ebd017dc1ccb',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_7.pdf': 'e82effb3-2185-44b6-bf95-5a40b02e46be',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_8.pdf': '87088659-8b5c-46e1-aa64-179057140b15',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_9.pdf': '9070210f-7d85-4a66-974f-97a0af11802e',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_10.pdf': '909f4d58-2527-4d00-b104-a2981aad683a',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_11.pdf': '35e9a9e7-b02f-421f-8b4f-c973326f3113',
+    '\uc790\uaca9\uc99d/\ub9ac\ub205\uc2a4\ub9c8\uc2a4\ud130.pdf': 'ebe7ac59-f1c4-4ea1-840a-ad904fc66a55',
   };
   function firebaseStorageDownloadUrlScript(objectPath, downloadToken) {
     return 'https://firebasestorage.googleapis.com/v0/b/' + FIREBASE_STORAGE_BUCKET + '/o/' + encodeURIComponent(objectPath) + '?alt=media&token=' + downloadToken;
@@ -860,16 +942,16 @@
     }).join('/');
   }
 
-  // 학원 수료증·과목 이수증 PDF는 Education 섹션에서만 링크 (Certificates 갤러리는 수상·자격증만)
+  // Awards/Certificates PDF defaults (Education certificates are linked in Education section only)
   var CERTIFICATES_SCHEMA_VERSION = 15;
   var DEFAULT_CERTIFICATES = [
-    { title: '<휴먼> 자동화 프로젝트 최우수상', image: pdfFromPages('수상/휴먼 자동화 프로젝트 최우수상.pdf'), type: 'pdf', category: '수상' },
-    { title: '<휴먼> 개근상', image: pdfFromPages('수상/휴먼 개근상.pdf'), type: 'pdf', category: '수상' },
-    { title: '<알파코> 출석 우수상', image: pdfFromPages('수상/알파코 출석 우수상.pdf'), type: 'pdf', category: '수상' },
-    { title: '<알파코> 태도 우수상', image: pdfFromPages('수상/알파코 태도 우수상.pdf'), type: 'pdf', category: '수상' },
-    { title: '<알파코> 프로젝트 우수상', image: pdfFromPages('수상/알파코 프로젝트 우수상.pdf'), type: 'pdf', category: '수상' },
-    { title: '<알파코> 학습 우수상', image: pdfFromPages('수상/알파코 학습 우수상.pdf'), type: 'pdf', category: '수상' },
-    { title: '리눅스마스터', image: pdfFromPages('자격증/리눅스마스터.pdf'), type: 'pdf', category: '자격증' }
+    { title: '<\ud734\uba3c> \uc790\ub3d9\ud654 \ud504\ub85c\uc81d\ud2b8 \ucd5c\uc6b0\uc218\uc0c1', image: pdfFromPages('\uc218\uc0c1/\ud734\uba3c \uc790\ub3d9\ud654 \ud504\ub85c\uc81d\ud2b8 \ucd5c\uc6b0\uc218\uc0c1.pdf'), type: 'pdf', category: '\uc218\uc0c1' },
+    { title: '<\ud734\uba3c> \uac1c\uadfc\uc0c1', image: pdfFromPages('\uc218\uc0c1/\ud734\uba3c \uac1c\uadfc\uc0c1.pdf'), type: 'pdf', category: '\uc218\uc0c1' },
+    { title: '<\uc54c\ud30c\ucf54> \ucd9c\uc11d \uc6b0\uc218\uc0c1', image: pdfFromPages('\uc218\uc0c1/\uc54c\ud30c\ucf54 \ucd9c\uc11d \uc6b0\uc218\uc0c1.pdf'), type: 'pdf', category: '\uc218\uc0c1' },
+    { title: '<\uc54c\ud30c\ucf54> \ud0dc\ub3c4 \uc6b0\uc218\uc0c1', image: pdfFromPages('\uc218\uc0c1/\uc54c\ud30c\ucf54 \ud0dc\ub3c4 \uc6b0\uc218\uc0c1.pdf'), type: 'pdf', category: '\uc218\uc0c1' },
+    { title: '<\uc54c\ud30c\ucf54> \ud504\ub85c\uc81d\ud2b8 \uc6b0\uc218\uc0c1', image: pdfFromPages('\uc218\uc0c1/\uc54c\ud30c\ucf54 \ud504\ub85c\uc81d\ud2b8 \uc6b0\uc218\uc0c1.pdf'), type: 'pdf', category: '\uc218\uc0c1' },
+    { title: '<\uc54c\ud30c\ucf54> \ud559\uc2b5 \uc6b0\uc218\uc0c1', image: pdfFromPages('\uc218\uc0c1/\uc54c\ud30c\ucf54 \ud559\uc2b5 \uc6b0\uc218\uc0c1.pdf'), type: 'pdf', category: '\uc218\uc0c1' },
+    { title: '\ub9ac\ub205\uc2a4\ub9c8\uc2a4\ud130', image: pdfFromPages('\uc790\uaca9\uc99d/\ub9ac\ub205\uc2a4\ub9c8\uc2a4\ud130.pdf'), type: 'pdf', category: '\uc790\uaca9\uc99d' }
   ];
   function getCertificates() {
     try {
@@ -884,10 +966,10 @@
       list = list.filter(function (item) {
         var img = (item.image || '').replace(/\\/g, '/');
         var cat = (item.category || '').trim();
-        if (cat === '근무 기록') return false;
-        if (cat === '수료증') return false;
-        if (cat === '이수증') return false;
-        if (img.indexOf('PDF/근무 기록/') === 0 || img.indexOf('/PDF/근무 기록/') >= 0 || img.indexOf('경력증명서_고용재') >= 0) return false;
+        if (cat === '\uadfc\ubb34 \uae30\ub85d') return false;
+        if (cat === '\uc218\ub8cc\uc99d') return false;
+        if (cat === '\uc774\uc218\uc99d') return false;
+        if (img.indexOf('PDF/\uadfc\ubb34 \uae30\ub85d/') === 0 || img.indexOf('/PDF/\uadfc\ubb34 \uae30\ub85d/') >= 0 || img.indexOf('\uacbd\ub825\uc99d\uba85\uc11c_\uace0\uc6a9\uc7ac') >= 0) return false;
         return true;
       });
       if (version < CERTIFICATES_SCHEMA_VERSION) {
@@ -931,46 +1013,45 @@
     var s = ('' + image).replace(/\\/g, '/');
     try {
       var dec = decodeURIComponent(s);
-      if (dec.indexOf('/PDF/수상/') >= 0) return '수상';
-      if (dec.indexOf('/PDF/자격증/') >= 0) return '자격증';
-      if (dec.indexOf('/PDF/학원 수료증/') >= 0) return '수료증';
-      if (dec.indexOf('/PDF/수료증/') >= 0) return '수료증';
-      if (dec.indexOf('/PDF/이수증/') >= 0) return '이수증';
+      if (dec.indexOf('/PDF/\uadfc\ubb34 \uae30\ub85d/') >= 0) return '\uadfc\ubb34 \uae30\ub85d';
+      if (dec.indexOf('/PDF/\uc218\ub8cc\uc99d/') >= 0) return '\uc218\ub8cc\uc99d';
+      if (dec.indexOf('/PDF/\uc774\uc218\uc99d/') >= 0) return '\uc774\uc218\uc99d';
+      if (dec.indexOf('/PDF/\uc790\uaca9\uc99d/') >= 0) return '\uc790\uaca9\uc99d';
+      if (dec.indexOf('/PDF/\uc218\uc0c1/') >= 0) return '\uc218\uc0c1';
     } catch (e) { /* ignore */ }
-    if (s.indexOf('PDF/수상/') === 0) return '수상';
-    if (s.indexOf('PDF/자격증/') === 0) return '자격증';
-    if (s.indexOf('PDF/학원 수료증/') === 0) return '수료증';
-    if (s.indexOf('PDF/수료증/') === 0) return '수료증';
-    if (s.indexOf('PDF/이수증/') === 0) return '이수증';
+    if (s.indexOf('PDF/\uadfc\ubb34 \uae30\ub85d/') === 0) return '\uadfc\ubb34 \uae30\ub85d';
+    if (s.indexOf('PDF/\uc218\ub8cc\uc99d/') === 0) return '\uc218\ub8cc\uc99d';
+    if (s.indexOf('PDF/\uc774\uc218\uc99d/') === 0) return '\uc774\uc218\uc99d';
+    if (s.indexOf('PDF/\uc790\uaca9\uc99d/') === 0) return '\uc790\uaca9\uc99d';
+    if (s.indexOf('PDF/\uc218\uc0c1/') === 0) return '\uc218\uc0c1';
     return '';
   }
   function inferEducationOrder(item) {
-    if (!item || item.category !== '수료증') return;
+    if (!item || item.category !== '\uc218\ub8cc\uc99d') return;
     var t = ((item.title || '') + ' ' + (item.image || '')).toLowerCase();
-    if (t.indexOf('데이터') >= 0 || t.indexOf('데이터 분석') >= 0) return 0;
-    if (t.indexOf('ai개발자') >= 0 || t.indexOf('ai 개발자') >= 0) return 1;
-    if (t.indexOf('도커') >= 0 || t.indexOf('쿠버') >= 0) return 2;
-    if (t.indexOf('리눅스 수료증') >= 0 || t.indexOf('리눅스 수료') >= 0) return 3;
-    if (t.indexOf('서버 구성') >= 0 || t.indexOf('서버구성') >= 0) return 4;
-    if (t.indexOf('네트워크') >= 0 || t.indexOf('시스코') >= 0) return 8;
+    if (t.indexOf('kic') >= 0) return 0;
+    if (t.indexOf('ai') >= 0) return 1;
+    if (t.indexOf('network') >= 0 || t.indexOf('\ub124\ud2b8\uc6cc\ud06c') >= 0) return 2;
+    if (t.indexOf('java') >= 0 || t.indexOf('frontend') >= 0) return 3;
+    if (t.indexOf('sql') >= 0 || t.indexOf('db') >= 0) return 4;
     return 9999;
   }
   function normalizeCertificateItem(item) {
     if (!item || typeof item !== 'object') return item;
-    if (!item.category) item.category = inferCategoryFromImage(item.image) || '기타';
-    if (item.category === '수료증' && item.educationOrder == null) item.educationOrder = inferEducationOrder(item);
+    if (!item.category) item.category = inferCategoryFromImage(item.image) || '\uae30\ud0c0';
+    if (item.category === '\uc218\ub8cc\uc99d' && item.educationOrder == null) item.educationOrder = inferEducationOrder(item);
     return item;
   }
   function groupCertificates(list) {
     var groups = {};
     (list || []).forEach(function (it) {
       normalizeCertificateItem(it);
-      var cat = (it.category || '').trim() || '기타';
+      var cat = (it.category || '').trim() || '\uae30\ud0c0';
       if (!groups[cat]) groups[cat] = [];
       groups[cat].push(it);
     });
-    if (groups['수료증'] && groups['수료증'].length) {
-      groups['수료증'].sort(function (a, b) {
+    if (groups['\uc218\ub8cc\uc99d'] && groups['\uc218\ub8cc\uc99d'].length) {
+      groups['\uc218\ub8cc\uc99d'].sort(function (a, b) {
         var oa = a.educationOrder != null ? a.educationOrder : 9999;
         var ob = b.educationOrder != null ? b.educationOrder : 9999;
         return oa - ob;
@@ -979,7 +1060,7 @@
     return groups;
   }
   function getCategoryOrder(groups) {
-    var base = ['수상', '자격증', '기타'];
+    var base = ['\uc218\ub8cc\uc99d', '\uc774\uc218\uc99d', '\uc790\uaca9\uc99d', '\uc218\uc0c1', '\uadfc\ubb34 \uae30\ub85d', '\uae30\ud0c0'];
     var cats = Object.keys(groups || {});
     cats.sort(function (a, b) {
       var ia = base.indexOf(a);
@@ -1043,7 +1124,7 @@
     if (isPdfItem(item)) card.classList.add('is-pdf');
     card.dataset.index = i;
     var title = (item.title || '').trim();
-    var certDelAria = escapeHtml(ptCert('deleteAria', '삭제'));
+    var certDelAria = escapeHtml(ptCert('deleteAria', 'Delete'));
     var inner = '';
     if (isPdfItem(item)) {
       var pdfSrc = item.image.indexOf('data:') === 0 ? pdfToViewUrl(item.image) : item.image;
@@ -1052,18 +1133,18 @@
       inner =
         '<div class="certificate-image">' +
         (safeSrc
-          ? '<iframe class="certificate-pdf-iframe" src="' + safeSrc + '" title="PDF 미리보기"></iframe>' +
-            '<div class="certificate-pdf-overlay" data-index="' + i + '" role="button" tabindex="0" aria-label="PDF 보기"></div>'
-          : '<span class="certificate-pdf-icon">📄</span>') +
-        '<button type="button" class="certificate-delete owner-only" aria-label="' + certDelAria + '">×</button></div>' +
+          ? '<iframe class="certificate-pdf-iframe" src="' + safeSrc + '" title="PDF preview"></iframe>' +
+            '<div class="certificate-pdf-overlay" data-index="' + i + '" role="button" tabindex="0" aria-label="Open PDF"></div>'
+          : '<span class="certificate-pdf-icon">PDF</span>') +
+        '<button type="button" class="certificate-delete owner-only" aria-label="' + certDelAria + '">?</button></div>' +
         '<div class="certificate-title">' + escapeHtml(title) + '</div>';
     } else {
       var imgHtml = item.image
         ? '<img src="' + item.image + '" alt="">'
-        : '<span style="font-size:2rem;opacity:0.5">📜</span>';
+        : '<span style="font-size:2rem;opacity:0.5">No image</span>';
       inner =
         '<div class="certificate-image">' + imgHtml +
-        '<button type="button" class="certificate-delete owner-only" aria-label="' + certDelAria + '">×</button></div>' +
+        '<button type="button" class="certificate-delete owner-only" aria-label="' + certDelAria + '">?</button></div>' +
         '<div class="certificate-title">' + escapeHtml(title) + '</div>';
     }
     card.innerHTML = inner;
@@ -1102,7 +1183,7 @@
     var normalized = (list || []).map(function (it) { return normalizeCertificateItem(it); });
     var groups = groupCertificates(normalized);
     var cats = getCategoryOrder(groups).filter(function (c) {
-      return c !== '기타' && c !== '수료증' && c !== '이수증';
+      return c !== '\uae30\ud0c0' && c !== '';
     });
 
     cats.forEach(function (cat) {
@@ -1118,11 +1199,11 @@
       var btnPrev = document.createElement('button');
       btnPrev.type = 'button';
       btnPrev.className = 'carousel-btn carousel-prev';
-      btnPrev.setAttribute('aria-label', '이전');
+      btnPrev.setAttribute('aria-label', 'Previous');
       var btnNext = document.createElement('button');
       btnNext.type = 'button';
       btnNext.className = 'carousel-btn carousel-next';
-      btnNext.setAttribute('aria-label', '다음');
+      btnNext.setAttribute('aria-label', 'Next');
 
       var scrollWrap = document.createElement('div');
       scrollWrap.className = 'certificate-carousel-scroll';
@@ -1227,14 +1308,14 @@
       title = title.trim();
       var image = certificateImageUrl && certificateImageUrl.value ? certificateImageUrl.value.trim() : '';
       if (!image && (!certificateImageFile || !certificateImageFile.files[0])) {
-        alert(ptCert('addNeedMedia', '상장 이미지 또는 PDF를 넣어주세요.'));
+        alert(ptCert('addNeedMedia', 'Please provide an image URL/file or a PDF URL.'));
         return;
       }
       function addCert(imgData, isPdf) {
         var list = getCertificates();
         var payload = { title: title, image: imgData || '' };
         if (isPdf) payload.type = 'pdf';
-        payload.category = inferCategoryFromImage(payload.image) || '기타';
+        payload.category = inferCategoryFromImage(payload.image) || '\uae30\ud0c0';
         list.push(payload);
         saveCertificates(list);
         renderCertificates();
@@ -1249,7 +1330,7 @@
       var isPdf = file.type === 'application/pdf';
       var maxSize = isPdf ? maxCertPdfSize : maxImageSize;
       if (file.size > maxSize) {
-        alert(isPdf ? ptCert('alertPdfTooBig', 'PDF는 2MB 이하로 올려주세요.') : ptCert('alertImageTooBig', '이미지는 400KB 이하로 올려주세요.'));
+        alert(isPdf ? ptCert('alertPdfTooBig', 'PDF is too large (max 2MB).') : ptCert('alertImageTooBig', 'Image is too large (max 400KB).'));
         return;
       }
       var reader = new FileReader();
@@ -1267,11 +1348,11 @@
     if (typeof portfolioT === 'function') {
       tgl.setAttribute('aria-label', open ? portfolioT('header.menuClose') : portfolioT('header.menuOpen'));
     } else {
-      tgl.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+      tgl.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     }
   }
 
-  // 모바일 메뉴 토글
+  // End
   var nav = document.querySelector('.nav');
   var toggle = document.querySelector('.nav-toggle');
   if (nav && toggle) {
@@ -1297,3 +1378,4 @@
     renderCertificates();
   });
 })();
+

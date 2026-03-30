@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Roy Koh | 개발 포트폴리오</title>
-  <meta name="description" content="그동안 개발한 프로젝트와 경험을 담은 포트폴리오입니다.">
+  <title>Roy Koh | Developer Portfolio</title>
+  <meta name="description" content="Portfolio of projects and experience.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,9 +24,9 @@
         <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
       </ul>
       <div class="nav-right">
-        <a href="/" class="react-main-icon" id="reactMainLink" title="React 포트폴리오(메인)" aria-label="React 메인으로 이동">R</a>
-        <button type="button" class="theme-toggle" id="themeToggle" aria-label="라이트 모드로 전환" title="라이트 모드">☀️</button>
-        <button class="nav-toggle" aria-label="메뉴 열기">
+        <a href="/" class="react-main-icon" id="reactMainLink" title="React portfolio (main)" aria-label="Go to React main site">R</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Light mode">?</button>
+        <button class="nav-toggle" aria-label="Toggle menu">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -37,9 +37,9 @@
     <section id="home" class="hero">
       <div class="hero-visual">
         <div class="hero-image-wrap hero-image-wrap--match-height">
-          <!-- 실제 파일: img/고용재_사진.jpg — 인코딩은 서버·브라우저 호환용. 폴백은 루트 /img/(Vite public 동일 파일) -->
-          <img src="img/%EA%B3%A0%EC%9A%A9%EC%9E%AC_%EC%82%AC%EC%A7%84.jpg" alt="고용재 프로필 사진" class="hero-image hero-image-1" width="800" height="1000" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='/img/%EA%B3%A0%EC%9A%A9%EC%9E%AC_%EC%82%AC%EC%A7%84.jpg'">
-          <img src="img/%EB%A1%9C%EA%B3%A0.png" alt="ROY.K 로고" class="hero-image hero-image-2" width="512" height="512" decoding="async" onerror="this.onerror=null;this.src='img/logo.png'">
+          <!-- image path: img/profile_photo.jpg with root fallback -->
+          <img src="img/%EA%B3%A0%EC%9A%A9%EC%9E%AC_%EC%82%AC%EC%A7%84.jpg" alt="Profile photo of Yongjae Koh" class="hero-image hero-image-1" width="800" height="1000" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='/img/%EA%B3%A0%EC%9A%A9%EC%9E%AC_%EC%82%AC%EC%A7%84.jpg'">
+          <img src="img/%EB%A1%9C%EA%B3%A0.png" alt="ROY.K logo" class="hero-image hero-image-2" width="512" height="512" decoding="async" onerror="this.onerror=null;this.src='img/logo.png'">
         </div>
       </div>
       <div class="hero-content">
@@ -48,11 +48,11 @@
           <span id="typing-text"></span><span class="cursor" aria-hidden="true">|</span>
         </h1>
         <p class="hero-desc" data-i18n="hero.desc">
-          그동안 만들었던 프로젝트와 사용한 기술을 정리한 공간입니다.
+          A collection of projects I have built and technologies I have used.
         </p>
         <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary" data-i18n="hero.viewProjects">프로젝트 보기</a>
-          <a href="/" class="btn btn-primary" id="heroReactBtn" target="_blank" rel="noopener noreferrer" title="React 포트폴리오(메인)" data-i18n="hero.viewReact">React로 보기</a>
+          <a href="#projects" class="btn btn-primary" data-i18n="hero.viewProjects">View projects</a>
+          <a href="/" class="btn btn-primary" id="heroReactBtn" target="_blank" rel="noopener noreferrer" title="React portfolio (main)" data-i18n="hero.viewReact">Open React site</a>
         </div>
       </div>
     </section>
@@ -63,26 +63,26 @@
         <div class="about-content about-content--profile">
           <div class="about-profile">
             <div class="about-profile-photo">
-              <img src="img/%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_%EA%B3%A0%EC%9A%A9%EC%9E%AC.jpg" alt="고용재 프로필 사진" width="200" height="250">
+              <img src="img/%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_%EA%B3%A0%EC%9A%A9%EC%9E%AC.jpg" alt="Profile photo of Yongjae Koh" width="200" height="250">
             </div>
             <div class="about-profile-fields">
               <div class="about-profile-row about-profile-row--pair">
                 <div class="about-profile-field">
-                  <span class="about-profile-label" data-i18n="about.name">이름</span>
-                  <span class="about-profile-value">고용재</span>
+                  <span class="about-profile-label" data-i18n="about.name">Name</span>
+                  <span class="about-profile-value">Yongjae Koh</span>
                 </div>
                 <div class="about-profile-field">
-                  <span class="about-profile-label" data-i18n="about.birth">생년월일</span>
+                  <span class="about-profile-label" data-i18n="about.birth">Date of birth</span>
                   <span class="about-profile-value">1988.10.20</span>
                 </div>
               </div>
               <div class="about-profile-row about-profile-row--pair">
                 <div class="about-profile-field">
-                  <span class="about-profile-label" data-i18n="about.nameEn">영문</span>
+                  <span class="about-profile-label" data-i18n="about.nameEn">English name</span>
                   <span class="about-profile-value">Koh Yongjae</span>
                 </div>
                 <div class="about-profile-field">
-                  <span class="about-profile-label" data-i18n="about.age">나이</span>
+                  <span class="about-profile-label" data-i18n="about.age">Age</span>
                   <span class="about-profile-value" id="about-man-age"></span>
                 </div>
               </div>
@@ -92,17 +92,17 @@
                   <span class="about-profile-value"><a href="mailto:roy.koh.ai88@gmail.com">roy.koh.ai88@gmail.com</a></span>
                 </div>
                 <div class="about-profile-field">
-                  <span class="about-profile-label" data-i18n="about.phoneLink">연락처</span>
+                  <span class="about-profile-label" data-i18n="about.phoneLink">Contact</span>
                   <span class="about-profile-value"><a href="#contact" class="about-scroll-contact" data-i18n="about.contactCta">contact</a></span>
                 </div>
               </div>
               <div class="about-profile-row about-profile-row--pair">
                 <div class="about-profile-field">
-                  <span class="about-profile-label" data-i18n="about.address">주소</span>
-                  <span class="about-profile-value" data-i18n="about.addressValue">서울시 노원구</span>
+                  <span class="about-profile-label" data-i18n="about.address">Location</span>
+                  <span class="about-profile-value" data-i18n="about.addressValue">Nowon-gu, Seoul</span>
                 </div>
                 <div class="about-profile-field">
-                  <span class="about-profile-label" data-i18n="about.role">지원 분야</span>
+                  <span class="about-profile-label" data-i18n="about.role">Focus</span>
                   <span class="about-profile-value" data-i18n="about.roleValue">LLM Developer</span>
                 </div>
               </div>
@@ -123,11 +123,11 @@
             </div>
           </div>
           <div class="about-intro-stack" lang="ko">
-            <p class="about-text about-intro-p">안녕하세요.</p>
-            <p class="about-text about-intro-p">꿈을 코드로 만드는 개발자 ROY(고용재)입니다. 사용하는 사람이 편하고 기분 좋게 쓸 수 있는 서비스를 만드는 걸 좋아합니다.</p>
-            <p class="about-text about-intro-p">AI를 서비스 기능으로 구현하는 개발에 집중하고 있고, 운영 경험을 바탕으로 개발자로 전환하여 LLM/RAG 기반 프로젝트를 수행하며 데이터부터 API, 서비스까지 이어 붙이는 경험을 쌓아 왔습니다. 기술 중심으로 성장하며 AI 개발자가 되길 희망하고, 웹·데이터·ML을 다루는 일에 관심이 많습니다.</p>
-            <p class="about-text about-intro-p">웹페이지 프론트와 백엔드 개발도 직접 해 보았고, Computer Vision 분야에서는 YOLO를 활용해 프로젝트를 진행해 본 경험이 있습니다.</p>
-            <p class="about-text about-intro-p">AI를 실제 서비스에 적용해 가치를 만드는 개발자로 기여하고 싶습니다. 궁금한 점이 있으시면 아래 연락처로 편하게 보내주세요.</p>
+            <p class="about-text about-intro-p">Hello,</p>
+            <p class="about-text about-intro-p">I'm ROY (Yongjae Koh), a developer who turns ideas into code.</p>
+            <p class="about-text about-intro-p">I focus on implementing AI as a core service feature, including LLM/RAG-based projects.</p>
+            <p class="about-text about-intro-p">I have worked on both frontend/backend web development and YOLO-based computer vision projects.</p>
+            <p class="about-text about-intro-p">If you have any questions, please feel free to contact me below.</p>
           </div>
         </div>
       </div>
@@ -136,7 +136,7 @@
     <section id="education" class="section education">
       <div class="container">
         <h2 class="section-title" data-i18n="education.title">Education</h2>
-        <p class="section-desc education-intro-desc"><span data-i18n="education.intro">이수한 교육 및 연수 과정입니다.</span><span class="education-cert-hint-text" data-i18n="education.hint">학원명을 클릭 하시면 수료증을 확인 하실 수 있습니다.</span></p>
+        <p class="section-desc education-intro-desc"><span data-i18n="education.intro">Training and courses I have completed.</span><span class="education-cert-hint-text" data-i18n="education.hint">Click an institution name to open the certificate PDF.</span></p>
         <div class="education-split" id="educationSplitRoot"></div>
       </div>
     </section>
@@ -147,42 +147,48 @@
           <h2 class="section-title" data-i18n="nav.projects">Projects</h2>
           <button type="button" class="btn btn-add owner-only" id="projectAddBtn" data-i18n="projects.add">+ Add Project</button>
         </div>
-        <p class="section-desc"><span data-i18n="projects.desc">그동안 개발한 프로젝트입니다.</span><span class="owner-only"> </span></p>
+        <p class="section-desc"><span data-i18n="projects.desc">Projects I have built.</span><span class="owner-only"> </span></p>
+        <div class="project-filter" id="projectFilter" role="group" data-i18n-attr="aria-label|projects.filterAria" aria-label="???? ???? ??">
+          <button type="button" class="project-filter-btn is-active" data-filter="all" data-i18n="projects.filterAll">??</button>
+          <button type="button" class="project-filter-btn" data-filter="personal" data-i18n="projects.filterPersonal">??</button>
+          <button type="button" class="project-filter-btn" data-filter="academy" data-i18n="projects.filterAcademy">????</button>
+        </div>
+        <p class="project-filter-empty" id="projectFilterEmpty" hidden data-i18n="projects.filterEmpty">? ??? ???? ????? ????.</p>
         <div class="project-carousel">
-          <button type="button" class="carousel-btn carousel-prev" id="projectCarouselPrev" data-i18n-attr="aria-label|projects.prevAria" aria-label="이전 프로젝트">‹</button>
+          <button type="button" class="carousel-btn carousel-prev" id="projectCarouselPrev" data-i18n-attr="aria-label|projects.prevAria" aria-label="Previous project">?</button>
           <div class="project-carousel-scroll" id="projectCarouselScroll">
             <div class="project-grid" id="projectGrid"></div>
           </div>
-          <button type="button" class="carousel-btn carousel-next" id="projectCarouselNext" data-i18n-attr="aria-label|projects.nextAria" aria-label="다음 프로젝트">›</button>
+          <button type="button" class="carousel-btn carousel-next" id="projectCarouselNext" data-i18n-attr="aria-label|projects.nextAria" aria-label="Next project">?</button>
         </div>
-        <p class="project-empty owner-only" id="projectEmpty" style="display: none;" data-i18n="projects.empty">등록된 프로젝트가 없습니다. "프로젝트 추가"로 첫 프로젝트를 올려보세요.</p>
+        <p class="project-empty owner-only" id="projectEmpty" style="display: none;" data-i18n="projects.empty">No projects yet. Use "Add Project" to add one.</p>
       </div>
 
-      <!-- 프로젝트 추가 모달 -->
+      <!-- Project add modal -->
       <div class="modal" id="projectModal" aria-hidden="true">
         <div class="modal-backdrop" id="projectModalBackdrop"></div>
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title">Add Project</h3>
-            <button type="button" class="modal-close modal-close-prominent" id="projectModalClose" aria-label="닫기">&times;</button>
+            <button type="button" class="modal-close modal-close-prominent" id="projectModalClose" aria-label="Close">&times;</button>
           </div>
           <form id="projectForm" class="project-form">
-            <label class="form-label">제목 <span class="required">*</span></label>
-            <input type="text" name="title" class="form-input" required placeholder="프로젝트 제목">
-            <label class="form-label">설명</label>
-            <textarea name="description" class="form-input form-textarea" rows="3" placeholder="프로젝트 설명을 적어주세요."></textarea>
-            <label class="form-label">기술 태그 <span class="form-hint">쉼표로 구분 (예: React, TypeScript)</span></label>
+            <label class="form-label">Title <span class="required">*</span></label>
+            <input type="text" name="title" class="form-input" required placeholder="Project title">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-input form-textarea" rows="3" placeholder="Write a short description."></textarea>
+            <label class="form-label">Tech tags <span class="form-hint">Comma-separated (e.g. React, TypeScript)</span></label>
             <input type="text" name="tags" class="form-input" placeholder="React, API, Node.js">
-            <label class="form-label">보기 링크</label>
+            <label class="form-label">Demo URL</label>
             <input type="url" name="demoUrl" class="form-input" placeholder="https://...">
-            <label class="form-label">코드 링크</label>
+            <label class="form-label">Code URL</label>
             <input type="url" name="codeUrl" class="form-input" placeholder="https://github.com/...">
-            <label class="form-label">이미지 <span class="form-hint">URL 또는 파일 선택</span></label>
-            <input type="url" name="imageUrl" class="form-input" placeholder="이미지 URL" id="projectImageUrl">
-            <input type="file" name="imageFile" class="form-input form-file" accept="image/*" id="projectImageFile" aria-label="이미지 파일 선택">
+            <label class="form-label">Image <span class="form-hint">Use URL or choose file</span></label>
+            <input type="url" name="imageUrl" class="form-input" placeholder="Image URL" id="projectImageUrl">
+            <input type="file" name="imageFile" class="form-input form-file" accept="image/*" id="projectImageFile" aria-label="Select image file">
             <div class="form-actions">
-              <button type="button" class="btn btn-ghost" id="projectFormCancel">취소</button>
-              <button type="submit" class="btn btn-primary">추가하기</button>
+              <button type="button" class="btn btn-ghost" id="projectFormCancel">Cancel</button>
+              <button type="submit" class="btn btn-primary">Add</button>
             </div>
           </form>
         </div>
@@ -193,22 +199,22 @@
       <div class="container">
         <h2 class="section-title" data-i18n="nav.skills">Skills</h2>
 
-        <div class="skills-filter-row skills-filter-row--tracks" role="tablist" data-i18n-attr="aria-label|skills.tabTrackAria" aria-label="스킬 분야">
+        <div class="skills-filter-row skills-filter-row--tracks" role="tablist" data-i18n-attr="aria-label|skills.tabTrackAria" aria-label="Skill tracks">
           <button type="button" role="tab" class="skills-filter-btn" data-skill-track="cv" aria-selected="false">CV</button>
           <button type="button" role="tab" class="skills-filter-btn is-active" data-skill-track="llm" aria-selected="true">LLM</button>
           <button type="button" role="tab" class="skills-filter-btn" data-skill-track="ml" aria-selected="false">ML</button>
           <button type="button" role="tab" class="skills-filter-btn" data-skill-track="web" aria-selected="false">Web</button>
-          <button type="button" role="tab" class="skills-filter-btn" data-skill-track="common" aria-selected="false" data-i18n-track-common>공통</button>
+          <button type="button" role="tab" class="skills-filter-btn" data-skill-track="common" aria-selected="false" data-i18n-track-common>Common</button>
         </div>
 
-        <div class="skills-filter-row skills-filter-row--tier" id="skillsTierRow" role="tablist" data-i18n-attr="aria-label|skills.tabTierAria" aria-label="숙련도">
-          <button type="button" role="tab" class="skills-filter-btn skills-filter-btn--tier is-active" data-skill-tier="strong" aria-selected="true" data-i18n-tier-strong>주력</button>
-          <button type="button" role="tab" class="skills-filter-btn skills-filter-btn--tier" data-skill-tier="experience" aria-selected="false" data-i18n-tier-exp>경험</button>
+        <div class="skills-filter-row skills-filter-row--tier" id="skillsTierRow" role="tablist" data-i18n-attr="aria-label|skills.tabTierAria" aria-label="Skill levels">
+          <button type="button" role="tab" class="skills-filter-btn skills-filter-btn--tier is-active" data-skill-tier="strong" aria-selected="true" data-i18n-tier-strong>Strong</button>
+          <button type="button" role="tab" class="skills-filter-btn skills-filter-btn--tier" data-skill-tier="experience" aria-selected="false" data-i18n-tier-exp>Experience</button>
         </div>
 
         <p class="skills-context-bar">
-          <span class="skills-context-prefix" data-i18n="skills.contextPrefix">현재 분류</span>
-          <span class="skills-context-value" id="skillsContextValue">LLM · 주력</span>
+          <span class="skills-context-prefix" data-i18n="skills.contextPrefix">Current filter</span>
+          <span class="skills-context-value" id="skillsContextValue">LLM ? Strong</span>
         </p>
 
         <div class="skills-wrap skills-wrap--filtered" id="skillsFilteredPanel" role="tabpanel" aria-live="polite"></div>
@@ -218,15 +224,15 @@
     <section id="awards" class="section award">
       <div class="container">
         <h2 class="section-title" data-i18n="awards.title">Award</h2>
-        <p class="section-desc award-intro-desc" data-i18n="awards.intro">교육 과정 등에서 받은 수상 실적입니다.</p>
+        <p class="section-desc award-intro-desc" data-i18n="awards.intro">Awards received during courses and training.</p>
 
         <div class="award-table-card">
           <table class="award-table">
             <thead>
               <tr>
-                <th scope="col" data-i18n="awards.colDate">날짜</th>
-                <th scope="col" data-i18n="awards.colName">수상명</th>
-                <th scope="col" data-i18n="awards.colIssuer">발급처</th>
+                <th scope="col" data-i18n="awards.colDate">Date</th>
+                <th scope="col" data-i18n="awards.colName">Award</th>
+                <th scope="col" data-i18n="awards.colIssuer">Issuer</th>
               </tr>
             </thead>
             <tbody id="staticAwardTbody"></tbody>
@@ -238,17 +244,17 @@
     <section id="certificates" class="section certificates">
       <div class="container">
         <h2 class="section-title" data-i18n="certificates.title">Certificates</h2>
-        <p class="section-desc" data-i18n="certificates.desc">국가·기관에서 발급한 자격·면허입니다.</p>
+        <p class="section-desc" data-i18n="certificates.desc">Licenses and certificates issued by institutions.</p>
 
         <div class="award-table-card">
           <table class="award-table award-table--license">
             <thead>
               <tr>
-                <th scope="col" data-i18n="certificates.colDate">취득일자</th>
-                <th scope="col" data-i18n="certificates.colCountry">국가</th>
-                <th scope="col" data-i18n="certificates.colName">자격증/면허증</th>
-                <th scope="col" data-i18n="certificates.colGrade">등급</th>
-                <th scope="col" data-i18n="certificates.colIssuer">발급처</th>
+                <th scope="col" data-i18n="certificates.colDate">Date</th>
+                <th scope="col" data-i18n="certificates.colCountry">Country</th>
+                <th scope="col" data-i18n="certificates.colName">Certificate/License</th>
+                <th scope="col" data-i18n="certificates.colGrade">Grade</th>
+                <th scope="col" data-i18n="certificates.colIssuer">Issuer</th>
               </tr>
             </thead>
             <tbody id="staticCertTbody"></tbody>
@@ -256,31 +262,31 @@
         </div>
       </div>
     </section>
-
-    <section id="contact" class="section contact">
-      <div class="container">
-        <h2 class="section-title" data-i18n="contact.title">Contact</h2>
-        <p class="section-desc" data-i18n="contact.desc">궁금한 점이 있으시면 아래로 연락 주세요.</p>
-        <div class="contact-panel">
-          <div class="contact-links">
-            <a href="mailto:roy.koh.ai88@gmail.com" class="contact-link">Email</a>
-            <a href="tel:01051378572" class="contact-link">Phone</a>
-            <a href="https://github.com/roykoh88" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
-            <!-- <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a> -->
-            <a href="https://javakid.tistory.com" target="_blank" rel="noopener noreferrer" class="contact-link">blog</a>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="footer">
-    <p class="footer-line">© <span id="year"></span> Roy Koh. <span data-i18n="footer.rights">All rights reserved.</span> <span id="ownerModeWrap"><button type="button" class="footer-owner-link" id="ownerModeToggle">편집 모드</button></span></p>
-    <p class="footer-lang" role="group" data-i18n-attr="aria-label|footer.langAria" aria-label="표시 언어">
-      <button type="button" class="footer-lang-btn" id="footerLangKo" aria-pressed="true" data-i18n="footer.langKo">한국어</button>
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-panel">
+        <h2 class="footer-contact-title" data-i18n="contact.title">Contact</h2>
+        <p class="footer-contact-desc" data-i18n="contact.desc">If you have any questions, please contact me below.</p>
+        <div class="contact-links footer-contact-links">
+          <a href="mailto:roy.koh.ai88@gmail.com" class="contact-link">Email</a>
+          <a href="tel:01051378572" class="contact-link">Phone</a>
+          <a href="https://github.com/roykoh88" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
+          <a href="https://open.kakao.com/o/sVwpT3ni" target="_blank" rel="noopener noreferrer" class="contact-link contact-link--kakao"><img class="contact-link__kakao-icon contact-link__kakao-icon--light" src="img/talk_no_bg.png" alt="" width="20" height="20" decoding="async" aria-hidden="true" /><img class="contact-link__kakao-icon contact-link__kakao-icon--dark" src="img/talk_white.png" alt="" width="20" height="20" decoding="async" aria-hidden="true" />&#xCE74;&#xCE74;&#xC624;&#xD1A1;</a>
+          <!-- <a href="https://discord.gg/your-invite-code" target="_blank" rel="noopener noreferrer" class="contact-link">Discord</a> -->
+          <!-- <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a> -->
+          <a href="https://javakid.tistory.com" target="_blank" rel="noopener noreferrer" class="contact-link contact-link--tistory"><img class="contact-link__tistory-icon contact-link__tistory-icon--light" src="img/dots_no_bg.png" alt="" width="20" height="20" decoding="async" aria-hidden="true" /><img class="contact-link__tistory-icon contact-link__tistory-icon--dark" src="img/dots_white.png" alt="" width="20" height="20" decoding="async" aria-hidden="true" />blog</a>
+        </div>
+        <p class="footer-line">? <span id="year"></span> Roy Koh. <span data-i18n="footer.rights">All rights reserved.</span> <span id="ownerModeWrap"><button type="button" class="footer-owner-link" id="ownerModeToggle">Edit mode</button></span></p>
+      </div>
+    </div>
+    <!-- Footer language switch is temporarily disabled. -->
+    <!-- <p class="footer-lang" role="group" data-i18n-attr="aria-label|footer.langAria" aria-label="Language">
+      <button type="button" class="footer-lang-btn" id="footerLangKo" aria-pressed="true" data-i18n="footer.langKo">Korean</button>
       <span class="footer-lang-sep" aria-hidden="true">/</span>
       <button type="button" class="footer-lang-btn" id="footerLangEn" aria-pressed="false" data-i18n="footer.langEn">English</button>
-    </p>
+    </p> -->
   </footer>
 
   <script src="static-i18n.js?v=3"></script>

@@ -3,7 +3,41 @@ import {
   PROJECTS_KEY,
   PROJECT_DISPLAY_ORDER,
   SKIP_TITLES,
+  defaultProjectByTitle,
 } from './constants'
+
+function mergeInstitutionFromDefaults(list) {
+  let changed = false
+  for (const p of list) {
+    let def = defaultProjectByTitle(p.title)
+    if (!def && p.titleEn) {
+      def = defaultProjectByTitle(String(p.titleEn).trim())
+    }
+    if (!def) continue
+    if (
+      (!p.projectType || String(p.projectType).trim() === '') &&
+      def.projectType
+    ) {
+      p.projectType = def.projectType
+      changed = true
+    }
+    if (
+      (!p.institution || String(p.institution).trim() === '') &&
+      def.institution
+    ) {
+      p.institution = def.institution
+      changed = true
+    }
+    if (
+      (!p.institutionEn || String(p.institutionEn).trim() === '') &&
+      def.institutionEn
+    ) {
+      p.institutionEn = def.institutionEn
+      changed = true
+    }
+  }
+  return changed
+}
 
 export function readProjects() {
   try {
@@ -27,6 +61,10 @@ export function readProjects() {
       localStorage.setItem(PROJECTS_KEY, JSON.stringify(list))
     }
 
+    if (mergeInstitutionFromDefaults(list)) {
+      localStorage.setItem(PROJECTS_KEY, JSON.stringify(list))
+    }
+
     return list
   } catch {
     return DEFAULT_PROJECTS.map((p) => ({ ...p }))
@@ -46,7 +84,7 @@ export function sortProjectsByDisplayOrder(list) {
     if (i >= 0) ordered.push({ p, i })
     else rest.push(p)
   })
-  ordered.sort((a, b) => a.i - b.i)
+  ordered.sort((a, b) => b.i - a.i)
   return [...ordered.map((x) => x.p), ...rest]
 }
 

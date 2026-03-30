@@ -1,7 +1,7 @@
 /**
- * 정적 HTML용 i18n — React messages.js / education·awards·cert 데이터와 맞춤
- * PDF URL: `react-app/src/config/portfolioPages.js` 의 FIREBASE_STORAGE_DOWNLOAD_TOKENS 와 동기화
- * localStorage 키: portfolioLang ('ko' | 'en')
+ * \uc815\uc801 HTML\uc6a9 i18n \u2014 React messages.js / education\u00b7awards\u00b7cert \ub370\uc774\ud130\uc640 \ub9de\ucda4
+ * PDF URL: `react-app/src/config/portfolioPages.js` \uc758 FIREBASE_STORAGE_DOWNLOAD_TOKENS \uc640 \ub3d9\uae30\ud654
+ * localStorage \ud0a4: portfolioLang ('ko' | 'en')
  */
 (function (global) {
   var LANG_KEY = 'portfolioLang'
@@ -10,42 +10,42 @@
 
   var FIREBASE_STORAGE_BUCKET = 'yjkohproject.firebasestorage.app'
   var FIREBASE_STORAGE_DOWNLOAD_TOKENS = {
-    '학원 수료증/AI개발자 수료증.pdf': '73eae910-2ff1-4e92-bac5-e4d10848abe8',
-    '학원 수료증/네트워크 수료증.pdf': 'ade03022-8624-4dec-bb00-0dc8d18c1433',
-    '학원 수료증/데이터 분석 수료증.pdf': '9ee71e23-cb49-494d-b2bf-25ae143fc38e',
-    '학원 수료증/도커 & 쿠버 수료증.pdf': '976bea00-eba5-4a42-b7b6-4966ea8f67aa',
-    '학원 수료증/리눅스 수료증.pdf': 'e4615cda-2181-4c37-af9b-c528293eb836',
-    '학원 수료증/리눅스1 수료증.pdf': '11887c51-8313-41d6-bf99-03bfa94a8bc5',
-    '학원 수료증/리눅스2 수료증.pdf': '4926ba48-bc9c-4956-8497-3c82b88e9062',
-    '학원 수료증/서버 구성 수료증.pdf': '2698a634-dca3-490c-8360-4b2bdff60251',
-    '학원 수료증/서버 구성1회차 수료증.pdf': '53227cd9-b2c1-4ae4-b35d-d3b70baa15a4',
-    '학원 수료증/씨스코1 수료증.pdf': 'b50426ac-31fe-46b7-85b7-077b0134eadc',
-    '학원 수료증/씨스코2 수료증.pdf': 'ad62f147-c2ff-4560-a0b0-163a049ffcaf',
-    '학원 수료증/정보보안1 수료증.pdf': '1cf18e55-42a8-45e1-b796-a76a8d04b60d',
-    '학원 수료증/정보보안2 수료증.pdf': '05f57cc9-b1d2-40c1-9a02-6c1edb69d50e',
-    '학원 수료증/정보보안3 수료증.pdf': 'e31a6f01-0a52-4e5e-bc45-6238fc8e834c',
-    '학원 수료증/정보보안4 수료증.pdf': '7a287b93-891a-4130-84ac-e5797654a8e2',
-    '학원 수료증/정보보안5 수료증.pdf': 'ff083384-e059-4668-8e5d-b3127ff5c696',
-    '학원 수료증/정보보안6 수료증.pdf': '9fe86d78-90ff-4298-9e53-610efdc1acde',
-    '학원 수료증/프론트&백엔드풀스택개발자 수료증.pdf': '252cd855-d890-4152-a918-17a9f9484f4c',
-    '수상/알파코 출석 우수상.pdf': 'f44b0c3c-9b20-4f54-a002-29fcd63415ea',
-    '수상/알파코 태도 우수상.pdf': 'ce6f46f5-eddf-4c7c-8027-879c82ed0379',
-    '수상/알파코 프로젝트 우수상.pdf': '23ab1ea8-fbd9-4f8f-bc3b-e5426022d2a8',
-    '수상/알파코 학습 우수상.pdf': '5aa0844c-a7ee-445f-bc77-990467e11fdb',
-    '수상/휴먼 개근상.pdf': 'fd03a002-9ccf-4587-961d-ded3f16495a4',
-    '수상/휴먼 자동화 프로젝트 최우수상.pdf': '51c0dd68-c878-45bb-98b1-cfda96f39f36',
-    '이수증/이수증_1.pdf': 'b81d29c8-f7ba-4930-ba9e-44afe510bbc0',
-    '이수증/이수증_2.pdf': '03456b8c-f420-47ad-843d-716b5049eef8',
-    '이수증/이수증_3.pdf': '85c65fe8-897a-4a88-a54f-d678a58f832e',
-    '이수증/이수증_4.pdf': 'b52c1575-f47b-44d3-bb04-0e3ec626187c',
-    '이수증/이수증_5.pdf': 'e5404eef-4989-42f0-9914-e16b4990e620',
-    '이수증/이수증_6.pdf': '8125b6e5-f45e-425e-a5fd-ebd017dc1ccb',
-    '이수증/이수증_7.pdf': 'e82effb3-2185-44b6-bf95-5a40b02e46be',
-    '이수증/이수증_8.pdf': '87088659-8b5c-46e1-aa64-179057140b15',
-    '이수증/이수증_9.pdf': '9070210f-7d85-4a66-974f-97a0af11802e',
-    '이수증/이수증_10.pdf': '909f4d58-2527-4d00-b104-a2981aad683a',
-    '이수증/이수증_11.pdf': '35e9a9e7-b02f-421f-8b4f-c973326f3113',
-    '자격증/리눅스마스터.pdf': 'ebe7ac59-f1c4-4ea1-840a-ad904fc66a55',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/AI\uac1c\ubc1c\uc790 \uc218\ub8cc\uc99d.pdf': '73eae910-2ff1-4e92-bac5-e4d10848abe8',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub124\ud2b8\uc6cc\ud06c \uc218\ub8cc\uc99d.pdf': 'ade03022-8624-4dec-bb00-0dc8d18c1433',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub370\uc774\ud130 \ubd84\uc11d \uc218\ub8cc\uc99d.pdf': '9ee71e23-cb49-494d-b2bf-25ae143fc38e',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub3c4\ucee4 & \ucfe0\ubc84 \uc218\ub8cc\uc99d.pdf': '976bea00-eba5-4a42-b7b6-4966ea8f67aa',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub9ac\ub205\uc2a4 \uc218\ub8cc\uc99d.pdf': 'e4615cda-2181-4c37-af9b-c528293eb836',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub9ac\ub205\uc2a41 \uc218\ub8cc\uc99d.pdf': '11887c51-8313-41d6-bf99-03bfa94a8bc5',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ub9ac\ub205\uc2a42 \uc218\ub8cc\uc99d.pdf': '4926ba48-bc9c-4956-8497-3c82b88e9062',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc11c\ubc84 \uad6c\uc131 \uc218\ub8cc\uc99d.pdf': '2698a634-dca3-490c-8360-4b2bdff60251',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc11c\ubc84 \uad6c\uc1311\ud68c\ucc28 \uc218\ub8cc\uc99d.pdf': '53227cd9-b2c1-4ae4-b35d-d3b70baa15a4',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc528\uc2a4\ucf541 \uc218\ub8cc\uc99d.pdf': 'b50426ac-31fe-46b7-85b7-077b0134eadc',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc528\uc2a4\ucf542 \uc218\ub8cc\uc99d.pdf': 'ad62f147-c2ff-4560-a0b0-163a049ffcaf',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5481 \uc218\ub8cc\uc99d.pdf': '1cf18e55-42a8-45e1-b796-a76a8d04b60d',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5482 \uc218\ub8cc\uc99d.pdf': '05f57cc9-b1d2-40c1-9a02-6c1edb69d50e',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5483 \uc218\ub8cc\uc99d.pdf': 'e31a6f01-0a52-4e5e-bc45-6238fc8e834c',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5484 \uc218\ub8cc\uc99d.pdf': '7a287b93-891a-4130-84ac-e5797654a8e2',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5485 \uc218\ub8cc\uc99d.pdf': 'ff083384-e059-4668-8e5d-b3127ff5c696',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\uc815\ubcf4\ubcf4\uc5486 \uc218\ub8cc\uc99d.pdf': '9fe86d78-90ff-4298-9e53-610efdc1acde',
+    '\ud559\uc6d0 \uc218\ub8cc\uc99d/\ud504\ub860\ud2b8&\ubc31\uc5d4\ub4dc\ud480\uc2a4\ud0dd\uac1c\ubc1c\uc790 \uc218\ub8cc\uc99d.pdf': '252cd855-d890-4152-a918-17a9f9484f4c',
+    '\uc218\uc0c1/\uc54c\ud30c\ucf54 \ucd9c\uc11d \uc6b0\uc218\uc0c1.pdf': 'f44b0c3c-9b20-4f54-a002-29fcd63415ea',
+    '\uc218\uc0c1/\uc54c\ud30c\ucf54 \ud0dc\ub3c4 \uc6b0\uc218\uc0c1.pdf': 'ce6f46f5-eddf-4c7c-8027-879c82ed0379',
+    '\uc218\uc0c1/\uc54c\ud30c\ucf54 \ud504\ub85c\uc81d\ud2b8 \uc6b0\uc218\uc0c1.pdf': '23ab1ea8-fbd9-4f8f-bc3b-e5426022d2a8',
+    '\uc218\uc0c1/\uc54c\ud30c\ucf54 \ud559\uc2b5 \uc6b0\uc218\uc0c1.pdf': '5aa0844c-a7ee-445f-bc77-990467e11fdb',
+    '\uc218\uc0c1/\ud734\uba3c \uac1c\uadfc\uc0c1.pdf': 'fd03a002-9ccf-4587-961d-ded3f16495a4',
+    '\uc218\uc0c1/\ud734\uba3c \uc790\ub3d9\ud654 \ud504\ub85c\uc81d\ud2b8 \ucd5c\uc6b0\uc218\uc0c1.pdf': '51c0dd68-c878-45bb-98b1-cfda96f39f36',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_1.pdf': 'b81d29c8-f7ba-4930-ba9e-44afe510bbc0',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_2.pdf': '03456b8c-f420-47ad-843d-716b5049eef8',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_3.pdf': '85c65fe8-897a-4a88-a54f-d678a58f832e',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_4.pdf': 'b52c1575-f47b-44d3-bb04-0e3ec626187c',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_5.pdf': 'e5404eef-4989-42f0-9914-e16b4990e620',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_6.pdf': '8125b6e5-f45e-425e-a5fd-ebd017dc1ccb',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_7.pdf': 'e82effb3-2185-44b6-bf95-5a40b02e46be',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_8.pdf': '87088659-8b5c-46e1-aa64-179057140b15',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_9.pdf': '9070210f-7d85-4a66-974f-97a0af11802e',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_10.pdf': '909f4d58-2527-4d00-b104-a2981aad683a',
+    '\uc774\uc218\uc99d/\uc774\uc218\uc99d_11.pdf': '35e9a9e7-b02f-421f-8b4f-c973326f3113',
+    '\uc790\uaca9\uc99d/\ub9ac\ub205\uc2a4\ub9c8\uc2a4\ud130.pdf': 'ebe7ac59-f1c4-4ea1-840a-ad904fc66a55',
   }
 
   function firebaseStorageDownloadUrl(objectPath, downloadToken) {
@@ -53,7 +53,7 @@
     return 'https://firebasestorage.googleapis.com/v0/b/' + FIREBASE_STORAGE_BUCKET + '/o/' + encoded + '?alt=media&token=' + downloadToken
   }
 
-  /** URL 인코딩된 PDF 상대 경로 → 디코딩 (자격증 행처럼 폴더명만 디코딩 안 된 경우는 세그먼트별 처리) */
+  /** URL \uc778\ucf54\ub529\ub41c PDF \uc0c1\ub300 \uacbd\ub85c \u2192 \ub514\ucf54\ub529 (\uc790\uaca9\uc99d \ud589\ucc98\ub7fc \ud3f4\ub354\uba85\ub9cc \ub514\ucf54\ub529 \uc548 \ub41c \uacbd\uc6b0\ub294 \uc138\uadf8\uba3c\ud2b8\ubcc4 \ucc98\ub9ac) */
   function decodedPdfRelativePath(s) {
     if (!s) return ''
     try {
@@ -81,7 +81,7 @@
 
   var MESSAGES = {
     ko: {
-      meta: { title: 'Roy Koh | 개발 포트폴리오', desc: '그동안 개발한 프로젝트와 경험을 담은 포트폴리오입니다.' },
+      meta: { title: 'Roy Koh | \uac1c\ubc1c \ud3ec\ud2b8\ud3f4\ub9ac\uc624', desc: '\uadf8\ub3d9\uc548 \uac1c\ubc1c\ud55c \ud504\ub85c\uc81d\ud2b8\uc640 \uacbd\ud5d8\uc744 \ub2f4\uc740 \ud3ec\ud2b8\ud3f4\ub9ac\uc624\uc785\ub2c8\ub2e4.' },
       nav: {
         about: 'About',
         education: 'Education',
@@ -91,123 +91,130 @@
         certificates: 'Certificates',
         contact: 'Contact',
       },
-      reactLinkTitle: 'React 포트폴리오(메인)',
-      reactLinkAria: 'React 메인으로 이동',
+      reactLinkTitle: 'React \ud3ec\ud2b8\ud3f4\ub9ac\uc624(\uba54\uc778)',
+      reactLinkAria: 'React \uba54\uc778\uc73c\ub85c \uc774\ub3d9',
       header: {
-        themeToDark: '다크 모드로 전환',
-        themeToLight: '라이트 모드로 전환',
-        themeDark: '다크 모드',
-        themeLight: '라이트 모드',
-        menuOpen: '메뉴 열기',
-        menuClose: '메뉴 닫기',
+        themeToDark: '\ub2e4\ud06c \ubaa8\ub4dc\ub85c \uc804\ud658',
+        themeToLight: '\ub77c\uc774\ud2b8 \ubaa8\ub4dc\ub85c \uc804\ud658',
+        themeDark: '\ub2e4\ud06c \ubaa8\ub4dc',
+        themeLight: '\ub77c\uc774\ud2b8 \ubaa8\ub4dc',
+        menuOpen: '\uba54\ub274 \uc5f4\uae30',
+        menuClose: '\uba54\ub274 \ub2eb\uae30',
       },
       hero: {
         tag: 'Developer Portfolio',
-        typing: '안녕하세요\n꿈을 개발하는 개발자\n Roy 입니다.',
-        desc: '그동안 만들었던 프로젝트와 사용한 기술을 정리한 공간입니다.',
-        viewProjects: '프로젝트 보기',
-        viewReact: 'React로 보기',
-        reactBtnTitle: 'React 포트폴리오(메인)',
-        photoAlt: '고용재 프로필 사진',
-        logoAlt: 'ROY.K 로고',
+        typing: '\uc548\ub155\ud558\uc138\uc694\n\uafc8\uc744 \uac1c\ubc1c\ud558\ub294 \uac1c\ubc1c\uc790\n Roy \uc785\ub2c8\ub2e4.',
+        desc: '\uadf8\ub3d9\uc548 \ub9cc\ub4e4\uc5c8\ub358 \ud504\ub85c\uc81d\ud2b8\uc640 \uc0ac\uc6a9\ud55c \uae30\uc220\uc744 \uc815\ub9ac\ud55c \uacf5\uac04\uc785\ub2c8\ub2e4.',
+        viewProjects: '\ud504\ub85c\uc81d\ud2b8 \ubcf4\uae30',
+        viewReact: 'React\ub85c \ubcf4\uae30',
+        reactBtnTitle: 'React \ud3ec\ud2b8\ud3f4\ub9ac\uc624(\uba54\uc778)',
+        photoAlt: '\uace0\uc6a9\uc7ac \ud504\ub85c\ud544 \uc0ac\uc9c4',
+        logoAlt: 'ROY.K \ub85c\uace0',
       },
       about: {
         title: 'About',
-        name: '이름',
-        birth: '생년월일',
-        nameEn: '영문',
-        age: '나이',
-        ageUnit: '(만)',
-        phoneLink: '연락처',
+        name: '\uc774\ub984',
+        birth: '\uc0dd\ub144\uc6d4\uc77c',
+        nameEn: '\uc601\ubb38',
+        age: '\ub098\uc774',
+        ageUnit: '(\ub9cc)',
+        phoneLink: '\uc5f0\ub77d\ucc98',
         contactCta: 'contact',
-        address: '주소',
-        role: '지원 분야',
-        addressValue: '서울시 노원구',
+        address: '\uc8fc\uc18c',
+        role: '\uc9c0\uc6d0 \ubd84\uc57c',
+        addressValue: '\uc11c\uc6b8\uc2dc \ub178\uc6d0\uad6c',
         roleValue: 'LLM Developer',
-        photoAlt: '고용재 프로필 사진',
+        photoAlt: '\uace0\uc6a9\uc7ac \ud504\ub85c\ud544 \uc0ac\uc9c4',
         intro: [
-          '안녕하세요.',
-          '꿈을 코드로 만드는 개발자 ROY(고용재)입니다. 사용하는 사람이 편하고 기분 좋게 쓸 수 있는 서비스를 만드는 걸 좋아합니다.',
-          'AI를 서비스 기능으로 구현하는 개발에 집중하고 있고, 운영 경험을 바탕으로 개발자로 전환하여 LLM/RAG 기반 프로젝트를 수행하며 데이터부터 API, 서비스까지 이어 붙이는 경험을 쌓아 왔습니다. 기술 중심으로 성장하며 AI 개발자가 되길 희망하고, 웹·데이터·ML을 다루는 일에 관심이 많습니다.',
-          '웹페이지 프론트와 백엔드 개발도 직접 해 보았고, Computer Vision 분야에서는 YOLO를 활용해 프로젝트를 진행해 본 경험이 있습니다.',
-          'AI를 실제 서비스에 적용해 가치를 만드는 개발자로 기여하고 싶습니다. 궁금한 점이 있으시면 아래 연락처로 편하게 보내주세요.',
+          '\uc548\ub155\ud558\uc138\uc694.',
+          '\uafc8\uc744 \ucf54\ub4dc\ub85c \ub9cc\ub4dc\ub294 \uac1c\ubc1c\uc790 ROY(\uace0\uc6a9\uc7ac)\uc785\ub2c8\ub2e4. \uc0ac\uc6a9\ud558\ub294 \uc0ac\ub78c\uc774 \ud3b8\ud558\uace0 \uae30\ubd84 \uc88b\uac8c \uc4f8 \uc218 \uc788\ub294 \uc11c\ube44\uc2a4\ub97c \ub9cc\ub4dc\ub294 \uac78 \uc88b\uc544\ud569\ub2c8\ub2e4.',
+          'AI\ub97c \uc11c\ube44\uc2a4 \uae30\ub2a5\uc73c\ub85c \uad6c\ud604\ud558\ub294 \uac1c\ubc1c\uc5d0 \uc9d1\uc911\ud558\uace0 \uc788\uace0, \uc6b4\uc601 \uacbd\ud5d8\uc744 \ubc14\ud0d5\uc73c\ub85c \uac1c\ubc1c\uc790\ub85c \uc804\ud658\ud558\uc5ec LLM/RAG \uae30\ubc18 \ud504\ub85c\uc81d\ud2b8\ub97c \uc218\ud589\ud558\uba70 \ub370\uc774\ud130\ubd80\ud130 API, \uc11c\ube44\uc2a4\uae4c\uc9c0 \uc774\uc5b4 \ubd99\uc774\ub294 \uacbd\ud5d8\uc744 \uc313\uc544 \uc654\uc2b5\ub2c8\ub2e4. \uae30\uc220 \uc911\uc2ec\uc73c\ub85c \uc131\uc7a5\ud558\uba70 AI \uac1c\ubc1c\uc790\uac00 \ub418\uae38 \ud76c\ub9dd\ud558\uace0, \uc6f9\u00b7\ub370\uc774\ud130\u00b7ML\uc744 \ub2e4\ub8e8\ub294 \uc77c\uc5d0 \uad00\uc2ec\uc774 \ub9ce\uc2b5\ub2c8\ub2e4.',
+          '\uc6f9\ud398\uc774\uc9c0 \ud504\ub860\ud2b8\uc640 \ubc31\uc5d4\ub4dc \uac1c\ubc1c\ub3c4 \uc9c1\uc811 \ud574 \ubcf4\uc558\uace0, Computer Vision \ubd84\uc57c\uc5d0\uc11c\ub294 YOLO\ub97c \ud65c\uc6a9\ud574 \ud504\ub85c\uc81d\ud2b8\ub97c \uc9c4\ud589\ud574 \ubcf8 \uacbd\ud5d8\uc774 \uc788\uc2b5\ub2c8\ub2e4.',
+          'AI\ub97c \uc2e4\uc81c \uc11c\ube44\uc2a4\uc5d0 \uc801\uc6a9\ud574 \uac00\uce58\ub97c \ub9cc\ub4dc\ub294 \uac1c\ubc1c\uc790\ub85c \uae30\uc5ec\ud558\uace0 \uc2f6\uc2b5\ub2c8\ub2e4. \uad81\uae08\ud55c \uc810\uc774 \uc788\uc73c\uc2dc\uba74 \uc544\ub798 \uc5f0\ub77d\ucc98\ub85c \ud3b8\ud558\uac8c \ubcf4\ub0b4\uc8fc\uc138\uc694.',
         ],
       },
       education: {
         title: 'Education',
-        intro: '이수한 교육 및 연수 과정입니다.',
-        hint: '학원명을 클릭 하시면 수료증을 확인 하실 수 있습니다.',
-        certPdfTitle: '수료증 PDF',
-        certCountTitle: '수료증 {n}건 — 펼쳐서 선택',
-        certBadge: '· 수료증 {n}',
-        certFallback: '이수증 {n}',
-        certRound: '{n}회차',
-        certSec: '정보보안 {n}',
-        certLinux: '리눅스 {n}',
-        certCisco: '씨스코 {n}',
-        certCourseSubject: '과목 이수증 {n}',
-        certBootcampDoc: '학원 수료증',
+        intro: '\uc774\uc218\ud55c \uad50\uc721 \ubc0f \uc5f0\uc218 \uacfc\uc815\uc785\ub2c8\ub2e4.',
+        hint: '\uad50\uc721\uae30\uad00\uba85\uc744 \ud074\ub9ad\ud558\uc2dc\uba74 \uc218\ub8cc\uc99d\uc744 \ud655\uc778\ud558\uc2e4 \uc218 \uc788\uc2b5\ub2c8\ub2e4.',
+        certPdfTitle: '\uc218\ub8cc\uc99d PDF',
+        certCountTitle: '\uc218\ub8cc\uc99d {n}\uac74 \u2014 \ud3bc\uccd0\uc11c \uc120\ud0dd',
+        certBadge: '\u00b7 \uc218\ub8cc\uc99d {n}',
+        certFallback: '\uc774\uc218\uc99d {n}',
+        certRound: '{n}\ud68c\ucc28',
+        certSec: '\uc815\ubcf4\ubcf4\uc548 {n}',
+        certLinux: '\ub9ac\ub205\uc2a4 {n}',
+        certCisco: '\uc528\uc2a4\ucf54 {n}',
+        certCourseSubject: '\uacfc\ubaa9 \uc774\uc218\uc99d {n}',
+        certBootcampDoc: '\uad50\uc721\uae30\uad00 \uc218\ub8cc\uc99d',
       },
       projects: {
-        desc: '그동안 개발한 프로젝트입니다.',
-        prevAria: '이전 프로젝트',
-        nextAria: '다음 프로젝트',
+        desc: '\uadf8\ub3d9\uc548 \uac1c\ubc1c\ud55c \ud504\ub85c\uc81d\ud2b8\uc785\ub2c8\ub2e4.',
+        prevAria: '\uc774\uc804 \ud504\ub85c\uc81d\ud2b8',
+        nextAria: '\ub2e4\uc74c \ud504\ub85c\uc81d\ud2b8',
         add: '+ Add Project',
         empty:
-          '등록된 프로젝트가 없습니다. "프로젝트 추가"로 첫 프로젝트를 올려보세요.',
-        noTitle: '제목 없음',
-        demo: '보기',
-        code: '코드',
-        academy: '학원 프로젝트',
-        personal: '개인 프로젝트',
-        deleteAria: '삭제',
-        alertImageSize: '이미지는 400KB 이하로 올려주세요.',
+          '\ub4f1\ub85d\ub41c \ud504\ub85c\uc81d\ud2b8\uac00 \uc5c6\uc2b5\ub2c8\ub2e4. "\ud504\ub85c\uc81d\ud2b8 \ucd94\uac00"\ub85c \uccab \ud504\ub85c\uc81d\ud2b8\ub97c \uc62c\ub824\ubcf4\uc138\uc694.',
+        noTitle: '\uc81c\ubaa9 \uc5c6\uc74c',
+        demo: '\ubcf4\uae30',
+        code: '\ucf54\ub4dc',
+        academy: '\uad50\uc721\uae30\uad00 \ud504\ub85c\uc81d\ud2b8',
+        personal: '\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8',
+        filterAria:
+          '\ud504\ub85c\uc81d\ud2b8 \uc720\ud615\uc73c\ub85c \ubcf4\uae30',
+        filterAll: '\uc804\uccb4',
+        filterPersonal: '\uac1c\uc778',
+        filterAcademy: '\uad50\uc721\uae30\uad00',
+        filterEmpty:
+          '\uc774 \ubd84\ub958\uc5d0 \ud574\ub2f9\ud558\ub294 \ud504\ub85c\uc81d\ud2b8\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.',
+        deleteAria: '\uc0ad\uc81c',
+        alertImageSize: '\uc774\ubbf8\uc9c0\ub294 400KB \uc774\ud558\ub85c \uc62c\ub824\uc8fc\uc138\uc694.',
       },
       skills: {
-        tabTrackAria: '스킬 분야',
-        tabTierAria: '숙련도',
-        trackCommon: '공통',
-        tierStrong: '주력',
-        tierExp: '경험',
-        contextPrefix: '현재 분류',
-        contextCommonSuffix: '협업·인프라 공통',
-        empty: '이 조합에 해당하는 항목이 없습니다.',
+        tabTrackAria: '\uc2a4\ud0ac \ubd84\uc57c',
+        tabTierAria: '\uc219\ub828\ub3c4',
+        trackCommon: '\uacf5\ud1b5',
+        tierStrong: '\uc8fc\ub825',
+        tierExp: '\uacbd\ud5d8',
+        contextPrefix: '\ud604\uc7ac \ubd84\ub958',
+        contextCommonSuffix: '\ud611\uc5c5\u00b7\uc778\ud504\ub77c \uacf5\ud1b5',
+        empty: '\uc774 \uc870\ud569\uc5d0 \ud574\ub2f9\ud558\ub294 \ud56d\ubaa9\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.',
       },
       awards: {
         title: 'Award',
-        intro: '교육 과정 등에서 받은 수상 실적입니다.',
-        colDate: '날짜',
-        colName: '수상명',
-        colIssuer: '발급처',
-        pdfTitleTemplate: '{label} PDF (새 창)',
+        intro: '\uad50\uc721 \uacfc\uc815 \ub4f1\uc5d0\uc11c \ubc1b\uc740 \uc218\uc0c1 \uc2e4\uc801\uc785\ub2c8\ub2e4.',
+        colDate: '\ub0a0\uc9dc',
+        colName: '\uc218\uc0c1\uba85',
+        colIssuer: '\ubc1c\uae09\ucc98',
+        pdfTitleTemplate: '{label} PDF (\uc0c8 \ucc3d)',
       },
       certificates: {
         title: 'Certificates',
-        desc: '국가·기관에서 발급한 자격·면허입니다.',
+        desc: '\uad6d\uac00\u00b7\uae30\uad00\uc5d0\uc11c \ubc1c\uae09\ud55c \uc790\uaca9\u00b7\uba74\ud5c8\uc785\ub2c8\ub2e4.',
         add: '+ Add Certificate',
-        colDate: '취득일자',
-        colCountry: '국가',
-        colName: '자격증/면허증',
-        colGrade: '등급',
-        colIssuer: '발급처',
-        pdfTitle: '자격증 PDF (새 창)',
-        addNeedMedia: '상장 이미지 또는 PDF를 넣어주세요.',
-        alertPdfTooBig: 'PDF는 2MB 이하로 올려주세요.',
-        alertImageTooBig: '이미지는 400KB 이하로 올려주세요.',
-        deleteAria: '삭제',
+        colDate: '\ucde8\ub4dd\uc77c\uc790',
+        colCountry: '\uad6d\uac00',
+        colName: '\uc790\uaca9\uc99d/\uba74\ud5c8\uc99d',
+        colGrade: '\ub4f1\uae09',
+        colIssuer: '\ubc1c\uae09\ucc98',
+        pdfTitle: '\uc790\uaca9\uc99d PDF (\uc0c8 \ucc3d)',
+        addNeedMedia: '\uc0c1\uc7a5 \uc774\ubbf8\uc9c0 \ub610\ub294 PDF\ub97c \ub123\uc5b4\uc8fc\uc138\uc694.',
+        alertPdfTooBig: 'PDF\ub294 2MB \uc774\ud558\ub85c \uc62c\ub824\uc8fc\uc138\uc694.',
+        alertImageTooBig: '\uc774\ubbf8\uc9c0\ub294 400KB \uc774\ud558\ub85c \uc62c\ub824\uc8fc\uc138\uc694.',
+        deleteAria: '\uc0ad\uc81c',
       },
-      contact: { title: 'Contact', desc: '궁금한 점이 있으시면 아래로 연락 주세요.' },
+      contact: { title: 'Contact', desc: '\uad81\uae08\ud55c \uc810\uc774 \uc788\uc73c\uc2dc\uba74 \uc544\ub798\ub85c \uc5f0\ub77d \uc8fc\uc138\uc694.' },
       owner: {
-        promptPassword: '비밀번호를 입력하세요.',
-        wrongPassword: '비밀번호가 올바르지 않습니다.',
+        promptPassword: '\ube44\ubc00\ubc88\ud638\ub97c \uc785\ub825\ud558\uc138\uc694.',
+        wrongPassword: '\ube44\ubc00\ubc88\ud638\uac00 \uc62c\ubc14\ub974\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4.',
       },
       footer: {
         rights: 'All rights reserved.',
-        ownerOn: '편집 모드 종료',
-        ownerOff: '편집 모드',
-        langKo: '한국어',
+        ownerOn: '\ud3b8\uc9d1 \ubaa8\ub4dc \uc885\ub8cc',
+        ownerOff: '\ud3b8\uc9d1 \ubaa8\ub4dc',
+        langKo: '\ud55c\uad6d\uc5b4',
         langEn: 'English',
-        langAria: '표시 언어',
+        langAria: '\ud45c\uc2dc \uc5b8\uc5b4',
       },
     },
     en: {
@@ -258,7 +265,7 @@
         intro: [
           'Hello.',
           "I'm ROY (Yongjae Koh), a developer who enjoys building services that feel easy and pleasant to use.",
-          'I focus on shipping AI as product features. Drawing on operations experience, I moved into development and have worked on LLM/RAG projects—connecting data, APIs, and services end to end. I want to grow as an AI engineer and care about web, data, and ML work.',
+          'I focus on shipping AI as product features. Drawing on operations experience, I moved into development and have worked on LLM/RAG projects\u2014connecting data, APIs, and services end to end. I want to grow as an AI engineer and care about web, data, and ML work.',
           'I have hands-on experience with front-end and back-end web development, and in computer vision I have delivered projects using YOLO.',
           'I hope to contribute as a developer who applies AI in real products and creates value. If you have any questions, feel free to reach out below.',
         ],
@@ -268,8 +275,8 @@
         intro: 'Training and courses I have completed.',
         hint: ' Click an institution name to open the certificate PDF.',
         certPdfTitle: 'Certificate PDF',
-        certCountTitle: '{n} certificates — expand to choose',
-        certBadge: '· {n} certificates',
+        certCountTitle: '{n} certificates \u2014 expand to choose',
+        certBadge: '\u00b7 {n} certificates',
         certFallback: 'Certificate {n}',
         certRound: 'Session {n}',
         certSec: 'Information Security {n}',
@@ -283,12 +290,17 @@
         prevAria: 'Previous project',
         nextAria: 'Next project',
         add: '+ Add Project',
-        empty: 'No projects yet. Use “Add Project” to add the first one.',
+        empty: 'No projects yet. Use \u201cAdd Project\u201d to add the first one.',
         noTitle: 'Untitled',
         demo: 'Demo',
         code: 'Code',
         academy: 'Bootcamp / academy',
         personal: 'Personal',
+        filterAria: 'Filter projects by type',
+        filterAll: 'All',
+        filterPersonal: 'Personal',
+        filterAcademy: 'Academy',
+        filterEmpty: 'No projects in this category.',
         deleteAria: 'Delete',
         alertImageSize: 'Please use images under 400 KB.',
       },
@@ -341,98 +353,96 @@
   }
 
   var SKILL_GROUP_EN = {
-    'API · 모델': 'API · Model',
-    'Notebook · 환경 · 실험': 'Notebook · Environment · Experiment',
-    'BaaS · 호스팅': 'BaaS · Hosting',
-    'Backend · 서빙': 'Backend · Serving',
-    'Data · 평가': 'Data · Evaluation',
-    배포: 'Deployment',
-    '배포 · 추론': 'Deployment · Inference',
+    'API \u00b7 \ubaa8\ub378': 'API \u00b7 Model',
+    'Notebook \u00b7 \ud658\uacbd \u00b7 \uc2e4\ud5d8': 'Notebook \u00b7 Environment \u00b7 Experiment',
+    'BaaS \u00b7 \ud638\uc2a4\ud305': 'BaaS \u00b7 Hosting',
+    'Backend \u00b7 \uc11c\ube59': 'Backend \u00b7 Serving',
+    'Data \u00b7 \ud3c9\uac00': 'Data \u00b7 Evaluation',
+    \ubc30\ud3ec: 'Deployment',
+    '\ubc30\ud3ec \u00b7 \ucd94\ub860': 'Deployment \u00b7 Inference',
   }
 
   var STATIC_AWARD_GROUPS = [
     {
-      issuerKo: '알파코 (Alphaco)',
+      issuerKo: '\uc54c\ud30c\ucf54 (Alphaco)',
       issuerEn: 'Alphaco',
       items: [
-        { date: '2025.07', titleKo: '학습 우수상', titleEn: 'Excellence Award — Learning', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%95%99%EC%8A%B5%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
-        { date: '2025.07', titleKo: '자연어 처리(NLP) 및 LLM 프로젝트 우수상', titleEn: 'Excellence Award — NLP & LLM Project', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
-        { date: '2025.08', titleKo: '태도 우수 교육상', titleEn: 'Excellence Award — Attitude', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%83%9C%EB%8F%84%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
-        { date: '2025.11', titleKo: '출석 우수상', titleEn: 'Excellence Award — Attendance', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%EC%B6%9C%EC%84%9D%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
+        { date: '2025.07', titleKo: '\ud559\uc2b5 \uc6b0\uc218\uc0c1', titleEn: 'Excellence Award \u2014 Learning', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%95%99%EC%8A%B5%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
+        { date: '2025.07', titleKo: '\uc790\uc5f0\uc5b4 \ucc98\ub9ac(NLP) \ubc0f LLM \ud504\ub85c\uc81d\ud2b8 \uc6b0\uc218\uc0c1', titleEn: 'Excellence Award \u2014 NLP & LLM Project', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
+        { date: '2025.08', titleKo: '\ud0dc\ub3c4 \uc6b0\uc218 \uad50\uc721\uc0c1', titleEn: 'Excellence Award \u2014 Attitude', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%ED%83%9C%EB%8F%84%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
+        { date: '2025.11', titleKo: '\ucd9c\uc11d \uc6b0\uc218\uc0c1', titleEn: 'Excellence Award \u2014 Attendance', pdf: '%EC%88%98%EC%83%81/%EC%95%8C%ED%8C%8C%EC%BD%94%20%EC%B6%9C%EC%84%9D%20%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
       ],
     },
     {
-      issuerKo: '휴먼 AI 교육센터',
+      issuerKo: '\ud734\uba3c AI \uad50\uc721\uc13c\ud130',
       issuerEn: 'Human AI Training Center',
       items: [
-        { date: '2026.03', titleKo: '개근상', titleEn: 'Perfect Attendance Award', pdf: '%EC%88%98%EC%83%81/%ED%9C%B4%EB%A8%BC%20%EA%B0%9C%EA%B7%BC%EC%83%81.pdf' },
-        { date: '2026.03', titleKo: '자동화 프로젝트 최우수상', titleEn: 'Grand Prize — Automation Project', pdf: '%EC%88%98%EC%83%81/%ED%9C%B4%EB%A8%BC%20%EC%9E%90%EB%8F%99%ED%99%94%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%B5%9C%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
+        { date: '2026.03', titleKo: '\uac1c\uadfc\uc0c1', titleEn: 'Perfect Attendance Award', pdf: '%EC%88%98%EC%83%81/%ED%9C%B4%EB%A8%BC%20%EA%B0%9C%EA%B7%BC%EC%83%81.pdf' },
+        { date: '2026.03', titleKo: '\uc790\ub3d9\ud654 \ud504\ub85c\uc81d\ud2b8 \ucd5c\uc6b0\uc218\uc0c1', titleEn: 'Grand Prize \u2014 Automation Project', pdf: '%EC%88%98%EC%83%81/%ED%9C%B4%EB%A8%BC%20%EC%9E%90%EB%8F%99%ED%99%94%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%B5%9C%EC%9A%B0%EC%88%98%EC%83%81.pdf' },
       ],
     },
   ]
 
   var STATIC_LICENSE_ROW = {
     date: '2024. 09',
-    countryKo: '대한민국',
+    countryKo: '\ub300\ud55c\ubbfc\uad6d',
     countryEn: 'South Korea',
-    titleKo: '리눅스 마스터',
+    titleKo: '\ub9ac\ub205\uc2a4 \ub9c8\uc2a4\ud130',
     titleEn: 'Linux Master',
-    gradeKo: '2급',
+    gradeKo: '2\uae09',
     gradeEn: 'Lv. 2',
-    issuerKo: 'KAIT 정보통신 기술 자격 검정',
+    issuerKo: 'KAIT \uc815\ubcf4\ud1b5\uc2e0 \uae30\uc220 \uc790\uaca9 \uac80\uc815',
     issuerEn: 'KAIT (Korea Association for ICT Promotion)',
-    pdf: '자격증/%EB%A6%AC%EB%88%85%EC%8A%A4%EB%A7%88%EC%8A%A4%ED%84%B0.pdf',
+    pdf: '\uc790\uaca9\uc99d/%EB%A6%AC%EB%88%85%EC%8A%A4%EB%A7%88%EC%8A%A4%ED%84%B0.pdf',
   }
 
-  /** GitHub Pages PDF 경로 (index.html 과 동일 인코딩) */
+  /** GitHub Pages PDF \uacbd\ub85c (index.html \uacfc \ub3d9\uc77c \uc778\ucf54\ub529) */
   var EDU = [
-    { pKo: '2026.03 ~ 진행중', pEn: '2026.03 — In progress', cKo: 'AI 논문 작성', cEn: 'AI research paper writing', oKo: '휴먼 AI 교육센터', oEn: 'Human AI Training Center', kind: 'text' },
-    { pKo: '2025.12 ~ 2026.03', pEn: '2025.12 — 2026.03', cKo: '심화_심층 데이터 분석을 통한 서비스 솔루션 개발자 과정', cEn: 'Advanced: service solution development through deep data analytics', oKo: '휴먼 AI 교육센터', oEn: 'Human AI Training Center', kind: 'link', href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf') },
-    { pKo: '2025.04 ~ 2025.11', pEn: '2025.04 — 2025.11', cKo: 'AI 개발자 마스터 과정', cEn: 'AI Developer Master Course', oKo: '알파코', oEn: 'Alphaco', kind: 'link', href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/AI%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf') },
-    { pKo: '2025.02 ~ 2025.03', pEn: '2025.02 — 2025.03', cKo: '도커 & 쿠버네티스', cEn: 'Docker & Kubernetes', oKo: '솔데스크', oEn: 'SolDesk', kind: 'link', href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%8F%84%EC%BB%A4%20&%20%EC%BF%A0%EB%B2%84%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf') },
-    { pKo: '2024.08 ~ 2024.09', pEn: '2024.08 — 2024.09', cKo: '리눅스 시스템 관리 및 Ansible 자동화 기술', cEn: 'Linux administration & Ansible automation', oKo: '솔데스크', oEn: 'SolDesk', kind: 'link', href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%A6%AC%EB%88%85%EC%8A%A4%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf') },
-    { pKo: '2024.06 ~ 2024.07', pEn: '2024.06 — 2024.07', cKo: '서버구성 자동화와 Ansible 구성', cEn: 'Server provisioning automation & Ansible', oKo: '솔데스크', oEn: 'SolDesk', kind: 'multi', n: 2, certs: [
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%84%9C%EB%B2%84%20%EA%B5%AC%EC%84%B11%ED%9A%8C%EC%B0%A8%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '1회차' },
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%84%9C%EB%B2%84%20%EA%B5%AC%EC%84%B1%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '2회차' },
+    { pKo: '2026.03 ~ \uc9c4\ud589\uc911', pEn: '2026.03 \u2014 In progress', cKo: 'AI \ub17c\ubb38 \uc791\uc131', cEn: 'AI research paper writing', oKo: '\ud734\uba3c AI \uad50\uc721\uc13c\ud130', oEn: 'Human AI Training Center', kind: 'text' },
+    { pKo: '2025.12 ~ 2026.03', pEn: '2025.12 \u2014 2026.03', cKo: '\uc2ec\ud654_\uc2ec\uce35 \ub370\uc774\ud130 \ubd84\uc11d\uc744 \ud1b5\ud55c \uc11c\ube44\uc2a4 \uc194\ub8e8\uc158 \uac1c\ubc1c\uc790 \uacfc\uc815', cEn: 'Advanced: service solution development through deep data analytics', oKo: '\ud734\uba3c AI \uad50\uc721\uc13c\ud130', oEn: 'Human AI Training Center', kind: 'link', href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf') },
+    { pKo: '2025.04 ~ 2025.11', pEn: '2025.04 \u2014 2025.11', cKo: 'AI \uac1c\ubc1c\uc790 \ub9c8\uc2a4\ud130 \uacfc\uc815', cEn: 'AI Developer Master Course', oKo: '\uc54c\ud30c\ucf54', oEn: 'Alphaco', kind: 'link', href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/AI%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf') },
+    { pKo: '2025.02 ~ 2025.03', pEn: '2025.02 \u2014 2025.03', cKo: '\ub3c4\ucee4 & \ucfe0\ubc84\ub124\ud2f0\uc2a4', cEn: 'Docker & Kubernetes', oKo: '\uc194\ub370\uc2a4\ud06c', oEn: 'SolDesk', kind: 'link', href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%8F%84%EC%BB%A4%20&%20%EC%BF%A0%EB%B2%84%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf') },
+    { pKo: '2024.08 ~ 2024.09', pEn: '2024.08 \u2014 2024.09', cKo: '\ub9ac\ub205\uc2a4 \uc2dc\uc2a4\ud15c \uad00\ub9ac \ubc0f Ansible \uc790\ub3d9\ud654 \uae30\uc220', cEn: 'Linux administration & Ansible automation', oKo: '\uc194\ub370\uc2a4\ud06c', oEn: 'SolDesk', kind: 'link', href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%A6%AC%EB%88%85%EC%8A%A4%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf') },
+    { pKo: '2024.06 ~ 2024.07', pEn: '2024.06 \u2014 2024.07', cKo: '\uc11c\ubc84\uad6c\uc131 \uc790\ub3d9\ud654\uc640 Ansible \uad6c\uc131', cEn: 'Server provisioning automation & Ansible', oKo: '\uc194\ub370\uc2a4\ud06c', oEn: 'SolDesk', kind: 'multi', n: 2, certs: [
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%84%9C%EB%B2%84%20%EA%B5%AC%EC%84%B11%ED%9A%8C%EC%B0%A8%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '1\ud68c\ucc28' },
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%84%9C%EB%B2%84%20%EA%B5%AC%EC%84%B1%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '2\ud68c\ucc28' },
     ] },
-    { pKo: '2022.11 ~ 2023.05', pEn: '2022.11 — 2023.05', cKo: '정보보안 1 ~ 6', cEn: 'Information Security 1–6', oKo: '코리아 IT 아카데미', oEn: 'Korea IT Academy', kind: 'multi', n: 6, certs: [
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%881%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '정보보안 1' },
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%882%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '정보보안 2' },
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%883%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '정보보안 3' },
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%884%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '정보보안 4' },
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%885%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '정보보안 5' },
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%886%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '정보보안 6' },
+    { pKo: '2022.11 ~ 2023.05', pEn: '2022.11 \u2014 2023.05', cKo: '\uc815\ubcf4\ubcf4\uc548 1 ~ 6', cEn: 'Information Security 1\u20136', oKo: '\ucf54\ub9ac\uc544 IT \uc544\uce74\ub370\ubbf8', oEn: 'Korea IT Academy', kind: 'multi', n: 6, certs: [
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%881%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\uc815\ubcf4\ubcf4\uc548 1' },
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%882%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\uc815\ubcf4\ubcf4\uc548 2' },
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%883%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\uc815\ubcf4\ubcf4\uc548 3' },
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%884%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\uc815\ubcf4\ubcf4\uc548 4' },
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%885%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\uc815\ubcf4\ubcf4\uc548 5' },
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%886%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\uc815\ubcf4\ubcf4\uc548 6' },
     ] },
-    { pKo: '2022.10 ~ 2022.11', pEn: '2022.10 — 2022.11', cKo: '리눅스 1 ~ 2', cEn: 'Linux 1–2', oKo: '코리아 IT 아카데미', oEn: 'Korea IT Academy', kind: 'multi', n: 2, certs: [
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%A6%AC%EB%88%85%EC%8A%A41%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '리눅스 1' },
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%A6%AC%EB%88%85%EC%8A%A42%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '리눅스 2' },
+    { pKo: '2022.10 ~ 2022.11', pEn: '2022.10 \u2014 2022.11', cKo: '\ub9ac\ub205\uc2a4 1 ~ 2', cEn: 'Linux 1\u20132', oKo: '\ucf54\ub9ac\uc544 IT \uc544\uce74\ub370\ubbf8', oEn: 'Korea IT Academy', kind: 'multi', n: 2, certs: [
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%A6%AC%EB%88%85%EC%8A%A41%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\ub9ac\ub205\uc2a4 1' },
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%A6%AC%EB%88%85%EC%8A%A42%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\ub9ac\ub205\uc2a4 2' },
     ] },
-    { pKo: '2022.09 ~ 2022.10', pEn: '2022.09 — 2022.10', cKo: '씨스코 1 ~ 2', cEn: 'Cisco 1–2', oKo: '코리아 IT 아카데미', oEn: 'Korea IT Academy', kind: 'multi', n: 2, certs: [
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%94%A8%EC%8A%A4%EC%BD%941%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '씨스코 1' },
-      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%94%A8%EC%8A%A4%EC%BD%942%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '씨스코 2' },
+    { pKo: '2022.09 ~ 2022.10', pEn: '2022.09 \u2014 2022.10', cKo: '\uc528\uc2a4\ucf54 1 ~ 2', cEn: 'Cisco 1\u20132', oKo: '\ucf54\ub9ac\uc544 IT \uc544\uce74\ub370\ubbf8', oEn: 'Korea IT Academy', kind: 'multi', n: 2, certs: [
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%94%A8%EC%8A%A4%EC%BD%941%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\uc528\uc2a4\ucf54 1' },
+      { href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EC%94%A8%EC%8A%A4%EC%BD%942%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\uc528\uc2a4\ucf54 2' },
     ] },
-    { pKo: '2021.08 ~ 2021.09', pEn: '2021.08 — 2021.09', cKo: '시스코 네트워크 관리자 기본과정', cEn: 'Cisco network administrator fundamentals', oKo: '솔데스크', oEn: 'SolDesk', kind: 'link', href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf') },
-    { pKo: '2019.06 ~ 2019.12', pEn: '2019.06 — 2019.12', cKo: '프론트 엔드 개발 및 자바 개발자 양성과정', cEn: 'Front-end & Java developer training', oKo: 'KIC 캠퍼스', oEn: 'KIC Campus', kind: 'multi', n: 12, certs: (function () {
-      var a = [{ href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%ED%94%84%EB%A1%A0%ED%8A%B8&%EB%B0%B1%EC%97%94%EB%93%9C%ED%92%80%EC%8A%A4%ED%83%9D%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '학원 수료증' }]
+    { pKo: '2021.08 ~ 2021.09', pEn: '2021.08 \u2014 2021.09', cKo: '\uc2dc\uc2a4\ucf54 \ub124\ud2b8\uc6cc\ud06c \uad00\ub9ac\uc790 \uae30\ubcf8\uacfc\uc815', cEn: 'Cisco network administrator fundamentals', oKo: '\uc194\ub370\uc2a4\ud06c', oEn: 'SolDesk', kind: 'link', href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf') },
+    { pKo: '2019.06 ~ 2019.12', pEn: '2019.06 \u2014 2019.12', cKo: '\ud504\ub860\ud2b8 \uc5d4\ub4dc \uac1c\ubc1c \ubc0f \uc790\ubc14 \uac1c\ubc1c\uc790 \uc591\uc131\uacfc\uc815', cEn: 'Front-end & Java developer training', oKo: 'KIC \ucea0\ud37c\uc2a4', oEn: 'KIC Campus', kind: 'multi', n: 12, certs: (function () {
+      var a = [{ href: pdfUrl('%ED%95%99%EC%9B%90%20%EC%88%98%EB%A3%8C%EC%A6%9D/%ED%94%84%EB%A1%A0%ED%8A%B8&%EB%B0%B1%EC%97%94%EB%93%9C%ED%92%80%EC%8A%A4%ED%83%9D%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EC%88%98%EB%A3%8C%EC%A6%9D.pdf'), lab: '\ud559\uc6d0 \uc218\ub8cc\uc99d' }]
       for (var i = 1; i <= 11; i++) {
-        a.push({ href: pdfUrl('%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_' + i + '.pdf'), lab: '과목 이수증' + i })
+        a.push({ href: pdfUrl('%EC%9D%B4%EC%88%98%EC%A6%9D/%EC%9D%B4%EC%88%98%EC%A6%9D_' + i + '.pdf'), lab: '\uacfc\ubaa9 \uc774\uc218\uc99d' + i })
       }
       return a
     })() },
-    { pKo: '2008.01 ~ 2009.06', pEn: '2008.01 — 2009.06', cKo: '어학 연수 및 비즈니스 회화', cEn: 'Language training & business conversation', oKo: 'TBLNJ 어학원', oEn: 'TBLNJ Language Institute', kind: 'text' },
+    { pKo: '2008.01 ~ 2009.06', pEn: '2008.01 \u2014 2009.06', cKo: '\uc5b4\ud559 \uc5f0\uc218 \ubc0f \ube44\uc988\ub2c8\uc2a4 \ud68c\ud654', cEn: 'Language training & business conversation', oKo: 'TBLNJ \uc5b4\ud559\uc6d0', oEn: 'TBLNJ Language Institute', kind: 'text' },
   ]
 
   function getLang() {
-    try {
-      var s = localStorage.getItem(LANG_KEY)
-      if (s === 'en' || s === 'ko') return s
-    } catch (e) {}
+    // Footer language switching is disabled, so keep legacy page in Korean.
+    try { localStorage.setItem(LANG_KEY, 'ko') } catch (e) {}
     return 'ko'
   }
 
   function setLang(next) {
-    var code = String(next || '').trim()
-    if (code !== 'en' && code !== 'ko') code = 'ko'
+    // Force Korean while language switching is temporarily disabled.
+    var code = 'ko'
     try {
       localStorage.setItem(LANG_KEY, code)
     } catch (e) {}
@@ -467,17 +477,17 @@
 
   function certLabel(lang, lab, edu, i) {
     if (lang !== 'en') return lab || interp(edu.certFallback, { n: i + 1 })
-    var m = /^(\d+)회차$/.exec(lab || '')
+    var m = /^(\d+)\ud68c\ucc28$/.exec(lab || '')
     if (m) return interp(edu.certRound, { n: m[1] })
-    var jb = /^정보보안 (\d+)$/.exec(lab || '')
+    var jb = /^\uc815\ubcf4\ubcf4\uc548 (\d+)$/.exec(lab || '')
     if (jb) return interp(edu.certSec, { n: jb[1] })
-    var lx = /^리눅스 (\d+)$/.exec(lab || '')
+    var lx = /^\ub9ac\ub205\uc2a4 (\d+)$/.exec(lab || '')
     if (lx) return interp(edu.certLinux, { n: lx[1] })
-    var cs = /^씨스코 (\d+)$/.exec(lab || '')
+    var cs = /^\uc528\uc2a4\ucf54 (\d+)$/.exec(lab || '')
     if (cs) return interp(edu.certCisco, { n: cs[1] })
-    var sj = /^과목 이수증(\d+)$/.exec(lab || '')
+    var sj = /^\uacfc\ubaa9 \uc774\uc218\uc99d(\d+)$/.exec(lab || '')
     if (sj) return interp(edu.certCourseSubject, { n: sj[1] })
-    if (lab === '학원 수료증') return edu.certBootcampDoc
+    if (lab === '\ud559\uc6d0 \uc218\ub8cc\uc99d') return edu.certBootcampDoc
     return lab || interp(edu.certFallback, { n: i + 1 })
   }
 
@@ -673,7 +683,7 @@
   global.portfolioT = function (path) {
     return t(getLang(), path)
   }
-  /** 특정 언어로 문자열 조회 (언어 전환 직후 getLang 지연 시 플젝 카드용) */
+  /** \ud2b9\uc815 \uc5b8\uc5b4\ub85c \ubb38\uc790\uc5f4 \uc870\ud68c (\uc5b8\uc5b4 \uc804\ud658 \uc9c1\ud6c4 getLang \uc9c0\uc5f0 \uc2dc \ud50c\uc81d \uce74\ub4dc\uc6a9) */
   global.portfolioTAt = function (lang, path) {
     var code = lang === 'en' || lang === 'ko' ? lang : getLang()
     return t(code, path)

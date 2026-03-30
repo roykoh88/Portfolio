@@ -125,7 +125,7 @@ export const educationColumns = [
       certificates: [
         {
           url: portfolioPdfUrl('학원 수료증/프론트&백엔드풀스택개발자 수료증.pdf'),
-          label: '학원 수료증',
+          label: '교육기관 수료증',
         },
         ...Array.from({ length: 11 }, (_, i) => {
           const n = i + 1

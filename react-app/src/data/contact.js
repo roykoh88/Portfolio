@@ -7,6 +7,16 @@ export const contactLinks = [
     href: 'https://github.com/roykoh88',
     external: true,
   },
+  {
+    label: '카카오톡',
+    href: 'https://open.kakao.com/o/sVwpT3ni',
+    external: true,
+  },
+  // {
+  //   label: 'Discord',
+  //   href: 'https://discord.gg/your-invite-code',
+  //   external: true,
+  // },
   // {
   //   label: 'LinkedIn',
   //   href: 'https://linkedin.com/in/yourprofile',

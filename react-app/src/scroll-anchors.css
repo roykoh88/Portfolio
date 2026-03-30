@@ -1,5 +1,8 @@
-/* 고정 헤더 때문에 #contact 등 앵커 이동 시 제목이 가려지지 않도록 */
+/* 고정 헤더 때문에 앵커 이동 시 제목이 가려지지 않도록 */
 main > section[id] {
+  scroll-margin-top: 5.5rem;
+}
+footer#contact {
   scroll-margin-top: 5.5rem;
 }
 

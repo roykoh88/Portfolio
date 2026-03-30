@@ -14,12 +14,8 @@ const LANG_STORAGE_KEY = 'portfolioLang'
 /** @typedef {'ko'|'en'} Lang */
 
 function readStoredLang() {
-  try {
-    const raw = localStorage.getItem(LANG_STORAGE_KEY)
-    if (raw === 'en' || raw === 'ko') return raw
-  } catch {
-    /* ignore */
-  }
+  // Footer language switching is disabled, so keep React app in Korean.
+  try { localStorage.setItem(LANG_STORAGE_KEY, 'ko') } catch { /* ignore */ }
   return 'ko'
 }
 
@@ -46,9 +42,10 @@ export function LanguageProvider({ children }) {
   const [lang, setLangState] = useState(readStoredLang)
 
   const setLang = useCallback((next) => {
-    setLangState(next)
+    const forced = 'ko'
+    setLangState(forced)
     try {
-      localStorage.setItem(LANG_STORAGE_KEY, next)
+      localStorage.setItem(LANG_STORAGE_KEY, forced)
     } catch {
       /* ignore */
     }

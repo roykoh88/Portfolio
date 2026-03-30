@@ -8,7 +8,6 @@ import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Projects } from './components/Projects'
 import { CertificatesSection } from './components/CertificatesSection'
-import { Contact } from './components/Contact'
 import { Skills } from './components/Skills'
 import { useOwnerMode } from './hooks/useOwnerMode'
 import { useProjects } from './hooks/useProjects'
@@ -61,7 +60,6 @@ function App() {
         <Skills />
         <Awards />
         <CertificatesSection />
-        <Contact />
       </main>
       <Footer ownerMode={ownerMode} onOwnerToggle={toggleOwnerMode} />
     </>

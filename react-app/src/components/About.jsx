@@ -128,10 +128,10 @@ export function About() {
               />
             </div>
             <div className="about-profile-fields">
-              {profileRows.map((row) =>
+              {profileRows.map((row, rowIndex) =>
                 row.type === 'pair' ? (
                   <div
-                    key={`pair-${row.left.label}`}
+                    key={`pair-${rowIndex}`}
                     className="about-profile-row about-profile-row--pair"
                   >
                     <Field label={row.left.label} value={row.left.value} />
@@ -139,7 +139,7 @@ export function About() {
                   </div>
                 ) : row.type === 'triple' ? (
                   <div
-                    key="links-triple"
+                    key={`links-triple-${rowIndex}`}
                     className="about-profile-row about-profile-row--triple"
                   >
                     {row.items.map((item) => (

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext.jsx'
 import {
   MAX_IMAGE_BYTES,
@@ -9,7 +9,9 @@ import { projectKey } from '../lib/projects/projectStorage'
 const CAROUSEL_MOBILE_BREAKPOINT = 768
 
 function projectCardCopy(p, lang, t) {
-  const def = defaultProjectByTitle(p.title)
+  const def =
+    defaultProjectByTitle(p.title) ||
+    (p.titleEn ? defaultProjectByTitle(String(p.titleEn).trim()) : undefined)
   const titleEn = p.titleEn ?? def?.titleEn
   const descEn = p.descriptionEn ?? def?.descriptionEn
   if (lang !== 'en') {
@@ -37,14 +39,34 @@ function parseTags(tags) {
     .filter(Boolean)
 }
 
+function institutionLine(p, lang) {
+  const def =
+    defaultProjectByTitle(p.title) ||
+    (p.titleEn ? defaultProjectByTitle(String(p.titleEn).trim()) : undefined)
+  const ko = String(p.institution ?? def?.institution ?? '').trim()
+  const en = String(p.institutionEn ?? def?.institutionEn ?? '').trim()
+  if (lang === 'en') return en || ko
+  return ko || en
+}
+
 export function Projects({ orderedProjects, addProject, removeProject }) {
   const { lang, t } = useLanguage()
   const [modalOpen, setModalOpen] = useState(false)
   const [carouselScroll, setCarouselScroll] = useState(false)
+  const [projectFilter, setProjectFilter] = useState('all')
   const scrollRef = useRef(null)
   const formRef = useRef(null)
 
-  const projectCount = orderedProjects.length
+  const filteredProjects = useMemo(() => {
+    if (projectFilter === 'all') return orderedProjects
+    return orderedProjects.filter((p) => {
+      const ty = p.projectType || 'personal'
+      if (projectFilter === 'personal') return ty === 'personal'
+      return ty === 'academy'
+    })
+  }, [orderedProjects, projectFilter])
+
+  const projectCount = filteredProjects.length
 
   useEffect(() => {
     function update() {
@@ -158,6 +180,35 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
           <span className="owner-only"> </span>
         </p>
         <div
+          className="project-filter"
+          role="group"
+          aria-label={t('projects.filterAria')}
+        >
+          {(['all', 'personal', 'academy']).map((key) => {
+            const labelKey =
+              key === 'all'
+                ? 'filterAll'
+                : key === 'personal'
+                  ? 'filterPersonal'
+                  : 'filterAcademy'
+            return (
+              <button
+                key={key}
+                type="button"
+                className={`project-filter-btn${
+                  projectFilter === key ? ' is-active' : ''
+                }`}
+                onClick={() => setProjectFilter(key)}
+              >
+                {t(`projects.${labelKey}`)}
+              </button>
+            )
+          })}
+        </div>
+        {filteredProjects.length === 0 && orderedProjects.length > 0 ? (
+          <p className="project-filter-empty">{t('projects.filterEmpty')}</p>
+        ) : null}
+        <div
           className={`project-carousel project-carousel--${
             carouselScroll ? 'scroll' : 'fill'
           }`}
@@ -176,7 +227,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
             id="projectCarouselScroll"
           >
             <div className="project-grid" id="projectGrid">
-              {orderedProjects.map((p) => {
+              {filteredProjects.map((p) => {
                 const type = p.projectType || 'personal'
                 const typeLabel =
                   type === 'academy'
@@ -189,6 +240,7 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                 const tags = parseTags(p.tags)
                 const { title: cardTitle, description: cardDesc } =
                   projectCardCopy(p, lang, t)
+                const org = type === 'academy' ? institutionLine(p, lang) : ''
                 return (
                   <article
                     className="project-card"
@@ -212,6 +264,9 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                     <div className="project-body">
                       <div className={typeClass}>{typeLabel}</div>
                       <h3 className="project-title">{cardTitle}</h3>
+                      {org ? (
+                        <p className="project-institution">{org}</p>
+                      ) : null}
                       <p className="project-desc">{cardDesc}</p>
                       <div className="project-tags">
                         {tags.map((tag) => (

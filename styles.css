@@ -247,6 +247,7 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 1.2vw;
   margin: 0 0 2vh;
   max-width: 100%;
+  white-space: pre-line;
 }
 .btn {
   display: inline-block;
@@ -664,46 +665,57 @@ a.education-org--cert:focus {
   font-size: 0.95rem;
   line-height: 1.5;
 }
+.award-table:not(.award-table--license) {
+  table-layout: fixed;
+}
+.award-table--license {
+  table-layout: fixed;
+}
 /* Award 3열: Date | 명칭 | 발급처 — 날짜는 최소 폭 확보, 명칭은 긴 문구용 min-width */
 .award-table:not(.award-table--license) thead th:nth-child(1),
 .award-table:not(.award-table--license) tbody td:nth-child(1) {
-  width: 1%;
-  min-width: 7rem;
+  width: 14%;
+  min-width: 6.5rem;
   white-space: nowrap;
 }
 .award-table:not(.award-table--license) thead th:nth-child(2),
 .award-table:not(.award-table--license) tbody td:nth-child(2) {
-  min-width: 20rem;
+  width: 56%;
+  min-width: 16rem;
 }
 .award-table:not(.award-table--license) thead th:nth-child(3),
 .award-table:not(.award-table--license) tbody td:nth-child(3) {
-  min-width: 11rem;
+  width: 30%;
+  min-width: 10rem;
 }
 /* Certificates 5열: Date | Country | 자격증 | 등급 | 발급처 */
 .award-table--license thead th:nth-child(1),
 .award-table--license tbody td:nth-child(1) {
-  width: 1%;
-  min-width: 7rem;
+  width: 12%;
+  min-width: 6.5rem;
   white-space: nowrap;
 }
 .award-table--license thead th:nth-child(2),
 .award-table--license tbody td:nth-child(2) {
-  width: 1%;
-  min-width: 6.5rem;
+  width: 14%;
+  min-width: 7.5rem;
   white-space: nowrap;
 }
 .award-table--license thead th:nth-child(3),
 .award-table--license tbody td:nth-child(3) {
-  min-width: 18rem;
+  width: 31%;
+  min-width: 14rem;
 }
 .award-table--license thead th:nth-child(4),
 .award-table--license tbody td:nth-child(4) {
-  min-width: 5rem;
+  width: 10%;
+  min-width: 4.5rem;
   white-space: nowrap;
 }
 .award-table--license thead th:nth-child(5),
 .award-table--license tbody td:nth-child(5) {
-  min-width: 11rem;
+  width: 33%;
+  min-width: 10rem;
 }
 .award-table thead th {
   padding: 0.75rem 0.85rem;
@@ -722,6 +734,9 @@ a.education-org--cert:focus {
   overflow-wrap: break-word;
   word-break: keep-all;
 }
+.award-table tbody td[rowspan] {
+  vertical-align: middle;
+}
 .award-table tbody tr:last-child td {
   border-bottom: none;
 }
@@ -729,6 +744,8 @@ a.education-org--cert:focus {
   color: var(--accent);
   font-weight: 500;
   white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
 }
 .award-table tbody td:nth-child(2) {
   text-align: center;
@@ -782,6 +799,49 @@ a.award-pdf-link:focus {
   height: 6px;
   background: var(--accent);
   border-radius: 50%;
+}
+
+/* ----- 프로젝트 분류 필터 ----- */
+.project-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+.project-filter-btn {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color var(--transition), background var(--transition),
+    color var(--transition);
+}
+.project-filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.project-filter-btn.is-active {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+  color: var(--accent);
+}
+.project-filter-empty {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.project-institution {
+  margin: 0.15rem 0 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.35;
 }
 
 /* ----- 프로젝트 (캐러셀) ----- */
@@ -1658,17 +1718,118 @@ a.award-pdf-link:focus {
 .contact-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.85rem;
+  justify-content: center;
 }
 .contact-link {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7.5rem;
+  padding: 0.85rem 1.35rem;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
   transition: border-color var(--transition), background var(--transition), color var(--transition);
+  gap: 0.45rem;
 }
+.contact-link::before {
+  display: inline-block;
+  font-size: 0.98em;
+  line-height: 1;
+}
+.contact-link[href^="mailto:"]::before {
+  content: "\2709";
+}
+.contact-link[href^="tel:"]::before {
+  content: "\260E";
+}
+.contact-link[href*="github.com"]::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='black' d='M8 0C3.58 0 0 3.58 0 8a8.01 8.01 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.5 7.5 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='black' d='M8 0C3.58 0 0 3.58 0 8a8.01 8.01 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.5 7.5 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+/* 티스토리: 이미지 아이콘 쓰는 링크는 .contact-link--tistory 로 폴백 T 박스 제외 */
+.contact-link[href*="tistory.com"]:not(.contact-link--tistory)::before,
+.contact-link[href*="blog"]:not(.contact-link--tistory)::before {
+  content: "T";
+  width: 1.02em;
+  height: 1.02em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.6px solid currentColor;
+  border-radius: 0.2em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+}
+/* Kakao Talk: 라이트 talk_no_bg, 다크 talk_white — data-theme 로 전환 */
+.contact-link.contact-link--kakao::before {
+  display: none;
+  content: "";
+}
+.contact-link--kakao .contact-link__kakao-icon {
+  height: 1.1em;
+  width: auto;
+  max-height: 1.15em;
+  flex-shrink: 0;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+.contact-link--kakao .contact-link__kakao-icon--light {
+  display: none;
+}
+.contact-link--kakao .contact-link__kakao-icon--dark {
+  display: block;
+}
+[data-theme='light'] .contact-link--kakao .contact-link__kakao-icon--light {
+  display: block;
+}
+[data-theme='light'] .contact-link--kakao .contact-link__kakao-icon--dark {
+  display: none;
+}
+/* Tistory: 라이트 dots_no_bg, 다크 dots_white */
+.contact-link.contact-link--tistory::before {
+  display: none;
+  content: "";
+}
+.contact-link--tistory .contact-link__tistory-icon {
+  height: 1.1em;
+  width: auto;
+  max-height: 1.15em;
+  flex-shrink: 0;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+.contact-link--tistory .contact-link__tistory-icon--light {
+  display: none;
+}
+.contact-link--tistory .contact-link__tistory-icon--dark {
+  display: block;
+}
+[data-theme='light'] .contact-link--tistory .contact-link__tistory-icon--light {
+  display: block;
+}
+[data-theme='light'] .contact-link--tistory .contact-link__tistory-icon--dark {
+  display: none;
+}
+/* Discord icon rule can be enabled once link is provided. */
+/* .contact-link[href*="discord.gg"]::before, .contact-link[href*="discord.com"]::before { content: "D"; } */
 .contact-link:hover {
   border-color: var(--accent);
   background: var(--accent-tint);
@@ -1686,7 +1847,51 @@ body.owner-mode .project-card .project-delete.owner-only {
   display: inline-block !important;
 }
 
-/* ----- 푸터 ----- */
+/* ----- 푸터: Contact + © 한 덩어리(세로 가운데 스택) ----- */
+footer#contact {
+  scroll-margin-top: 5.5rem;
+}
+/* 박스 없음: 본문 배경과 이어지는 일반 푸터 레이아웃만 */
+.footer-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+.footer-contact-title {
+  margin: 0;
+  width: 100%;
+  max-width: 32rem;
+  text-align: center;
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.footer-contact-desc {
+  margin: 0;
+  width: 100%;
+  max-width: 32rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  text-wrap: balance;
+}
+.footer-contact-links {
+  width: 100%;
+  justify-content: center;
+}
+.footer-line {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
 .footer {
   padding: clamp(1.25rem, 3vw, 1.5rem) clamp(0.75rem, 2vw, 1.25rem);
   border-top: 1px solid var(--border);
@@ -1696,6 +1901,12 @@ body.owner-mode .project-card .project-delete.owner-only {
   margin: 0;
   font-size: 0.9rem;
   color: var(--text-muted);
+}
+.footer .footer-line {
+  margin: 0.25rem 0 0;
+  width: 100%;
+  max-width: 36rem;
+  text-align: center;
 }
 .footer-owner-link {
   margin-left: 0.5rem;
@@ -1710,9 +1921,6 @@ body.owner-mode .project-card .project-delete.owner-only {
 }
 .footer-owner-link:hover {
   color: var(--accent);
-}
-.footer-line {
-  margin: 0 0 0.65rem;
 }
 .footer-lang {
   margin: 0;
