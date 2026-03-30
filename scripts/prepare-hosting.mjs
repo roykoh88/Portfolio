@@ -19,7 +19,9 @@ const LEGACY_FILES = [
   'skills-track.js',
   '404.html',
 ]
-const LEGACY_DIRS = ['img', 'PDF']
+// PDF는 Firebase/토큰 URL 또는 GitHub Pages 기반으로 열리므로,
+// 빌드 시 레거시로 굳이 복사할 필요가 없습니다.
+const LEGACY_DIRS = ['img']
 
 function copyDirRecursive(src, dest) {
   fs.mkdirSync(dest, { recursive: true })
