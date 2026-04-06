@@ -7,6 +7,7 @@ export const SKILL_GROUP_EN = {
   'Data · 평가': 'Data · Evaluation',
   배포: 'Deployment',
   '배포 · 추론': 'Deployment · Inference',
+  'Desktop · 라벨링': 'Desktop · Labeling',
 }
 
 export const SKILL_SUBTITLE_EN = {

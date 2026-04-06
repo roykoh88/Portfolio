@@ -282,6 +282,19 @@
       institutionEn: 'Alphaco'
     },
     {
+      title: 'Bbox Local Labeler',
+      titleEn: 'Bbox Local Labeler',
+      description:
+        '로컬 환경에서 이미지를 열고 BBox를 수동 라벨링하거나 YOLO 모델로 자동 라벨링하고, 데이터 증강과 .pt 재학습까지 이어서 진행할 수 있는 PySide6 데스크톱 앱입니다. 라벨은 YOLO Detection 포맷으로 저장합니다. 이미지·폴더·.pt 드래그 앤 드롭, classes.txt 기반 클래스 관리, 미라벨 일괄 자동 라벨링(진행 중 수동 수정 가능), train/val/test 분할 및 학습 기법 옵션(Small-Object Tiles, Mosaic, MixUp 등), BBox 개수별 필터, 한·영 UI, 단축키·휠 확대 축소를 지원합니다.',
+      descriptionEn:
+        'PySide6 desktop app for a fully local workflow: open images, draw or edit YOLO-format bounding boxes, auto-label with a YOLO .pt (current or batch unlabeled), run augmentation with synced labels, and retrain—without relying on paid hosted tools. Drag-and-drop for images, folders, and models; classes.txt; protected manual saves during batch runs; train/val/test splits and training options (e.g. small-object tiles, mosaic, mix-up); BBox-count grouping for review; Korean/English UI; shortcuts and wheel zoom.',
+      tags: 'Python, PySide6, Ultralytics, YOLO, Pillow, Computer Vision, PyTorch',
+      demoUrl: '',
+      codeUrl: 'https://github.com/roykoh88/Auto_CV_Labeling',
+      image: '',
+      projectType: 'personal'
+    },
+    {
       title: 'Dream Lotto (운세·꿈 해몽 로또 추천)',
       titleEn: 'Dream Lotto (horoscope & dream-based Lotto picks)',
       description:
@@ -487,7 +500,8 @@
     '하이브리드 번역기',
     'LLM 개인 비서 서비스 (BizAi)',
     '공학용 계산기',
-    'Portfolio'
+    'Portfolio',
+    'Bbox Local Labeler'
   ];
   function getProjectsInRouletteOrder(list) {
     var src = list != null ? list : getProjects();

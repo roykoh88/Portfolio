@@ -368,6 +368,7 @@
     'Data \u00b7 \ud3c9\uac00': 'Data \u00b7 Evaluation',
     \ubc30\ud3ec: 'Deployment',
     '\ubc30\ud3ec \u00b7 \ucd94\ub860': 'Deployment \u00b7 Inference',
+    'Desktop \u00b7 \ub77c\ubca0\ub9c1': 'Desktop \u00b7 Labeling',
   }
 
   /** React `src/data/awards.js` `awardGroups` 와 동일: 발급처 순서·행 날짜 내림차순 */

@@ -321,11 +321,10 @@ export const SKILLS_BY_TRACK_AND_TIER = {
           {
             items: [
               'YOLO',
+              'Ultralytics',
               'OpenCV',
               'SAHI',
               'OCR',
-              'CNN',
-              'RNN',
               'GRU',
               'LSTM',
               'Transformer',
@@ -350,6 +349,14 @@ export const SKILLS_BY_TRACK_AND_TIER = {
       SKILLS_NOTEBOOK_ENV_GROUP,
     ],
     experience: [
+      {
+        title: 'Computer Vision',
+        blocks: [{ items: ['Pillow', 'CNN', 'RNN'] }],
+      },
+      {
+        title: 'Desktop · 라벨링',
+        blocks: [{ items: ['PySide6', 'PyInstaller'] }],
+      },
       {
         title: '배포 · 추론',
         blocks: [{ items: ['Docker'] }],

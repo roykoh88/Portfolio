@@ -299,11 +299,10 @@
             {
               items: [
                 'YOLO',
+                'Ultralytics',
                 'OpenCV',
                 'SAHI',
                 'OCR',
-                'CNN',
-                'RNN',
                 'GRU',
                 'LSTM',
                 'Transformer',
@@ -328,6 +327,14 @@
         SKILLS_NOTEBOOK_ENV_GROUP,
       ],
       experience: [
+        {
+          title: 'Computer Vision',
+          blocks: [{ items: ['Pillow', 'CNN', 'RNN'] }],
+        },
+        {
+          title: 'Desktop · 라벨링',
+          blocks: [{ items: ['PySide6', 'PyInstaller'] }],
+        },
         {
           title: '배포 · 추론',
           blocks: [{ items: ['Docker'] }],
