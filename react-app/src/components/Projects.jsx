@@ -301,23 +301,25 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                         ) : null}
                         {p.codeUrl ? (
                           isPrivateCodeGateUrl(p.codeUrl) ? (
-                            <a
-                              href="#"
-                              role="button"
+                            <button
+                              type="button"
                               className="project-code-private"
                               onClick={(e) => {
                                 e.preventDefault()
                                 if (window.confirm(t('projects.privateCodeConfirm'))) {
-                                  window.open(
+                                  const w = window.open(
                                     KAKAO_OPEN_CHAT_URL,
                                     '_blank',
                                     'noopener,noreferrer',
                                   )
+                                  if (!w || (typeof w.closed !== 'undefined' && w.closed)) {
+                                    window.location.href = KAKAO_OPEN_CHAT_URL
+                                  }
                                 }
                               }}
                             >
                               {t('projects.code')}
-                            </a>
+                            </button>
                           ) : (
                             <a
                               href={p.codeUrl}

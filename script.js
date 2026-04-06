@@ -657,14 +657,14 @@
         (p.demoUrl ? '<a href="' + escapeHtml(p.demoUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(demoLabel) + '</a>' : '') +
         (p.codeUrl
           ? (isPrivateCodeGateUrl(p.codeUrl)
-              ? '<a href="#" class="project-code-private" role="button">' + escapeHtml(codeLabel) + '</a>'
+              ? '<button type="button" class="project-code-private">' + escapeHtml(codeLabel) + '</button>'
               : '<a href="' + escapeHtml(p.codeUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(codeLabel) + '</a>')
           : '') +
         '</div></div>';
       grid.appendChild(card);
-      var privCodeA = card.querySelector('a.project-code-private');
-      if (privCodeA) {
-        privCodeA.addEventListener('click', function (e) {
+      var privCodeBtn = card.querySelector('button.project-code-private');
+      if (privCodeBtn) {
+        privCodeBtn.addEventListener('click', function (e) {
           e.preventDefault();
           var msg = ptProjects('privateCodeConfirm', '', forLang);
           if (!msg || msg === 'projects.privateCodeConfirm') {
@@ -674,7 +674,10 @@
                 : '\uc774 \uc800\uc7a5\uc18c\ub294 \ube44\uacf5\uac1c(Private)\uc785\ub2c8\ub2e4. \ucf54\ub4dc\ub97c \ubcf4\uc2dc\ub824\uba74 \uc81c \uc2b9\uc778\uc774 \ud544\uc694\ud569\ub2c8\ub2e4. \uce74\uce74\uc624\ud1a1\uc73c\ub85c \uc5f0\ub77d\ud574 \ubcf4\uc2dc\uaca0\uc2b5\ub2c8\uae4c?';
           }
           if (window.confirm(msg)) {
-            window.open(PRIVATE_CODE_KAKAO_URL, '_blank', 'noopener,noreferrer');
+            var w = window.open(PRIVATE_CODE_KAKAO_URL, '_blank', 'noopener,noreferrer');
+            if (!w || (typeof w.closed !== 'undefined' && w.closed)) {
+              window.location.href = PRIVATE_CODE_KAKAO_URL;
+            }
           }
         });
       }

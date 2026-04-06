@@ -982,13 +982,17 @@ a.award-pdf-link:focus {
 }
 .project-links {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 1rem;
+  touch-action: manipulation;
 }
 .project-links a {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--accent);
   transition: color var(--transition);
+  touch-action: manipulation;
 }
 .project-links a:hover { color: var(--accent-hover); }
 .project-card .project-image img {
@@ -1520,13 +1524,28 @@ a.award-pdf-link:focus {
 }
 .project-card:hover .project-delete { opacity: 0.9; }
 .project-card .project-image { position: relative; }
-.project-links a[href='']:not(.project-code-private),
-.project-links a[href='#']:not(.project-code-private) {
+.project-links a[href=''],
+.project-links a[href='#'] {
   display: none;
 }
-.project-links a.project-code-private {
+/* 비공개 코드: 모바일 가로 스크롤(pan-x) 안에서도 탭이 스크롤로 소비되지 않도록 button 사용 */
+.project-links button.project-code-private {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--accent);
   cursor: pointer;
   text-decoration: underline;
+  text-align: left;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.08);
+  touch-action: manipulation;
+}
+.project-links button.project-code-private:hover {
+  color: var(--accent-hover);
 }
 
 /* ----- 스킬 ----- */
