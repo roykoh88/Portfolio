@@ -90,6 +90,8 @@ export const messages = {
       noTitle: '\uc81c\ubaa9 \uc5c6\uc74c',
       demo: '\ubcf4\uae30',
       code: '\ucf54\ub4dc',
+      privateCodeConfirm:
+        '\uc774 \uc800\uc7a5\uc18c\ub294 \ube44\uacf5\uac1c(Private)\uc785\ub2c8\ub2e4. \ucf54\ub4dc\ub97c \ubcf4\uc2dc\ub824\uba74 \uc81c \uc2b9\uc778\uc774 \ud544\uc694\ud569\ub2c8\ub2e4. \uce74\uce74\uc624\ud1a1\uc73c\ub85c \uc5f0\ub77d\ud574 \ubcf4\uc2dc\uaca0\uc2b5\ub2c8\uae4c?',
       deleteAria: '\uc0ad\uc81c',
       empty:
         '\ub4f1\ub85d\ub41c \ud504\ub85c\uc81d\ud2b8\uac00 \uc5c6\uc2b5\ub2c8\ub2e4. "\ud504\ub85c\uc81d\ud2b8 \ucd94\uac00"\ub85c \uccab \ud504\ub85c\uc81d\ud2b8\ub97c \uc62c\ub824\ubcf4\uc138\uc694.',
@@ -241,6 +243,8 @@ export const messages = {
       noTitle: 'Untitled',
       demo: 'Demo',
       code: 'Code',
+      privateCodeConfirm:
+        'This repository is private. Viewing the code requires my approval. Would you like to contact me via KakaoTalk?',
       deleteAria: 'Delete',
       empty: 'No projects yet. Use \u201cAdd Project\u201d to add the first one.',
       modalTitle: 'Add Project',

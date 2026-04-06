@@ -569,6 +569,12 @@
     return fallback;
   }
 
+  var PRIVATE_CODE_KAKAO_URL = 'https://open.kakao.com/o/sVwpT3ni';
+  function isPrivateCodeGateUrl(url) {
+    var u = String(url || '').trim().replace(/\/+$/, '');
+    return u === 'https://github.com/roykoh88/Auto_CV_Labeling';
+  }
+
   function renderProjects(forLang) {
     var allProjects = getProjects();
     var ordered = getProjectsInRouletteOrder(allProjects);
@@ -648,10 +654,30 @@
         '<p class="project-desc">' + escapeHtml(projectCardDescription(p, forLang) || '') + '</p>' +
         '<div class="project-tags">' + tags.map(function (t) { return '<span>' + escapeHtml(t) + '</span>'; }).join('') + '</div>' +
         '<div class="project-links">' +
-        (p.demoUrl ? '<a href="' + escapeHtml(p.demoUrl) + '" target="_blank" rel="noopener">' + escapeHtml(demoLabel) + '</a>' : '') +
-        (p.codeUrl ? '<a href="' + escapeHtml(p.codeUrl) + '" target="_blank" rel="noopener">' + escapeHtml(codeLabel) + '</a>' : '') +
+        (p.demoUrl ? '<a href="' + escapeHtml(p.demoUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(demoLabel) + '</a>' : '') +
+        (p.codeUrl
+          ? (isPrivateCodeGateUrl(p.codeUrl)
+              ? '<a href="#" class="project-code-private" role="button">' + escapeHtml(codeLabel) + '</a>'
+              : '<a href="' + escapeHtml(p.codeUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(codeLabel) + '</a>')
+          : '') +
         '</div></div>';
       grid.appendChild(card);
+      var privCodeA = card.querySelector('a.project-code-private');
+      if (privCodeA) {
+        privCodeA.addEventListener('click', function (e) {
+          e.preventDefault();
+          var msg = ptProjects('privateCodeConfirm', '', forLang);
+          if (!msg || msg === 'projects.privateCodeConfirm') {
+            msg =
+              effectiveProjectLang(forLang) === 'en'
+                ? 'This repository is private. Viewing the code requires my approval. Would you like to contact me via KakaoTalk?'
+                : '\uc774 \uc800\uc7a5\uc18c\ub294 \ube44\uacf5\uac1c(Private)\uc785\ub2c8\ub2e4. \ucf54\ub4dc\ub97c \ubcf4\uc2dc\ub824\uba74 \uc81c \uc2b9\uc778\uc774 \ud544\uc694\ud569\ub2c8\ub2e4. \uce74\uce74\uc624\ud1a1\uc73c\ub85c \uc5f0\ub77d\ud574 \ubcf4\uc2dc\uaca0\uc2b5\ub2c8\uae4c?';
+          }
+          if (window.confirm(msg)) {
+            window.open(PRIVATE_CODE_KAKAO_URL, '_blank', 'noopener,noreferrer');
+          }
+        });
+      }
       card.querySelector('.project-delete').addEventListener('click', function () {
         var list = getProjects();
         var idx = list.findIndex(function (item) {

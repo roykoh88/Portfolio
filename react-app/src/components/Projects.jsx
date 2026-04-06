@@ -6,6 +6,10 @@ import {
   defaultProjectByTitle,
 } from '../lib/projects/constants'
 import { projectKey } from '../lib/projects/projectStorage'
+import {
+  isPrivateCodeGateUrl,
+  KAKAO_OPEN_CHAT_URL,
+} from '../lib/projects/privateCodeGate'
 
 const CAROUSEL_MOBILE_BREAKPOINT = 768
 
@@ -296,13 +300,33 @@ export function Projects({ orderedProjects, addProject, removeProject }) {
                           </a>
                         ) : null}
                         {p.codeUrl ? (
-                          <a
-                            href={p.codeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {t('projects.code')}
-                          </a>
+                          isPrivateCodeGateUrl(p.codeUrl) ? (
+                            <a
+                              href="#"
+                              role="button"
+                              className="project-code-private"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                if (window.confirm(t('projects.privateCodeConfirm'))) {
+                                  window.open(
+                                    KAKAO_OPEN_CHAT_URL,
+                                    '_blank',
+                                    'noopener,noreferrer',
+                                  )
+                                }
+                              }}
+                            >
+                              {t('projects.code')}
+                            </a>
+                          ) : (
+                            <a
+                              href={p.codeUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {t('projects.code')}
+                            </a>
+                          )
                         ) : null}
                       </div>
                     </div>

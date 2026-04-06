@@ -160,6 +160,8 @@
         noTitle: '\uc81c\ubaa9 \uc5c6\uc74c',
         demo: '\ubcf4\uae30',
         code: '\ucf54\ub4dc',
+        privateCodeConfirm:
+          '\uc774 \uc800\uc7a5\uc18c\ub294 \ube44\uacf5\uac1c(Private)\uc785\ub2c8\ub2e4. \ucf54\ub4dc\ub97c \ubcf4\uc2dc\ub824\uba74 \uc81c \uc2b9\uc778\uc774 \ud544\uc694\ud569\ub2c8\ub2e4. \uce74\uce74\uc624\ud1a1\uc73c\ub85c \uc5f0\ub77d\ud574 \ubcf4\uc2dc\uaca0\uc2b5\ub2c8\uae4c?',
         academy: '\uad50\uc721\uae30\uad00 \ud504\ub85c\uc81d\ud2b8',
         personal: '\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8',
         outsourced: '\uc678\uc8fc \ud504\ub85c\uc81d\ud2b8',
@@ -300,6 +302,8 @@
         noTitle: 'Untitled',
         demo: 'Demo',
         code: 'Code',
+        privateCodeConfirm:
+          'This repository is private. Viewing the code requires my approval. Would you like to contact me via KakaoTalk?',
         academy: 'Bootcamp / academy',
         personal: 'Personal',
         outsourced: 'Client / outsourced',
