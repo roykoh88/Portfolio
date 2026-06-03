@@ -217,9 +217,9 @@ export const PROJECT_DISPLAY_ORDER = [
   '하이브리드 번역기',
   'LLM 개인 비서 서비스 (BizAi)',
   '공학용 계산기',
-  'ERP 샘플 시스템',
   'Portfolio',
   'Bbox Local Labeler',
+  'ERP 샘플 시스템',
 ]
 
 /** 저장된 프로젝트와 기본 목록 매칭 — 제목이 한글이거나 영문(titleEn)이어도 동일 항목으로 인식 */

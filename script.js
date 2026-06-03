@@ -529,9 +529,9 @@
     '하이브리드 번역기',
     'LLM 개인 비서 서비스 (BizAi)',
     '공학용 계산기',
-    'ERP 샘플 시스템',
     'Portfolio',
-    'Bbox Local Labeler'
+    'Bbox Local Labeler',
+    'ERP 샘플 시스템'
   ];
   function getProjectsInRouletteOrder(list) {
     var src = list != null ? list : getProjects();
