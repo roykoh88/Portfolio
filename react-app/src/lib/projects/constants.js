@@ -54,7 +54,7 @@ export const DEFAULT_PROJECTS = [
       '개인 프로젝트로 제작한 ERP 샘플 웹 애플리케이션입니다. 업무 데이터 관리와 화면 흐름을 실제 서비스처럼 구성했습니다.',
     descriptionEn:
       'Personal sample ERP web app with business-data management flows and service-style screens.',
-    tags: 'React, JavaScript, Firebase, HTML, CSS',
+    tags: 'React, JavaScript, Firebase, Llama, EXAONE, HTML, CSS',
     demoUrl: 'https://sampleerp-b2417.web.app/',
     codeUrl: 'https://github.com/roykoh88/Erp',
     image: '',
