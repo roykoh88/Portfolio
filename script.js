@@ -198,6 +198,19 @@
       projectType: 'personal'
     },
     {
+      title: 'ERP 샘플 시스템',
+      titleEn: 'Sample ERP System',
+      description:
+        '개인 프로젝트로 제작한 ERP 샘플 웹 애플리케이션입니다. 업무 데이터 관리와 화면 흐름을 실제 서비스처럼 구성했습니다.',
+      descriptionEn:
+        'Personal sample ERP web app with business-data management flows and service-style screens.',
+      tags: 'React, JavaScript, Firebase, HTML, CSS',
+      demoUrl: 'https://sampleerp-b2417.web.app/',
+      codeUrl: 'https://github.com/roykoh88/Erp',
+      image: '',
+      projectType: 'personal'
+    },
+    {
       title: '하이브리드 번역기',
       titleEn: 'Hybrid translator',
       description:
@@ -224,6 +237,21 @@
       projectType: 'outsourced',
       institution: '성심케어',
       institutionEn: 'SungSim Care'
+    },
+    {
+      title: '휴먼딥브릿지',
+      titleEn: 'Human Deep Bridge',
+      description:
+        '휴먼딥브릿지 공식 웹사이트 외주 제작 프로젝트입니다. 서비스 소개와 접근성을 고려해 실제 운영 사이트로 배포했습니다.',
+      descriptionEn:
+        'Outsourced official website project for Human Deep Bridge, built and deployed as a live service site.',
+      tags: 'React, JavaScript, HTML, CSS',
+      demoUrl: 'http://www.humandeepbridge.com/',
+      codeUrl: 'https://github.com/roykoh88/humandeepbridge',
+      image: '',
+      projectType: 'outsourced',
+      institution: 'Human Deep Bridge',
+      institutionEn: 'Human Deep Bridge'
     },
     {
       title: '네이버 경제 뉴스 크롤러',
@@ -495,11 +523,13 @@
     '네이버 경제 뉴스 크롤러',
     'Dream Web (AI 로또 분석 시스템)',
     '노인 재가복지 보조금 자가진단',
+    '휴먼딥브릿지',
     '공부·수면 → 합격 예측 (간단한 AI)',
     'BulSee (불씨)',
     '하이브리드 번역기',
     'LLM 개인 비서 서비스 (BizAi)',
     '공학용 계산기',
+    'ERP 샘플 시스템',
     'Portfolio',
     'Bbox Local Labeler'
   ];
